@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://home.mozu.com",
+  "developerAccountId": 6411,
+  "developerAccount": {
+    "emailAddress": "siddalingaswamy.kl@echidnainc.com",
+    "password":"siddu*1"
+  },
+  "workingApplicationKey": "DrewVolt.VOLT_UAT.1.0.0.Release"
+}
