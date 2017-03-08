@@ -1,0 +1,1403 @@
+<<<<<<< HEAD
+{
+    "items": [   
+        {
+            "xtype": "panel",
+            "title": "General",
+            "collapsed": false,
+            "items": [  
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showAddressTypeDropdown",
+                    "fieldLabel": "Show Address Type dropdown in Address Forms (Residential/Commercial)"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enablePartialCaching",
+                    "fieldLabel": "Enable partial caching using the Hypr {% partial_cache %} tag"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "managePowerReview",
+                    "fieldLabel": "Manage Power Reviews"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "OrderStatus-Setting",
+                    "fieldLabel": "OrderStatus-Setting"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "textarea",
+                    "name": "StoreCreditText",
+                    "fieldLabel": "Store Credit Text",
+                    "allowBlank": true,
+                    "width": "1000px"
+                },
+                {
+                    "xtype": "mz-input-category",
+                    "name": "ProjectListing",
+                    "fieldLabel": "Projects Category Id"
+                },
+                {
+                    "xtype": "mz-input-category",
+                    "name": "LearningCenter",
+                    "fieldLabel": "Learning Center Category Id"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "videoType",
+                    "fieldLabel": "Video Type name"
+                },
+                
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "articleType",
+                    "fieldLabel": "Article Type name"
+                },
+                
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "newsType",
+                    "fieldLabel": "News Type name"
+                },
+                
+                 {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "pressType",
+                    "fieldLabel": "Press Release Type name"
+                },
+                 {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeDesktop",
+                    "fieldLabel": "PDP Desktop Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeTablet",
+                    "fieldLabel": "PDP Tablet Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeMobile",
+                    "fieldLabel": "PDP Mobile Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "singleCustomisedBulbMostPopularExtra",
+                    "fieldLabel": "Most Popular Extra For single Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "doubleCustomisedBulbMostPopularExtra",
+                    "fieldLabel": "Most Popular Extra For Double Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "singleCustomisedBulbExtra",
+                    "fieldLabel": "single Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "TopCustomisedBulbExtra",
+                    "fieldLabel": "Top Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "BottomCustomisedBulbExtra",
+                    "fieldLabel": "Bottom Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "pricelabel",
+                    "fieldLabel": "Product Price Label"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "msrplabel",
+                    "fieldLabel": "Product MSRP Label"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "salepricelabel",
+                    "fieldLabel": "Product Saleprice Label"
+                },
+                {
+                    "xtype": "panel",
+                    "title": "SEO Content",
+                    "collapsed": false,
+                    "items": [
+                        {
+                          "name": "canonicalProtocol",
+                          "fieldLabel": "Force secure Canonical links (ex: <code>https://domain.tld/</code>)",
+                          "xtype": "mz-input-dropdown",
+                          "anchor": "90%",
+                          "store": [
+                                ["http", "HTTP"],
+                                ["https", "HTTPS"]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Third Party configuration",
+            "collapsed": false,
+            "items": [    
+                 {
+                    "fieldLabel": "Bronto Direct add Domain Url",
+                    "name":"brontodirectaddDomainurl",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add Domain Id",
+                    "name":"brontodirectaddId",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add footer list Id",
+                    "name":"brontodirectadd",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Article list Id",
+                    "name":"articlelist",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the News list Id",
+                    "name":"news",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Videos list Id",
+                    "name":"video",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Promotion list Id",
+                    "name":"promo",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for All Subscribe list Id",
+                    "name":"allsubscribelist",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "textarea",
+                    "name": "brontoTag",
+                    "fieldLabel": "Bronto tag",
+                    "allowBlank": false, 
+                    "width": "1000px",
+                    "forceSelection": true
+                },  
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "gtmTag",
+                    "fieldLabel": "GTM tracking code",
+                    "allowBlank": false,
+                    "width": "300px",
+                    "forceSelection": true
+                }
+            ]
+        },  
+        {
+            "xtype": "panel",
+            "title": "Extended Properties",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "extendedPropertiesEnabled",
+                    "fieldLabel": "Enable Extended Properties (Tracking Strings)"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "extendedPropertyParameters",
+                    "fieldLabel": "Query Parameters (comma separated)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Lists",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductCode",
+                    "fieldLabel": "Show product code in product lists"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductShortDesc",
+                    "fieldLabel": "Show product short description in product lists"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Search",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showChildCategoriesInFaceting",
+                    "fieldLabel": "Show two levels of the category hierarchy in faceting"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "useSearchAutocomplete",
+                    "fieldLabel": "Show search suggestions"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "suggestPriorSearchTerms",
+                    "fieldLabel": "Show search terms others used on this site in search suggestions",
+                    "enableIf": "useSearchAutocomplete"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Layout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "gutterWidth",
+                    "fieldLabel": "Base Margin Width",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "15px",
+                        "20px",
+                        "25px",
+                        "30px",
+                        "35px"
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Suppress CVV During Express Checkout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "isCvvSuppressed",
+                    "fieldLabel": "CVV Suppressed"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Anonymous Account Verification Options",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "zipCodeEnabled",
+                    "fieldLabel": "Billing Zip Code"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "phoneNumberEnabled",
+                    "fieldLabel": "Billing Phone Number"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "billingEmailEnabled",
+                    "fieldLabel": "Billing Email"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Text",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-selectmulti",
+                    "name": "loadGoogleFonts",
+                    "fieldLabel": "Load Google Fonts",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "Source Sans Pro",
+                        "Open Sans",
+                        "Raleway",
+                        "Lora",
+                        "Rokkitt"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "primaryFont",
+                    "fieldLabel": "Primary Font",
+                    "allowBlank": false,
+                    "storeFrom": "loadGoogleFonts",
+                    "forceSelection": true
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "fontSize",
+                    "fieldLabel": "Font Size",
+                    "allowBlank": false,
+                    "editable": false,
+                    "forceSelection": true,
+                    "store": [
+                        "12px",
+                        "14px",
+                        "16px",
+                        "18px",
+                        "20px"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-color",
+                    "name": "textColor",
+                    "fieldLabel": "Text Color"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Paging",
+            "collapsed": false,
+            "items": [
+
+                {
+                    "fieldLabel": "Show these page size options",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptions",
+                    "allowBlank": false,
+                    "forceSelection": true, 
+                    "store": [
+                        20,
+                        40,
+                        60,
+                        100,
+                        200
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSize",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptions"
+                },
+                {
+                    "fieldLabel": "Default Sort Order",
+                    "xtype": "mz-input-text",
+                    "name": "defaultSort",
+                    "allowBlank": true      ,
+                    "allowOnlyWhitespace":true           
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Navigation",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Maximum Items In Main Nav",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavItems",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 1
+                },
+                {
+                    "fieldLabel": "Maximum Nav Item Label Length",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavLabelLength",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 4,
+                    "allowBlank": false
+                }
+            ]
+        },
+         {
+        "xtype": "textarea",
+          "name": "recommendationproduct",
+          "fieldLabel": "Enter the recommendationproduct",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+            "xtype": "mz-input-checkbox",
+            "name": "enabletrackingnumber",
+            "fieldLabel": "Enable Tracking Number link"
+        },
+        {
+          "fieldLabel": "Enter the Fedex tracking link",
+          "name":"fedextrackinglink",
+          "xtype": "textfield",
+          "width": "500px" 
+        } ,
+        {
+              "xtype": "textarea",
+              "name": "couponcodeinfo",
+              "fieldLabel": "Enter Coupon Code Info",
+              "width": "600px",
+              "Height":"100px"    
+            },
+        {
+              "xtype": "textarea",
+              "name": "colorswatchcolorcode",
+              "fieldLabel": "Enter Color swatch color code",
+              "width": "700px",
+              "Height":"200px"
+            },
+            {
+          "fieldLabel": "Enter the CDN quality parameter Value",
+          "name":"cdnQuality",
+          "xtype": "textfield",
+          "width": 300 
+            },
+            {
+          "fieldLabel": "Enter the CDN quality parameter Value for Homepage Carousel",
+          "name":"homepageCdnQuality",
+          "xtype": "textfield",
+          "width": 300 
+            },
+            {
+          "fieldLabel": "Enter the links for the terms and agreement",
+          "name":"termslink",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+             {
+          "fieldLabel": "Enter the version of theme",
+          "name":"themeversion",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            
+            {
+          "fieldLabel": "Enter the Products Category Id",
+          "name":"product_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the article Category Id",
+          "name":"article_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the video Category Id",
+          "name":"video_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the Project Category Id",
+          "name":"Project_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the News Category Id",
+          "name":"News_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the resource Category Id",
+          "name":"resource_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the Slug for the Homepage",
+          "name":"canonicalHomepageSlug ",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            {
+          "fieldLabel": "Enter the Homepage Background Image Name",
+          "name":"homebackgroundimage",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            {
+          "fieldLabel": "Enter the Google Maps Api Key",
+          "name":"googleMapApiKey",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            
+         {
+        "xtype": "textarea",
+          "name": "myprofiletext",
+          "fieldLabel": "Enter the Welcome Text for My Profile Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "savedcardstext",
+          "fieldLabel": "Enter the Welcome Text for Saved Cards Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "addressbooktext",
+          "fieldLabel": "Enter the Welcome Text for Address Book Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "myorderstext",
+          "fieldLabel": "Enter the Welcome Text for My Orders Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "reordertext",
+          "fieldLabel": "Enter the Welcome text for Reorders Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+         {
+        "xtype": "textarea",
+          "name": "returnstext",
+          "fieldLabel": "Enter the Welcome Text for My Returns Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "mywishlisttext",
+          "fieldLabel": "Enter the Welcome Text for My Wishlist Seection",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "mystorecredittext",
+          "fieldLabel": "Enter the Welcome Text for Store Credit Section",
+          "width": "600px",
+          "Height":"100px"      
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "preferencestext",
+          "fieldLabel": "Enter the Welcome text for Preferences Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+          "name": "articlenoimage",
+          "fieldLabel": "Enter the Default Sharing image for Articles",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+          "name": "newsnoimage",
+          "fieldLabel": "Enter the Default Sharing image for News", 
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "mz-input-checkbox",
+        "name": "cmsflag",
+        "fieldLabel": "Themesettings when  no cms context"
+        },
+        {
+        "xtype": "textarea",
+        "name": "promotionslot",
+        "fieldLabel": "Promotions when no cms context", 
+        "width": "600px",
+        "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+         "name": "voltlogo",
+         "fieldLabel":"Logo when no cms context", 
+         "width": "600px",
+         "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+         "name": "footerhtml",
+         "fieldLabel": "Footer when no cms context", 
+         "width": "600px",
+         "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+        "name": "megamenuhtml",
+        "fieldLabel": "Menu when no cms context", 
+        "width": "600px",
+        "Height":"100px"     
+        }  
+           
+    ]
+}
+=======
+{
+    "items": [   
+        {
+            "xtype": "panel",
+            "title": "General",
+            "collapsed": false,
+            "items": [  
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showAddressTypeDropdown",
+                    "fieldLabel": "Show Address Type dropdown in Address Forms (Residential/Commercial)"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enablePartialCaching",
+                    "fieldLabel": "Enable partial caching using the Hypr {% partial_cache %} tag"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "managePowerReview",
+                    "fieldLabel": "Manage Power Reviews"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "OrderStatus-Setting",
+                    "fieldLabel": "OrderStatus-Setting"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "textarea",
+                    "name": "StoreCreditText",
+                    "fieldLabel": "Store Credit Text",
+                    "allowBlank": true,
+                    "width": "1000px"
+                },
+                {
+                    "xtype": "mz-input-category",
+                    "name": "ProjectListing",
+                    "fieldLabel": "Projects Category Id"
+                },
+                {
+                    "xtype": "mz-input-category",
+                    "name": "LearningCenter",
+                    "fieldLabel": "Learning Center Category Id"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "videoType",
+                    "fieldLabel": "Video Type name"
+                },
+                
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "articleType",
+                    "fieldLabel": "Article Type name"
+                },
+                
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "newsType",
+                    "fieldLabel": "News Type name"
+                },
+                
+                 {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "pressType",
+                    "fieldLabel": "Press Release Type name"
+                },
+                 {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeDesktop",
+                    "fieldLabel": "PDP Desktop Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeTablet",
+                    "fieldLabel": "PDP Tablet Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "productMainImagesizeMobile",
+                    "fieldLabel": "PDP Mobile Image Size"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "singleCustomisedBulbMostPopularExtra",
+                    "fieldLabel": "Most Popular Extra For single Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "doubleCustomisedBulbMostPopularExtra",
+                    "fieldLabel": "Most Popular Extra For Double Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "singleCustomisedBulbExtra",
+                    "fieldLabel": "single Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "TopCustomisedBulbExtra",
+                    "fieldLabel": "Top Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "BottomCustomisedBulbExtra",
+                    "fieldLabel": "Bottom Customised Bulb"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "pricelabel",
+                    "fieldLabel": "Product Price Label"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "msrplabel",
+                    "fieldLabel": "Product MSRP Label"
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "salepricelabel",
+                    "fieldLabel": "Product Saleprice Label"
+                },
+                {
+                    "xtype": "panel",
+                    "title": "SEO Content",
+                    "collapsed": false,
+                    "items": [
+                        {
+                          "name": "canonicalProtocol",
+                          "fieldLabel": "Force secure Canonical links (ex: <code>https://domain.tld/</code>)",
+                          "xtype": "mz-input-dropdown",
+                          "anchor": "90%",
+                          "store": [
+                                ["http", "HTTP"],
+                                ["https", "HTTPS"]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Third Party configuration",
+            "collapsed": false,
+            "items": [    
+                 {
+                    "fieldLabel": "Bronto Direct add Domain Url",
+                    "name":"brontodirectaddDomainurl",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add Domain Id",
+                    "name":"brontodirectaddId",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add footer list Id",
+                    "name":"brontodirectadd",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Article list Id",
+                    "name":"articlelist",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the News list Id",
+                    "name":"news",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Videos list Id",
+                    "name":"video",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for the Promotion list Id",
+                    "name":"promo",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "fieldLabel": "Bronto Direct add tag for All Subscribe list Id",
+                    "name":"allsubscribelist",
+                    "xtype": "textfield",
+                    "allowBlank": false,
+                    "width": "500px",
+                    "forceSelection": true 
+                },
+                {
+                    "anchor": "60%",
+                    "xtype": "textarea",
+                    "name": "brontoTag",
+                    "fieldLabel": "Bronto tag",
+                    "allowBlank": false, 
+                    "width": "1000px",
+                    "forceSelection": true
+                },  
+                {
+                    "anchor": "60%",
+                    "xtype": "mz-input-text",
+                    "name": "gtmTag",
+                    "fieldLabel": "GTM tracking code",
+                    "allowBlank": false,
+                    "width": "300px",
+                    "forceSelection": true
+                }
+            ]
+        },  
+        {
+            "xtype": "panel",
+            "title": "Extended Properties",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "extendedPropertiesEnabled",
+                    "fieldLabel": "Enable Extended Properties (Tracking Strings)"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "extendedPropertyParameters",
+                    "fieldLabel": "Query Parameters (comma separated)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Lists",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductCode",
+                    "fieldLabel": "Show product code in product lists"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listProductShortDesc",
+                    "fieldLabel": "Show product short description in product lists"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Search",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showChildCategoriesInFaceting",
+                    "fieldLabel": "Show two levels of the category hierarchy in faceting"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "useSearchAutocomplete",
+                    "fieldLabel": "Show search suggestions"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "suggestPriorSearchTerms",
+                    "fieldLabel": "Show search terms others used on this site in search suggestions",
+                    "enableIf": "useSearchAutocomplete"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Layout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "gutterWidth",
+                    "fieldLabel": "Base Margin Width",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "15px",
+                        "20px",
+                        "25px",
+                        "30px",
+                        "35px"
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Suppress CVV During Express Checkout",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "isCvvSuppressed",
+                    "fieldLabel": "CVV Suppressed"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Anonymous Account Verification Options",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "zipCodeEnabled",
+                    "fieldLabel": "Billing Zip Code"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "phoneNumberEnabled",
+                    "fieldLabel": "Billing Phone Number"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "billingEmailEnabled",
+                    "fieldLabel": "Billing Email"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Text",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-selectmulti",
+                    "name": "loadGoogleFonts",
+                    "fieldLabel": "Load Google Fonts",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "Source Sans Pro",
+                        "Open Sans",
+                        "Raleway",
+                        "Lora",
+                        "Rokkitt"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "primaryFont",
+                    "fieldLabel": "Primary Font",
+                    "allowBlank": false,
+                    "storeFrom": "loadGoogleFonts",
+                    "forceSelection": true
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "fontSize",
+                    "fieldLabel": "Font Size",
+                    "allowBlank": false,
+                    "editable": false,
+                    "forceSelection": true,
+                    "store": [
+                        "12px",
+                        "14px",
+                        "16px",
+                        "18px",
+                        "20px"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-color",
+                    "name": "textColor",
+                    "fieldLabel": "Text Color"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Paging",
+            "collapsed": false,
+            "items": [
+
+                {
+                    "fieldLabel": "Show these page size options",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptions",
+                    "allowBlank": false,
+                    "forceSelection": true, 
+                    "store": [
+                        20,
+                        40,
+                        60,
+                        100,
+                        200
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSize",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptions"
+                },
+                {
+                    "fieldLabel": "Default Sort Order",
+                    "xtype": "mz-input-text",
+                    "name": "defaultSort",
+                    "allowBlank": true      ,
+                    "allowOnlyWhitespace":true           
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Navigation",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Maximum Items In Main Nav",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavItems",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 1
+                },
+                {
+                    "fieldLabel": "Maximum Nav Item Label Length",
+                    "xtype": "mz-input-number",
+                    "name": "maxTopLevelNavLabelLength",
+                    "hideTrigger": false,
+                    "allowDecimal": false,
+                    "minValue": 4,
+                    "allowBlank": false
+                }
+            ]
+        },
+         {
+        "xtype": "textarea",
+          "name": "recommendationproduct",
+          "fieldLabel": "Enter the recommendationproduct",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+            "xtype": "mz-input-checkbox",
+            "name": "enabletrackingnumber",
+            "fieldLabel": "Enable Tracking Number link"
+        },
+        {
+          "fieldLabel": "Enter the Fedex tracking link",
+          "name":"fedextrackinglink",
+          "xtype": "textfield",
+          "width": "500px" 
+        } ,
+        {
+              "xtype": "textarea",
+              "name": "couponcodeinfo",
+              "fieldLabel": "Enter Coupon Code Info",
+              "width": "600px",
+              "Height":"100px"    
+            },
+        {
+              "xtype": "textarea",
+              "name": "colorswatchcolorcode",
+              "fieldLabel": "Enter Color swatch color code",
+              "width": "700px",
+              "Height":"200px"
+            },
+            {
+          "fieldLabel": "Enter the CDN quality parameter Value",
+          "name":"cdnQuality",
+          "xtype": "textfield",
+          "width": 300 
+            },
+            {
+          "fieldLabel": "Enter the CDN quality parameter Value for Homepage Carousel",
+          "name":"homepageCdnQuality",
+          "xtype": "textfield",
+          "width": 300 
+            },
+            {
+          "fieldLabel": "Enter the links for the terms and agreement",
+          "name":"termslink",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+             {
+          "fieldLabel": "Enter the version of theme",
+          "name":"themeversion",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            
+            {
+          "fieldLabel": "Enter the Products Category Id",
+          "name":"product_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the article Category Id",
+          "name":"article_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the video Category Id",
+          "name":"video_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the Project Category Id",
+          "name":"Project_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the News Category Id",
+          "name":"News_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the resource Category Id",
+          "name":"resource_Cid",
+          "xtype": "textfield",
+          "width": 300 
+            } ,
+            {
+          "fieldLabel": "Enter the Slug for the Homepage",
+          "name":"canonicalHomepageSlug ",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            {
+          "fieldLabel": "Enter the Homepage Background Image Name",
+          "name":"homebackgroundimage",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            {
+          "fieldLabel": "Enter the Google Maps Api Key",
+          "name":"googleMapApiKey",
+          "xtype": "textfield",
+          "width": 500 
+            },
+            
+         {
+        "xtype": "textarea",
+          "name": "myprofiletext",
+          "fieldLabel": "Enter the Welcome Text for My Profile Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "savedcardstext",
+          "fieldLabel": "Enter the Welcome Text for Saved Cards Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "addressbooktext",
+          "fieldLabel": "Enter the Welcome Text for Address Book Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "myorderstext",
+          "fieldLabel": "Enter the Welcome Text for My Orders Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "reordertext",
+          "fieldLabel": "Enter the Welcome text for Reorders Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+         {
+        "xtype": "textarea",
+          "name": "returnstext",
+          "fieldLabel": "Enter the Welcome Text for My Returns Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "mywishlisttext",
+          "fieldLabel": "Enter the Welcome Text for My Wishlist Seection",
+          "width": "600px",
+          "Height":"100px"     
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "mystorecredittext",
+          "fieldLabel": "Enter the Welcome Text for Store Credit Section",
+          "width": "600px",
+          "Height":"100px"      
+        },
+
+         {
+        "xtype": "textarea",
+          "name": "preferencestext",
+          "fieldLabel": "Enter the Welcome text for Preferences Section",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+          "name": "articlenoimage",
+          "fieldLabel": "Enter the Default Sharing image for Articles",
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+          "name": "newsnoimage",
+          "fieldLabel": "Enter the Default Sharing image for News", 
+          "width": "600px",
+          "Height":"100px"     
+        },
+        {
+        "xtype": "mz-input-checkbox",
+        "name": "cmsflag",
+        "fieldLabel": "Themesettings when  no cms context"
+        },
+        {
+        "xtype": "textarea",
+        "name": "promotionslot",
+        "fieldLabel": "Promotions when no cms context", 
+        "width": "600px",
+        "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+         "name": "voltlogo",
+         "fieldLabel":"Logo when no cms context", 
+         "width": "600px",
+         "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+         "name": "footerhtml",
+         "fieldLabel": "Footer when no cms context", 
+         "width": "600px",
+         "Height":"100px"     
+        },
+        {
+        "xtype": "textarea",
+        "name": "megamenuhtml",
+        "fieldLabel": "Menu when no cms context", 
+        "width": "600px",
+        "Height":"100px"     
+        }  
+           
+    ]
+}
+>>>>>>> origin/master
