@@ -1,0 +1,123 @@
+﻿{% extends "page" %} 
+{% block title-tag-content %}
+{% firstof pageContext.metaTitle labels.yourAccount %} | {% parent %}{% endblock title-tag-content %} 
+{% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %} 
+{% block breadcrumbs %}
+<div itemprop="breadcrumb" class="mz-breadcrumbs">  
+    <div class="breadcrumbs-center">
+        <a href="/" class="mz-breadcrumb-link is-first" title="Home">Home</a> 
+        <span class="mz-breadcrumb-separator">/</span>
+        <span class="mz-breadcrumb-current">{{ labels.myAccount|safe }}</span> 
+    </div>
+</div>
+{% endblock breadcrumbs %}
+{% block body-content %}
+
+{% preload_json model "customer" %}
+
+<div class="mz-accountparent">
+    <h1 class="mz-pagetitle">
+    {{labels.myAccount|safe|upper }}
+    </h1>
+<div class="selected-menu-mobile mz-mobile">
+    <span class="mz-icon">
+        <span class="mz-icon">
+            <svg width="20" height="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 34" style="enable-background:new 0 0 27 34;" xml:space="preserve">
+                <g>
+                    <path class="st0" d="M26.9,26c-0.5-3.1-2.6-4.8-5.5-5.5c-3.3-0.9-6.6-1.2-10-1c-2.7,0.2-5.3,0.6-7.8,1.7c-2.4,1.1-3.5,3-3.6,5.6
+                        c0,0.5,0.1,1.1,0.5,1.4c5.1,5.2,11.2,6.9,18.3,5.3c3.1-0.7,5.7-2.3,8.1-4.2 M4.6,8.9c0,4.9,3.9,9,8.8,9c5,0,9-3.9,9.1-8.9
+                        c0-4.9-4-9-8.8-9C8.6,0,4.6,3.9,4.6,8.9z"></path>
+                    <path class="st0" d="M26.9,29.2c-2.4,1.9-5,3.6-8.1,4.2c-7.1,1.6-13.2-0.1-18.3-5.3c-0.3-0.3-0.5-0.9-0.5-1.4
+                        c0.1-2.5,1.1-4.5,3.6-5.6c2.5-1.1,5.1-1.5,7.8-1.7c3.4-0.2,6.7,0.1,10,1c2.9,0.8,4.9,2.4,5.5,5.5C26.9,27.1,26.9,28.1,26.9,29.2z"></path>
+                    <path class="st0" d="M4.6,8.9c0-5,4-8.9,9.1-8.9c4.8,0,8.9,4.1,8.8,9c0,5-4.1,8.9-9.1,8.9C8.5,17.9,4.6,13.8,4.6,8.9z"></path>
+                </g>
+            </svg>
+        </span>
+        <a class="mz-scrollnav-link" id="mz-settings" href="#settings" data-target="account-settings">
+            {{labels.myprofile|safe}}
+        </a>
+        </span>
+        <p class="toggle-mblicon">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 31 17" style="enable-background:new 0 0 31 17;" xml:space="preserve">
+                <style type="text/css">
+                    .st1 {
+                        fill: #CCCBCB;
+                    }
+                </style>
+
+                <path class="st1" d="M15.3,10.7L6.5,2c0,0-0.1-0.1-0.1-0.1H1.6c-0.2,0-0.3,0.2-0.1,0.4l13.8,13.8c0.1,0.1,0.2,0.1,0.3,0L29.4,2.3
+    c0.1-0.1,0-0.4-0.1-0.4h-4.8c-0.1,0-0.1,0-0.1,0.1l-8.8,8.8C15.5,10.8,15.4,10.8,15.3,10.7z" />
+            </svg>
+        </p>
+    </div>
+    <div class="mz-accountparent-inner-wrap" style="display:flex">
+        <div class="mz-l-sidebar mz-myaccount-nav">
+            {% include "modules/my-account/my-account-nav" with navtarget="body" %}
+        </div>
+        <div id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large">
+            {% dropzone "my-account-top" scope="template" %}
+            <div id="account-messages">
+                {% include "modules/common/message-bar" with model=model.messages %}
+            </div>
+            
+            <!-- mz-accountsettings -->
+            <div class="mz-l-stack-section mz-container" id="account-settings">
+                {% include "modules/my-account/my-account-settings" %}
+            </div>
+            
+            {% comment %}
+            <a id="password"></a>
+            <div class="mz-l-stack-section mz-passwordsection mz-container" id="password-section">
+                {% include "modules/my-account-settingsount/my-account-password" %}
+            </div>
+            {% endcomment %} 
+            
+            {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+           
+            <div class="mz-l-stack-section mz-accountwishlist mz-container mz-myaccount-panels" id="account-wishlist">
+                {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
+            </div>
+            {% endif %}
+
+
+<div class="mz-l-stack-section mz-accountorderhistory mz-container mz-myaccount-panels" id="account-orderhistory">
+{% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory %}
+</div> 
+
+
+<div class="mz-l-stack-section mz-accountreturnhistory mz-container mz-myaccount-panels" id="account-returnhistory">
+{% include "modules/my-account/my-account-returnhistory" with model=model.returnHistory %}
+</div>
+    
+
+<div class="mz-l-stack-section mz-accountpaymentmethods mz-container mz-myaccount-panels" id="account-paymentmethods">
+{% include "modules/my-account/my-account-paymentmethods" %}
+</div>
+
+  
+            <div class="mz-l-stack-section mz-accountreturnhistory mz-container mz-myaccount-panels" id="account-quickorder">
+                <h5 class="section-title">{{ themeSettings.reordertext }}</h5> {% include "modules/my-account/my-quickreorder" with model=model.orderHistory %}
+            </div>
+
+         
+            <div class="mz-l-stack-section mz-accountaddressbook mz-container mz-myaccount-panels" id="account-addressbook">
+                {% include "modules/my-account/my-account-addressbook" %}
+            </div>
+
+     
+            <div class="mz-l-stack-section mz-accountstorecredit mz-container mz-myaccount-panels" id="account-storecredit">
+                {% include "modules/my-account/my-account-storecredit" %}
+            </div>
+
+
+            <div class="mz-l-stack-section mz-accountreturnhistory mz-container mz-myaccount-panels" id="account-preference">
+                {% include "modules/my-account/my-preference" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% require_script "pages/myaccount" %}
+{% require_script "pages/cart" %}  
+{% endblock body-content %} 
+{% block body-below-content %} 
+{% endblock body-below-content %}

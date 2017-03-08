@@ -1,0 +1,133 @@
+﻿@fontFamily:            {{ themeSettings.primaryFont }}, sans-serif;
+@fontSize:              16px; //{{ themeSettings.fontSize }};
+@fontSizeSmall:         @fontSize - 2px;
+@fontSizeLarger:        @fontSize + 2px;
+@fontSizeLarge:         @fontSize + 6px;
+@storeBrandingFontSize: 36px;
+@healthBlueLight : #ccffff;
+@healthBlueDark : #ccffff;
+@textColor:             {{ themeSettings.textColor }};
+@linkColor:             #000;
+@linkHoverColor:        #fddb00;
+@linkVisitedColor:      #990000;
+@errorText:             #b94a48;
+@errorBackground:       #ffeee5;
+@warningText:           @textColor;
+@warningBackground:     #ffefcf;
+@successText:           @textColor;
+@successBackground:     #eef2ee;
+
+@availableText:         #237e0e;
+@unavailableText:       #ae1231;
+
+
+//--------------------Header bgcolor --------------------
+@headerbg  :            #161616;
+@list-stylecolor:       #adadad;
+@breadcrum-nav:         #b4b4b4;
+@breadcrumcurr:         #000000;
+@btn-bghover:           #cc0000;  
+@btn-bg:                #ED1F24;  
+@btn-grey:              #39393c;
+@btn-grey-hover:        #252526;
+
+@bodyBackgroundColor:   {{ themeSettings.bodyBackgroundColor }};
+
+@errorBorder:           darken(spin(@errorBackground, -10), 3%);
+@successBorder:         darken(spin(@successBackground, -10), 3%);
+@warningBorder:         darken(spin(@warningBackground, -10), 3%);
+
+@errorIcon:				"../resources/images/error-exclamation.png";
+@columnWidth-2col:		435px;
+@gutter:				{{themeSettings.gutterWidth}};
+@inputBorder:			#a7a7a7;
+
+@defaultTileHeight:            250px;
+@defaultTileWidth:             250px;
+@productTileHeight:            360px;
+@productTileWidth:             @defaultTileWidth;
+@addressTileHeight:            240px;
+@addressTileWidth:             @defaultTileWidth;
+@productImagesContainerWidth:  {{ themeSettings.productImagesContainerWidth }}px;
+@orderDetailWidth:      200px;
+@itemListingThumbSize:  {{ themeSettings.itemListingThumbSize }};
+@productListingThumbSize: {{ themeSettings.listProductThumbSize }}px;
+
+
+/* GLOBAL VARIABLES - ADDED BY ECHIDNA */
+
+// Colorcode Vars
+@black:		#000000;
+@white:		#ffffff;
+@red:       #ED1F24;    
+// UI dimension Vars
+@full-size: 100%;
+@half-size: 50%;
+
+// Type based mixins
+.capitalize()       { text-transform: capitalize; }
+.uppercase()        { text-transform: uppercase; }
+.lowercase()        { text-transform: lowercase; }
+.nocase()           { text-transform: none; }
+
+.text-right()       { text-align: right; }
+.text-left()        { text-align: left; }
+.text-center()      { text-align: center; }
+.text-justify()     { text-align: justify; }
+
+.text-underline()   { text-decoration: underline; }
+.text-nounderline()   { text-decoration: none; }
+
+.show() { display:block; }
+.hide() { display:none; }
+.visible() { visibility:visible; opacity: 1; }
+.hidden() { visibility:hidden; }
+
+// Type based classes
+
+// Text Decorators
+.uppercase      { .uppercase(); }
+.lowercase      { .lowercase(); }
+.capitalize     { .capitalize(); }
+.nocase         { .nocase(); }
+
+
+.text-right     { .text-right(); }
+.text-left      { .text-left(); }
+.text-center    { .text-center(); }
+.text-justify   { .text-justify(); }
+.text-underline   { .text-underline(); }
+.text-nounderline   { .text-nounderline(); }
+
+// Z-index
+.level(@index) when (@index = 1) { z-index: 1; }
+.level(@index) when (@index = 2) { z-index: 11; }
+.level(@index) when (@index = 3) { z-index: 111; }
+.level(@index) when (@index = 4) { z-index: 1111; }
+.level(@index) when (@index = 5) { z-index: 11111; }  
+
+// Display Properties
+.show { .show(); }
+.hide { .hide(); }
+.visible { .visible(); }
+.hidden { .hidden(); }
+
+// Links
+@link: #ED1F24;
+@link-hover: #c90000 ;
+
+// Buttons
+@btn-primary : #fddb00;
+@btn-primary-hover: #000;
+@btn-secondary : #39393c;
+@btn-secondary-hover : #666666;
+
+@checkout-focus : #fff;
+
+
+
+.shortdesculist() {list-style-type: disc; padding: 2px 0;}
+.shortdescolist() {list-style-type: decimal; padding: 2px 0;}
+.shortdescpara() {padding: 0; margin:0;line-height: 18px;}
+
+

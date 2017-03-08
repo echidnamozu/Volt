@@ -1,0 +1,153 @@
+.catagory-aSpot-slider {
+    position: relative;
+    .imagevideocaraousel {
+        .vt-slider {
+            overflow: hidden;
+            background-color: #575757;
+            text-align: center;
+            a {
+                img {
+                    width: 100%;
+                    height: auto;
+                    margin: 0 auto;
+                }
+            }
+            .first-line {
+                font: 38px "roboto_bold";
+                text-transform: none;
+                top: 24%;
+                letter-spacing: normal;
+            }
+            .second-linedata {
+                font: 20px "roboto_regular";
+                text-transform: none;
+                top: 43%;
+            }
+            .third-line {
+                top: 52%;
+                font: 14px "roboto_regular";
+            }
+            .clickToUrl {
+                position: absolute;
+                top: 58%;
+                left: 0;  
+                right: 0;  
+                margin-left: auto;
+                margin-right: auto;
+                width: 150px;
+                .clickToUrl-button {
+                    padding: 10px 25px;
+                    background-color: rgba(0,0,0,0.5);
+                    border-radius: 10px;
+                    border: 1px solid #fddb00;
+                    text-transform: uppercase;
+                    font: 12px "roboto_medium";
+                    margin-bottom: 0;
+                    color: @white;
+                }
+                .clickToUrl-button:hover {
+                    background-color: #fddb00;
+                    color: @black;
+                }
+            }
+        }
+        
+        .owl-controls {
+            margin: 0;
+            .owl-nav {
+                display: none;
+            }
+            .owl-dots {
+                right: 55px;
+                .owl-dot.active {
+                    background-color: #fddb00;
+                    border-radius: 20px;
+                    border-color: #fddb00;
+                }
+                .owl-dot {
+                    background-color: #fff;
+                    border-radius: 20px;
+                    border-color: #ccc7c7;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+    }
+    .pause-control{
+        width: 20px;
+        height: 20px;
+        background-color: #fddb00;
+        background-position: center;
+        background-size: fit;
+        border-radius: 20px;
+        position: absolute;
+        bottom: 9px;
+        right: 30px;
+        z-index: 2;
+        cursor: pointer;
+        transition: all 0.3s;
+
+    }
+    .pause-control:hover {
+        transform: scale(1.3);
+    }
+    .pause-control.playing {
+        background-image: url('../resources/images/icons/pause.png');
+    }
+    .pause-control.paused {
+        background-image: url('../resources/images/icons/play.png');
+    }
+}
+
+@media only screen and (min-width: 1px) and (max-width: 767px) {
+ .catagory-aSpot-slider {
+    .imagevideocaraousel {
+       max-height: none;
+        .vt-slider {
+            overflow: hidden;
+            .first-line {
+                font: 21px "roboto_bold";
+                text-transform: none;
+                top: 30%;
+                letter-spacing: normal;
+            }
+            .second-linedata {
+                font: 16px "roboto_regular";
+                text-transform: none;
+                top: 44%;
+            }
+            .third-line {
+                font: 10px "roboto_regular";
+            }
+            .clickToUrl {
+                top: 58%;
+                width: 90px;
+                .clickToUrl-button {
+                    padding: 5px;
+                    font-size: 12px;
+                    width: 100%;
+                }
+            }
+            a {
+                img {
+                    width: auto;
+                    height: auto;
+                    max-width: 100%;
+                }
+            }
+        }
+        .owl-controls {      
+        display: none;
+            .owl-dots {
+                width: 100%;
+                right: 0;
+                text-align: center;
+            }
+        }
+    }
+     .pause-control {
+        right: 5px;
+     }
+ }
+}

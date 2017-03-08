@@ -1,0 +1,8 @@
+﻿
+    {% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy pageContext.search.query %}
+        {% include "modules/product/faceted-products" %}
+    {% endpartial_cache %}
+{% require_script "pages/search" %} 
+
+{% require_script "pages/product-listing" %}  
+    

@@ -1,0 +1,29 @@
+// Section - 3 Forms
+
+// Standard Forms 
+form {
+  margin: 0 0 1rem;
+  // Using forms within rows, we need to set some defaults 
+  .row .row {
+    margin: 0 -0.5rem;
+    .column, .columns {
+      padding: 0 0.5rem;
+    }
+    &.collapse {
+      margin: 0;
+      .column, .columns {
+        padding: 0;
+      }
+      input {
+        -webkit-border-bottom-right-radius: 0;
+        -webkit-border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+  .row input.column, .row input.columns, .row textarea.column, .row textarea.columns {
+    padding-left: 0.5rem;
+  }
+}
+

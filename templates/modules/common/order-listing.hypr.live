@@ -1,0 +1,329 @@
+<img class="print-logo" src="/resources/images/print-logo.png" width= "250" height="50"  alt="print-logo"/>  
+<div class="print-address" style="float: right;">
+    <p>VOLT<sup>&reg;</sup> Lighting</p>
+    <p>15486 N.Nebraska Ave. </p>
+    <p>Lutz, FL 33549</p>
+    <p>Phone: {{ labels.phoneNumber }}</p>
+</div>
+<div class="clearfix"></div>   
+<div id="order-receipt"><h1>ORDER RECEIPT DETAILS</h1></div>
+<div class="mz-myordercollapse">
+    <div class="mz-redorderdetails">   
+        <ul>
+        {% if pageContext.pageType == "my_account" %}
+            <span class="mz-mobile order-listing_toggle"> <a class="toggle" href="#toggle"> </a>
+            </span>
+            {% endif %}
+            <li class="mz-reorder-name"><span class="mz-name">NO</span> <span class="mz-value">{{ order.orderNumber }}</span>
+            </li>
+            <li class="mz-reorder-refno"><span class="mz-name">PO # / Order Notes</span> 
+                
+            <span class="mz-value po-number">
+            {% if pageContext.pageType == "my_account" %}
+                {% with model.attributes|findwhere('fullyQualifiedName','tenant~ponumber') as mdl %} 
+                {% with order.attributes|findwhere('fullyQualifiedName','tenant~ponumber')  as aliasName %} 
+                
+                    {% if mdl  %}
+                        {% if mdl.values and mdl.values !=""  %}
+                            {{ mdl.values }}
+                        {% else %}
+                             
+                        {% endif %}
+                    {% else %}
+                            {% if aliasName %}
+                                {{ aliasName.values }}  
+                            {% else %}
+                                    
+                            {% endif %}
+                    {% endif %}
+                </span>
+                    <span class="mz-value order-comment">
+                    {% if model.shopperNotes.comments %}
+                        {% if mdl  %}
+                            {% if mdl.values and mdl.values !="" %}
+                             / 
+                            {% endif %}
+                        {% else %}
+                            {% if aliasName %}
+                             / 
+                            {% endif %}
+                        {% endif %}
+                         {{model.shopperNotes.comments}}
+                    {% else %}
+                         
+                    {% endif %} 
+                    </span>
+                {% endwith %}
+                {% endwith %}
+            {% else %}
+                {% for data in model.attributes %}
+                    {% if data  %}
+                        {% if forloop.first %}   
+                            {% for dt in data.values %}
+                                {% if forloop.first %}
+                                    {{dt}}  
+                                {% endif %}
+                            {% endfor %}
+                            </span>
+                            <span class="mz-value order-comment">
+                            {% if model.shopperNotes.comments %}
+                                {% if data  %}
+                                    {% if data.values.length > 0 %}
+                                     / 
+                                    {% endif %}
+                                {% endif %}
+                                 {{model.shopperNotes.comments}}
+                            {% else %}
+                                 
+                            {% endif %} 
+                            </span>
+                        {% endif %} 
+                    {% endif %}     
+                {% endfor %}
+            {% endif %}
+            
+            </li>
+            <li class="mz-reorder-placed"><span class="mz-name">Placed</span> <span class="mz-value mz-date">{{ order.submittedDate|date("F j, Y") }} </span><div class="clearfix"></div>   
+            </li>  
+            <li class="mz-reorder-total"><span class="mz-name">Total</span> <span class="mz-value"> {{ order.total|currency }}</span><div class="clearfix"></div>
+            </li>
+            <li class="mz-reorder-status"><span class="mz-name">Status</span> <span class="mz-value">{{ order.status }}</span><div class="clearfix"></div>
+            </li>
+            {% if pageContext.pageType == "my_account" %} 
+            <li class="mz-reorder-icon mz-desktop bgimgmbl"><a class="toggle" href="javascript:void(0)"><span class="toggle-icon">Icon</span></a><div class="clearfix"></div>
+            </li>
+            {% endif %}
+        </ul>  
+    </div>   
+  
+    <div class="clear"></div>
+    <div class="toggle-order {{order.id}}" id="toggle" {% if pageContext.pageType == "my_account" %}style="display:none" {% endif %}>
+    {% block order-details %}
+        <div class="mz-billinginormation">
+            <div class="left-shipping panel-border"> 
+                <div class="left-shippingdetails">
+                    <span>SHIPPING INFORMATION</span>
+                </div>
+                <div class="mz-shippinginformation">
+                    <div class="mz-shippingaccount">
+                        <p class="mz-shippinginformatonship">Ship To</p>
+                      </div>
+                    <div class="mz-rightinfomation">
+                           <p>{{ order.fulfillmentInfo.fulfillmentContact.firstName|upper }}  &nbsp; {{ order.billingInfo.billingContact.lastNameOrSurname|upper }} </p>
+                       
+                            <p>{{ order.fulfillmentInfo.fulfillmentContact.address.address1}} </p>
+                        <p>{{ order.fulfillmentInfo.fulfillmentContact.address.cityOrTown}}, {{ order.fulfillmentInfo.fulfillmentContact.address.stateOrProvince}}  {{ order.fulfillmentInfo.fulfillmentContact.address.postalOrZipCode}}</p>
+                        <p>{{ order.fulfillmentInfo.fulfillmentContact.address.countryCode}}</p>
+                        <p>{{ order.fulfillmentInfo.fulfillmentContact.phoneNumbers.home}}</p>
+                  
+                    </div>
+                    <div class="clear"></div>
+                     <div class="mz-shippingaccount">
+                       
+                        <p class="mz-shippinginformatonship2">Shipping Method</p>
+                    </div>
+                       <div class="mz-rightinfomation">
+                           <p class="nocolor">{{ order.fulfillmentInfo.shippingMethodName }}</p> 
+                    </div>
+                    {% comment %}
+                    {% if order.packages.length > 0 %}
+                         {% for ordertrackin in order.packages %}
+                             <div class="clear"></div>
+                                <div class="mz-shippingaccount">
+                                    <p class="mz-shippinginformatonship2">Tracking Number</p>
+                                </div>
+                            <div class="mz-rightinfomation">
+                            {% if themeSettings.enabletrackingnumber %}
+                                {% for track in ordertrackin.trackings %}
+                                    <a href="{{themeSettings.fedextrackinglink}}{{ track }}">{{ track }}</a> 
+                                {% endfor %}
+                                
+                            {% else %}
+                             {% for track in ordertrackin.trackings %}
+                                    <p>{{ track }}</p>
+                                {% endfor %}    
+                            {% endif %}
+                            </div>
+                         {% endfor %}
+                    {% endif %}
+                    {% endcomment %}
+                    
+                </div>
+            </div>
+            <div class="right-billing panel-border"> 
+                <div class="left-shippingdetails">
+                    <span>BILLING INFORMATION</span>
+                </div>
+                <div class="mz-shippinginformation"> 
+                    <div class="mz-shippingaccount">
+                        <p class="mz-shippinginformatonship0">Billing Email</p>
+                        <div class="mz-rightinfomation mz-mobile">
+                        <p>{{ order.billingInfo.billingContact.email}}</p>
+                    </div>
+                        <p class="mz-shippinginformatonship">Billing Address</p>   
+                    
+                    </div>
+
+                    <div class="mz-rightinfomation ">
+                        <p class="mz-desktop">{{ order.billingInfo.billingContact.email}}</p>
+                        <p>{{ order.billingInfo.billingContact.firstName|upper }} &nbsp; {{ order.billingInfo.billingContact.lastNameOrSurname|upper }}  </p>
+                       
+                               <p>{{ order.billingInfo.billingContact.address.address1}}</p>
+                        <p>{{ order.billingInfo.billingContact.address.cityOrTown}}, {{ order.billingInfo.billingContact.address.stateOrProvince}} {{ order.billingInfo.billingContact.address.postalOrZipCode}}</p>
+                        
+                        <p class="ca">{{ order.billingInfo.billingContact.address.countryCode}}</p> 
+                        <p>{{ order.billingInfo.billingContact.phoneNumbers.home}}</p>
+                    </div>
+                    
+                       <div class="clear"></div>
+                         <div class="mz-shippingaccount">
+                             <p class="mz-shippinginformatonship2">Payment Method</p>
+                         </div>
+                            <div class="mz-rightinfomation"> 
+                               <p class="nocolor">{{ order.billingInfo.paymentType }}</p>
+                               </div>
+                </div>
+
+            </div>
+        </div>
+        {% endblock order-details %}
+        <div class="clear"></div>
+        <div class="mz-orderstructure">
+            <p>Order Summary</p>
+        </div>
+       
+        <div class="mz-tablestructure">
+            <div class="cart-brd">
+                <div class="row text-center cart-section">
+
+                    <div class="mz-carttable-header-desc bold large-6 text-left medium-6 large-push-0 small-2 columns">DESCRIPTION</div>
+                    <div class="mz-carttable-header-price bold large-2 large-text-left medium-2 large-push-0 small-2 columns">UNIT PRICE</div>
+                    <div class="mz-carttable-header-qty bold large-2 medium-2  large-push-0 small-2 columns">QUANTITY</div>
+                    <div class="mz-carttable-header-total large-text-right bold large-2 medium-2 large-push-0  small-2 columns">SUBTOTAL</div>
+                    <div class="mz-carttable-item-remove bold large-2 medium-2 large-push-0  small-2 columns"></div>
+
+                </div>
+
+                {% if not model.isEmpty %} 
+                    {% for item in model.items %}
+                        <div class= "item-listing-block">
+                            {% include "modules/common/item-listing" with model=item %} 
+                            {% for productDiscount in item.productDiscounts %}
+                                <div class="mz-item-discount">
+                                    <span class="mz-item-discountname">{{ productDiscount.discount.name }}</span>
+                                    {% if productDiscount.discount.freeShipping %}
+                                        <span class="mz-item-discountamt">{{ labels.freeShipping }}</span>
+                                    {% else %}
+                                        <span class="mz-item-discountamt"> -{{ productDiscount.impact|currency }}</span>
+                                    {% endif %}
+                                </div>    
+                            {% endfor %}
+                        </div>
+                    {% endfor %} 
+                {% else %}
+                <div class="mz-carttable-noitems">
+                    <div>
+                        {{ labels.cartEmpty }}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="clear clearfix"></div>
+                <div class="mz-accountvalues">
+                <div class="order-comments large-6 medium-6 large-push-0  small-4 columns mz-desktop">
+                <h6 class="heading">Order Comments</h6>
+                <div class="body">
+                    {{model.shopperNotes.comments}}
+                    </div>
+                </div>
+                <table class="large-6 medium-6 large-push-0 small-12 columns">
+                    {% if  model.orderDiscounts.length == 0 %}
+                        <tr>
+                            <td class="mz-accountvaluestd1 total">{{ labels.subtotal }}</td>
+                            <td class="mz-accountvaluestd2 total">{{ model.discountedSubtotal|currency }}</td>
+                        </tr>  
+                    {% endif %}
+                        {% if model.orderDiscounts %}
+                            {% for discount in model.orderDiscounts %}
+                                {% if not discount.excluded %}
+                                    <tr>  
+                                        <td class="mz-accountvaluestd1">{{ labels.subtotal }}</td>
+                                        <td class="mz-accountvaluestd2">{{ model.discountedSubtotal|currency }}</td> 
+                                    </tr>
+                                    <tr>
+                                        <td class="mz-accountvaluestd1">{{ labels.discounts }}</td>
+                                        {% for discount in model.orderDiscounts %}    
+                                            <td class="mz-accountvaluestd2">-{{ discount.impact |currency }}</td>
+                                        {% endfor %}  
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td class="mz-accountvaluestd1">{{ labels.discounts }}</td>
+                                <td class="mz-accountvaluestd2">$0.00</td>
+                            </tr>
+                        {% endif %}
+                    <tr>
+                        <td class="mz-accountvaluestd1">Tax</td>
+
+                            <td class="mz-accountvaluestd2">{{ model.taxTotal|currency }}</td>
+                        </tr>
+                        <tr>
+                            <td class="mz-accountvaluestd1">Shipping & Handling</td>
+                             {% if model.shippingSubTotal  || model.handlingTotal %}
+                             <td class="mz-accountvaluestd2">{{ model.shippingSubTotal|currency }}</td>
+                           
+                             {% else %}
+                            <td class="mz-accountvaluestd2">$0.00</td>
+                            {%endif %} 
+                        </tr>
+                        {% for shippingDiscount in model.shippingDiscounts %}
+                            <tr class="mz-accountvaluestd1">
+                                <td class="mz-accountvaluestd2">{{ shippingDiscount.discount.discount.name }}</td>
+                                <td class="mz-accountvaluestd2">-{{ shippingDiscount.discount.impact|currency}}</td> 
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="mz-totalgrandvalue"> 
+                <div class="print-reciept mz-desktop"><a data-mz-action="printReciept" href="javascript:void(0)">Print Reciept</a></div> 
+                    <table>
+                        <tr>
+                            <td class="mz-accountvaluestd1 total">Grand Total</td>
+
+                            <td class="mz-accountvaluestd2 total">{{ model.total|currency }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="order-comments-mobile mz-mobile">
+                    <h6 class="heading">Order Comments</h6>
+                    <div class="body">{{model.shopperNotes.comments}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

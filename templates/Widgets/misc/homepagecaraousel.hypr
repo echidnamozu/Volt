@@ -1,0 +1,86 @@
+<div class="imagevideocaraousel" homepagecaraousel>
+    {% for item in model.config.data%} 
+        <div class="{% if item.details.urlType%}videopop{%else%}vt-slider{%endif%}"> 
+             
+                    <p class="first-line" style="color:{{item.details.color}}">{{item.details.lineOne}}</p> 
+                <p class="second-linedata" style="color:{{item.details.color}}" >{{item.details.lineTwo}}</p>
+                <p class="third-line" style="color:{{item.details.color}}" >{{item.details.lineThree}}</p>
+                {% if item.details.linkText and item.details.linkUrl %}
+                    <a class="clickToUrl" href="{{item.details.linkUrl}}">
+                        <p class="clickToUrl-button" value="{{item.details.linkText}}">
+                            {{item.details.linkText}}
+                        </p>
+                    </a>
+                {% endif %}
+                {% if item.details.urlType%}<span class="videoicon"></span>{%endif%} 
+                {% if item.details.urlType%}
+                    
+                    {% if pageContext.isMobile  %}
+                        <img    {% if not forloop.first %}  
+                             class="owl-lazy" data-src="{{item.imageUrl}}?max=800&quality={{themeSettings.homepageCdnQuality}}"
+                             {% else %}
+                                src="{{item.imageUrl}}?max=800&quality={{themeSettings.homepageCdnQuality}}"  
+                             {% endif %}
+                            {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information"> 
+                    {% else %}
+                        {% if pageContext.isTablet  %}
+                            <img {% if not forloop.first %}    
+                                 class="owl-lazy" data-src="{{item.imageUrl}}?max=1000&quality={{themeSettings.homepageCdnQuality}}"
+                                 {% else %}
+                                    src="{{item.imageUrl}}?max=1000&quality={{themeSettings.homepageCdnQuality}}"  
+                                 {% endif %}
+                                {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information">
+                        {% else %}
+                            <img {% if not forloop.first %}  
+                                 class="owl-lazy" data-src="{{item.imageUrl}}?max=2800&quality={{themeSettings.homepageCdnQuality}}"
+                                 {% else %}
+                                    src="{{item.imageUrl}}?max=2800&quality={{themeSettings.homepageCdnQuality}}"  
+                                 {% endif %}
+                                 {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information">
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <a href="{{item.details.url}}">
+                    
+                        {% if pageContext.isMobile  %}
+                        <img    {% if not forloop.first %}  
+                                 class="owl-lazy" data-src="{{item.imageUrl}}?max=800&quality={{themeSettings.homepageCdnQuality}}"
+                                 {% else %}
+                                    src="{{item.imageUrl}}?max=800&quality={{themeSettings.homepageCdnQuality}}"  
+                                 {% endif %}
+                                {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information"> 
+                        {% else %}
+                            {% if pageContext.isTablet  %}
+                                <img {% if not forloop.first %}  
+                                     class="owl-lazy" data-src="{{item.imageUrl}}?max=1000&quality={{themeSettings.homepageCdnQuality}}"
+                                     {% else %}
+                                        src="{{item.imageUrl}}?max=1000&quality={{themeSettings.homepageCdnQuality}}"  
+                                     {% endif %}
+                                    {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information">
+                            {% else %}
+                                <img {% if not forloop.first %}  
+                                     class="owl-lazy" data-src="{{item.imageUrl}}?max=2000&quality={{themeSettings.homepageCdnQuality}}"
+                                     {% else %}
+                                        src="{{item.imageUrl}}?max=2000&quality={{themeSettings.homepageCdnQuality}}"  
+                                     {% endif %}
+                                     {% if item.details.urlType%}data-video="{{item.details.url}}"{%endif%} alt="VOLT Lighting Information">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                {%endif%}
+        </div>
+    {% endfor %}
+</div>
+<div style="display:none" class="pause-control playing"><span></span></div>
+{% require_script "widgets/homepagecaraousel"%}
+
+
+
+
+
+
+
+
+
+
+

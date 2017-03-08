@@ -1,0 +1,75 @@
+﻿.mz-accountsettings {
+    .mz-accountsettings-displayname,
+    .mz-accountsettings-displayemail,
+    .mz-accountsettings-displayphone {
+        display: inline-block;
+        margin-right: @gutter/4;
+        font-size: 13px;
+        color: #1c1c1c;
+         .open_sans_semibold();
+    }
+
+    .mz-accountsettings-displayname {
+        font-size: @fontSizeLarger; 
+        margin: 0 @gutter/4 0 0;
+    }
+
+    .mz-accountsettings-section {
+        padding-top: @gutter/2;
+        min-height: @gutter*1.5;
+    }
+
+    .mz-accountsettings-name {
+        input, button {
+            vertical-align: middle;
+            margin-bottom: 0;
+        }
+
+    }
+
+    .mz-accountsettings-email, .mz-accountsettings-phone {
+        padding-top: 0;
+    }
+
+    .mz-accountsettings-firstname,
+    .mz-accountsettings-lastname {
+        width: 80px;
+        font-size: @fontSizeLarger;
+        height: @fontSizeLarger + 4;
+    }
+    .mz-accountsettings-password {
+        > div {
+            width: 100%;
+            float: left;
+            margin-bottom: @gutter;
+
+            label, input {
+                display: inline-block;
+                margin-bottom: @gutter;
+                vertical-align: middle;
+                width: 140px;
+            }
+        }
+
+        .mz-password-actions {
+            margin-bottom: @gutter * 2;
+        }
+    }
+
+    .mz-accountsettings-email, .mz-accountsettings-phone {
+        padding-top: 0;
+    }
+
+    .mz-accountsettings-firstname,
+    .mz-accountsettings-lastname {
+        width: 200px;
+        font-size: @fontSize + .5;
+    }
+
+    .mz-accountsettings-acceptsmarketing {
+        clear: both;
+        label { vertical-align: middle; }
+    }
+}
+
+

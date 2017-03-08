@@ -1,0 +1,103 @@
+﻿{% extends "email/email" %}
+
+{% block body-content %}
+
+    <p style="color:#56534c!important;line-height:20px;font-weight:600;font-size:16px;">
+        <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">
+            {% if model.billingInfo.billingContact.firstName %}
+                {{ labels.emailOrderconf|string_format(model.billingInfo.billingContact.firstName, model.billingInfo.billingContact.lastNameOrSurname)|safe }}
+            {% else %}
+                {{ labels.emailOpeningAlternative|safe }}
+            {% endif %}
+        </font>
+    </p>
+
+    <p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderConfirmationBlob1|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}</font></p>
+
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderNo|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.orderNumber }}</font></p>
+
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.custId|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.customerAccountId }}</font></p>
+
+    <p style="background-color:#2e2e2e;padding:5px 5px 5px 5px;color:#fddb00;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.orderDetails|safe}}</font></p>
+
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderNo|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.orderNumber }} <a href="http://{{ domainName }}/user/order-status?returnUrl=/myaccount#orderhistory" target="_blank" style="color:#56534c!important;font-weight:600;text-decoration:underline!important;">{{ labels.checkOrderStatus|safe }}</a></font></p>
+    
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderDate|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.submittedDate|safe }}</font></p>
+       
+       <br/> 
+
+     <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td valign="top" width="50%">
+                <table width="95%" cellpadding="5" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td valign="top" style="font-weight: 600;color: #666;background-color: #eeeeee;text-align: left;text-transform: uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.shippingInformation|safe}}</font></td>
+                        </tr>
+                        <tr>
+                            <td valign="top"  style="word-break: break-all;">
+                                <p style="color:#000!important;line-height:20px;margin-bottom: 5px;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.shipTo|safe }}</font></p>
+                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% include "modules/common/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</font></p>
+                                <p style="color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.shippingMethod|safe }}</font></p>
+                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.fulfillmentInfo.shippingMethodName }}</font></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td valign="top" width="50%">
+                <table width="95%" cellpadding="5" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td valign="top"  style="font-weight: 600;color: #666;background-color: #eeeeee;text-align: left;text-transform: uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.billingInformation|safe }}</font></td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="word-break: break-all;">
+                                {% ifnotequal model.total 0 %}
+                                    <p style="color:#000!important;line-height:20px;margin-bottom: 5px;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.billingEmail|safe }}</font></p>
+                                    <p style="line-height:20px;color:#000;margin-top: 0;"><span class="removeunderline"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.billingInfo.billingContact.email }}</font></span></p> 
+                                    
+                                    {% if model.billingInfo.paymentType != "PayPalExpress" and model.billingInfo.paymentType != "PayPalExpress2" and model.billingInfo.paymentType != "PayWithAmazon"%}
+                                        <p style="color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.billingTo|safe }}</font></p>
+                                        <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% include "modules/common/email-address-summary" with model=model.billingInfo.billingContact %}</font></p>
+                                    {%endif%}
+
+                                    <p style="color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.paymentMethod|safe }}</font></p>
+
+                                    {% for payments in model.payments %}
+                                        {% if payments.status != "Voided" and payments.status != "Declined" and payments.status != "New" %}
+ 
+                                            {% if payments.paymentType == "CreditCard" %}
+                                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ payments.billingInfo.card.paymentOrCardType }} {{ payments.billingInfo.card.cardNumberPartOrMask }}</font></p>    
+                                            {% endif %}
+
+                                            {% if payments.paymentType == "PayPalExpress" or payments.paymentType == "PayPalExpress2" %}
+                                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.paypalExpress|safe }}</font></p>
+                                            {% endif %}
+
+                                            {% if payments.paymentType == "PayWithAmazon" %}
+                                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.payWithAmazon|safe }}</font></p>
+                                            {%endif%}
+
+                                            {% if payments.paymentType == "StoreCredit" %}
+                                                <p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.sCredit|safe }}</font></p>
+                                            {%endif%}
+                                        {%endif%}
+                                    {%endfor%}
+                                {% endifnotequal %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <br/>
+    {% include "modules/common/email-order-summary" %}
+    
+
+    <p style="line-height:20px;color:#575853;margin-top: 25px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.emailorderbottom|string_format(domainName)|safe }}</font></p>
+
+
+{% endblock body-content %}

@@ -1,0 +1,151 @@
+{% if model.no_of_itemsearch ==0 %}    
+    <script>
+        dataLayer.push({
+          'pageTypeContext': 'Notfound' 
+        });
+        console.log(2);
+    </script>
+{% endif %}   
+<div  class="mz-productlist {% block module-classes %}{% endblock module-classes %}"> 
+        {% if pagecontext.pageType == "search" or model.pagetype == "search"%}   
+         {% with model.items|first as elemnt %}        
+            <div class="navigate_part">  
+                {% if viewData.Products > 0 %}        
+                    <a href="/search?query={{pageContext.search.query}}&amp;categoryId={{themeSettings.product_Cid}}" val="Products" class="mz-facetingform-link products_link {% if elemnt.productType == "multiple_customised_bulbs" or elemnt.productType == "single_customised_bulbs" or elemnt.productType == "standard" or elemnt.productType == "mr16 bulb" or elemnt.productType == "CustomizedProducts" %} active" {% endif %} data-mz-action="drillDown" data-mz-hierarchy-id="{{themeSettings.product_Cid}}" data-mz-facet-value="categoryId:{{themeSettings.product_Cid}}" data-mz-facet="categoryId">
+                    {% if elemnt.productType == "multiple_customised_bulbs" or elemnt.productType == "single_customised_bulbs" or elemnt.productType == "standard" or elemnt.productType == "mr16 bulb" or elemnt.productType == "CustomizedProducts" %} Products {% else %} Products({{viewData.Products}}) {% endif %}</a>
+                {% else %}
+                    <a href="javascript:void(0)" disabled val="Products" class="mz-facetingform-link products_link disable" >Products({{viewData.Products}})</a>
+                {% endif %}
+                {% if viewData.Article > 0 %}
+                    <a href="/search?query={{pageContext.search.query}}&amp;categoryId={{themeSettings.article_Cid}}" val="Articles" class="mz-facetingform-link articles_link {% if elemnt.productType == "Article type" %} active" {% endif %}"  data-mz-action="drillDown" data-mz-hierarchy-id="{{themeSettings.article_Cid}}" data-mz-facet-value="categoryId:{{themeSettings.article_Cid}}" data-mz-facet="categoryId">
+                    {% if elemnt.productType == "Article type" %} Articles {% else %} Articles({{viewData.Article}}) {% endif %}</a>
+                {% else %}
+                    <a href="javascript:void(0)" disabled val="Products" class="mz-facetingform-link products_link disable" >Articles({{viewData.Article}})</a>
+                {% endif %}
+                {% if viewData.Videos > 0 %}
+                    <a href="/search?query={{pageContext.search.query}}&amp;categoryId={{themeSettings.video_Cid}}" val="Videos" class="mz-facetingform-link videos_link {% if elemnt.productType == "video type" %} active" {% endif %}" data-mz-action="drillDown" data-mz-hierarchy-id="{{themeSettings.video_Cid}}" data-mz-facet-value="categoryId:{{themeSettings.video_Cid}}" data-mz-facet="categoryId">
+                    {% if elemnt.productType == "video type" %} Videos {% else %} Videos({{viewData.Videos}}) {% endif %}</a>   
+                {% else %}
+                    <a href="javascript:void(0)" disabled val="Products" class="mz-facetingform-link products_link disable" >Videos({{viewData.Videos}})</a>
+                {% endif %}
+                {% if viewData.News > 0 %}
+                    <a href="/search?query={{pageContext.search.query}}&amp;categoryId={{themeSettings.News_Cid}}" val="News" class="mz-facetingform-link News_link{% if elemnt.productType == "Product News" or  elemnt.productType=="PressRelease"%} active" {% endif %}" data-mz-action="drillDown" data-mz-hierarchy-id="{{themeSettings.News_Cid}}" data-mz-facet-value="categoryId:{{themeSettings.News_Cid}}" data-mz-facet="categoryId">
+                    {% if elemnt.productType == "Product News" or  elemnt.productType=="PressRelease" %} News {% else %} News({{viewData.News}}) {% endif %}</a>
+                {% else %}
+                    <a href="javascript:void(0)" disabled val="Products" class="mz-facetingform-link products_link disable" > News({{viewData.News}})</a>
+                {% endif %}
+                {% if viewData.Projects > 0 %}
+                    <a href="/search?query={{pageContext.search.query}}&amp;categoryId={{themeSettings.Project_Cid}}" val="Projects" class="mz-facetingform-link Projects_link{% if elemnt.productType == "Project" %} active" {% endif %}" data-mz-action="drillDown" data-mz-hierarchy-id="{{themeSettings.Project_Cid}}" data-mz-facet-value="categoryId:{{themeSettings.Project_Cid}}" data-mz-facet="categoryId">
+                    {% if elemnt.productType == "Project" %} Projects {% else %} Projects({{viewData.Projects}}) {% endif %}</a>  
+                {% else %}
+                    <a href="javascript:void(0)" disabled val="Products" class="mz-facetingform-link products_link disable" > Projects({{viewData.Projects}})</a>
+                {% endif %}           
+            </div>        
+            {% if elemnt.productType == "multiple_customised_bulbs" or elemnt.productType == "single_customised_bulbs" or elemnt.productType == "standard" or elemnt.productType == "mr16 bulb" or elemnt.productType == "CustomizedProducts" %}
+                <div id="products">
+                    <h2 class="search-title">Products</h2>
+                    <ul class="mz-productlist-list mz-products mz-l-tiles">
+                    {% for product in model.items %}
+                      {% if product.productType|lower != themeSettings.videoType|lower and product.productType|lower != themeSettings.articleType|lower and product.productType|lower != themeSettings.newsType|lower and product.productType|lower != themeSettings.pressType|lower and  product.productType|lower != themeSettings.amp_pro_news|lower and product.productType|lower != themeSettings.logednews|lower and product.productType|lower != themeSettings.projectType|lower %}
+                         
+                            {% if product.productCode !="nothanks"%}
+                            {% if forloop.index <= 10 %}
+                                <li class="mz-productlist-item" data-mz-product="{{ product.productCode }}">{% include "modules/product/product-listing" with model=product %}</li>
+                           {% else %}
+                                <li class="mz-productlist-item" data-mz-product="{{ product.productCode }}">{% include "modules/product/product-listing1" with model=product %}</li>
+                           {% endif  %}
+                            {% endif %} 
+                       
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                     
+                    <div style="clear:both;"></div> 
+                </div>
+            {% endif %}
+            {% if elemnt.productType|lower == themeSettings.videoType|lower %}
+            <div id="videos">
+                <h2 class="search-title">Videos</h2>
+                <ul class="mz-productlist-list mz-videos mz-l-tiles"> 
+                    {% for video in model.items %}
+                      
+                         <li class="mz-productlist-item" data-mz-product="{{ video.productCode }}">{% include "modules/product/product-listing" with model=video %}</li>
+                       
+                    {% endfor %}
+                </ul> 
+                
+                <div style="clear:both;"></div>  
+                
+            </div>    
+            {% endif %}    
+            
+           <!--articles-->
+            {% if elemnt.productType|lower == themeSettings.articleType|lower %} 
+            <div id="articles" >
+               <h2 class="search-title">Articles</h2>
+                <ul  class="mz-productlist-list mz-articles mz-l-tiles" >
+                    {% for article in model.items %}
+                        <li class="mz-productlist-item" data-mz-product="{{ article.productCode }}">{% include "modules/product/product-listing" with model=article %}</li>
+                    
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div>
+            </div>    
+            {% endif %}    
+            <!--news-->
+           {% if elemnt.productType|lower == themeSettings.newsType|lower or  elemnt.productType|lower == themeSettings.pressType|lower %}
+           <div id="news" >
+               <h2 class="search-title">News</h2>
+                <ul class="mz-productlist-list project-news mz-l-tiles" >
+                    {% for news in model.items %}
+                    
+                        <li class="mz-productlist-item" data-mz-product="{{ news.productCode }}">{% include "modules/product/product-listing" with model=news %}</li>
+                    
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div>
+            </div> 
+            {% endif %}
+            <!--articles-->
+           {% if elemnt.productType|lower == themeSettings.projectType|lower %}
+           <div id="project">
+               <h2 class="search-title">Projects</h2>
+                <ul class="mz-productlist-list mz-project mz-l-tiles" >
+                    {% for project in model.items %}
+                    
+                        <li class="mz-productlist-item" data-mz-product="{{ news.productCode }}">{% include "modules/product/product-listing" with model=project %}</li>
+                    
+                  
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div>
+            </div> 
+            {% endif %}
+        {% endwith %}    
+        {% else %}
+            {% for mod in model.items %}
+            {% if forloop.first %}
+            <ul class="mz-productlist-list {% if mod.productType == 'Article type' %} mz-articles {% endif %}{% if mod.productType == 'project' %} mz-project {% endif %}{% if mod.productType == 'Product News' %} project-news {% endif %}{% if mod.productType == 'PressRelease' %} pr-section {% endif %} {% if mod.productType == 'Amp_pro_News' %} project-news {% endif %}{% if mod.productType == 'loged-in-news' %} project-news {% endif %} {% if mod.productType == 'video type' %} mz-videos {% endif %} {% block list-classes %}{% endblock list-classes %}">
+            {% endif %}
+            {% endfor %}
+                {% for prod in model.items %} 
+                   {% if forloop.index <= 10 %}
+                        <li class="mz-productlist-item" data-mz-product="{{ prod.productCode }}">{% include "modules/product/product-listing" with model=prod %}</li>
+                   {% else %}
+                        <li class="mz-productlist-item" data-mz-product="{{ prod.productCode }}">{% include "modules/product/product-listing1" with model=prod %}</li>
+                   {% endif  %}
+                    
+                {% endfor %}
+            </ul>
+        {% endif %}
+</div>  
+
+
+
+
+
+
+

@@ -1,0 +1,421 @@
+
+{% with model.options|findwhere('attributeFQN',"tenant~color") as option %}
+{% with option.values|findwhere('isSelected',"true") as selectedColor %}
+
+{% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as wireSize %}
+{% with wireSize.values|findwhere('isSelected',"true") as selectedWireSize %} 
+
+{% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as colorTemp %}
+{% with colorTemp.values|findwhere('isSelected',"true") as selectedColorTemp %}
+
+{% with model.options|findwhere('attributeFQN',"tenant~size") as size %}
+{% with size.values|findwhere('isSelected',"true") as selectedSize %}
+
+{% if model.productType == "Standard" or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+    {% if selectedColor or selectedWireSize or selectedColorTemp or selectedSize %}
+    {# with default options which is selected #}
+       
+        {% if model.purchasableState.isPurchasable %} 
+            {% if model.inventoryInfo.manageStock %}
+                {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                    {% if model.options.length <= 2 %} 
+                        {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                        {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsizeWire %} 
+                        {% with model.options|findwhere('attributeFQN',"tenant~size") as modsize %}
+                        {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as modcolorTemp %}
+                            {% if modprod and modsizeWire %}
+                               <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                    {{ labels.addToCart }} 
+                                </button>
+                            {% else %}
+                                {% if modprod or modsizeWire or modsize or modcolorTemp %}
+                                    {% if model.options.length == 1 %}
+                                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                        {{ labels.addToCart }}
+                                    </button>
+                                    {% else %}
+                                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                            {{ labels.customAddToCart }}
+                                        </button>
+                                    {% endif %} 
+                                {% else %}
+                                    <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                        {{ labels.customAddToCart }}
+                                    </button>
+                                {% endif %} 
+                            {% endif %} 
+                        {% endwith %} 
+                        {% endwith %} 
+                        {% endwith %} 
+                        {% endwith %} 
+                    {% else %}
+                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                        {{ labels.customAddToCart }}
+                        </button>
+                    {% endif %}
+                {% else %}
+                {# out of stock or backorder #}
+                    {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                        {% if model.options.length <= 2 %}
+                            {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                            {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsizeWire %} 
+                            {% with model.options|findwhere('attributeFQN',"tenant~size") as modsize %} 
+                                {% if modprod and modsizeWire %}
+                                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" mz-backorder-button data-mz-action="addToCart">
+                                        {{ labels.addToCart }}
+                                    </button>
+                                {% else %}
+                                    {% if modprod or modsizeWire or modsize %}
+                                        {% if model.options.length == 1 %}
+                                            <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                                {{ labels.addToCart }}
+                                            </button>
+                                        {% else %}
+                                            <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                                {{ labels.customAddToCart }}
+                                            </button>
+                                        {% endif %} 
+                                    {% else %}
+                                        <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                           {{ labels.customAddToCart }}
+                                        </button>
+                                    {% endif %}   
+                                {% endif %}   
+                            {% endwith %} 
+                            {% endwith %}    
+                            {% endwith %} 
+                        {% else %}
+                            <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                              {{ labels.customAddToCart }}
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                          {{ labels.outOfStock }}
+                        </button>
+                        <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if model.options.length <= 2 %}
+                    {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsizeWire %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~size") as modsize %}
+                    {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as modcolorTemp %}
+                        {% if modprod and modsizeWire %}
+                           <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                {{ labels.addToCart }} 
+                            </button>
+                        {% else %}
+                            {% if modprod or modsizeWire or modsize or modcolorTemp %}
+                                {% if model.options.length == 1 %}
+                                <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                    {{ labels.addToCart }}
+                                </button>
+                                {% else %}
+                                    <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                        {{ labels.customAddToCart }}
+                                    </button>
+                                {% endif %} 
+                            {% else %}
+                                <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                    {{ labels.customAddToCart }}
+                                </button>
+                            {% endif %} 
+                        {% endif %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                {% else %}
+                    <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                    {{ labels.customAddToCart }}
+                    </button>
+                {% endif %}
+            {% endif %}
+        
+        {% else %}
+            {% if model.crproduct %}   
+                {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                            {{ labels.customAddToCart }} 
+                        </button>
+                    {% else %}
+                        <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                            {{ labels.customAddToCart }}
+                        </button>
+                    {% endif %}
+                {% else %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                        {{ labels.customAddToCart }} 
+                        </button>
+                    {% else %}
+                    {% if model.inventoryInfo.onlineStockAvailable == 0 and model.variationProductCode %}
+                        <button  class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                            {{ labels.outOfStock }}
+                        </button>
+                        <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                    {% else %}
+                         <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-processing" disabled="disabled" data-mz-action="addToCart">  
+                        Processing...
+                    </button>
+                    {% endif %}
+                    {% endif %}
+                {% endif %}    
+            {% else %}
+                {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                            {{ labels.customAddToCart }} 
+                        </button>
+                    {% else %}
+                        <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                            {{ labels.customAddToCart }}
+                        </button>
+                    {% endif %}
+                {% else %}
+                 {% if model.inventoryInfo.onlineStockAvailable == 0 and model.variationProductCode %}
+                    <button  class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                        {{ labels.outOfStock }}
+                    </button>
+                    <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                {% else %}
+                     <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-processing" disabled="disabled" data-mz-action="addToCart">  
+                        Processing...
+                    </button>
+                {% endif %}
+                {% endif %}
+            {% endif %}   
+        {% endif %}
+    
+    {% else %}
+        {# with options but non is default #}
+        {% if wireSize or option or size or colorTemp %}
+            <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-processing" disabled="disabled" data-mz-action="addToCart">  
+                        Processing...
+                    </button>
+        {% else %}
+        {# with option extras #}
+            {% if model.purchasableState.isPurchasable %} 
+                {% if model.inventoryInfo.manageStock %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                        {% if model.options.length > 0 %}
+                        {% with model.options|first as modprod %}
+                            {% with modprod.values|first as info %}
+                                {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-extracode="{{info.value}}" data-mz-action="addTocartExtra">
+                                        {{ labels.addToCart }}
+                                    </button>
+                                {% else %}
+                                    <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                    {{ labels.customAddToCart }}
+                                    </button>
+                                {% endif %}
+                            {%endwith %}
+                        {% endwith %}    
+                        {% else %}   
+                            <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                {{ labels.addToCart }}
+                            </button>
+                        {% endif %}
+                    {% else %} 
+                        {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" and model.options.length > 0 %}
+                            {% for modprod in model.options %} 
+                                {% with mod.options  as prd %}
+                                    {% with modprod.values|first as info %}
+    
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                {% if forloop.last %} 
+                                                    {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}
+                                                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" data-mz-action="addTocartExtramultiple">
+                                                        {{ labels.addToCart }}
+                                                    </button>
+                                                    {% else %} 
+                                                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" data-mz-action="addTocartExtramultiple">
+                                                        {{ labels.outOfStock }}
+                                                    </button>
+                                                    <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% else %}
+                                                <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                                    {{ labels.customAddToCart }}
+                                                </button>                                        
+                                            {% endif %} 
+                                    {% endwith %}        
+                                {% endwith %}        
+                             {% endfor %}
+                        {% else %}
+                            {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                                <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                    {{ labels.addToCart }}
+                                </button>
+                            {% else %}
+                                {% if model.productUsage == "Bundle" %}
+                                    {% if model.options.length > 0 %}
+                                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                            {{ labels.customAddToCart }}
+                                        </button>
+                                    {% else %}
+                                        <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                                            {{ labels.addToCart }}
+                                        </button> 
+                                    {% endif %}
+                                {% else %}
+                                    <button  class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                                        {{ labels.outOfStock }}
+                                    </button>
+                                    <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %} 
+                {% else %}
+                    {% if model.options.length > 0 %}
+                    {% with model.options|first as modprod %}
+                        {% with modprod.values|first as info %}
+                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-extracode="{{info.value}}" data-mz-action="addTocartExtra">
+                                    {{ labels.addToCart }}
+                                </button>
+                            {% else %}
+                                <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                {{ labels.customAddToCart }}
+                                </button>
+                            {% endif %}
+                        {%endwith %}
+                    {% endwith %}    
+                    {% else %}   
+                        <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                            {{ labels.addToCart }}
+                        </button>
+                    {% endif %}
+                {% endif %}      
+            {% else %}
+                {% if model.options.length == 1 %}
+                    {% with model.options|first as modprod %} 
+                        {% with modprod.values|first as info %}
+                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}
+                                    {% if model.inventoryInfo.onlineStockAvailable == 0 and model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                                        <button class="mz-productdetail-addtocart mz-backorder-button mz-button large-6 column mz-button-large" >
+                                            {{ labels.addToCart }} 
+                                        </button>  
+                                    {% else %}
+                                        <button {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior == "AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-extracode="{{info.value}}" data-mz-action="addTocartExtra">
+                                            {{ labels.addToCart }} 
+                                        </button>
+                                    {% endif %}
+                                {% else %}  
+                                     <button {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior == "AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-extracode="{{info.value}}" data-mz-action="addTocartExtra">
+                                        {{ labels.outOfStock }}
+                                    </button>
+                                    <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                                {% endif %}
+                            {% else %}
+                                <button   class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                                     {{ labels.outOfStock }}
+                                </button>
+                                <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% if model.options.length == 0 %}
+                        {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                            <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                {{ labels.addToCart }}
+                            </button>   
+                        {% else %} 
+                            <button   class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                             {{ labels.outOfStock }}
+                            </button>
+                            <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                        {% endif %}
+                    {% else %} 
+                        {% for modprod in model.options %} 
+                            {% with mod.options  as prd %}
+                                {% with modprod.values|first as info %}
+                                    {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                        {% if forloop.last %} 
+                                            {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}
+                                                <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" data-mz-action="addTocartExtramultiple">
+                                                    {{ labels.addToCart }} 
+                                                </button>
+                                            {% else %}
+                                            <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" data-mz-action="addTocartExtramultiple">
+                                                {{ labels.outOfStock }}
+                                            </button>
+                                            <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                                            {% endif %}
+                                        {% endif %}   
+                                    {% else %}
+                                        {% if model.inventoryInfo.onlineStockAvailable > 0  %}    
+                                            <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart large-6 column mz-button mz-button-large">
+                                               {{ labels.customAddToCart }}
+                                            </button>
+                                        {% else %}  
+                                            {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                                                <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                                                        {{ labels.customAddToCart }}   
+                                                </button>   
+                                            {% else %} 
+                                            
+                                                <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                                                       {{ labels.outOfStock }}
+                                                </button>
+                                                <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                                            {% endif %} 
+                                        {% endif %}  
+                                    {% endif %}
+                                {% endwith %}        
+                            {% endwith %}        
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endif %}   
+    {% endif %}
+    
+    {% else %}   
+            {% if model.inventoryInfo.onlineStockAvailable > 0 %}  
+                <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-action="addToCart">
+                    {{ labels.addToCart }}
+                </button>
+            {% else %} 
+                {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                    <button id="add-to-cart" class="mz-productdetail-addtocart mz-backorder-button large-6 column mz-button mz-button-large">
+                        {{ labels.addToCart }}
+                    </button>
+                   
+                {% else %} 
+                   <button class="mz-productdetail-addtocart mz-button mz-button-large large-6 column is-disabled" disabled="disabled" data-mz-action="addToCart">
+                           {{ labels.outOfStock }}
+                    </button>
+                    <button id="out_of_stock" style="display:none">out_of_stock</button> 
+                {% endif %} 
+            {% endif %}  
+{% endif %}
+
+{% endwith %} 
+{% endwith %}
+
+{% endwith %}
+{% endwith %}
+
+{% endwith %}
+{% endwith %}
+
+{% endwith %}
+{% endwith %}  
+
+
+
+
+
+
+
+
+

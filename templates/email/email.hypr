@@ -1,0 +1,136 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="format-detection" content="telephone=no"> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+  {%if pageContext.isEditMode %}
+    {% include "modules/json-required-for-hyprlive" %}
+    {% include "modules/trailing-scripts" %}
+    {% cms_resources %}
+  {% endif %}
+<style>
+    .hx .ii
+    {
+      margin-right: 0 !important;
+    }
+</style>
+<style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Roboto:300); /*Calling our web font*/
+    
+    
+   /* Some resets and issue fixes */
+        #outlook a { padding:0; }
+        body{ width:100% !important; -webkit-text; size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; }     
+        .ReadMsgBody { width: 100%; }
+        .ExternalClass {width:100%;} 
+        .backgroundTable {margin:0 auto; padding:0; width:100%;!important;} 
+        table td {border-collapse: collapse;}
+        .ExternalClass * {line-height: 115%;}           
+    /* End reset */
+
+    /* General styling */
+
+    body {
+      -webkit-font-smoothing:antialiased;
+      -webkit-text-size-adjust:none;
+      width: 100%;
+      height: 100%;
+      margin:0;
+      font-size: 15px;
+      background-color: #fff;
+      font-weight: 400;
+     }
+    a{
+        color: #575853 !important;
+        mso-line-height-rule: exactly;
+        text-decoration: none !important;
+      }
+      a[href^=mailto]{
+        color: #575853 !important;
+        mso-line-height-rule: exactly;
+        text-decoration: none !important;
+      }
+    .telnoios a{
+      color: #fddb00 !important;
+    }
+    .calendarios a{
+      color: #fff !important;
+    }
+    td{
+        word-break: break-all;
+    }
+</style>
+  
+<style type="text/css" media="only screen and (max-width: 599px)">
+      /* Mobile styles */
+      /* @media only screen and (max-width: 599px) {
+
+        table[class='w320'],td[class='w320'] {
+            width: 100% !important;
+            display: block !important;
+            min-width: 320px !important;
+        }
+        td[class='m-td'], div[class='hide-for-mobile'], span[class='hide-for-mobile'] {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            font-size: 0 !important;
+            line-height: 0 !important;
+            min-height: 0 !important;
+        }
+      }
+     @media only screen and (max-device-width: 400px), only screen and (max-width: 400px) {
+        span[class="mobiletxt"] {
+            font-size: 10 !important;
+        }
+        .text-footer a {
+            color: #99958d;
+            text-decoration: none;
+            font-size: 9px;
+            mso-line-height-rule: exactly;
+            line-height: 11px;
+        }
+    }
+    @media only screen and (max-width : 360px) {
+    img.logo {
+        width: 100px !important;
+       }
+  }*/
+</style>
+</head>
+
+<body> 
+  
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">   
+    <tr>
+      <td valign="top">
+        <!--Header-->  
+        {{pageContext.cmsContext.page.document.properties.html_1|safe}}
+      <!--Header End-->  
+      <!--Body--> 
+        <table width="100%" cellpadding="20" cellspacing="0" border="0">
+          <tr>
+              <td valign="top">
+                  {% block body-content %}
+                  {% endblock body-content %}
+
+                    <p style="color:#000;margin-top:30px;font-size:14px;">
+                      <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.emailClosing|string_format(siteContext.generalSettings.websiteName)|safe }}</font></p>
+              </td>
+          </tr>
+        </table>
+      <!--Body End-->  
+      <!--Footer--> 
+      
+        {{pageContext.cmsContext.page.document.properties.html_2|safe}}
+       
+            
+      <!--Footer End--> 
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

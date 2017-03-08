@@ -1,0 +1,327 @@
+{% autoescape on %}
+{% block doctype %}
+<!doctype html>
+{% endblock doctype %}
+
+{% comment %}
+    The comment tag lets you write comments that will be visible when editing the template file, but don't appear in the rendered HTML. It's essentially just an "ignore this" tag.
+{% endcomment %}
+
+{% comment %}
+    The conditional statements below detect if visitor is on a particular
+    version of IE and adds the appropriate classes to the HTML element. You can then target
+    these browsers in your CSS without hacks, like:
+
+        .thing {
+        padding: 10px;
+        }
+        .ie6 .thing {
+        padding: 12px;
+        }
+
+    no-js:
+    The Modernizr library we're using will replace the class "no-js" with "js" if javascript 
+    available. Again you can use this as a way to make sensible fallbacks if javascript
+    is not available.
+{% endcomment %}
+
+{% block open-html-tag %}
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|(!IE) ]><!--> 
+<html class="no-js" lang="en">
+<!--<![endif]-->
+{%endblock open-html-tag %}
+
+    {% block head-tag %}
+    <head>
+
+        {% include "modules/json-required-for-hyprlive" %}
+
+        {% block meta-tags %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="{{ PageContext.MetaDescription }}">
+        <meta name="keywords" content="{{ PageContext.MetaKeywords }}">
+        <meta name="correlationId" content="{{ pageContext.correlationId }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/resources/images/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/resources/images/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/resources/images/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/resources/images/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/resources/images/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/resources/images/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/resources/images/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/resources/images/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/resources/images/favicons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-194x194.png" sizes="194x194">
+        <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="/resources/images/favicons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-16x16.png" sizes="16x16">
+
+        <link rel="manifest" href="/resources/images/favicons/manifest.json">
+        
+        <link rel="icon" type="image/ico" href="/resources/images/favicons/volt.ico" sizes="64x64">
+        <meta name="apple-mobile-web-app-title" content="Volt Lighting">
+        <meta name="application-name" content="Volt Lighting">
+        <meta name="msapplication-TileColor" content="#1f2021">
+        <meta name="msapplication-TileImage" content="/resources/images/favicons/volt.ico">
+        <meta name="theme-color" content="#1f2021">
+        {% if pagecontext.pageType %}
+            {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                    {% if hideinfo %}
+                        {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                             {% if hiddenproduct %}
+                                <META NAME="ROBOTS" CONTENT="NOINDEX, FOLLOW"> 
+                             {% else %}
+                             {% endif %}
+                        {% endwith %}
+                    {% endif %}
+                {% endwith %}
+            {% endif %}    
+        {% endif %}
+        
+        {% endblock meta-tags %}
+
+        <title>{% block title-tag-content %}{{ siteContext.generalSettings.websiteName }} {% endblock title-tag-content %}</title>
+
+        {% if PageContext.FeedUrl  %}
+            <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
+        {% endif %}
+
+        {% block canonical-tag %} 
+              {% include "modules/canonical-tag" %}
+        {% endblock canonical-tag %}
+
+        {% if PageContext.CrawlerInfo.PreviousUrl  %}
+        <link rel="prev" href="{{PageContext.CrawlerInfo.PreviousUrl}}">
+        {% endif %}
+
+        {% if PageContext.CrawlerInfo.NextUrl  %}
+        <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
+        {% endif %}
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
+        <style type="text/css">
+             
+            {{themeSettings.colorswatchcolorcode|safe}}
+
+        </style> 
+        {% endblock stylesheets %}
+        
+        {% block head-tag-scripts %}
+        
+        
+        {% endblock head-tag-scripts %}
+        
+        {% cms_resources %}
+        
+        
+        {%header_content%}
+    
+
+
+    </head>
+    {% endblock head-tag %}
+    
+    {% block body-tag %}
+
+    {% block open-body-tag %}
+
+    <body itemscope itemtype="http://schema.org/WebPage" class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
+    
+
+    {% if not user.isAnonymous %}
+        {% with pageContext.user.segments as segment %}
+        
+        {% for segval in segment %}   
+            {% with segval|split("-") as data %}  
+                {% with data|first as label1 %}
+                        {% if label1 == "PL" %} 
+                            
+                            <input type="hidden" id="customersegmentval" value="{{segval}}"/> 
+                            {% with "(properties.SegmentLabel eq {0})"|string_format(segval) as aliasa %}
+                                {% include_documents "pages/customerlabel" listFQN="PriceListLabel@DrewVolt" view="siteBuilder" filter=aliasa as_parameter%}
+                            {% endwith%}
+                        {% endif %}
+                {% endwith %}    
+            {% endwith %}
+        {% endfor %}
+        {% endwith %}
+    {% endif %}
+
+    
+    {% endblock open-body-tag %}
+
+        <div  class="preloader" style="display: none;" >
+            <p class="loading-text"></p>
+            <svg height="120" width="120" class="svg-circle1">
+              <path class="svg-circle-path2" d="M28,60a32,32 0 1,0 64,0a32,32 0 1,0 -64,0" fill="none" stroke="#fddb00" stroke-width="7" stroke-dasharray="160, 247"/>
+            </svg>
+        </div>
+        <div id="popup" class="search-site">
+            {% include "modules/page-header/searchoverlay" %}
+        </div>
+       
+        <div id="page-wrapper" class="mz-l-pagewrapper">
+    
+            {% block utility-bar %}
+                {% include "modules/utility-bar/header" %}
+            {% endblock utility-bar %}
+
+            {% block page-header %}
+                <div class="header-intro  mz-mobile">
+                    <div class="row"> 
+            
+                        <div class="mob_head medium-12 ">
+                            {% dropzone "MOBILEPROMOTIONAL" scope="site" %}  
+                        </div>
+
+                    </div>    
+                </div>
+                {% include "modules/page-header" %}
+            {% endblock page-header %}
+
+                
+    
+            <div role="main" id="page-content" class="mz-l-pagecontent">
+
+                <div class="megamenu">
+                    {% if pagecontext.cmsContext %}   
+                        {% dropzone "megamenu" scope="site" %}
+                    {% else %}
+                        {% if themeSettings.cmsflag %} 
+                            {{themeSettings.megamenuhtml|safe}}
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                {% block breadcrumbs %}
+                {% if themeSettings.showBreadcrumbs %}
+                {% include "modules/breadcrumbs" %}
+                {% endif %}
+                {% endblock breadcrumbs %}
+                
+                {% block body-content %}
+                {% dropzone "body" scope="page" %}
+                {% endblock body-content %}
+                
+                {% block body-below-content %}
+                {% dropzone "body-bottom" scope="template" %}
+                {% endblock body-below-content %}
+            <div class="mz-navmobile mz-mobile-logout mz-mobile" style="display: none;"> 
+                <div class="clear"></div>
+                 
+                    <ul class="mz-scrollnav-list nav mz-content"  style="">
+                    <div class="close-mzaccount"><a title="Close"  class="close mz-btnclose mz-logout-close"> </a></div>  
+                         <li class="my-profile"><a class="view-account" href="/myaccount">View My profile</a></li>
+                            <li><a class="view-order" href="/myaccount#paymentmethods" data-target="account-paymentmethods">Saved Cards</a></li>
+                            <li><a class="view-order" href="/myaccount#orderhistory" data-target="account-orderhistory">Orders</a></li>
+                            <li><a class="view-returns" href="/myaccount#addressbook" data-target="account-addressbook">Address Book</a></li>
+                            <li><a class="view-quick-order" href="/myaccount#reorder" data-target="account-quickorder">Reorder</a></li>  
+                            <li><a class="view-wishlist" href="/myaccount#wishlist" data-target="account-wishlist">Wishlist</a></li>
+                            <li><a class="view-wishlist" href="/myaccount#storcredits" data-target="account-storecredit">Store Credit</a></li> 
+                            <li><a href="/logout" data-mz-action="logout" class="glossy uppercase" title="Log Out">Log Out</a></li>   
+                    </ul>
+                </div>
+            </div>
+                
+            </div>
+
+            {% block page-footer %}
+            {% if pagecontext.cmsContext %}
+                {% include "modules/page-footer" %}
+            {% else %}
+                {% if themeSettings.cmsflag %}
+                    {{themeSettings.footerhtml|safe}}
+                {% endif %}
+            {% endif %}
+            {% endblock page-footer %}
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script> 
+        
+        <script src="{% make_url "cdn" "/scripts/vendor/modernizr.min.js" %}" async></script>
+        {% require_script "pages/amp-gtm" %} 
+        {% require_script "pages/common" %}  
+        {% require_script "modules/common"%} 
+        {% block trailing-scripts %}
+        {% include "modules/trailing-scripts" %}
+        {% endblock trailing-scripts %}
+        
+        
+        
+        <script type="application/ld+json">
+     
+          {
+          "@context": "http://schema.org/",
+          "@type": "Organization",
+          "brand": {
+            "@type": "Organization",
+            "name": "VOLT Lighting",
+            "logo": "{{ siteContext.cdnPrefix }}/cms/{{ siteContext.siteId}}/files/img-logo.png"
+          },
+          "url": "http://{{sitecontext.domains.primary.domainName|split('/')|first}}",
+          "name": "VOLT Lighting"
+          }
+        </script>
+
+        <div class="google-trusted-popup " style="display: none;"> 
+            <div class=" mz-modal__wrapper" data-mz-role="modal-window">
+                <div class="mz-modal__inner" data-mz-role="modal-contents">  
+                    <div class="learning-center-listing">
+                        <ul>
+                            <li>
+                                Articles
+                            </li>
+                            <li>
+                                Videos
+                            </li>
+                            <li>
+                                News
+                            </li>
+                            <li>
+                                Other Resources
+                            </li>
+                        </ul>
+                    </div>
+                      
+                </div>
+            </div>
+
+        </div>
+        
+        {% include "modules/analytics/facebook-ads-tracking-code" %}
+        {% include "modules/web-fonts-loader" %}
+        
+        {% include "modules/common/login-popover"%} 
+        
+
+        <div style="display:none;">
+            {% visitor_tracking_pixel %}
+        </div>
+
+        {% preload_json siteContext "sitecontext" %} 
+
+        <div id="box-overlay"></div>
+        
+        <div id="box-loading">
+            <div></div> 
+        </div> 
+        
+    </body>
+    {% endblock body-tag %}
+
+</html>
+{% endautoescape %}
+
+
+
+

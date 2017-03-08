@@ -1,0 +1,27 @@
+﻿<div class="bg-header">
+	<div class="row">
+		<div class="medium-11 columns medium-centered main-header">
+			<div  class="small-12 medium-2 columns">
+				<h2 class="mz-storebranding" id="store-branding"> 
+				{% if pagecontext.cmsContext %}
+					 {% dropzone "logo" scope="site" %}
+				{% else%} 
+    				{% if themeSettings.cmsflag %}
+        				<div id="mz-drop-zone-logo" class="mz-drop-zone">
+                            <div class="mz-cms-row" >
+                                <div class="mz-cms-col-12-12" style="width:">
+                                    <div class="mz-cms-block">
+                                        <div class="mz-cms-content" style="height:auto;">
+                                            <div class="mz-cms-image" data-mz-cms-image="">
+        			    	                    {{themeSettings.voltlogo|safe}}
+        			    	                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    				{% endif %}
+				{% endif %}
+				</h2>  
+			</div>
+

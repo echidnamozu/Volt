@@ -1,0 +1,8 @@
+﻿{% extends "modules/common/payment-method" %}
+{% block module-classes %}mz-paymentmethod-myaccount{% endblock %}
+{% block payment-method-action-classes %}row{% endblock payment-method-action-classes %}
+{% block payment-method-actions %}
+    <a class="mz-paymentmethod-edit columns large-2 small-5 text-center" href="javascript:;" data-mz-action="beginEditCard" data-mz-card="{{ model.id }}">{{ labels.edit }}</a>
+    <a class="mz-paymentmethod-delete columns large-2 small-5 text-center pull-left" href="javascript:;" data-mz-action="beginDeleteCard" data-mz-card="{{ model.id }}">{{ labels.delete }}</a>
+{% endblock payment-method-actions %}
+  

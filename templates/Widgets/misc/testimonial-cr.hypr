@@ -1,0 +1,20 @@
+<div class="testimonial-content">
+	<div  class="image-left">
+	    <span class="inline">
+	    	<img src="{{model.config.img}}" alt="{{model.config.name}}"/>
+	    </span>
+	</div>
+	<p class="name">
+		{{model.config.name | safe}}
+	</p>
+	<p class="content">
+		<span class="heading">{{model.config.head | safe}}</span>
+		<span>{{model.config.content | safe}}</span>
+	</p>
+</div>
+ 
+{% if model.config.link %}
+	<div class="see-more"><a href="{{model.config.link}}" target="_blank">See More</a></div>
+{% endif %}
+
+{% require_script "pages/customer-review" %}

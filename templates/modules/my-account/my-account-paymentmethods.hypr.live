@@ -1,0 +1,53 @@
+﻿<h5 class="section-title">{{ themeSettings.savedcardstext }}</h5>
+<div class="myaccount-paymentmethod panel-border">
+{% if  not model.hasSavedCards %}
+<p class="paymentnocards">You have no saved cards</p>
+<p class="mz-imagenocards"></p>
+{% endif %}
+ 
+{% if model.hasSavedCards || editing.card == "new" %}
+     <div class="mz-personalinformation">
+        <span>Cards</span> 
+        <!--<button class="mz-accountsettings-nameedit" data-mz-card="new" data-mz-action="beginEditCard">{{ labels.addNewCard }}</button> -->
+    </div>
+<ul class="mz-accountpaymentmethods-list mz-l-tiles">
+    {% for card in model.cards %}
+    {% if editing.card == card.id %}    
+        {% include "modules/my-account/my-account-credit-card-form" with model=model.editingCard %}
+    {% else %}
+        <li class="mz-accountpaymentmethods-method mz-accountpaymentmethods-form panel-border"> 
+        <div class="heading">Card {{ forloop.index }}</div>
+        {% include "modules/my-account/my-account-paymentmethod" with model=card %}
+        </li>
+         
+    {% endif %}
+    {% endfor %}
+    {% if editing.card == "new" %}
+      <div class="mz-personalinformation">
+        <span>Add New Card</span>
+       
+    </div>
+        {% include "modules/my-account/my-account-credit-card-form" with model=model.editingCard editingContact=model.editingContact %}
+    {% endif %}
+</ul>
+{% endif %}
+   {% if editing.card != "new" %}
+ <div class="mz-personalinformation">
+        <span>Add New Card</span>
+       
+    </div>
+
+<div class="mz-btnaccount"><button class="mz-button mz-button-small mz-accountsettings-addcard mz-accountsave" data-mz-card="new" data-mz-action="beginEditCard">{{ labels.addNewCard }}</button></div>
+{% endif %}
+
+</div> 
+
+
+
+
+
+
+
+
+
+

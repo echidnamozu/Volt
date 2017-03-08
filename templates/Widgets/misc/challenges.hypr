@@ -1,0 +1,59 @@
+
+
+<div class="competitor-content mz-desktop">
+    <div class="volt-products">
+        <h4>{{ model.config.voltheading }}</h4>
+        <img src="{{model.config.voltimg}}" alt="Competitor-volt"/>
+        <p>{{model.config.voltdescription|safe}}</p> 
+    </div>
+    <span class="vs">vs</span>
+    <div class="all-competitors">
+        <div class="competitor-container">
+            <div class="competitor-1">
+                <h4>{{ model.config.Competitor1heading }}</h4>
+                <img src="{{ model.config.Competitor1img }}" alt="Competitor1img"/>
+                <p>{{ model.config.Competitor1description|safe }}</p>
+            </div>
+            
+        </div>
+        {% if  model.config.hrBorderStyle == "double" %}
+        <div class="competitor-container">
+            <div class="competitor-1 competitor-2">
+                <h4>{{ model.config.Competitor2heading }}</h4>
+                <img src="{{ model.config.Competitor2img }}" alt="Competitor2img"/>
+                <p>{{ model.config.Competitor2description  |safe}}</p>
+            </div>
+        </div>
+        {% endif %}
+        <span {% if model.config.hrBorderStyle == "single" %}class="single-col"{% endif %}>{{model.config.voltsummary}}</span>
+    </div>
+</div>
+
+
+<div id="tabs-container" class="mz-mobile">
+    <ul class="tabs-menu">
+        <li class="current"><a href="#tab-1">{{ model.config.voltheading }}</a></li>
+        <li><a href="#tab-2">{{ model.config.Competitor1heading }}</a></li>
+        {% if  model.config.hrBorderStyle == "double" %}
+        <li><a href="#tab-3">{{ model.config.Competitor2heading }}</a></li>
+        {% endif %}
+    </ul>
+    <div class="tab">
+        <div id="tab-1" class="tab-content">
+            <img src="{{ model.config.voltimg }}" alt="Competitorimg"/>
+                <p>{{ model.config.voltdescription  |safe}}</p>
+        </div>
+        <div id="tab-2" class="tab-content">
+             <img src="{{ model.config.Competitor1img }}" alt="Competitor1img"/>
+            <p>{{ model.config.Competitor1description  |safe}}</p>
+        
+        </div>
+        {% if  model.config.hrBorderStyle == "double" %}
+        <div id="tab-3" class="tab-content">
+             <img src="{{ model.config.Competitor2img }}" alt="Competitor2img"/>
+            <p>{{ model.config.Competitor2description  |safe}}</p>
+        </div>
+        {% endif %}
+    </div>
+    <span {% if model.config.hrBorderStyle == "single" %}class="single-col"{% endif %}>{{model.config.voltsummary}}</span>
+</div>

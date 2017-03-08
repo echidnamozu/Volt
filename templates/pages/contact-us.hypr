@@ -1,0 +1,19 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-contact-us {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="contact-us mz-static-page"> 
+      {% dropzone "title" scope="template" %}
+      <div class="mz-mobile">{% dropzone "promoslot1" scope="template" %} </div>
+      <div class="mz-desktop">{% dropzone "promoslot" scope="template" %} </div>
+      {% dropzone "contact-us" scope="template" %} 
+    </div>
+
+{% endblock body-content %}  
+

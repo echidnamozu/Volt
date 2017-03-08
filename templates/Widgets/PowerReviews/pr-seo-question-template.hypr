@@ -1,0 +1,13 @@
+{% if model.items %}
+	{% for r in model.items %}
+         {% with "merchantGrpId eq '{0}' and productCode eq '{1}' and pageNumber eq {2}" as qFormat%}
+	        {% with pageContext.query.pageNumber|default("1") as pageNum %}
+                  {% with qFormat|string_format(r.merchantGrpId,pageModel.productCode, pageNum) as q %}
+                	     {% include_entities "widgets/PowerReviews/pr-seo-template" listFQN="mozu-powerreviews-seo-questions@mzint"  query=q %}
+                  {% endwith %}    
+            {% endwith %}    
+        {% endwith %}
+        {% require_script "widgets/powerreviews" %}
+	{% endfor %}
+{% endif %}
+

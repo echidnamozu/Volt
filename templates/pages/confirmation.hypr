@@ -1,0 +1,106 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.orderConfirmation %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-confirmation {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% preload_json model "order" %}
+
+<div class="mz-l-container">
+<img class="print-logo" src="/resources/images/print-logo.png" width= "250" height="50"  alt="print-logo"/>  
+<div class="print-address" style="float: right;">
+    <p>VOLT<sup>&reg;</sup> Lighting</p>
+    <p>15486 N.Nebraska Ave. </p>
+    <p>Lutz, FL 33549</p>
+    <p>Phone: {{ labels.phoneNumber }}</p>
+</div>
+<div class="clearfix"></div>
+    <div class="print-receipt"><a href="javascript:window.print()">Print Receipt</a></div> 
+    <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
+
+	<p class="thanku-text">{{ labels.confirmationText }}</p>   
+     <div class="row order-no-details">
+        <div class="large-6 medium-6 small-12 columns">
+            <p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
+           
+            <p>{{labels.refPurchaseOrder}}:
+            {% for options in model.attributes %}
+            {% if forloop.first %}
+                {% for option in options.values %}
+                {% if forloop.first %}
+                <span>{{option}}</span>
+                {% endif %}     
+                {% endfor %}
+            {% endif %} 
+            {% endfor %} 
+            </p>
+        </div>
+        <div class="large-3 medium-6 small-12 customer-id columns"><label>Customer Id:  </label><span>{{ model.customerAccountId }}</span></div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="mz-checkout-paymenttitle">{{ labels.payments }} - {{ model.total|currency }}</h4>
+   
+    <div class="mz-l-stack">
+                
+        {% if model.hasDirectShip %} 
+        <div class="mz-l-stack-section shipping-section large-6 medium-6 columns">
+            <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
+            <dl class="mz-propertylist">
+                <dt>{{ labels.shipTo }}</dt>
+                <dd class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</dd>
+                <dt>{{ labels.shippingMethod }}</dt>
+                <dd>{{ model.fulfillmentInfo.shippingMethodName }}</dd>
+            </dl>
+        </div>
+        {% endif %}
+        <div class="mz-l-stack-section billing-section large-6 medium-6 columns">
+            <h4 class="mz-l-stack-sectiontitle">{{ labels.billingInformation }}</h4>
+            <!--<h4 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h4>-->
+            {% for payment in model.payments %}
+            {% if payment.status != "Voided" and payment.status != "Declined" %}
+            {% include "modules/checkout/checkout-payment" with model=payment %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="clearfix"></div>
+        {% for item in model.items %}
+        {% if item.fulfillmentMethod == "Pickup" %}
+        <div class="mz-l-stack-section">
+            <h4 class="mz-l-stack-sectiontitle">{{ labels.storePickupFor|string_format(item.product.name)|safe }}</h4>
+            <dl class="mz-propertylist">
+                <dt>{{ labels.storeName }}</dt>
+                <dd>{{ item.fulfillmentLocationName }}</dd>
+            </dl>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="mz-l-stack">
+        
+       
+        
+
+
+        <div class="mz-l-stack-section">
+            <h4 class="mz-l-stack-sectiontitle">{{ labels.conorderSummary }} </h4>
+            {% include "modules/common/confirmation-order-summary" %}
+            
+        </div>
+    </div>
+</div><!-- #order-confirmation -->
+
+{% endblock body-content %}
+
+{% block trailing-scripts %}
+	{% parent %}
+	{% if siteContext.generalSettings.isGoogleAnalyticsEnabled and siteContext.generalSettings.isGoogleAnalyticsEcommerceEnabled %}
+	{% include "modules/analytics/google-analytics-ecommerce-tracking-code" %}
+	{% endif %}
+
+{% endblock trailing-scripts %}
+
+		
+		
+		

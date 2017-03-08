@@ -1,0 +1,69 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-career mz-prodocuments{% endblock body-tag-classes %}
+ 
+{% block body-content %}
+
+<div class="product-docs mz-static-page">
+ <h1>{{labels.productDocuments|safe}}</h1>
+    
+    {% for link in navigation.tree %}
+        {% if link.nodeType == "category" and not link.isEmpty and link.name|lower == "products" %}
+            {% for childs in link.items %}
+                {% if childs.items and childs.items.length > 0 %}
+                    {% if not childs.isEmpty %}  
+                        {% for childrn in childs.items %} 
+                            {% if childrn.items.length > 0 %}
+                                {% for child in childrn.items %} 
+                                    
+                                    <div class="lifetime-warranty-details" mz-qo-id-toggle="{{child.orginalId}}">
+                                        
+                                        <div class="products-accordion-header " >
+                                            <h3 class="cat">{{child.name}}</h3>
+                                        </div>   
+                                        <div class="products-accordion cathead">
+                                            {% include_products "modules/productdocument-header" with pageSize=200 categoryCode=child.categoryCode %}      
+                                        </div>
+                                    </div>    
+                                {% endfor %}
+                            {% else %} 
+                               
+                                <div class="lifetime-warranty-details" mz-qo-id-toggle="{{childrn.orginalId}}">
+                                    
+                                    <div class="products-accordion-header " >
+                                        <h3 class="cat">{{childrn.name}}</h3>
+                                    </div>
+                                    <div class="products-accordion cathead">
+                                        {% include_products "modules/productdocument-header" with pageSize=200 categoryCode=childrn.categoryCode %}      
+                                    </div>
+                                </div>        
+                            {% endif %}    
+                        {% endfor %}
+                    {% else %}
+                        
+                        <div class="lifetime-warranty-details" mz-qo-id-toggle="{{childs.orginalId}}">
+                            
+                            <div class="products-accordion-header " >
+                                <h3 class="cat">{{childs.name}}</h3>
+                            </div>
+                            <div class="products-accordion cathead">
+                                {% include_products "modules/productdocument-header" with pageSize=200 categoryCode=childs.categoryCode %}      
+                            </div>
+                        </div>
+                    {% endif %}    
+                {% else %}
+                    <h2 class="{{ itemdata.hidecategory}}">{{childs.name}}</h2>   
+                    <div class="lifetime-warranty-details" mz-qo-id-toggle="{{childs.orginalId}}">
+                        <div class="products-accordion maincat">
+                            {% include_products "modules/productdocument-header" with pageSize=200 categoryCode=childs.categoryCode %}      
+                        </div>
+                    </div>
+                {% endif %}  
+            {% endfor %}
+        {% endif %}  
+    {% endfor %}
+</div>
+{% endblock body-content %}
+

@@ -1,0 +1,79 @@
+﻿    {% if model.hasPriceRange %}
+        <div class="mz-price-block">     
+            {% with model|get_product_attribute_value("tenant~price-label") as aliasName %} 
+                {% with aliasName|split(",") as documentData %} 
+                    {% with documentData|first as label1 %}
+                    {% with documentData|last as label2%}
+                        {% if model.priceRange.lower %}  
+                            {% if model.priceRange.lower.msrp %} 
+
+                                <div>
+                                  <span class="originalprice customerprice">{% if label1 %} {{label1}} {% else %} {{themeSettings.msrplabel}}{% endif %} :</span> <span class="mz-price originalprice" > $</span><span class="mz-price originalprice">
+                                       {{ model.priceRange.lower.msrp|floatformat(2) }}
+                                   </span> 
+                                </div>
+                            {% endif %}
+
+                            <div>
+                            {% if model.priceRange.lower.onSale %}
+                                {% if model.priceRange.lower.discount.discount.name %}
+                                    {% if model.segpricelabel %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                    {% else %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="mz-price-discountname customersaleprice">{{model.priceRange.lower.discount.discount.name}} &ndash;</span>
+                                    {% endif %} <span class="mz-price  is-saleprice"> $</span><span class="mz-price is-saleprice">{{model.priceRange.lower.salePrice|floatformat(2)}}</span>
+                                {% else %}
+                                    {% if model.segpricelabel %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %} class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                    {% else %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.salepricelabel}}{% endif %} :</span>  
+                                    {% endif %} 
+
+                                    <span class="mz-price is-crossedout">
+                                        {{model.priceRange.lower.price|currency}} 
+                                    </span>
+                                    <span class="mz-price  is-saleprice" > $</span><span class="mz-price is-saleprice">
+                                        {{model.priceRange.lower.salePrice|floatformat(2)}}
+                                    </span>
+                                {% endif %}    
+                            {% else %} 
+                                {% if model.segpricelabel %}
+                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                {% else %}
+                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.pricelabel}}{% endif %} :</span>  
+                                {% endif %} 
+
+                                <span class="mz-price ">$</span><span class="mz-price">
+                                    {{model.priceRange.lower.price|floatformat(2)}}
+                                </span>
+                                {% if model.priceRange.lower.priceType == "MAP" %} 
+                                    <div>add to cart to see final price</div>
+                                {% endif %}
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    {% endwith %}
+                {% endwith %}
+            {% endwith %}
+       </div>
+        {% if model.priceRange.lower.msrp %}
+            <p class="mz-productlisting-savings">You save: <span></span></p>
+        {% endif %}  
+
+    {% else %}
+       
+        {% include "modules/common/price" with model=model%}
+       
+    {% endif %} 
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+
+{% for cat in model.config.featured-brand-categories %} 
+        {% if cat==34 or cat==72 or cat==70 or cat==19%} 
+            {% for prod in model.config.products %}
+                {% if forloop.first %}
+                    <div class="aspotcontianer">            
+                {% endif %}
+                <div class="featured-article"> 
+                {% if cat==19  %}
+                    <h3 class="article-content">Featured Release</h3>
+                {% endif %}
+                {% if cat ==72%}
+                    <h3 class="article-content">Featured Loggined News</h3>
+                {% endif %}
+                {% if cat ==70%}
+                    <h3 class="article-content">Featured Product News</h3>
+                {% endif %}
+                {% if cat ==34%}
+                    <h3 class="article-content">Featured Articles</h3>
+                {% endif %}
+                  
+                        
+                            {% include_products "modules/news-resources-aspot" with  productCodes=prod as_parameter %}
+                </div>    
+                {% if forloop.last %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if cat==39 %}  
+            {% for prod in model.config.products %}
+                {% if forloop.first %}
+                    <div class="aspotcontianer">            
+                {% endif %}
+                <div class="featured-article">
+                <span class="video-icon-play"></span>
+                        <h3 class="article-content">Featured Videos</h3>
+                            {% include_products "modules/video-a-spot-description" with  productCodes=prod as_parameter %}
+                </div>    
+                {% if forloop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+        {% if cat==9 %} 
+            {% for prod in model.config.products %}
+                {% if forloop.first %}
+                    <div class="aspotcontianer">            
+                {% endif %}
+                <div class="featured-article">
+                        <h3 class="article-content">Featured Articles</h3>
+                            {% include_products "modules/featured-project-description" with productCodes=prod as_parameter %}
+                </div>     
+                {% if forloop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+       
+{% endfor %} 
+
+
+
+
+
+
+
+
+
+
+

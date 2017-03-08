@@ -1,0 +1,67 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+{% comment %}
+	{% if user and user.firstName %}
+		{{ labels.emailOpening|string_format(user.firstName)|safe }}
+	{% else %}
+		{{ labels.emailOpeningAlternative|safe }}
+	{% endif %}
+{% endcomment %}
+
+	<p style="font-weight:600;color:#56534c!important;font-size:16px;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.emailOpeningAlternative|safe }}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.inStockBlob1|string_format(siteContext.generalSettings.websiteName)|safe }}</font></p>
+
+	 <p style="background-color:#2e2e2e;padding:5px 5px 5px 5px;color:#fddb00;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.prodDetails|safe}}</font></p>
+
+	<table width="100%" cellpadding="5" cellspacing="0">
+		<tbody>
+	        <tr>
+	            <td width="50%" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.itemsNum }}</font></td>
+	            <td style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.itemsName }}</font></td>
+	        </tr>
+			<tr>
+			{% with model.product|get_product_attribute("tenant~hide-product") as hidden %}  
+			{% if hidden %}
+			{% for val in hidden.values %}
+             {% if forloop.first %}
+             	<td width="50%" valign="top" style="padding-top:10px;padding-bottom:10px;">
+					{% for prodimage in model.content.productImages %}
+						{% if forloop.first %}
+							<a style="color:#000!important;text-decoration:none!important;display:inline-block;" 
+							{% if val.value %} href="javascript:void(0)" {% else %} href="http://{{domainName}}/p/{{model.productCode}}" {% endif %}
+							target="_blank"><img src="http:{{prodimage.imageUrl}}" alt="img-{{model.productCode}}" width="100px"/></a>
+						{% endif %}
+					{% endfor %}
+					<p style="font-weight:600;color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif"><a style="color:#000!important;text-decoration:none!important;" 
+					{% if val.value %} href="javascript:void(0)" {% else %} href="http://{{domainName}}/p/{{model.productCode}}" {% endif %} target="_blank">{{model.productCode}}</a></font></p>
+				</td>
+				<td valign="top" style="padding-top:10px;padding-bottom:10px;">
+					<p style="font-weight:600;color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif"><a style="color:#000!important;text-decoration:none!important;" {% if val.value %} href="javascript:void(0)" {% else %} href="http://{{domainName}}/p/{{model.productCode}}" {% endif %} target="_blank">{{model.content.productName}}</a></font></p>
+				</td>
+             {% endif %}
+             {% endfor %}
+             {% else %}
+             	<td width="50%" valign="top" style="padding-top:10px;padding-bottom:10px;">
+					{% for prodimage in model.content.productImages %}
+						{% if forloop.first %}
+							<a style="color:#000!important;text-decoration:none!important;display:inline-block;" 
+							href="http://{{domainName}}/p/{{model.productCode}}"
+							target="_blank"><img src="http:{{prodimage.imageUrl}}" alt="img-{{model.productCode}}" width="100px"/></a>
+						{% endif %}
+					{% endfor %}
+					<p style="font-weight:600;color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif"><a style="color:#000!important;text-decoration:none!important;" 
+					 href="http://{{domainName}}/p/{{model.productCode}}" target="_blank">{{model.productCode}}</a></font></p>
+				</td>
+				<td valign="top" style="padding-top:10px;padding-bottom:10px;">
+					<p style="font-weight:600;color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif"><a style="color:#000!important;text-decoration:none!important;" href="http://{{domainName}}/p/{{model.productCode}}" target="_blank">{{model.content.productName}}</a></font></p>
+				</td>
+             {% endif %}
+			</tr>
+		</tbody>
+	</table>
+
+	<p style="line-height:20px;color:#000;padding-bottom:15px;border-bottom:1px solid #f2f2f2;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.inStockBlob2|string_format(domainName, model.productCode)|safe }}</font></p>
+
+{% endblock body-content %}

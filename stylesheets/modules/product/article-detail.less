@@ -1,0 +1,282 @@
+.centerAlign() {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.lower-panel-wrap {
+    .lower-panel {
+        .subscribe-wrap {
+            .subscribe-email-box {
+                input[type="text"],input[type="button"] {
+                    margin: 0;
+                    display: inline-block;
+                    height: 38px;
+                }
+                .success-msg-on-submit {   
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    color: #4a8f10;
+                    height: 40px;
+                    display: none;
+                    width: 100%;   
+                    text-align: center;
+                    line-height: 35px;
+                    text-transform: capitalize;
+                    background-color: #dff2bf;
+                    border-radius: 5px;
+                }
+                input[type="text"] {
+                    width: 70%;
+                    border-right: none;
+                    float: left;
+                    border-radius: 5px 0px 0 5px;
+                    &:focus {     
+                        background:#fff;
+                    }
+                    &.empty-val {
+                        border: 2px solid #ed1f24;
+                        background: #F0BDBD;
+                    }
+                }
+                input[type="button"] {
+                    border: none;
+                    width: 30%;
+                    border-radius: 0 5px 5px 0;
+                    font-size: 0.8em;
+                    .roboto_bold();
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+.articleproduct {    
+    .main-article {
+        .articlename-wrap {
+            .centerAlign();
+            margin-bottom: 10px;
+            .articlename { 
+                margin-top: 20px;
+                font-size: 1.5em;
+                .roboto_bold();
+                border-bottom: 2px solid #fddb00;
+                text-transform: uppercase;
+            }
+        }
+        .articleImgs {
+            .articleImgs-innerwrap {
+                .centerAlign();
+                background-image: url('../resources/images/icons/loading.gif');
+                background-repeat: no-repeat;
+                background-position: center;
+                .owl-controls {
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    position: absolute;
+                    text-align: center;
+                    .owl-dots {
+                        .owl-dot.active {
+                            background-color: @white;
+                        }
+                        .owl-dot {
+                            box-shadow: 0px 1px 2px @black;
+                            background-color: #afafaf;
+                        }
+                    }
+                }
+            }
+        }
+        .mainprojectdescription {
+            ul {
+                    display: block;
+                    list-style-type: disc;
+                    -webkit-margin-before: 1em;
+                    -webkit-margin-after: 1em;
+                    -webkit-margin-start: 0px;
+                    -webkit-margin-end: 0px;
+                    -webkit-padding-start: 40px;                
+                li {
+                    display: list-item;
+                    list-style-type: disc;
+                    text-align: -webkit-match-parent;
+                }
+            }
+            ol ul, ul ol, ul ul, ol ol {
+                -webkit-margin-before: 0px;
+                -webkit-margin-after: 0px;
+                li
+                {
+                    list-style-type: circle;
+                }
+            }
+            ul ul, ol ul {
+                list-style-type: circle;
+                li
+                {
+                    list-style-type: circle;
+                }
+            }
+            .centerAlign();
+            .projdescription {
+                margin-top: 15px;
+                color: #474747;
+                h2 {
+                    font-size: 1.3em;
+                    margin-bottom: 15px;
+                }
+                h3 {
+                    font-size: 1.4em;
+                    margin-bottom: 15px;
+                }
+                img {
+                    float: right;
+                }
+            }
+        }
+        .lower-panel-wrap {
+            .centerAlign();
+            .lower-panel {
+                border-top:1px solid #e0e0e0;
+                border-bottom:1px solid #e0e0e0;
+                margin-bottom: 20px;
+                width: 100%;
+                display: inline-block;
+                .column {
+                    padding: 0;
+                }
+                .share-wrap {
+                    height: 30px;
+                    margin: 20px 0;
+                    .share-icons {
+                        text-align: right;
+                        svg {
+                            margin: 0 4% 0 0;
+                            .st0 {
+                                fill: @black;
+                            }
+                            &:hover .st0 {
+                                fill: #9b9b9b;
+                            }
+                        }
+                    }
+                }
+                .subscribe-wrap {
+                    height: 30px;
+                    margin: 15px 0;
+                    text-align: right;
+                    .subscribe-text-copy {
+                        margin: 5px 0px;
+                        padding-right: 15px;
+                    }
+                    .subscribe-email-box {
+                        height: auto;
+                    }
+                }
+            }
+        }
+        .buttons-panel {
+            .centerAlign();
+            text-align: center;
+            .mz-button {
+                .roboto_bold();
+                font-size: 1em;
+                margin: 0 10px 30px 10px;
+                padding: 10px 20px;
+                border: 1px solid #666;
+                background-color: transparent;
+                &:hover {
+                    background-color: #fddb00;
+                    color: @black;
+                    border-color: #fddb00
+                }
+                .button-icon {
+                    width: 25px;
+                    margin-right: 5px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+@media @tabletportrait {
+    .articleproduct {
+        .main-article {
+            .articlename-wrap, .articleImgs .articleImgs-innerwrap, .mainprojectdescription, .lower-panel-wrap, .buttons-panel{
+                padding: 0 20px;
+            }
+            .lower-panel-wrap {
+                .lower-panel {
+                    .share-wrap {
+                        width: 100%;
+                    }
+                    .subscribe-wrap {
+                        width: 100%;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}
+@media @mobile {
+    .articleproduct {
+        .main-article {
+            .articlename-wrap, .articleImgs .articleImgs-innerwrap, .mainprojectdescription, .lower-panel-wrap, .buttons-panel{
+                padding: 0 10px;
+                .projdescription {
+                    &.set-height {
+                        height: 355px;    
+                        overflow: hidden;
+                    }
+                    &.more-desc {
+                        overflow: auto;
+                        height: 100%; 
+                    }
+                }
+                .more-link {
+                    color: #000;
+                    text-decoration: underline;
+                }
+            }
+            .lower-panel-wrap {
+                .lower-panel {
+                    .share-wrap {
+                        margin: 10px 0 20px 0; 
+                         .share-icons {
+                            text-align: left;
+                             .addthis_toolbox a {
+                                margin-right: 15px;
+                                .fa {
+                                    font-size: 2em;
+                                    color: #000;
+                                }
+                             }
+                         }
+                    }
+                    .subscribe-wrap {
+                        text-align: left;
+                        margin: 0 0 15px 0;
+                    }
+                }
+            }
+            .buttons-panel {
+                margin: 15px 0;
+                .mz-button {
+                    width: 92%;
+//                    text-align: left;
+                    font-size: 1.2em;
+//                    padding: 10px 20px 10px 12%; 
+                    .button-icon {
+                        width: 35px;
+                    }
+                }
+            }
+        }
+    } 
+}

@@ -1,0 +1,115 @@
+<script type="text/javascript">
+</script>
+<h5 class="section-title">{{themeSettings.myprofiletext}}</h5>
+<div class="mz-accountsettings edit-acct-spacing panel-border">
+
+    <div class="mz-personalinformation">       
+        <span> {{ labels.mzpersonal| lower}} </span>
+        <button class=" mz-accountsettings-nameedit" data-mz-action="startEditName">{{ labels.edit }}</button>
+    </div>
+    {% if editing.name %}
+    <p class="mz-edittext">Edit Account Information</p>{% endif %}
+    <div class="mz-accountsettings-section mz-accountsettings-name">
+
+
+        <div class="mz-rightfields">
+            {% if editing.name %}
+            <div class="mz-nextfields">
+                <div class="mz-firstname">
+                    <p class="mz-spanemail"><span class="required">*</span>Email</p>
+
+                    <input class="mz-accountsettings-email" type="email" placeholder="Email Address" data-mz-value="emailAddress" value="{{ model.emailAddress|default(model.userName) }}">
+                    <div class="validation-accountsettings mz-validationmessage"></div>
+                </div>
+                <div class="mz-firstname">
+                    <p><span class="required">*</span>First Name </p>
+                    <input class="mz-accountsettings-firstname" type="text" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
+                    <div class="validation-accountsettings mz-validationmessage"></div>
+                </div>
+                <div class="mz-lastname">
+
+                    <p> <span class="required">*</span>Last Name</p>
+                    <input class="mz-accountsettings-lastname" type="text" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
+                    <div class="validation-accountsettings mz-validationmessage"></div>
+                </div>
+                <div class="mz-lastname">
+                    <p>Company</p>
+                    <input class="mz-accountsettings-companyOrOrganization" type="text" placeholder="{{ labels.companyOrOrganization }}" data-mz-value="companyOrOrganization" value="{{ model.companyOrOrganization }}" />
+                    <div class="validation-accountsettings mz-validationmessage"></div>
+                </div>
+
+                <div class="mz-buttons">       
+                    <p class="mz-requiredmsg">*Required Fields</p>
+                    <button class="mz-button mz-button-small mz-accountsettings-namecancel mz-accountsave" data-mz-action="cancelEditName">{{ labels.cancel }}</button>
+                    <button class="mz-button mz-button-small mz-accountsettings-namedone mz-accountcancel" data-mz-action="finishEditName">{{ labels.save }}</button>
+                </div>
+                <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
+                <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
+            </div>
+            {% else %}
+            <div class="mz-firstname">
+                <span class="mz-f">Email</span>
+                <div class="mz-accountsettings-displayemail">{{ model.emailAddress|default(model.userName) }}</div>
+            </div>
+            <div class="mz-firstname">
+                <span class="mz-f">First Name</span>
+                <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.firstName }}</div>
+            </div>
+            <div class="mz-lastname">
+                <span class="mz-f">Last Name</span>
+                <div class="mz-accountsettings-displayname" id="account-settings-name"> {{ model.lastName }}</div>
+            </div>
+            <div class="mz-lastname">
+                <span class="mz-f">Company</span>
+                <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.companyOrOrganization }} </div>
+            </div>
+            {% endif %} 
+        </div>
+    </div>
+</div>
+<div class="mz-accountsettings-password mz-accountsettings mz-accpassworddetails panel-border">
+    <div class="mz-personalinformation mz-accounttopborder ">
+        <span> {{labels.mzchangepassword | lower}} </span>
+
+    </div>
+    {% if editing.password %}
+    <!--  <p class="mz-edittext">Change Password</p> -->
+    <div class="mz-accountpassword">
+        <div class="mzoldnewpass">
+            <div class="mz-oldpass">
+                <!-- <span class="required">*</span> -->
+                <label for="account-oldpassword" class="mz-accountsettings-oldpasswordlabel">Enter {{ labels.oldPassword }}</label>
+                <div class="mz-validationmessage" data-mz-validationmessage-for="oldPassword"></div>
+                <input id="account-password" class="mz-accountsettings-password" type="password" data-mz-value="oldPassword" value="{{ model.oldPassword }}" placeholder="{{ labels.oldPassword }}" />
+                <br />
+            </div>
+            <div class="mz-newpass">
+                <!-- <span class="required">*</span> -->
+                <label for="account-password" class="mz-accountsettings-passwordlabel">Enter {{ labels.newPassword }}</label>
+                <div class="mz-validationmessage" data-mz-validationmessage-for="password"></div>
+                <input id="account-password" class="mz-accountsettings-password" type="password" data-mz-value="password" value="{{ model.password }}" placeholder="{{ labels.newPassword }}" />
+                <br />
+            </div>
+        </div>
+        <div class="mz-confirmpass">
+            <label for="account-confirmpassword" class="mz-accountsettings-confirmpasswordlabel">
+                <!-- <span class="required">*</span> -->Re-Enter {{ labels.newPassword }}</label>
+            <div class="mz-validationmessage" data-mz-validationmessage-for="confirmPassword"></div>
+            <input id="account-confirmpassword" placeholder="{{ labels.confirmPassword }}" class="mz-accountsettings-confirmpassword" type="password" data-mz-value="confirmPassword" value="{{ model.confirmPassword }}" />
+            <br />
+        </div>
+        <div class="mz-password-actions">
+            <div class="mz-buttons">
+                <!--  <p class="mz-requiredmsg">*Required Fields</p> -->
+
+                <button class="mz-button mz-button-small mz-accountsettings-passwordcancel mz-accountsave" data-mz-action="cancelEditPassword">{{ labels.cancel }}</button>
+                <button class="mz-button mz-button-small mz-accountsettings-passworddone mz-accountcancel" data-mz-action="finishEditPassword">{{ labels.save }} Changes</button>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    <button class="mz-button mz-button-small mz-accountsettings-passwordedit" data-mz-action="startEditPassword">{{ labels.changePassword }}</button>
+    <div class="mz-validationmessage password-changed" data-mz-validationmessage-for="passwordChanged"></div>
+    {% endif %}
+</div>

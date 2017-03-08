@@ -1,0 +1,45 @@
+// Section - 22 - Side Nav 
+
+.side-nav {
+  display: block;
+  margin: 0;
+  padding: 0.875rem 0;
+  list-style-type: none;
+  list-style-position: outside;
+   .montserrat_regular();
+  li {
+    margin: 0 0 0.4375rem 0;
+    font-size: 0.875rem;
+    font-weight: normal;
+    a:not(.button) {
+      display: block;
+      color: #008CBA;
+      margin: 0;
+      padding: 0.4375rem 0.875rem;
+      &:hover, &:focus {
+        background: rgba(0, 0, 0, 0.025);
+        color: #1cc7ff;
+      }
+    }
+    &.active > a:first-child:not(.button) {
+      color: #1cc7ff;
+      font-weight: normal;
+       .montserrat_regular();
+    }
+    &.divider {
+      border-top: 1px solid;
+      height: 0;
+      padding: 0;
+      list-style: none;
+      border-top-color: white;
+    }
+    &.heading {
+      color: #008CBA;
+      font-size: 0.875rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+

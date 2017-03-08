@@ -1,0 +1,64 @@
+    <div class="mz-contractor-form">
+		<div class="application-form">
+			<form id="share-your-story-form" autocomplete="off" method="post" enctype="text/plain">
+				<input type="hidden" id="admin-email" name="adminEmail" value="{{ model.config.SYSadminEmail }}">
+				<input type="hidden" name="spreadsheetId" value="{{ model.config.SYSsheetId }}">
+				<input type="hidden" id="admin-name" name="contactName" value="{{ model.config.SYScontactName }}">
+				<div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+	    		<h1>Share Your Story</h1> 
+				<span class="message-bar" style="color:red; margin: 10px 0;display: inline-block;"></span>
+				<div class="form-column1 form-clear">
+					<h2>{{ labels.emailAddress }} *</h2>
+					<input name="emailaddress" id="mz-app-emailaddress" maxlength="255" placeholder="Enter Your Email" type="email" class="contact-input" tabindex="1" required/>
+				</div>
+                <br />
+				<div class="form-column1">
+					<h2>{{ labels.firstName }} *</h2>
+					<input name="firstname" id="mz-app-firstname" maxlength="320" placeholder="Enter First Name" type="text" class="contact-input" tabindex="2" required/>
+				</div>
+				<div class="form-column2">
+					<h2>{{ labels.lastName }} *</h2>
+					<input name="lastname" id="mz-app-lastname"  maxlength="320" placeholder="Enter Last Name" type="text" class="contact-input" tabindex="3" required/>
+				</div>
+                <div class="clear-fix"></div>
+                <div class="form-column1">
+					<h2>{{ labels.location }} *</h2> 
+					<input name="location" id="mz-app-location"  maxlength="320" placeholder="Enter Location" type="text" class="contact-input" tabindex="4" required/>
+				</div>
+                <div class="form-column2">
+					<h2>{{ labels.designedBy }} *</h2>
+					<input name="designer" id="mz-app-designer"  maxlength="320" placeholder="Enter Name" type="text" class="contact-input" tabindex="5" required/>
+				</div> 
+                
+                <div class="form-column1 form-clear">
+                    <h2>{{ labels.installedBy }} *</h2>
+                    <input name="installedby" id="mz-app-installedby"  maxlength="320" placeholder="Enter Name" type="text" class="contact-input" tabindex="5" required/>
+                </div>
+                <br/>
+                <div class="form-column1 form-clear">
+                    <h2>{{ labels.storyTitle }} *</h2>
+                    <input name="storyTitle" id="mz-app-storyTitle"  maxlength="320" placeholder="Enter Tilte" type="text" class="contact-input" tabindex="6" required/>
+                </div>
+                <br/>
+                <div class="form-column1 form-clear">
+                    <h2>{{ labels.storyDesc }} *</h2>
+                    <textarea name="storyDesc" id="mz-app-storyDesc" placeholder="Enter Description" type="text" class="slot1-textarea contact-input" tabindex="7" required></textarea>
+                </div>
+                <br/>
+                
+				<div class="form-column1 form-clear">
+				    <div class="g-recaptcha"  data-sitekey="{{model.config.sitekey}}"> 
+                    </div>
+                    <span class="validation-captcha" style="color:red; margin: 10px 0; display: inline-block;"></span>
+				</div>
+                <br /> 
+                <p>Note: we will open your email client on Submit. Please attach your images in mail and send.</p>
+                <br />
+				<button name="submit-button" type="button" id="share-your-story-mailto"  class="contact-button" tabindex="20">Submit</button>
+			</form>
+			
+		</div>
+	</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+

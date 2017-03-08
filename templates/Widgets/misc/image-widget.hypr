@@ -1,0 +1,36 @@
+    
+    
+    <div class="featured-article">
+            
+            <h3 class="article-content">{{Model.config.head}}</h3>
+            
+            <figure>
+                <a class="imiageLInk" {% if Model.config.link %}href="{{Model.config.link}}"{% endif %}>
+                    {% if pageContext.isMobile  %} 
+                         <img class="imgSrcValue" src="{{Model.config.img}}?max=800&quality={{themeSettings.cdnQuality}}"  border="0" alt="Featured Image">
+                    {% else %} 
+                            
+                        {% if pageContext.isTablet  %}
+                             <img class="imgSrcValue" src="{{Model.config.img}}?max=1000&quality={{themeSettings.cdnQuality}}"  border="0" alt="Featured Image">
+                        {% else %} 
+                             <img class="imgSrcValue" src="{{Model.config.img}}?max=2800&quality={{themeSettings.cdnQuality}}"  border="0" alt="Featured Image">
+                        {% endif %}
+                    {% endif %} 
+                </a>
+            </figure>
+            
+            <div class="description" style="line-height: 21px;margin: 7px 7px 11px 11px;">
+                {{Model.config.content|safe}}
+            </div>
+            
+            <div style="clear:both;"></div>
+    </div>
+
+ 
+
+
+
+
+
+
+

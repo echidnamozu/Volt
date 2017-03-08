@@ -1,0 +1,18 @@
+﻿<label class="mz-pagingcontrols-pagesize-label mz-customdrop">
+  
+  <select data-mz-value="pageSize" class="mz-pagingcontrols-pagesize-dropdown amp-selector medium-12" autocomplete="off"> 
+    {% block page-sizes %} 
+    {% if pageContext.categoryId == themeSettings.article_Cid or pageContext.categoryId == themeSettings.resource_Cid or pageContext.categoryId == themeSettings.News_Cid or pageContext.categoryId == themeSettings.Project_Cid or pageContext.categoryId == themeSettings.video_Cid %}
+      {% for pageSize in themeSettings.pageSizeOptionsArt %}
+        <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+      {% endfor %}
+    {% else %}
+      	
+  		{% for pageSize in themeSettings.pageSizeOptionsNew %}
+	        <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+      	{% endfor %}
+	      	
+  	{% endif %}
+    {% endblock page-sizes %}
+  </select>
+</label>

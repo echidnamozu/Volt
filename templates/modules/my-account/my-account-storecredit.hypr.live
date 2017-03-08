@@ -1,0 +1,31 @@
+﻿<h5 class="section-title">{{ themeSettings.mystorecredittext }}</h5>
+<div class="mz-storecredit panel-border">
+<div class="mz-personalinformation">
+        <span>Store Credit</span>
+</div>
+<div class="store-balance">
+<h3>STORE CREDIT BALANCE</h3>
+<p>You Currently have balance of <span>{{ model.totalCreditAmount|currency }}</span></p>
+</div>
+<div class="mz-accountstorecredit-form">
+<div class="store-balance">
+<h3>REDEEM STORE CREDIT</h3>
+<p>{{ labels.storecreditText }}</p>
+<div class="mz-storecreditinput">
+<span style="font-weight: normal">Enter your code, then click apply</span>
+<div class="input-text"> <input type="text" placeholder="Enter Code" class="mz-accountstorecredit-input" data-mz-entering-credit />
+<button class="mz-button mz-button-small mz-accountstorecredit-add" data-mz-action="addStoreCredit">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+  
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+{% with model.items|first as prod %} 
+    <li class="products-list-item"> 
+        <a href="/p/{{prod.productCode}}">
+            <figure>
+                <img class='projects-products-image' src="{{prod.mainImage.imageUrl}}?max={% block thumbnail-size %}{{ themeSettings.listProductThumbSize }}{% endblock thumbnail-size %}&quality={{themeSettings.cdnQuality}}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{prod.productName}}"{% endif %} />  
+            </figure>
+            <h4>{{prod.content.productName| truncatewords(8) |safe}}</h4>
+        </a>
+        <div class="price-wrap">
+            {% include "modules/product/price-stack" with model=prod  %}
+        </div>
+        <div class="mz-productlisting-rating">
+            <script type="text/javascript" src="//static.powerreviews.com/widgets/v1/widget.js"></script>
+            <div id="PRInlineRating-{{prod.productCode}}" class="pr-inline-rating" data-mz-product-code="{{ prod.productCode }}" data-mz-product-url="{{ prod.url }}" style="display:none;">
+                <div id="pr-snippet-{{prod.productCode}}" class="pr-snippet" >
+
+                    <div id="reviewSnippetProduct">
+                        <div class="pr-snippet-wrapper">
+                            <div class="pr-snippet-stars">
+                                    <div id="pr-snippet-star-image" title="That's good stuff">&nbsp;</div>
+                            </div>
+                            <div class="pr-clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+ {% endwith %} 
+
+

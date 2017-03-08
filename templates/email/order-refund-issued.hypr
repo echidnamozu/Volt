@@ -1,0 +1,87 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+
+	<p style="font-weight:600;color:#56534c!important;font-size:16px;line-height:20px;">
+		<font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">
+	        {% if model.fulfillmentInfo.fulfillmentContact.firstName %}
+	            {{ labels.emailOpening|string_format(model.fulfillmentInfo.fulfillmentContact.firstName, model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname)|safe }}
+	        {% else %}
+	            {{ labels.emailOpeningAlternative|safe }}
+	        {% endif %}
+	    </font>
+    </p>
+
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderRefundBlob|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}</font></p>
+
+	<p style="background-color:#2e2e2e;padding:5px 5px 5px 5px;color:#fddb00;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.orderDetails|safe}}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderNo|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.orderNumber }}</font></p>
+    
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderDate|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.submittedDate|safe }}</font></p>
+<br/>
+	<table width="100%" cellpadding="5" cellspacing="0">
+        <tbody>
+            <tr>
+                <td colspan="2" valign="top" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.refundDetails}}</font></td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" cellpadding="5" cellspacing="0" style="border-bottom: 1px solid #f2f2f2;">
+    	<tbody>
+			<tr>
+				<td class='w320' valign="top" width="50%">
+					<table width="100%" cellpadding="0" cellspacing="0">
+				    	<tbody>
+						{% for refund in model.refunds %}
+							<tr>
+								<td  valign="top" style="padding: 10px 0 0 0;">
+									<p style="font-weight:600;color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.refundmethod|safe }}</font></p>
+									{% if refund.payment.paymentType == "CreditCard" %}
+										<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ refund.payment.billingInfo.card.paymentOrCardType }} {{ refund.payment.billingInfo.card.cardNumberPartOrMask }}</font></p>
+									{% else %}
+										{% if refund.payment.paymentType == "PaypalExpress" %}
+											<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.payPal }}</font></p>
+										{% else %}
+											{% if refund.payment.paymentType == "StoreCredit" %}
+												<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.storeCredit }} {{ refund.payment.billingInfo.storeCreditCode|default("") }}</font></p>
+											{% endif %}
+										{% endif %}
+									{% endif %}
+									{% if refund.payment.paymentType == "PayWithAmazon" %}
+										<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.payWithAmazon}}</font></p>
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td valign="top" style="padding: 10px 0 0 0;">
+									<p style="font-weight:600;color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.refundDate|safe }}</font></p>
+									<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ refund.auditInfo.createDate }}</font></p>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+				    </table>
+				</td>
+				<td class='w320' valign="top" width="50%">
+					<table width="100%" cellpadding="0" cellspacing="0">
+				    	<tbody>
+						{% for refund in model.refunds %}
+							<tr>
+								<td valign="top" style="padding: 10px 0 0 0;">
+									<p style="font-weight:600;color:#000!important;line-height:20px;margin-bottom: 5px;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.amtrefunded|safe }}</font></p>
+									<p style="line-height:20px;color:#000;margin-top: 0;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ refund.amount|currency }}</font></p>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+				    </table>
+				</td>
+			</tr>
+		</tbody>
+    </table>
+    
+    
+
+{% endblock body-content %}

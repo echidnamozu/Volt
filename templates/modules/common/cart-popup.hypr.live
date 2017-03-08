@@ -1,0 +1,97 @@
+
+<div class="mz-ampcart">     
+  
+    <div class="mz-mincartcount">
+
+        <div class="mz-countleft">
+            <p><span class="amp-count">   {{ model.count }} </span>  {{labels.itemsInCart}}</p>
+            <span class="minicartpricec">{{ model.discountedTotal|currency }} </span> 
+            {% if model.count > 5  %}  
+                <a class="mz-cartbtnviewall" href="{{pageContext.secureHost}}/cart">ViewAll</a>
+            {% endif %}    
+        </div>
+        <div class="mz-checkout">
+            <a class="mz-cartbtncart" href="{{pageContext.secureHost}}/cart">Checkout</a>
+        </div>   
+    </div>  
+    <div class="clearfix"></div>
+    <div class="mz-softcart">    
+   
+        <div class="mz-table-cart-{%if Model.IsEmpty %}isempty{% else %}items{% endif %}">    
+        {% if not model.isEmpty and model.items.length > 0 %}
+        
+          {% for item in model.items %}
+         
+          
+          {% if item.index < 5 %}
+            <div class="mz-cartseparate">
+                <div class="mz-softcartbor">
+        
+                    <div class="mz-softcartleft">
+                        {% if item.product.imageUrl and themeSettings.showCartItemImage %}
+                          <a href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}"{% endif %} /></a>
+                      {% endif %}
+                    </div>
+        
+                    <div class="mz-softcartright">
+                        <div class="mz-carttable-item-info-wrap{% if not item.product.imageUrl %} mz-no-image{% endif %}">
+                            <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
+                             
+                            <span class="mz-carttable-item-code">
+                              {{ labels.productCode }}: <em>{{ item.product.productCode }}</em>
+                            </span>
+                            {% if item.fulfillmentMethod == 'Pickup' %}
+                                <span class="mz-carttable-item-pickuplocation">
+                                    {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
+                                </span>
+                            {% endif %}
+                            {% for opt in item.product.options %}
+                                {% if opt.attributeFQN == "tenant~color" %}
+                                    <div class="mz-softqty">
+                                      <span class="amp-mblcontent">{{labels.finishcart}}</span> <span>{{ opt.value }}</span>  
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="mz-softqty">
+                              <span class="amp-mblcontent">{{labels.qty}}</span> <span>{{ item.quantity }}</span>
+                            </div>
+                        </div>
+                        <div class="mz-softcartprice">
+                            <span class="mz-item-price is-saleprice amp-price">{{ item.total|currency }}</span>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>    
+            {% endif %}  
+            {% endfor %} 
+        {% else %}
+            <div class="mz-carttable-noitems">
+                <div>
+                {{ labels.cartEmpty }} 
+                </div>
+            </div> 
+        {% endif %}
+    
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+{% extends "page" %}
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %} mz-parentcategory {% endblock body-tag-classes %}
+{% block body-content %}
+{% preload_json model "parent-category" %} 
+{% preload_json model "category" %}
+
+<h1 style="display: none;" itemprop="name">{{pagecontext.title}} </h1>
+<div data-mz-category="{{model.categoryId}}" class="mz-l-container mz-parentcategory">
+  
+   
+    <div class="catagory-aSpot-slider">
+        {% dropzone "main-slider" scope="page" %}
+    </div>
+    
+    <div class="mz-desktop">
+        {% dropzone "contentSlot-image1" scope="page" %}
+        {% dropzone "contentSlot-image2" scope="page" %}
+    </div> 
+    
+    <div class="mz-mobile">
+        {% dropzone "contentSlot-image1-mobile" scope="page" %}
+        {% dropzone "contentSlot-image2-mobile" scope="page" %}
+    </div>
+    
+    
+    {% dropzone "dropZone-slot1" scope="page" %}
+    
+   <div class="mz-shop-landscape-lighting">
+    <div class="category-home" style="background-image:url('{{ siteContext.cdnPrefix }}/cms/{{ siteContext.siteId}}/files/img-bg1.png')">
+
+        <div class="mz-slots-header">
+            {% dropzone "category-imageSlot-title" scope="page" %}
+        </div>
+        <div class="homecateogry row">
+                {% dropzone "category-imageSlot-1" scope="page" %}
+        </div>
+    </div>
+    </div>
+
+     {% dropzone "list-1" scope="page" %} 
+    <div class="article-widget">
+     {% dropzone "article-title-1" scope="page" %}
+     {% dropzone "article-1" scope="page" %}
+     {% dropzone "article-2" scope="page" %}
+    <div class="article-video-title mz-mobile">
+        {% dropzone "article-video-title" scope="page" %}
+    </div>
+     {% dropzone "article-video" scope="page" %}
+    </div> 
+     
+    <div class="featured-products">
+     {% dropzone "featured-products-title-1" scope="page" %}
+     {% dropzone "featured-products-1" scope="page" %}
+    </div>
+     
+    <div class="recently-viewed">
+     {% dropzone "recently-viewed-title-1" scope="page" %}
+     {% dropzone "recently-viewed-1" scope="page" %}
+    </div>
+    
+</div>
+
+{% endblock body-content %}

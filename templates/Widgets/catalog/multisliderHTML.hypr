@@ -1,0 +1,9 @@
+
+{% preload_json model.config.desgincateogry "desgin_categories" %}
+
+
+ <div class="row bg-totalpro-slide  text-center">
+    
+ </div>
+{% require_script "widgets/multisliderCarousel" %}
+

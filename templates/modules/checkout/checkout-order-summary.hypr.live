@@ -1,0 +1,10 @@
+﻿<div class="mz-ordersummary-checkout">
+    <h3 class="mz-formstep-header mz-checkoutform-header">
+        Review Your Order 
+        <a href="/cart" class="mz-formstep-edit" data-mz-action="editCart">Edit Cart</a>
+    </h3>
+
+    <div class="mz-formstep-body"> 
+        {% include "modules/common/order-summary" %}   
+    </div><!-- #order-summary -->
+</div> 

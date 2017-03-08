@@ -1,0 +1,76 @@
+{% if pageContext.pageType == "web_page" %}
+<div class="navigations top"><a href="javascript:void(0);" class="prevNav">Previous</a> | <a href="javascript:void(0);" class="nextNav">Next</a></div>
+{% endif %}
+{% for mod in model.items %}
+  {% if forloop.first %} 
+    <ul itemtype="http://schema.org/ItemList" class="mz-productlist-list {% if mod.productType == 'Article type' %} mz-articles {% endif %}{% if mod.productType == 'project' %} mz-project {% endif %}{% if mod.productType == 'Product News' %} project-news {% endif %}{% if mod.productType == 'PressRelease' %} pr-section {% endif %} {% if mod.productType == 'Amp_pro_News' %} project-news {% endif %}{% if mod.productType == 'loged-in-news' %} project-news {% endif %} {% if mod.productType == 'video type' %} mz-videos {% endif %} {% block list-classes %}{% endblock list-classes %}">
+  {% endif %}
+  {% endfor %}     
+        {% for prod in model.items %} 
+        {% with prod.properties|findwhere('attributeFQN','tenant~amp-pro-only') as aliasName %} 
+        {% with aliasName.values|findwhere('value',true) as checkVal %} 
+        <li class="mz-productlist-item" data-mz-product="{{ prod.productCode }}">
+            <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ prod.productCode }}">
+                <div class="mz-productlisting-image" itemscope itemtype="http://schema.org/ImageObject">  
+                    {% block product-image %} 
+                    <a itemprop="url"  href="{% make_url "product" prod %}">
+                         {% if prod.mainImage.imageUrl %} 
+                                {% if pageContext.isMobile  %}
+                                        <img itemprop="image"  src="{% make_url "image" prod.mainImage with max=themeSettings.productMainImagesizeMobile quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{ prod.productName }}"{% endif %} />
+                                {% else %} 
+                                {% if pageContext.isTablet  %}
+                                        <img itemprop="image"  src="{% make_url "image" prod.mainImage with max=themeSettings.productMainImagesizeTablet quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{ prod.productName }}"{% endif %} />
+                                {% else %}  
+                                        <img itemprop="image"  src="{% make_url "image" prod.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{ prod.productName }}"{% endif %} />
+                                {% endif %}
+                            {% endif %} 
+                        {% else %}
+                            <img  src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg" alt="No-image"/>
+                        {% endif %}
+                    </a>
+                    {% endblock product-image %}
+                </div>
+                <div class="mz-productlisting-info">
+                            <a  class="mz-productlisting-title" href="{% make_url "product" prod %}">{{prod.content.productName |safe}}</a>
+                            <div class=" mz-productlisting-price"> 
+                                <div class="retailPrice">
+                                    Retail Price: 
+                                    {% if prod.price.msrp %}
+                                        {{ prod.price.msrp | currency}}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </div>   
+                                <div class="salePrice">
+                                    Sale Price: <b>{{ prod.price.price | currency}}</b>
+                                </div>
+                            </div>
+                            <div class="mz-productlisting-rating">
+                                <script type="text/javascript" src="//static.powerreviews.com/widgets/v1/widget.js"></script>
+
+                                <div id="PRInlineRating-{{prod.productCode}}" class="pr-inline-rating" data-mz-product-code="{{ prod.productCode }}" data-mz-product-url="{{ prod.url }}" style="display:none;">
+                                        
+                                    <div id="pr-snippet-{{prod.productCode}}" class="pr-snippet" >
+                                            
+                                        <div id="reviewSnippetProduct">
+                                            <div id="pr-snippet-review-count"></div>
+                                            <div class="pr-snippet-wrapper">
+                                                <div class="pr-snippet-stars">
+                                                        <div id="pr-snippet-star-image" title="That's good stuff">&nbsp;</div>  
+                                                </div>
+                                                <div class="pr-clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </li>
+        {% endwith %}
+        {% endwith %}
+        {% endfor %}
+    </ul>
+    {% if pageContext.pageType == "web_page" %}
+    <div class="navigations"><a href="javascript:void(0);" class="prevNav">Previous</a> | <a href="javascript:void(0);" class="nextNav">Next</a></div>
+    {% endif %}

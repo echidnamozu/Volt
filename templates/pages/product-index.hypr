@@ -1,0 +1,133 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-product-index {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+     <div>{{model.properties.blurb|safe}}<div>
+     
+    <div class="product-index mz-static-page"> 
+      {% dropzone "index" scope="template" %}  
+      <img class="print-logo" src="/resources/images/print-logo.png" width="250" height="50" alt="Print">
+        <div class="print-address" style="float: right;">
+            <p>VOLT<sup>&reg;</sup> Lighting</p>
+            <p>15486 N.Nebraska Ave. </p>
+            <p>Lutz, FL 33549</p>
+            <p>Phone: 813-978-3700</p>
+        </div>
+        <div class="clearfix"></div> 
+      {% for link in navigation.tree %}
+        {% if link.nodeType == "category" and link.name|lower == "products" %}
+            {% if link.items and link.items.length > 0%}
+                {% for childs in link.items %}
+                {% if childs.items and childs.items.length > 0 %}
+                        <div class="parent_category">
+                            <h2 parentid="{{link.categoryCode}}" class="mz-qo-cat-name">{{childs.name}}</h2>
+                        </div>
+                        <div class="index-accordion">
+                    {% if not childs.isEmpty %}  
+                        {% for childrn in childs.items %} 
+                            {% if childrn.items.length > 0 %}
+                              <div parentid="{{childs.categoryCode}}" catid="{{childrn.categoryCode}}" class="mz-qo-category parent_category2">
+                                    <div class="mz-qo-cat-title"> 
+                                        <h2 class="mz-qo-cat-name">{{childrn.name}}</h2>
+                                    </div> 
+                                </div> 
+                                {% for child in childrn.items %} 
+                                    <div parentid="{{childrn.categoryCode}}" class="index-accordion-header"> 
+                                		<h3>
+                                			<span class="product-name">{{child.name}}</span> 
+                                			<span class="product-code"></span>
+                                			<span class="product-price"><a href="/c/{{child.categoryCode}}">Go To Category Page</a></span>
+                                			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+                            			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+                                		</h3>
+                                	</div>
+                                	<div parentid="{{childrn.categoryCode}}" class="index-accordion-content"> 
+                                	         {% include_products "modules/productindexproduct" with pageSize=200 categoryCode=child.categoryCode %}      
+                                		<a href="/c/{{child.categoryCode}}" class="category-link">Go To Category Page</a>
+                                	</div>
+                                {% endfor %}
+                            {% else %}
+                                <div parentid="{{childs.categoryCode}}" class="index-accordion-header"> 
+                            		<h3>
+                            			<span class="product-name">{{childrn.name}}</span> 
+                            			<span class="product-code"></span>
+                            			<span class="product-price"><a href="/c/{{childrn.categoryCode}}">Go To Category Page</a></span>
+                            			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+                        			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+                            		</h3>
+                            	</div>
+                            	<div parentid="{{childs.categoryCode}}" class="index-accordion-content"> 
+                            	         {% include_products "modules/productindexproduct" with pageSize=200 categoryCode=childrn.categoryCode %}      
+                            		<a href="/c/{{child.categoryCode}}" class="category-link">Go To Category Page</a>
+                            	</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                     {% for childrn in childs.items %}
+                        <div parentid="{{childs.categoryCode}}" class="index-accordion-header"> 
+                    		<h3>
+                    			<span class="product-name">{{childrn.name}}</span>  
+                    			<span class="product-code"></span>
+                    			<span class="product-price"><a href="/c/{{childrn.categoryCode}}">Go To Category Page</a></span>
+                    			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+                			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+                    		</h3>
+                    	</div>
+                    	<div parentid="{{childs.categoryCode}}" class="index-accordion-content"> 
+                    	         {% include_products "modules/productindexproduct" with pageSize=200 categoryCode=childrn.categoryCode %}      
+                    		<a href="/c/{{childrn.categoryCode}}" class="category-link">Go To Category Page</a>
+                    	</div>
+                    	{% endfor %}
+                    {% endif %}
+                      
+                            </div>  
+                {% else %}
+                 <div class="index-accordion">
+                 <div  parentid="{{link.categoryCode}}" class="index-accordion-header"> 
+                    		<h3>
+                    			<span class="product-name">{{childs.name}}</span> 
+                    			<span class="product-code"></span>
+                    			<span class="product-price"><a href="/c/{{childs.categoryCode}}">Go To Category Page</a></span>
+                    			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+                			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+                    		</h3>
+                    	</div>
+                    	<div  parentid="{{link.categoryCode}}" class="index-accordion-content"> 
+                    	         {% include_products "modules/productindexproduct" with pageSize=200 categoryCode=childs.categoryCode %}      
+                    		<a href="/c/{{childs.categoryCode}}" class="category-link">Go To Category Page</a>
+                    	</div>
+                    	</div>
+                {% endif %}
+        		{% endfor %}
+    	{% else %}
+        	 <div class="index-accordion-header"> 
+            		<h3>
+            			<span class="product-name">{{link.name}}</span> 
+            			<span class="product-code"></span>
+            			<span class="product-price"><a href="/c/{{childs.categoryCode}}">Go To Category Page</a></span>
+            			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+        			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+            		</h3>
+            	</div>
+            	<div class="index-accordion-content"> 
+            	         {% include_products "modules/productindexproduct" with pageSize=200 categoryCode=link.categoryCode %}      
+            		<a href="/c/{{link.categoryCode}}" class="category-link">Go To Category Page</a>
+        	   </div>
+    	{% endif %}
+        {% endif %}  
+    {% endfor %}
+    </div>
+
+{% endblock body-content %} 
+
+
+
+
+
+
+

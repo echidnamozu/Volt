@@ -1,0 +1,116 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-byos {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+	<div>{{model.properties.blurb|safe}}<div>
+	 {% if pagecontext.isEditMode%}<span>Get Started </span>{% endif %}
+    {% dropzone "get-started" scope="template" %}
+
+    <div class="byos {% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}"> 
+    	<h1>{{labels.byos}}</h1>
+	    <div class="mz-byos">
+            <div class="mz-backorder-popup byos-backorder"></div>
+			<div class="left-nav">
+	      		{% dropzone "byos-left" scope="template" %} 
+			</div>
+			<div class="right-content">
+			   {% if pagecontext.isEditMode%}<span>Layout Content </span>{% endif %}
+			   <div data-mz-row="row1" class="{% if pagecontext.isEditMode%}{% else %}hidediv showdiv{% endif %}">
+			    	{% dropzone "byos-right1" scope="template" %}
+			   </div>
+			   {% if pagecontext.isEditMode%}<span>pathlight Content </span>{% endif %}
+			   <div data-mz-row="row2" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right2" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>spotlight Content </span>{% endif %}
+			    <div data-mz-row="row3" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right3" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>Deck/steplight Content </span>{% endif %}
+			    <div data-mz-row="row4" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right4" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>other fixture Content </span>{% endif %}
+			    <div data-mz-row="row5" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}"> 
+			    	{% dropzone "byos-right5" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>wiring Content </span>{% endif %}
+			    <div data-mz-row="row6" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right6" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>transformers Content </span>{% endif %}
+			    <div data-mz-row="row7" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right7" scope="template" %}
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>Accessories and tools Content </span>{% endif %}
+			    <div data-mz-row="row8" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    	{% dropzone "byos-right8" scope="template" %}
+			    </div>
+			   
+			    <div data-mz-row="row9" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    </div>
+			    
+			    <div data-mz-row="row10" class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %}">
+			    
+			    </div>
+			</div>
+			<div class="right-image">
+				{% if pagecontext.isEditMode%}<span>Layout Image </span>{% endif %}
+				<div data-mz-row="row1" class="{% if pagecontext.isEditMode%}{% else %}hidediv showdiv{% endif %}">
+					{% dropzone "byos-image" scope="template" %}
+				</div>
+				 <div data-mz-row="row2"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer">
+			        {% if pagecontext.isEditMode%}<span>Step 2 Products </span>{% endif %}
+			        {% dropzone "byos-product1" scope="template" %}
+			    </div>
+			    <div data-mz-row="row3"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer"> 
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 3 in the below dropzone </span>{% endif %}
+			     {% dropzone "byos-product2" scope="template" %}
+			    </div>
+			    <div data-mz-row="row4"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer">
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 4 in the below dropzone </span>{% endif %}
+			     		      {% dropzone "byos-product3" scope="template" %}   
+			    </div>
+			    <div data-mz-row="row5"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer"> 
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 5 in the below dropzone </span>{% endif %}
+			     		      {% dropzone "byos-product4" scope="template" %}   
+			    </div>
+			    <div data-mz-row="row6"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer"> 
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 6 in the below dropzone </span>{% endif %}
+			     		      {% dropzone "byos-product5" scope="template" %}   
+			    </div>
+			    <div data-mz-row="row7"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer"> 
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 7 in the below dropzone </span>{% endif %}
+			     		      {% dropzone "byos-product6" scope="template" %}   
+			    </div>
+			    <div data-mz-row="row8"  class="{% if pagecontext.isEditMode%}{% else %}hidediv{% endif %} productcontainer"> 
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 8 in the below dropzone </span>{% endif %}
+			     		     {% dropzone "byos-product7" scope="template" %}   
+			    </div>
+			    {% if pagecontext.isEditMode%}<span>Please drop products for Step 9 in the below dropzone </span>{% endif %}
+			    <div data-mz-row="row9"  class="{% if pagecontext.isEditMode%}{% else %}hidediv productcontainer final{% endif %}"> 
+	     		     {% dropzone "final-check" scope="template" %}    
+			    </div>
+    			{% if pagecontext.isEditMode%}<span>Review Content</span>{% endif %} 
+			    <div data-mz-row="row10"  class="{% if pagecontext.isEditMode%}{% else %}hidediv productcontainer cartcontainer{% endif %}"> 
+			     		     
+		     		     {% dropzone "query" scope="template" %} 
+			    </div>
+				<div></div>
+			</div>
+		</div>
+
+    	<div class="nav-buttons">
+			<a href="#" class="prev-btn" data-mz-next></a>
+			<a href="#" class="next-btn" data-mz-next="row2"></a>
+		</div>
+		
+    </div>
+{% require_script "pages/byos" %}
+{% endblock body-content %}
+

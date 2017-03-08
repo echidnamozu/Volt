@@ -1,0 +1,45 @@
+
+{% for item in model.items %}
+    <div productandextrasproductsslider-extras-sub class="productandextrasproductsslider-extras-item">
+    <div class="productandextrasproductsslider-extras-item-image">
+        <a href="{% if item.content.seoFriendlyUrl %}/{{item.content.seoFriendlyUrl}}{% endif %}/p/{{item.productCode}}">
+           
+           {% for itemimg in item.content.productImages %} 
+           
+           {% if forloop.first %}
+           {% if pageContext.isMobile  %}
+                <img src="{% make_url "image" itemimg with max=250 quality=themeSettings.cdnQuality as_parameter %}" width="250" alt="{% if itemimg.imageUrl.altText %}{{itemimg.imageUrl.altText}}{% else %}{{item.content.productName}}{% endif %}" /> 
+            {% else %}
+                {% if pageContext.isTablet  %}
+                    <img src="{% make_url "image" itemimg with max=250 quality=themeSettings.cdnQuality as_parameter %}" width="250" alt="{% if itemimg.imageUrl.altText %}{{itemimg.imageUrl.altText}}{% else %}{{item.content.productName}}{% endif %}" />     
+                {% else %} 
+                    <img src="{% make_url "image" itemimg with max=250 quality=themeSettings.cdnQuality as_parameter %}" width="250" alt="{% if itemimg.imageUrl.altText %}{{itemimg.imageUrl.altText}}{% else %}{{item.content.productName}}{% endif %}" /> 
+                {% endif %}
+            {% endif %} 
+            {% endif %} 
+            {% endfor %}
+        </a>
+    </div>
+        <div class="productandextrasproductsslider-extras-item-details">
+            <a href="{% if item.content.seoFriendlyUrl %}/{{item.content.seoFriendlyUrl}}{% endif %}/p/{{item.productCode}}">
+                <p class="productandextrasproductsslider-extras-item-details-name">{{item.content.productName|safe}}</p>
+            </a>
+            {% comment %}
+            <p class="productandextrasproductsslider-extras-item-details-price">{{item.price.price|currency}}</p>
+           {% endcomment %}
+            <p class="productandextrasproductsslider-extras-item-details-desc">
+            {{ item.content.productShortDescription|striptags|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+            <a href="{% if item.content.seoFriendlyUrl %}/{{item.content.seoFriendlyUrl}}{% endif %}/p/{{item.productCode}}" class="productandextrasproductsslider-extras-item-details-addcart">SHOP NOW</a>
+        </div> 
+    </div> 
+{% endfor %} 
+
+
+
+
+
+
+
+
+
+

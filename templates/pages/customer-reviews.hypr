@@ -1,0 +1,25 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-customer-reviews {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="customer-reviews mz-static-page"> 
+      {% dropzone "title" scope="page" %}
+      {% dropzone "promoslot" scope="page" %} 
+      {% dropzone "gts" scope="page" %}  
+    </div>
+    <div class="mz-static-page"> 
+      {% dropzone "testimonials" scope="page" %}
+    </div>
+    <div class="customer-reviews mz-static-page"> 
+      {% dropzone "promoslot1" scope="page" %} 
+      {% dropzone "top-rated" scope="page" %} 
+    </div>
+  
+{% endblock body-content %}
+

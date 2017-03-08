@@ -1,0 +1,188 @@
+﻿      
+  
+  
+{% if model.discountTotal > 0 %}
+    {% if model.orderDiscounts.length > 0 or model.shippingDiscounts.length > 0 %}
+
+        {% if model.orderDiscounts.length > 0 %}
+        
+            {% for discountcodes in model.orderDiscounts %}
+                {% if discountcodes.couponCode %}
+                    <div class="coupon-code-row">
+                        <div class="coupon-code-success">
+                            Coupon code <label>{{ discountcodes.couponCode }} </label> applied successfully
+                            <a href="javascript:void(0)"  data-mz-coupon-code="{{ discountcodes.couponCode }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                        </div>
+                    </div>
+                    
+                {% else %}
+                    {% if model.shippingDiscounts.length > 0  %} 
+                        {% for discountcodes in model.shippingDiscounts %}
+                            {% if discountcodes.discount.couponCode %}
+                                <div class="coupon-code-row">
+                                    <div class="coupon-code-success">
+                                        Coupon code <label>{{ discountcodes.discount.couponCode }} </label> applied successfully
+                                        <a href="javascript:void(0)"  data-mz-coupon-code="{{ discountcodes.discount.couponCode }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                                    </div>
+                                </div>
+                            
+                            {% else %}
+                                
+                                {% if model.pdiscount %}
+                                    <div class="coupon-code-row">
+                                        <div class="coupon-code-success">
+                                            Coupon code <label>{{ model.pdiscount }} </label> applied successfully
+                                            <a href="javascript:void(0)"  data-mz-coupon-code="{{ model.pdiscount }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                                        </div>
+                                    </div>
+                                {% else %}
+                                        <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+                                            <label for="coupon-code">{{ labels.couponCode }}</label>
+                                            <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+                                        </div>
+
+                                        <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                                            <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+                                            <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+                                        </div>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% endfor %}        
+                     
+                    {% else %} 
+                        {% if model.pdiscount %}
+                            <div class="coupon-code-row">
+                                <div class="coupon-code-success">
+                                    Coupon code <label>{{ model.pdiscount }} </label> applied successfully
+                                    <a href="javascript:void(0)"  data-mz-coupon-code="{{ model.pdiscount }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                                </div>
+                            </div>
+                        {% else %}
+                                <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+                                    <label for="coupon-code">{{ labels.couponCode }}</label>
+                                    <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+                                </div>
+
+                                <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                                    <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+                                    <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+                                </div>
+
+                        {% endif %}
+                    {% endif %} 
+                {% endif %}
+
+            {% endfor %}
+
+        {% else %}
+
+            {% if model.shippingDiscounts.length > 0  %} 
+
+                {% for discountcodes in model.shippingDiscounts %}
+                    {% if discountcodes.discount.couponCode %}
+                        <div class="coupon-code-row">
+                            <div class="coupon-code-success">
+                                Coupon code <label>{{ discountcodes.discount.couponCode }} </label> applied successfully
+                                <a href="javascript:void(0)"  data-mz-coupon-code="{{ discountcodes.discount.couponCode }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                            </div>
+                        </div>
+                    
+                    {% else %}
+                        {% if model.pdiscount %}
+                            <div class="coupon-code-row">
+                                <div class="coupon-code-success">
+                                    Coupon code <label>{{ model.pdiscount }} </label> applied successfully
+                                    <a href="javascript:void(0)"  data-mz-coupon-code="{{ model.pdiscount }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                                </div>
+                            </div>
+                        {% else %}
+                                <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+                                    <label for="coupon-code">{{ labels.couponCode }}</label>
+                                    <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+                                </div>
+
+                                <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                                    <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+                                    <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+                                </div>
+
+                        {% endif %}
+                    {% endif %}
+
+                {% endfor %}        
+             
+            {% else %}
+                {% if model.pdiscount %}
+                    <div class="coupon-code-row">
+                        <div class="coupon-code-success">
+                            Coupon code <label>{{ model.pdiscount }} </label> applied successfully
+                            <a href="javascript:void(0)"  data-mz-coupon-code="{{ model.pdiscount }}"  data-mz-action="removecouponcode" data-mz-value="couponCode" class="mz-icon-close removeCoupon">X</a> 
+                        </div>
+                    </div>
+                {% else %}
+                        <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+                            <label for="coupon-code">{{ labels.couponCode }}</label>
+                            <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+                        </div>
+
+                        <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                            <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+                            <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+                        </div>
+
+                {% endif %}
+            {% endif %} 
+
+        {% endif %}
+
+         
+
+    {% else %} 
+
+        {% if model.pdiscount %}
+            <div class="coupon-code-row">
+                <div class="coupon-code-success">
+                    Coupon code <label>{{ model.pdiscount }} </label> applied successfully
+                    <a href="javascript:void(0)"  data-mz-coupon-code="{{ model.pdiscount }}" data-mz-value="couponCode" data-mz-action="removecouponcode" class="mz-icon-close removeCoupon">X</a> 
+                </div>
+            </div>
+        {% else %}
+                <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+                    <label for="coupon-code">{{ labels.couponCode }}</label>
+                    <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+                </div>
+
+                <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                    <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+                    <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+                </div>
+
+        {% endif %}
+
+    {% endif %} 
+
+{% else %}
+    {% if model.couponCodes.length > 0 %} 
+        {% for discountcode in model.couponCodes %}
+            <div class="coupon-code-row">
+                <div class="coupon-code-success">
+                    Coupon code <label>{{ discountcode }} </label> applied successfully
+                    <a href="javascript:void(0)"  data-mz-coupon-code="{{ discountcode }}" data-mz-value="couponCode" data-mz-action="removecouponcode" class="mz-icon-close removeCoupon">X</a> 
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}    
+        <div class="mz-l-formfieldgroup-cell coupon-label large-6 columns"> 
+            <label for="coupon-code">{{ labels.couponCode }}</label>
+            <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }} </a><div class="cart-tooltip">{{ themeSettings.couponcodeinfo |safe}}</div></span>       
+        </div>
+        <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+            <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" placeholder="Enter Code">
+            <button class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.applyCoupon }}</button>
+        </div>
+    {% endif %}    
+
+{% endif %} 

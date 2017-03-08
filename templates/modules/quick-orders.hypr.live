@@ -1,0 +1,327 @@
+<div mz-qo-delete-modal class="modal">
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+    <div class="mz-modal__wrapper" data-mz-role="modal-window">
+        <div class="mz-modal__inner clearfix" data-mz-role="modal-contents">
+            <p class="delete_text">Are you sure want to delete this item ?</p>
+            <div class="clearfix"></div>
+            <div class="confirm-btns clearfix">
+                <button class="mz-cart-model-btn mz-model-yes-btn" options={{model.options}} prcode={{model.id}} id="cart-del-confirm-yes" data-mz-delete-item="yes">Yes</button>
+                <button class="mz-cart-model-btn mz-model-no-btn" id="cart-del-confirm-no" data-mz-delete-item="no">No</button>
+            </div>
+        </div>      
+    </div>
+</div>
+</div> 
+<div id="cartdiv"></div>
+<div  class="confirm_modal">
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+    <div class="mz-modal__wrapper" data-mz-role="modal-window">
+        <div class="mz-modal__inner clearfix" data-mz-role="modal-contents">
+            <p class="delete_text">Products are not added to cart.<br/> Any items not yet added to cart will be lost.<br/>Are you sure you want to exit from the Quick Order ?</p>
+            <div class="clearfix"></div>
+            <div class="confirm-btns clearfix">
+                <button class="mz-cart-model-btn mz-model-yes-btn" url="" id="confirm-exit-out-yes" data-mz-item="yes">Open in New Tab</button>
+                <button class="mz-cart-model-btn mz-model-yes-btn" url="" id="confirm-exit-yes" data-mz-item="yes">Leave this page</button>
+                <button class="mz-cart-model-btn mz-model-yes-btn" id="confirm-exit-no" data-mz-item="no">Cancel</button>
+            </div>
+        </div>      
+    </div>
+</div>
+</div> 
+
+<div  class="alert_modal">
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+    <div class="mz-modal__wrapper" data-mz-role="modal-window">
+        <div class="mz-modal__inner clearfix" data-mz-role="modal-contents">
+            <p class="delete_text">Sorry this product is out of stock</p>
+            <div class="confirm-btns clearfix text-center small-12">
+                <button class="mz-cart-model-btn mz-model-yes-btn alert_btns " id="alert_modal-exit" data-mz-item="no">OK</button>
+            </div>
+        </div>      
+    </div>
+</div>
+</div> 
+
+<div  class="pr_error">
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+    <div class="mz-modal__wrapper" data-mz-role="modal-window"> 
+        <div class="mz-modal__inner clearfix" data-mz-role="modal-contents">
+            <p class="delete_text change-error"></p>
+            <div class="confirm-btns clearfix text-center small-12">
+                <button class="mz-cart-model-btn mz-model-yes-btn alert_btns" id="error_modal-exit" data-mz-item="no">OK</button>
+            </div>
+        </div>      
+    </div>
+</div>
+</div>     
+
+<div itemprop="breadcrumb" class="mz-breadcrumb"> 
+    <div class="breadcrumbs-center {% if pageContext.title == "Quick Order"%} row{% endif %}">
+        
+        <div class="small-12">
+            <a href="/" class="mz-breadcrumb-link is-first" title="Home">Home</a> 
+            <span class="mz-breadcrumb-separator">/</span>
+            <span class="mz-breadcrumb-current">{{ labels.quicorder }}</span>
+        </div>
+    </div>  
+</div> 
+<div class="mz-messagebarmodel">
+    
+</div>
+<div class="quick_order_container">
+    <div class="small-12 quick-order-head">
+        <div class="filterhead">
+            <h2>Quick Order</h2>
+            <div  class="filtersection" mz-qo-category-filtering> 
+               <span class="caret"></span> 
+               <p  class="mz-qo-cart-filter">Filter</p>  
+            </div>
+            <div class="clearfix"></div>   
+        </div>   
+    </div>
+    <div mz-qo-category-filtering-container class="row mz-qo-category-filtering-container" style="display:none;">
+        {% if pageContext.isMobile  %} 
+        <a class="right mz-close-button" href="/quick-order"></a>   
+        <span class="refine-search">Refine Your Search</span>
+        <label class="label-product">PRODUCTS</label>      
+        {% endif %} 
+        <div class="small-12 small-centered columns apply-filter"> 
+        {% for item in model.items %}
+            {% if item.content.name == "Products" %}     
+                {% for childitem in item.childrenCategories %}
+                    {% if childitem.childrenCategories.length > 0 %}
+                        {% for child in childitem.childrenCategories %}
+                            {% if child.childrenCategories.length > 0 %}
+                                {% for child1 in child.childrenCategories %}
+                                    {% if child1.isDisplayed %} 
+                                        <div class="squaredOne small-3 medium-4 columns">         
+                                            <input mz-qo-id-toggle-cntrl="{{child1.categoryId}}" id="{{child1.categoryId}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">
+                                            <label for="{{child1.categoryId}}"> 
+                                                <span>
+                                                <span></span>
+                                                </span>
+                                                {{child1.content.name | safe }}
+                                            </label>
+                                        </div>
+                                    {% endif %} 
+                                {% endfor %}
+                            {% else %}
+                                {% if child.isDisplayed %}   
+                                    <div class="squaredOne small-3 medium-4 columns">         
+                                        <input mz-qo-id-toggle-cntrl="{{child.categoryId}}" id="{{child.categoryId}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">
+                                        <label for="{{child.categoryId}}"> 
+                                            <span>
+                                            <span></span>
+                                            </span>
+                                            {{child.content.name | safe }}
+                                        </label>
+                                    </div>
+                                {% endif %} 
+                            
+                            {% endif %} 
+                        {% endfor %}
+                    {% else %}
+                        {% if childitem.isDisplayed %} 
+                            <div class="squaredOne small-3 medium-4 columns">         
+                                <input mz-qo-id-toggle-cntrl="{{childitem.categoryId}}" id="{{childitem.categoryId}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">
+                                <label for="{{childitem.categoryId}}">
+                                    <span>
+                                    <span></span>
+                                    </span>
+                                    {{childitem.content.name | safe }}
+                                </label>
+                            </div>
+                        {% endif %} 
+                    {% endif %} 
+                {% endfor %}
+            {% endif %} 
+        {% endfor %}
+        </div>
+        {% if pageContext.isMobile  %}
+        <div class="small-12 small-centered columns apply-clear-button">
+            <div class="row">
+            <button mz-toggle-clear class="small-5 columns">clear</button>  
+            <button mz-qo-id-toggle-mobile class="small-5 columns">apply</button>
+            </div>
+        </div>
+        {% endif%}
+    </div>
+    {% dropzone "quickorder-info" scope="page" %}
+    <div class="mz-qo-add-all-to-cart add-to-cart">
+        <p mz-qo-add-all-to-cart class="add-to-cart">ADD TO CART</p>
+    </div>
+
+{% for item in model.items %}
+    {% if item.content.name == "Products" %}  
+        {% for childitem in item.childrenCategories %}
+            {% if childitem.childrenCategories.length > 0 %}
+                {% if childitem.isDisplayed %}
+                    <div class="parent_category">
+                        <h2 class="mz-qo-cat-name">{{childitem.content.name | safe}}</h2>
+                    </div>     
+                {% endif %}   
+            
+                <div class="child_catitems">
+                    {% for child in childitem.childrenCategories %}
+                        {% if child.childrenCategories.length > 0 %}   
+                            <div class="mz-qo-category parent_category2" mz-qo-id-toggle ="{{child.categoryId}}">
+                                <div  class="mz-qo-cat-title">
+                                    <h2 class="mz-qo-cat-name">{{child.content.name | safe}}</h2>
+                                </div>
+                            </div>       
+                            {% for child1 in child.childrenCategories %}
+                                
+                                {% if child1.childrenCategories.length > 0 %}   
+                                    <div class="mz-qo-category parent_category3" mz-qo-id-toggle ="{{child1.categoryId}}">
+                                        <div  class="mz-qo-cat-title">
+                                            <h2 class="mz-qo-cat-name">{{child1.content.name | safe}}</h2>
+                                        </div>
+                                    </div>       
+                                    {% for child2 in child1.childrenCategories %}
+                                        {% if child2.childrenCategories.length > 0 %}   
+                                            <div class="mz-qo-category parent_category4" mz-qo-id-toggle ="{{child2.categoryId}}">
+                                                <div  class="mz-qo-cat-title">
+                                                    <h2 class="mz-qo-cat-name">{{child2.content.name | safe}}</h2>
+                                                </div>
+                                            </div>          
+                                            {% for child3 in child2.childrenCategories %}
+                                                {% if child3.childrenCategories.length > 0 %}   
+                                                    <div class="mz-qo-category parent_category5" mz-qo-id-toggle ="{{child3.categoryId}}">
+                                                        <div  class="mz-qo-cat-title">
+                                                            <h2 class="mz-qo-cat-name">{{child3.content.name | safe}}</h2>
+                                                        </div>
+                                                    </div>  
+                                                    {% for child4 in child3.childrenCategories %}
+                                                        {% if child4.childrenCategories.length > 0 %}   
+                                                            <div class="mz-qo-category parent_category6" mz-qo-id-toggle ="{{child4.categoryId}}">
+                                                                <div  class="mz-qo-cat-title">
+                                                                    <h2 class="mz-qo-cat-name">{{child4.content.name | safe}}</h2>
+                                                                </div>
+                                                            </div>
+                                                            {% for child5 in child4.childrenCategories %}   
+                                                                {% if child5.childrenCategories.length > 0 %}   
+                                                                    <div class="mz-qo-category parent_category7" mz-qo-id-toggle ="{{child5.categoryId}}">
+                                                                        <div  class="mz-qo-cat-title">
+                                                                            <h2 class="mz-qo-cat-name">{{child5.content.name | safe}}</h2>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% for child6 in child5.childrenCategories %}
+                                                                        {% if child6.childrenCategories.length > 0 %}   
+                                                                            <div class="mz-qo-category parent_category8" mz-qo-id-toggle ="{{child6.categoryId}}">
+                                                                                <div  class="mz-qo-cat-title">
+                                                                                    <h2 class="mz-qo-cat-name">{{child6.content.name | safe}}</h2>
+                                                                                </div>
+                                                                            </div>          
+                                                                            {% for child7 in child6.childrenCategories %}
+                                                                                {% if child7.isDisplayed %} 
+                                                                                    <div class="mz-qo-category child_cat7" mz-qo-id-toggle ="{{child7.categoryId}}">
+                                                                                        <div mz-qo-id="{{child7.categoryId}}" class="mz-qo-cat-title">
+                                                                                            <h2 class="mz-qo-cat-name">{{child7.content.name | safe}}</h2>
+                                                                                        </div>
+                                                                                        
+                                                                                        <div mz-qo-p-id="{{child7.categoryId}}" class="mz-qo-products"></div>
+                                                                                    </div> 
+                                                                                {% endif %}    
+                                                                            {% endfor %}
+                                                                        {% else %}
+                                                                            {% if child6.isDisplayed %} 
+                                                                                <div class="mz-qo-category child_cat6" mz-qo-id-toggle ="{{child6.categoryId}}">
+                                                                                    <div mz-qo-id="{{child6.categoryId}}" class="mz-qo-cat-title">
+                                                                                        <h2 class="mz-qo-cat-name">{{child6.content.name | safe}}</h2>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div mz-qo-p-id="{{child6.categoryId}}" class="mz-qo-products"></div>
+                                                                                </div> 
+                                                                            {% endif %}
+                                                                        {% endif %}    
+                                                                    {% endfor %}
+                                                                {% else %}    
+                                                                    {% if child5.isDisplayed %} 
+                                                                        <div class="mz-qo-category child_cat5" mz-qo-id-toggle ="{{child5.categoryId}}">
+                                                                            <div mz-qo-id="{{child5.categoryId}}" class="mz-qo-cat-title">
+                                                                                <h2 class="mz-qo-cat-name">{{child5.content.name | safe}}</h2>
+                                                                            </div>
+                                                                            
+                                                                            <div mz-qo-p-id="{{child5.categoryId}}" class="mz-qo-products"></div>
+                                                                        </div> 
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {% if child4.isDisplayed %} 
+                                                                <div class="mz-qo-category child_cat4" mz-qo-id-toggle ="{{child4.categoryId}}">
+                                                                    <div mz-qo-id="{{child4.categoryId}}" class="mz-qo-cat-title">
+                                                                        <h2 class="mz-qo-cat-name">{{child4.content.name | safe}}</h2>
+                                                                    </div>
+                                                                    
+                                                                    <div mz-qo-p-id="{{child4.categoryId}}" class="mz-qo-products"></div>
+                                                                </div> 
+                                                            {% endif %}
+                                                        {% endif %}      
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% if child3.isDisplayed %} 
+                                                        <div class="mz-qo-category child_cat3" mz-qo-id-toggle ="{{child3.categoryId}}">
+                                                            <div mz-qo-id="{{child3.categoryId}}" class="mz-qo-cat-title">
+                                                                <h2 class="mz-qo-cat-name">{{child3.content.name | safe}}</h2>
+                                                            </div>
+                                                            
+                                                            <div mz-qo-p-id="{{child3.categoryId}}" class="mz-qo-products"></div>
+                                                        </div> 
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}    
+                                            {% if child2.isDisplayed %} 
+                                                <div class="mz-qo-category child_cat2" mz-qo-id-toggle ="{{child2.categoryId}}">
+                                                    <div mz-qo-id="{{child2.categoryId}}" class="mz-qo-cat-title">
+                                                        <h2 class="mz-qo-cat-name">{{child2.content.name | safe}}</h2>
+                                                    </div>
+                                                    
+                                                    <div mz-qo-p-id="{{child2.categoryId}}" class="mz-qo-products"></div>
+                                                </div> 
+                                            {% endif %} 
+                                        {% endif %}     
+                                    {% endfor %}               
+                                {% else %}                
+                                    {% if child1.isDisplayed %} 
+                                        <div class="mz-qo-category child_cat1" mz-qo-id-toggle ="{{child1.categoryId}}">
+                                            <div mz-qo-id="{{child1.categoryId}}" class="mz-qo-cat-title">
+                                                <h2 class="mz-qo-cat-name">{{child1.content.name | safe}}</h2>
+                                            </div>
+                                            
+                                            <div mz-qo-p-id="{{child1.categoryId}}" class="mz-qo-products"></div>
+                                        </div> 
+                                    {% endif %}
+                                {% endif %}    
+                            {% endfor %}    
+                        {% else %}
+                            {% if child.isDisplayed %} 
+                            <div class="mz-qo-category category2" mz-qo-id-toggle ="{{child.categoryId}}">
+                                <div mz-qo-id="{{child.categoryId}}" class="mz-qo-cat-title">
+                                    <h2 class="mz-qo-cat-name">{{child.content.name | safe}}</h2>  
+                                </div>
+                                
+                                <div mz-qo-p-id="{{child.categoryId}}" class ="mz-qo-products"></div>   
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                           
+                    {% endfor %}
+                </div>  
+            {% endif %}
+        {% endfor %}
+    {% endif %}    
+    
+{% endfor %}
+
+<div class=""clearfix"></div>
+<div class="mz-qo-add-all-to-cart right add-to-cart">
+    <p  mz-qo-cart-subtotal class="mz-qo-cart-subtotal">Subtotal<span>$0.00</span></p>  
+    <p mz-qo-add-all-to-cart class="add-to-cart">ADD TO CART</p>
+    
+    
+</div>
+</div>
+
+ 

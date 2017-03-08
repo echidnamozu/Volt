@@ -1,0 +1,160 @@
+﻿
+<header class="mz-desktop mz-pageheader mz-ampheade{% if themeSettings.bannerImageEnabled %} mz-pageheader-hasbanner {% endif %}" id="vt-header">
+   {% block store-branding %}
+        {% include "modules/page-header/store-branding" %}   
+    {% endblock store-branding %}   
+   
+    {% block utility-nav %}
+        {% include "modules/page-header/utility-nav" %}
+    {% endblock utility-nav %}
+    
+    <div>
+        {% if pagecontext.cmsContext %}
+            {% dropzone "promotionalslot" scope="site" %}
+        {% else %}
+            {% if themeSettings.cmsflag %} 
+                {{ themeSettings.promotionslot|safe }}
+            {% endif %} 
+        {% endif %}
+    </div>
+    <div style="display:none;">
+        {% dropzone "promotionalslot1" scope="site" %}
+    </div>
+</header>
+
+<header class="mz-mobile mz-pageheader mz-ampheade">
+    <ul class="mz-nav__container mz-nav--inline">
+    <li class="mz-nav__item menu">
+        <a href="javascript:void(0);" class="icon-menu">
+        
+        </a>
+    </li>
+    
+    <li class="mz-nav__item logo">
+        {% if pagecontext.cmsContext %} 
+            {% dropzone "mobilelogo" scope="site" %}
+        {% else %}
+            {% if themeSettings.cmsflag %}
+                <div id="mz-drop-zone-logo" class="mz-drop-zone">
+                    <div class="mz-cms-row" >
+                        <div class="mz-cms-col-12-12" style="width:">
+                            <div class="mz-cms-block">
+                                <div class="mz-cms-content" style="height:auto;">
+                                        <div class="mz-cms-image" data-mz-cms-image="">
+                                                {{themeSettings.voltlogo|safe}}
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            {% endif %}
+        {% endif %}
+    </li>
+  
+    <li class="mz-nav__item search">
+        <a href="" class="icon-search">  
+            <svg version="1.1" class="mob-search" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 56 58" style="enable-background:new 0 0 56 58;" xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:#BBBBBB;}
+            </style>
+            <path class="st0" d="M24.6,45.4c-12.3,0-22.2-9.9-22.2-22.2S12.3,1,24.6,1c12.3,0,22.2,9.9,22.2,22.2S36.9,45.4,24.6,45.4z
+                 M24.6,5.4c-9.8,0-17.8,8-17.8,17.8c0,9.8,8,17.8,17.8,17.8s17.8-8,17.8-17.8C42.4,13.4,34.4,5.4,24.6,5.4z M53.6,46.3L52.5,57
+                L40.2,44.7l5.9-5.9L53.6,46.3z"/>
+            </svg>
+        </a> 
+    </li>
+
+
+    <li class="mz-nav__item login"> 
+        {% if user.isAnonymous %}
+         <a {% if pageContext.isSecure  %} href="javascript:void(0);" {% else %} href="{{pageContext.secureHost}}/signinform" {% endif %} class="guesticon"  {% if pageContext.isSecure %} {% if pageContext.title == "SignInForm" or pageContext.title == "SignUpForm" %} {% else %} data-mz-loginpopup{% endif %}{% endif %}    > 
+        {% else %}   
+        <a href="javascript:void(0);" class="icon-login"> 
+        {% endif %}
+          <svg version="1.1" class="svg-login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:#D0D0D0;}
+            </style>
+            <g>
+                <g>
+                    <g>
+                        <path class="st0" d="M19.6,7.2c0,3.4-2.7,6.1-6.1,6.1c-3.4,0-6.1-2.7-6.1-6.1c0-3.4,2.7-6.1,6.1-6.1C16.9,1,19.6,3.8,19.6,7.2z"
+                            />
+                        <path class="st0" d="M24.9,26.3c0,3.6-22.8,3.6-22.8,0c0-5.4,5.1-9.5,11.4-9.5C19.8,16.7,24.9,20.8,24.9,26.3z"/>
+                    </g>
+                </g>
+            </g>
+            </svg>
+        </a>  
+    </li>
+
+    <li class="mz-nav__item quickorder"> 
+      <a href="/quick-order" class="icon-quickorder">  
+            <svg version="1.1" class="svg-quick-order" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                <style type="text/css">
+                    .st0{fill:#D0D0D0;}
+                </style>
+                <polygon class="st0" points="12.1,1.1 4.3,16.8 11.3,16.8 5.5,28.9 22.7,13.5 12.6,13.5 18.9,1.1 "/>
+                </svg> 
+      </a>  
+    </li>
+    
+    <li class="mz-nav__item cart">
+      <a href="{{pageContext.secureHost}}/cart" class="icon-cart">
+        <span class="link-icons">
+            <svg version="1.1" class="svg-cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 82 80" style="enable-background:new 0 0 82 80;" xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:#FCDA00;}
+            </style>
+            <g id="jXG0nn.tif">
+                <g>
+                    <path class="st0" d="M81.7,0.8l-3.3,7.6c0,0-5.5,0-8.3,0c-0.9,3.3-1.8,6.6-2.7,9.9C63.6,32,59.8,45.9,56,59.7
+                        c-0.9,3.3-3.7,5.4-7.2,5.4c-12.6,0-18.4,0-31,0c-0.2,0-0.8,0-0.8,0l-2.2-7.6c0,0,22,0,32.9,0c0.6,0,1-0.1,1.1-0.8
+                        c0.4-1.8,1-3.6,1.5-5.5c-10.7,0-18.1,0-28.7,0c-2.7,0-8,0-8,0S1.4,17.5,0.3,13.4c20.2,0,40.4,0,60.6,0c1-3.6,2-7.1,2.9-10.6
+                        c0.2-0.7,0.3-1.4,0.5-2.1C69,0.8,81.7,0.8,81.7,0.8z"/>
+                    <path class="st0" d="M26,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1c2.4-0.6,4.7,0.7,5.3,3.1
+                        c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C27.1,79.2,26.6,79.2,26,79.2z"/>
+                    <path class="st0" d="M41.9,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1
+                        c2.4-0.6,4.7,0.7,5.3,3.1c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C42.9,79.2,42.4,79.2,41.9,79.2z"/>
+                </g>
+            </g>
+            </svg>
+            <span  class="cart-count" data-mz-role="cartmonitor"> {{ model.count }} </span>
+        </span>
+	
+      </a>      
+    </li>
+        
+   
+    
+  </ul>
+</header>
+
+{% require_script "modules/cart-monitor" %}
+{% require_script "modules/login-links" %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

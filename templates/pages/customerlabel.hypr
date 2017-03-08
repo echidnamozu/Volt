@@ -1,0 +1,4 @@
+
+{% for mdl in model.items %}
+<input type="hidden" id="customersegmentvallabel" value="{{mdl.properties.PriceLabel}}"/> 
+{% endfor %}

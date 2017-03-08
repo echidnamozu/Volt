@@ -1,0 +1,12 @@
+{% for mdl in model.items %}
+<div class="mz-productoptions-valuecontainer">
+    <div class="img-slot">
+        <img src="{{mdl.properties.ImageUrl}}" alt="{{mdl.productName}}">
+    </div> 
+    <div class="option-container">
+        <div class="options">  
+            <input class="mz-productoptions-option"  type="radio" value="{{mdl.properties.Code}}"><label class="mz-productoptions-label" >{{mdl.properties.DisplayText}}</label>
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,0 +1,9 @@
+
+{% preload_json model.config.hidden_field_1 "uploadimagevideos" %}
+
+    <div class="imagevideocaraousel">
+    <div class="imgvideo">
+    
+    </div>
+    </div>
+     {% require_script "widgets/upload" %}

@@ -1,0 +1,1900 @@
+
+.clear {
+    clear: both;
+}
+table {
+    background: transparent;
+    margin-bottom: 0;
+    border: none;
+    table-layout: auto;  
+}
+.mz-anonymous-account{
+    .mz-l-pagecontent{
+        .validationmsg {
+            border: 1px solid red!important;
+            background: #FFCECE!important;
+        }
+        .validationfreemsg {
+            border: 1px solid #e8e8e8!important;
+            background: #f7f7f7!important;
+        }
+        input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+            background: #fcfcfc;
+        }
+        &.pop-position-mob {
+            position: fixed;
+            overflow: hidden;
+        }
+        .mz-breadcrumbs {
+            color: #2e2e2e;
+            padding: 10px 40px;
+            background: #e8e8e8;
+            font-size: 0.750em;
+            font-family: 'roboto_regular';
+            text-transform: uppercase;
+            .breadcrumbs-center {
+                width: 100%;
+                padding: 0;
+                margin: 0 auto;
+                .mz-breadcrumbs-orderstatus{
+                    display: inline-block;
+                }
+            }
+            .mz-validationmessage {
+                color: #b94a48;
+                font-size: 9px;
+                display: block;
+                //position: absolute;
+                //top: 67px;
+            }
+        }
+        .mz-validationmessage {
+            color: #b94a48;
+            font-size: 12px;
+            display: block;
+            //position: absolute;
+            //top: 67px;
+        }
+        .mz-myaccount-panels {
+            float: left;
+            width: 100%;
+        }
+        .mz-myaccount-nav {
+            min-height: 700px;
+            width: 22%;
+            box-sizing: border-box;
+            float: left;
+            // padding: 20px 0px;
+            z-index: 1;
+            position: relative;
+            background: #f6f6f6;
+            padding: 2% 0 2% 3%;
+
+            .mz-scrollnav {
+                .mz-scrollnav-list {
+                    .mz-scrollnav-item {
+                        margin: 5px 15px;
+                        padding: 2% 5%;
+                        border-radius: 5px;
+                        .mz-scrollnav-link {
+                            color: #1e1e1e;
+                            font-family: 'roboto_medium';
+                        }
+                    }
+                    .active-tab {
+                        background-color: #efefef;
+                        .mz-scrollnav-link {
+                            font-family: 'roboto_bold';
+                        }
+                    }
+                }
+            }
+        }
+        .mz-l-stack-large {
+            box-shadow: -15px 5px 28px 0 rgba(234,233,233,0.8);
+            min-height: 700px;
+            height: auto;
+            width: 78%;
+        }
+        .mz-contacttype-isprimary {
+            font-size: 14px;
+            font-style: italic;
+            display: block;
+            margin-top: 3px;
+            text-indent: 5px;
+        }
+        .is-required {
+            color: black;
+        }
+        .myaccountno-orders {
+            font-family: 'roboto_bold';
+            text-align: center;
+            padding: 10px 0px;
+        }
+        @media (max-width:600px) {
+            .mz-myaccount-panels {
+                margin-left: 0;
+            }
+            .mz-myaccount-nav {
+                float: none;
+                width: auto;
+                margin-bottom: @gutter;
+                .clearfix();
+                .mz-scrollnav-item {
+                    float: left;
+                    margin: @gutter/4;
+                }
+            }
+        }
+        label {
+            //color: #353538;
+            display: inline-block;
+            cursor: auto;
+            //font-family: initial;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #000;
+            //margin-left: 2px;
+        }
+        .mz-myaccountbreadcrumb {
+            width: 100%;
+            background: #f0f0f0;
+            padding: 40px 0 21px 0;
+            span {
+                font-family: 'roboto_bold';
+                font-size: 13px;
+                width: 85%;
+                margin: 0 auto;
+                display: inherit;
+            }
+            .home {
+                color: #C7C7C7;
+                font-family: 'roboto_bold';
+                text-transform: capitalize;
+                display: inline-block;
+                font-size: 14px;
+            }
+        }
+    
+        .mz-requiredmsg {
+            font-family: 'roboto_bold';
+            font-size: 12px;
+            color: red;
+            margin: 0px;
+            padding: 0px;
+        }
+    
+        .mz-pagetitle {
+            font-family: 'roboto_bold';
+            font-size: 28px;
+            color: #39393c;
+            padding: 2.5% 3%;
+            border-bottom: 1px solid #c9c9c9;
+            margin-bottom: 0px;
+            
+        }
+        //ORder History //
+        .mz-orderhistory {
+            padding: 0;
+            clear: both;
+            float: left;
+            width: 100%;
+            display: block;
+            .mz-l-stack-sectiontitle {
+                font-size: 14px;
+                border-bottom: 1px solid #c9c9c9;
+                padding: 10px 0 25px;
+                min-height: 40px;
+                margin-bottom: 0px;
+                .open_sans_semibold();
+            }
+            .mz-accounttopborder {
+                //border-top: 2px solid #d2d2d2;
+            }
+            .mz-personalinformation {
+                padding: 10px 0px;
+                border-bottom: 1px solid #f6f6f6;
+                font-weight: bold;
+                text-transform: capitalize;
+                margin-bottom: 5%;
+                span {
+                    //color: #343434;
+                    font-size: 18px;
+                    .montserrat_regular();
+                }
+                .mz-accountsettings-nameedit {
+                    float: right;
+                    border: none;
+                    background: transparent;
+                    color: #fddb00;
+                    text-decoration: underline;
+                    .montserrat_regular();
+                    font-size: 14px;
+                }
+            }
+            .mz-orderhistory-section {
+                .mz-l-paginatedlist-list {
+                    .text-center();
+                    .mz-orderlist {
+                        .text-left();
+                        margin: 20px;
+                    }
+                    .mz-more-order {
+                        padding: 8px 15px;
+                        font-size: 14px;
+                        border: 0;
+                        .border-radius(5px);
+                        color: @white;
+                        background: @btn-secondary;
+                        .montserrat_regular();
+                        &:hover {
+                            background: @btn-secondary-hover;
+                        }
+                    }
+                }
+            }
+            .mz-myordercollapse {
+                border: 1px solid #f6f6f6;
+                .mz-redorderdetails {
+                    padding: 0 1%;
+                    background: #fcfcfc;
+                    font-family: 'open_sansbold';
+                    border: 1px solid #f6f6f6;
+                    &.bgclass {
+                        background: #fcfcfc !important;
+                    }
+                    ul {
+                        margin: 0;
+                        li {
+                            display: inline-block;
+                            padding: 6px;
+                            font-size: 14px;
+                            padding: 10px 15px;
+                            margin-bottom: 0;
+                            line-height: 2.5em;
+                            vertical-align: top;
+                            .mz-value {
+                                color: initial;
+                            }
+                            .mz-name {
+                                font-weight: bold;
+                                text-transform: uppercase;
+                            }
+                            &.mz-reorder-name {
+                                width: 11%;
+                            }
+                            &.mz-reorder-refno {
+                                width: 25%;
+                            }
+                            &.mz-reorder-placed {
+                                width: 27%;
+                            }
+                            &.mz-reorder-total {
+                                width: 12%;
+                            }
+                            &.mz-reorder-status {
+                                //border-right: 2px solid #f6f6f6;
+                                width: 16%;
+                            }
+                            &.mz-reorder-icon {
+                                width: 6%;
+                            }
+                        }
+                        .mz-namevalue {
+                            color: #000;
+                            font-size: 13px;
+                        }
+                        .mz-name {
+                            color: #979696;
+                            font-family: 'roboto_light';
+                            font-size: 14px;
+                            display: block;
+                        }
+                    }
+                }
+                .mz-billinginormation {
+                    .left-shipping {
+                        width: 45%;
+                        float: left;
+                        padding: 10px;
+                        &.panel-border {
+                            padding: 2%;
+                            margin: 2%;
+                            background: #fcfcfc;
+                            border: 2px solid #f6f6f6;
+                        }
+                        .left-shippingdetails {
+                            font-family: 'roboto_light';
+                            border-bottom: 1px solid #424242;
+                            span {
+                                margin-bottom: 6px;
+                                font-weight: bold;
+                                display: inline-block;
+                                font-family: "roboto_regular";
+                                font-size: 15px;
+                                color: #000;
+                            }
+                        }
+                        .mz-shippinginformation {
+                            padding: 4% 0;
+                            font-family: 'open_sansbold';
+                            font-size: 14px;
+                            .mz-shippingaccount {
+                                float: left;
+                                width: 49%;
+                                margin: 0;
+                                font-size: 14px;
+                                .mz-shippinginformatonship {
+                                    text-transform: capitalize;
+                                    min-height: 145px;
+                                    font-size: 14px;
+                                    margin: 0;
+                                    font-family: "roboto_light";
+                                    color: #666666;
+                                    font-weight: bold;
+                                    letter-spacing: 1px;
+                                }
+                                .mz-shippinginformatonship2 {
+                                    font-size: 14px;
+                                    margin: 0;
+                                    font-family: "roboto_light";
+                                    color: #666666;
+                                    font-weight: bold;
+                                    letter-spacing: 1px;
+                                }
+                            }
+                            .mz-rightinfomation {
+                                float: right;
+                                text-align: left;
+                                width: 50%;
+                                a {
+                                    color: #fddb00;
+                                    text-decoration: underline;
+                                    font-size: 11px;
+                                    margin: 0 3px;
+                                    &:hover {
+                                        color: @btn-primary-hover;
+                                    }
+                                }
+                                p {
+                                    margin: 0px;
+                                    //color: #979696;
+                                    font-size: 12px;
+                                    font-family: sans-serif;
+                                    font-weight: bold;
+                                }
+                                p:first-child {
+                                    color: #1c1c1c;
+                                    font-size: 12px;
+                                    margin-bottom: 8px;
+                                }
+                                p:last-child {
+                                    // margin-top: 39px;
+                                }
+                                .nocolor {
+                                    color: initial;
+                                }
+                            }
+                        }
+                    }
+                    .right-billing {
+                        width: 45%;
+                        float: left;
+                        padding: 10px;
+                        &.panel-border {
+                            padding: 2%;
+                            margin: 2%;
+                            background: #fcfcfc;
+                            border: 2px solid #f6f6f6;
+                        }
+                        .left-shippingdetails {
+                            font-family: 'roboto_light';
+                            border-bottom: 1px solid #424242;
+                            span {
+                                font-weight: bold;
+                                margin-bottom: 6px;
+                                display: inline-block;
+                                font-family: "roboto_light";
+                                font-size: 15px;
+                                color: #1c1c1c;
+                            }
+                        }
+                        .mz-shippinginformation {
+                            padding: 4% 0;
+                            font-family: 'roboto_light';
+                            font-size: 14px;
+                            .mz-shippingaccount {
+                                float: left;
+                                width: 50%;
+                                margin-top: 2%;
+                                font-size: 14px;
+                                .mz-shippinginformatonship {
+                                    min-height: 115px;
+                                    font-size: 14px;
+                                    margin: 0;
+                                    font-family: "roboto_light";
+                                    color: #666666;
+                                    font-weight: bold;
+                                    letter-spacing: 0.5px;
+                                }
+                                .mz-shippinginformatonship2 {
+                                    font-size: 14px;
+                                    margin: 0;
+                                    font-family: "roboto_light";
+                                    color: #666666;
+                                    font-weight: bold;
+                                    letter-spacing: 0.5px;
+                                }
+                                .mz-shippinginformatonship0 {
+                                    font-size: 14px;
+                                    margin-bottom: 2px;
+                                    font-family: "roboto_light";
+                                    color: #666666;
+                                    font-weight: bold;
+                                    letter-spacing: 0.5px;
+                                }
+                            }
+                            .mz-rightinfomation {
+                                float: right;
+                                text-align: left;
+                                width: 50%;
+                                margin-top: 2%;
+                                p {
+                                    margin: 0px;
+                                    //color: #979696;
+                                    font-size: 12px;
+                                    font-family: sans-serif;
+                                    font-weight: bold;
+                                    letter-spacing: 0.5px;
+                                }
+                                p:first-child {
+                                    word-wrap: break-word;
+                                    //color: #1c1c1c;
+                                    font-size: 12px;
+                                    margin-bottom: 8px;
+                                }
+                                p:last-child {
+                                    // margin-top: 21px;
+                                }
+                                .nocolor {
+                                    color: initial;
+                                }
+                            }
+                        }
+                    }
+                }
+                .mz-orderstructure {
+                    //background: #f7f7f7;
+                    font-weight: bold;
+                    padding: 15px 20px;
+                    p {
+                        margin: 0;
+                        font-family: 'montserratregular';
+                        font-size: 15px;
+                        color: #1c1c1c;
+                        .uppercase();
+                        font-weight: bold;
+                    }
+                }
+                .toggle-icon {
+                    width: 32px;
+                    display: inline-block;
+                    background: url("../resources/images/myaccount-icons/plus.svg")no-repeat;
+                    text-indent: -9999px;
+                    background-size: 78%;
+                    position: relative;
+                    bottom: -5px;
+                    height: 25px;
+                }
+                .toggle-icon-down {
+                    background: url("../resources/images/myaccount-icons/minus.svg")no-repeat;
+                    background-size: 78%;
+                    bottom: -5px;
+                    height: 25px;
+                }
+                .mz-orderrefund {
+                    background: #f3f3f3;
+                    float: left;
+                    font-family: 'montserratregular';
+                    font-size: 14px;
+                    width: 100%;
+                    padding-left: 59px;
+                    padding-top: 20px;
+                    padding-bottom: 25px;
+                    border-radius: 6px;
+                    position: relative;
+                    padding-right: 47px;
+                    border: 4px solid#f3f3f3;
+                    top: 15px;
+                    .checkbox1 {
+                        width: 18%;
+                        float: left;
+                        label {
+                            font-family: 'montserratregular';
+                            font-size: 14px;
+                        }
+                        label input {
+                            display: none;
+                        }
+                        label span {
+                            height: 10px;
+                            width: 10px;
+                            border: 1px solid grey;
+                            display: inline-block;
+                            margin-right: 10px;
+                        }
+                        [type=checkbox]:checked + span {
+                            background: black;
+                        }
+                    }
+                    .checkbox2 {
+                        width: 18%;
+                        float: left;
+                        label {
+                            font-family: 'montserratregular';
+                            font-size: 14px;
+                        }
+                        label input {
+                            display: none;
+                        }
+                        label span {
+                            height: 10px;
+                            width: 10px;
+                            border: 1px solid grey;
+                            display: inline-block;
+                        }
+                        [type=checkbox]:checked + span {
+                            background: black;
+                        }
+                    }
+                    .mz-detailsrefund {
+                        text-align: left;
+                        .mz-refundselect {
+                            border: 1px solid #e8e8e8;
+                            background-color: #f7f7f7;
+                            width: 250px;
+                        }
+                        input[type="number"] {
+                            border: 1px solid #e8e8e8;
+                            background-color: #f7f7f7;
+                            width: 93px;
+                        }
+                        .mz-textarea {
+                            textarea {
+                                border: 1px solid #e8e8e8;
+                                background-color: #f7f7f7;
+                                width: 250px;
+                                height: 68px;
+                            }
+                        }
+                        .mz-buttons {
+                            margin: 0 20px;
+                            clear: both;
+                        }
+                        .mz-accountsave {
+                            width: 110px;
+                            // background: #39393c;
+                            //color: white;
+                            border: none;
+                            margin: 7px 7px 0 0 !important;
+                            font-size: 12px;
+                            font-family: 'montserratregular';
+                            text-transform: uppercase;
+                        }
+                        .mz-accountcancel {
+                            width: 110px;
+                            background: #fddb00;
+                            color: white;
+                            border: none;
+                            margin-top: 5px!important;
+                            font-size: 12px;
+                            font-family: 'montserratregular';
+                            text-transform: uppercase;
+                        }
+                        .mz-selectons {
+                            float: left;
+                            width: 36%;
+                        }
+                    }
+                    .mz-l-formfieldgroup-cell:first-child {
+                        text-align: left;
+                    }
+                }
+                .mz-orderrefund:after, .mz-orderrefund:before {
+                    bottom: 100%;
+                    left: 15%;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+                .mz-orderrefund:after {
+                    border-bottom-color: #f3f3f3;
+                    border-width: 30px;
+                }
+                .mz-orderrefund:before {
+                    //border-color: #f3f3f3;
+                    //border-bottom-color: #c2e1f5;
+                    //border-width: 36px;
+                    //margin-left: -36px;
+                }
+                .item-listing-block {
+                    border-bottom: 1px solid #f6f6f6;
+                    .mz-itemlisting {
+                        padding-top: 20px;
+                        .mz-item-price {
+                            padding: 0 7%;
+                        }
+                        .mz-itemlisting-actions {
+                            float: none;
+                        }
+                    }
+                    .mz-item-discount {
+                        background: #eee;
+                        color: #4a4a4a;
+                        font-size: 12px;
+                        .montserrat_regular();
+                        padding: 10px;
+                        margin: 1%;
+                        text-align: left;
+                        font-weight: normal;
+                        .mz-item-discountname {
+                            display: inline-block;
+                            text-align: left;
+                            width: 77%;
+                        }
+                        .mz-item-discountamt {
+                            display: inline-block;
+                            text-align: right;
+                            width: 20%;
+                            color: #4a4a4a;
+                        }
+                    }
+                }
+            }
+            .mz-tablestructure {
+                .cart-brd {
+                    padding: 25px 10px;
+                    .mz-table-cart-items {
+                        border-bottom: 1px solid #c9c9c9;
+                        padding: 25px 0px;
+                    }
+                    .cart-section {
+                        // font-family: 'montserratbold';
+                        text-transform: uppercase;
+                        font-size: 13px;
+                        color: #979696;
+                        padding: 5px 0px;
+                        border-bottom: 1px solid #f6f6f6;
+                        border-top: 1px solid #f6f6f6;
+                    }
+                    .mz-carttable-item-product {
+                        margin: 0;
+                        padding: 0;
+                        .mz-productimage {
+                            border: 2px solid #f3f3f3;
+                            float: left;
+                            margin-right: 10px;
+                            padding: 8px;
+                            width: 25%;
+                            img {
+                                max-width: 100%;
+                            }
+                        }
+                        .mz-carttable-item-title {
+                            font-family: 'montserratregular';
+                            font-size: 13px;
+                            color: #3f3f3f;
+                            text-align: left;
+                        }
+                        .mz-itemlisting-description {
+                            float: left;
+                        }
+                        .option-values {
+                            text-align: left;
+                            .mz-finish {
+                                display: inline-block;
+                                width: auto;
+                                font-family: 'montserratregular';
+                                font-size: 12px;
+                            }
+                            .bronze {
+                                height: 25px;
+                                width: 45px;
+                                display: inline-block;
+                                position: relative;
+                                top: 9px;
+                                font-family: 'montserratregular';
+                                font-size: 12px;
+                            }
+                            .mzcolor-text {
+                                display: inline-block;
+                                font-family: 'montserratregular';
+                                font-size: 12px;
+                                margin-top: 10px;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                    .amp-cross {
+                        //font-family: 'montserratregular';
+                        color: #ccc;
+                        font-size: 14px;
+                    }
+                    .is-saleprice {
+                        // font-family: 'montserratregular';
+                        font-size: 16px;
+                        color: #000;
+                        display: block;
+                    }
+                    .amp-quantityvalue {
+                        //font-family: 'montserratregular';
+                        font-size: 14px;
+                    }
+                    .mz-carttable-header-options label {
+                        //font-family: 'montserratregular';
+                        font-size: 13px;
+                        font-weight: normal;
+                        color: #979696;
+                        text-align: left;
+                    }
+                    .mz-carttable-header-options {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .mz-carttable-header-options label span {
+                        font-weight: bold;
+                        color: black;
+                        margin-right: 10px;
+                    }
+                    .mz-carttable-item-total .is-crossedout {
+                        font-family: 'montserratregular';
+                        font-size: 14px;
+                        color: #cccccc;
+                        display: block;
+                        margin-left: -15px;
+                    }
+                    .mz-carttable-item-total .savepercent {
+                        display: block;
+                        font-size: 12px;
+                        color: #cccccc;
+                    }
+                    .mz-carttable-item-total .amp-price {
+                        font-family: 'montserratbold';
+                        font-size: 16px;
+                        color: #fddb00;
+                        display: block;
+                    }
+                    .mz-carttable-item-remove {
+                        font-family: 'montserratregular';
+                        .mzaccount-remove-item {
+                            font-size: 14px;
+                        }
+                        .mz-accoutreturn {
+                            font-size: 10px;
+                            border: 1.5px solid #b3b3b4;
+                            padding: 7px;
+                            border-radius: 6px;
+                            font-family: montserratbold;
+                            text-transform: uppercase;
+                            a {
+                                color: #000;
+                                &:hover {
+                                    opacity: 0.7;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .mz-accountvalues {
+                width: 100%;
+                float: left;
+                border-bottom: 1px solid #f6f6f6;
+                margin: 20px 0;  
+                font-family: 'montserratregular';
+                font-size: 16px;
+                letter-spacing: 1px;
+                font-weight: normal;
+                .order-comments {
+                    float: left;
+                    width: 45%;
+                    .body {
+                        color: #979696;
+                        text-align: left;
+                        font-size: 12px;
+                    }
+                }
+                table {
+                    background: transparent;
+                    float: right;
+                    tr {
+                        background: transparent;
+                        td {
+                            text-align: left;
+                        }
+                    }
+                }
+                .mz-accountvaluestd1 {
+                    color: grey;
+                    width: 200px;
+                    text-align: left;
+                    &.total {
+                        color: initial;
+                    }
+                }
+                .mz-accountvaluestd2 {
+                    color: grey;
+                    width: 150px;
+                    text-align: right;
+                    &.total {
+                        color: initial;
+                    }
+                }
+            }
+            .mz-totalgrandvalue {
+                width: 100%;
+                float: left;
+                font-family: 'montserratregular';
+                font-size: 16px;
+                //border-bottom: 1px solid #c9c9c9;
+                padding: 15px 0px;
+                .print-reciept {
+                    float: left;
+                    color: #979696;
+                    a {
+                        color: grey;
+                        text-decoration: underline;
+                    }
+                }
+                table {
+                    background: transparent;
+                    float: right;
+                    width: 50%;
+                }
+                .mz-accountvaluestd1 {
+                    color: grey;
+                    width: 200px;
+                    text-align: left;
+                    letter-spacing: 1px;
+                    font-weight: normal;
+                    &.total {
+                        color: initial;
+                    }
+                }
+                .mz-accountvaluestd2 {
+                    color: grey;
+                    width: 150px;
+                    text-align: right;
+                    letter-spacing: 1px;
+                    font-weight: normal;
+                    &.total {
+                        color: initial;
+                    }
+                }
+            }
+            .toggle {
+                display: inline-block;
+            }
+            .bgclass {
+                background: #fddb00 !important;
+            }
+            .bordrnone {
+                border: none!important;
+            }
+            .mz-validationmessage {
+                top: 48px;
+            }
+            .mz-returnform-optionalcomments {
+                .mz-validationmessage {
+                    position: relative;
+                    top: 0;
+                }
+            }
+        }
+        .mz-itemactionlink {
+            float: right;
+            .mz-itemlisting-action {
+                
+                font-size: 13px;
+                border: 1px solid #39393C;
+                color: #343434;
+                padding: 4px 6px;
+                border-radius: 6px;
+                .uppercase();
+                &:hover {
+                    background: @btn-secondary-hover;
+                    border: 1px solid @btn-secondary-hover;
+                    color: @white;
+                    text-decoration: none;
+                }
+            }
+        }
+        //ORder History ////My returns //
+        .mz-accountreturns {
+            padding: 0;
+            clear: both;
+            float: left;
+            width: 100%;
+            .mz-l-stack-sectiontitle {
+                font-size: 14px;
+                border-bottom: 1px solid #c9c9c9;
+                padding: 10px 0 25px;
+                min-height: 40px;
+                margin-bottom: 0px;
+                .open_sans_semibold();
+            }
+            .mz-personalinformation {
+                padding: 10px 0px;
+                border-bottom: 1px solid #f6f6f6;
+                span {
+                    font-size: 17px;
+                    color: initial;
+                    //.montserrat_regular();
+                    font-weight: bold;
+                }
+                .mz-accountsettings-nameedit {
+                    float: right;
+                    border: none;
+                    background: transparent;
+                    color: #fddb00;
+                    text-decoration: underline;
+                    .montserrat_regular();
+                    font-size: 14px;
+                }
+            }
+            .mz-tablestructure {
+                .cart-brd {
+                    border-radius: 4px;
+                    padding: 20px 0px;
+                    //background: #fcfcfc;
+                    //border-bottom: 1px solid #f6f6f6;
+                    margin-bottom: 10px;
+                    .order-details {
+                        border: 1px solid #f6f6f6;
+                        margin: 2%;
+                        .order-row {
+                            background: #fcfcfc;
+                            border: 1px solid #f6f6f6;
+                            .mz-toggle-icon {
+                                cursor: pointer;
+                                position: relative;
+                                .icon-toggle {
+                                    width: 32px;
+                                    display: inline-block;
+                                    background: url("../resources/images/myaccount-icons/plus.svg") no-repeat;
+                                    text-indent: -9999px;
+                                    background-size: 78%;
+                                    position: absolute;
+                                    height: 25px;
+                                    right: 15px;
+                                    height: 25px;
+                                    bottom: -8px;
+                                }
+                            }
+                            &.active {
+                                .mz-toggle-icon {
+                                    cursor: pointer;
+                                    .icon-toggle {
+                                        background: url("../resources/images/myaccount-icons/minus.svg") no-repeat;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .return-details {
+                        padding: 20px;
+                        .panel-border {
+                            padding-left: 0;
+                            padding-right: 0;
+                            background: #fff;
+                            .panel-heading {
+                                padding: 10px;
+                                h6 {
+                                    font-weight: bold;
+                                    padding: 1%;
+                                    border-bottom: 1px solid #f4f4f4;
+                                    &.details-ret {
+                                        border-bottom: 0;
+                                    }
+                                }
+                            }
+                            .panel-body {
+                                .row {
+                                    //padding-left: 10px;
+                                    //padding-right: 10px;
+                                    padding: 10px;
+                                    &.row-table {
+                                        padding-left: 0;
+                                        padding-right: 0;
+                                        th, td {
+                                            padding: 1% 3%;
+                                            &:nth-child(2) {
+                                                text-align: center;
+                                            }
+                                        }
+                                        .nopadding {
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                                .mz-carttable-item-product {
+                                    padding-left: 0;
+                                }
+                                .return-det {
+                                    margin: 1% 0;
+                                    padding: 2%;
+                                }
+                            }
+                        }
+                    }
+                    .mz-table-cart-items {
+                        //border-bottom: 1px solid #f6f6f6;
+                        padding: 20px 0px 18px 0px;
+                    }
+                    .cart-section {
+                        font-size: 13px;
+                        color: #979696;
+                        padding: 5px 0px;
+                        //border-bottom: 1px solid #848484;
+                        .uppercase();
+                        // .montserrat_regular();
+                    }
+                    .mz-carttable-item-product {
+                        .mz-productimage {
+                            border: 2px solid #f7f7f7;
+                            float: left;
+                            margin-right: 10px;
+                            padding: 0;
+                            width: 25%;
+                            img {
+                                width: 100%;
+                                max-width: 100%;
+                            }
+                        }
+                        .mz-carttable-item-info-wrap {
+                            float: left;
+                            width: 70%;
+                        }
+                        .mz-carttable-item-title {
+                            font-size: 16px;
+                            color: #000;
+                            text-align: left;
+                            display: inherit;
+                            // .montserrat_regular();
+                        }
+                        .option-values {
+                            text-align: left;
+                            .mz-finish {
+                                display: inline-block;
+                                width: auto;
+                                font-size: 12px;
+                                margin: 0 30px 0 0;
+                                color: #4A4A4A;
+                                .montserrat_bold();
+                            }
+                            .bronze {
+                                height: 25px;
+                                width: 50px;
+                                display: inline-block;
+                                position: relative;
+                                top: 9px;
+                                font-size: 12px;
+                                .capitalize();
+                                .montserrat_regular();
+                            }
+                            .mzcolor-text {
+                                display: inline-block;
+                                font-size: 12px;
+                                margin-top: 10px;
+                                margin-left: 5px;
+                                color: #9b9b9b;
+                                .montserrat_regular();
+                                .lowercase();
+                                &:first-letter {
+                                    .uppercase();
+                                }
+                            }
+                        }
+                    }
+                    .amp-cross {
+                        font-family: 'montserratregular';
+                        color: #9b9b9b;
+                        font-size: 13px;
+                    }
+                    .is-saleprice {
+                        font-size: 16px;
+                        color: #fddb00;
+                        display: block;
+                        .montserrat_regular();
+                    }
+                    .amp-quantityvalue {
+                        font-size: 14px;
+                        .montserrat_regular();
+                    }
+                    .mz-carttable-header-options {
+                        margin: 25px 0 0 13px;
+                        clear: both;
+                    }
+                    .mz-carttable-header-options label {
+                        font-size: 14px;
+                        font-weight: normal;
+                        color: #9B9B9B;
+                        text-align: left;
+                        margin: 0;
+                        // .montserrat_regular();
+                    }
+                    .mz-carttable-header-options label span {
+                        font-weight: bold;
+                        font-size: 13px;
+                        color: #595959;
+                        display: inline-block;
+                        width: 100px;
+                        .montserrat_regular();
+                    }
+                    .mz-carttable-item-total .is-crossedout {
+                        font-size: 14px;
+                        color: #cccccc;
+                        display: block;
+                        margin-left: -15px;
+                        .montserrat_regular();
+                    }
+                    .mz-carttable-item-total .savepercent {
+                        display: block;
+                        font-size: 13px;
+                        color: #9b9b9b;
+                        .montserrat_regular();
+                    }
+                    .mz-carttable-item-total .amp-price {
+                        font-size: 16px;
+                        color: #fddb00;
+                        display: block;
+                        margin-bottom: 5px;
+                        .montserrat_regular();
+                    }
+                    .mz-carttable-item-remove {
+                        .montserrat_regular();
+                        .mzaccount-remove-item {
+                            font-size: 14px;
+                        }
+                        .mz-accoutreturn {
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+            .text-orderhistory {
+                background: #fddb00;
+                margin: 10px 0px;
+                background: #f7f7f7;
+                font-family: 'roboto_medium';
+                p {
+                    padding: 10px 10px 10px 20px;
+                    font-size: 14px;
+                    a {
+                        color: #fddb00;
+                        text-decoration: underline;
+                        .uppercase();
+                    }
+                }
+            }
+            .mz-damagedreason {
+                width: 100%;
+                padding: 5px;
+                background: #eeeeee;
+                font-family: 'montserratregular';
+                font-size: 14px;
+                margin-top: 10px;
+                .mz-reason {
+                    color: red;
+                }
+            }
+        }
+        
+        .mz-more-order {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 0;
+            .border-radius(5px);
+            color: @white;
+            background: @btn-secondary;
+            &:hover {
+                background: @btn-secondary-hover;
+            }
+        }
+        select {
+            -moz-appearance: none;
+        }
+        .mz-l-stack-section {
+            display: none;
+        }
+        .mz-l-stack-section:first-child {
+            display: block;
+        }
+    }
+} 
+
+
+ 
+
+@media only screen and  (min-width: 1px) and (max-width: 767px){
+    .mz-anonymous-account {
+        .mz-myaccountbreadcrumb {
+            padding: 18px 0 20px;
+        }
+        .mz-l-pagecontent .mz-orderhistory {
+            .mz-totalgrandvalue table {
+                width: 100%;
+            }
+            .mz-myordercollapse .item-listing-block .mz-itemlisting .mz-item-price {
+                padding: 0;
+            }
+        } 
+        
+         
+        .mz-l-stack-large {
+            min-height: 250px;
+            height: auto;
+            .mz-l-stack-section {
+                min-height: 250px;
+            }
+        }
+        .panel-border {
+        width: 100%; 
+        background-color: #fff;
+        }
+        .myaccount-paymentmethod,
+        .mz-accountadressbook,
+        .mz-orderhistory,
+        .mz-accountreturns,
+        .mz-wishlist,
+        .mz-storecredit,
+        .my-preferenceaccount {
+            padding: 10px;
+            &.panel-border { 
+        width: 100%;
+        position: relative; 
+        }
+            .mz-l-stack-sectiontitle {
+                padding: 0px 0px 20px 0px;
+                line-height: 25px;
+            }
+        }
+        .mz-orderhistory {
+            .mz-orderhistory-section {
+                .mz-l-paginatedlist-list {
+                    .mz-more-order {
+                        font-size: 12px;
+                        display: block;
+                        width: 100%;   
+                    }
+                }
+            }
+            
+        }
+        .mz-quickreorder {
+            padding: 1%;
+            .mz-mblcontent {
+                display: block !important;
+            }
+            &:first-child {
+                padding: 10px;
+            }
+        }
+        
+        .mz-myaccountbreadcrumb span {
+            width: 95%;
+        }
+        .breadcrumbs-center {
+            display: none;
+        }
+        .mz-accountparent{
+            .mz-pagetitle {
+                padding: 15px 5px 15px 5px;
+                font-size: 14px;
+                border-bottom: 1px solid #efefef;
+                margin-bottom: 5%;
+            }
+             .mz-mobile {
+                select {
+                    margin: 10px;
+                    width: 90%;
+                    border-radius: 5px;
+                }
+             }
+        }
+       .mz-accountparent .mz-scrollnav .mz-scrollnav-item {
+            float: none;
+            padding-left: 5px;
+            margin: 0;
+            text-align: left;
+        }
+        
+            
+        //Saved Cards
+        
+        .mz-accountreturns {            
+            .mz-tablestructure {
+                .cart-brd .mz-carttable-item-product .mz-productimage {
+                min-height: 75px!important;
+                width: 100% !important;
+            }
+                .cart-brd .mz-carttable-header-options {
+                margin: 5px 0 0 0;
+                label {
+                    width: 100%;
+                    span {
+                        font-size: 12px;
+                    }
+                }
+            }
+             
+            .cart-brd {
+                .name {
+                    color: #979696; 
+                    margin: 0;
+                }
+                padding: 0;
+                .amp-cross {
+                float: left;
+                position: static;
+                }
+                .is-saleprice {
+                margin-left: 16px;
+                float: left;
+                }
+                .amp-quantityvalue {
+                float: left;
+                }
+                .return-details {
+                    padding: 0 !important; 
+                    .panel-border {
+                        background: none;
+                        margin-top : 0;
+                        padding-top: 0;
+                        .panel-heading {
+                            padding: 1%;
+                            background: #f7f7f7;
+                            h6  {
+                                border-bottom: 0;
+                            }
+                        }
+                        .panel-body {
+                            .name {
+                                color: #979696; 
+                            }
+                        }
+                    }
+                }
+                .mz-carttable-item-total .is-crossedout {
+                float: left;
+                margin-left: 0;
+                }
+                .mz-carttable-item-total {
+                min-height: 20px; 
+                margin: 15px 0 0;
+                padding-left: 25px;
+                .savepercent {
+                text-align: left;
+                margin-bottom: 5px;
+                }
+                }
+                .mz-carttable-item-total .amp-price { 
+                text-align: right;
+                }
+                .mz-table-cart-items {
+                padding: 0;
+                }
+
+                .is-saleprice {
+                display: inline-block;
+                margin-left: 16px;
+                font-size: 14px;
+                }
+            }
+            }
+            .cart-section {
+                display: none;
+            }
+            .mz-carttable-item-title {
+                font-family: 'montserratregular';
+                font-size: 14px;
+                color: #3f3f3f;
+                text-align: left;
+                margin: 10px 0px;
+                display: inline-block;
+            }
+            
+        
+            .amp-mblcontent,
+            .mz-carttable-qty-field {
+                display: inline-block;
+                margin-right: 19px;
+            }
+            .mz-tablestructure .cart-brd .amp-cross {
+                position: relative;
+                left: 15px;
+            }
+            .small-6 {
+                margin: 5px 0px;
+                padding: 0;
+            }
+            .mz-carttable-item-qty {
+                padding: 0 0 0 14px;
+                .amp-mblcontent {
+                    float: left;
+                    font-size: 13px;
+                    font-family: "montserratregular";
+                }
+            }
+            .option-values {
+                text-align: left;
+                .mz-finish {
+                    color: #4a4a4a;
+                    display: inline-block;
+                    font-family: "roboto_bold";
+                    font-size: 12px;
+                    margin: 0 10px 10px 0;
+                    width: auto;
+                }
+                .bronze {
+                    display: inline-block;
+                    font-family: "montserratregular";
+                    font-size: 12px;
+                    height: 25px;
+                    position: relative;
+                    text-transform: capitalize;
+                    top: 9px;
+                    width: 50px;
+                }
+                .mzcolor-text {
+                    color: #7b7b7b;
+                    display: inline-block;
+                    font-family: "montserratregular";
+                    font-size: 12px;
+                    margin-left: 5px;
+                    margin-top: 10px;
+                    .lowercase();
+                }
+            }
+            .mz-carttable-item-title {
+                width: 100%;
+                margin: 15px 0;
+            }
+            .text-orderhistory p {
+                font-size: 12px;
+            }
+        }
+        
+        .mz-orderhistory {
+            .mz-myordercollapse {
+                .mz-mobile {
+                    .mz-itemlisting  {
+                        .name {
+                        color: #979696; 
+                        text-transform: uppercase;
+                        font-size: small;
+                        }
+                        .value {
+                            color: initial; 
+                            .is-saleprice {
+                                
+                            }
+                        }
+                    }
+                }
+                .mz-orderstructure {
+                    padding: 0 !important;
+                    p {
+                        font-size: 12px;
+                        padding: 3% 10px;
+                        background: #f7f7f7;
+                    }
+                }
+                .mz-tablestructure {
+                    background: #fcfcfc;
+                }
+                .mz-redorderdetails {
+                    border: 1px solid #f6f6f6; 
+                }
+                .mz-redorderdetails ul li {
+                    display: block !important;
+                    padding: 5px  !important;
+                    .mz-name {
+                        color: #979696;
+                        font-size: 14px;
+                        float: left;
+                        width: 60%; 
+                    }
+                    .mz-value {
+                        color: #000;
+                    }
+                }
+                .mz-redorderdetails {
+                    background: #fcfcfc;
+                    &.bgclass {
+                        background: #fcfcfc !important; 
+                        ul {
+                            li {
+                                .mz-name {
+                                    color: #979696 !important;
+                                    //font-family: "roboto";
+                                    font-size: 14px; 
+                                }
+                                .mz-value {
+                                    color: #000 !important;
+                                    //font-family: "roboto";
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+                // .order-listing_toggle{
+                //     position:absolute;
+                //     right:12px;
+                // }
+                .mz-billinginormation {
+                    .left-shipping {
+                        .left-shippingdetails {
+                            font-size: 12px;
+                            span {
+                                font-size: 13px;
+                            }
+                        }
+                        .mz-shippinginformation {
+                            font-size: 12px !important;
+                            font-family: 'roboto_light'  !important;
+                            float: none  !important;
+                            width: auto  !important;
+                            .mz-shippingaccount {
+                                font-size: 12px;
+                                float: none !important;  
+                                width: 100% !important; 
+                                .mz-shippinginformatonship {
+                                    min-height: 0  !important;  
+                                    font-size: 14px  !important;
+                                    font-family: 'roboto_light'  !important;
+                                }
+                                .mz-shippinginformatonship2 {
+                                    font-size: 14px;
+                                }
+                            }
+                            .mz-rightinfomation {
+                            float: none   !important;
+                            width: 100%   !important;
+                            clear: both   !important; 
+                            font-weight: bold;  
+                                p {
+                                    font-size: 12px;
+
+                                }
+                                p:first-child {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                    .right-billing {
+                        //width: 50%;
+                        //float: left;
+                        padding: 10px;
+                        .left-shippingdetails {
+                            font-family: 'roboto_bold';
+                            border-bottom: 1px solid #424242;
+                            font-size: 12px;
+                            span {
+                                font-size: 12px;
+                            }
+                        }
+                        .mz-shippinginformation {
+                            padding: 5px 10px;
+                            font-family: 'roboto_bold';
+                            font-size: 12px;
+                            .mz-shippingaccount {
+                                font-size: 12px;
+                                .mz-shippinginformatonship {
+                                    min-height: 0  !important;
+                                    font-size: 12px  !important;
+                                }
+                                .mz-shippinginformatonship2 {
+                                    font-size: 12px;
+                                }
+                                .mz-shippinginformatonship0 {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .mz-billinginormation .right-billing {
+                    width: 100% !important;
+                    padding: 0;
+                    &.panel-border {
+                        padding: 0  !important;
+                        margin: 0  !important;
+                        background: none; 
+                    }
+                    .mz-shippinginformation {
+                        padding: 10px 5px;
+                        .mz-rightinfomation p:first-child {
+                            font-size: 11px;
+                        }
+                    }
+                }
+                .mz-billinginormation .left-shipping {
+                    width: 100% !important;
+                    padding: 0;
+                    margin-bottom: 10px;
+                    &.panel-border {
+                        padding: 0  !important;
+                        margin: 0  !important;
+                        background: none; 
+                    }
+                    
+                    .mz-shippinginformation {
+                        padding: 10px 5px   !important;
+                    }
+                }
+                .mz-billinginormation .left-shipping .left-shippingdetails {
+                    background: #f7f7f7;
+                    padding: 3% 0px;
+                    border-bottom: none !important;
+                    span {
+                        margin-bottom: 0;
+                        padding: 0px 5px;
+                        color: #000;
+                        font-size: 12px;
+                    }
+                }
+                .mz-billinginormation .right-billing .left-shippingdetails {
+                    background: #f7f7f7;
+                    padding: 3% 0px; 
+                    border-bottom: none !important; 
+                    font-size: 14px;
+                    span {
+                        margin-bottom: 0;
+                        padding: 0px 5px;
+                        color: #000;
+                    }
+                }
+            }
+            .mz-tablestructure .cart-brd .cart-section {
+                display: none;
+            }
+            .mz-carttable-item-title {
+                font-family: 'montserratregular';
+                font-size: 14px;
+                color: #3f3f3f;
+                text-align: left;
+                margin: 10px 0px;
+                display: inline-block;
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-total .savepercent {
+                text-align: left;
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-total .amp-price {
+                text-align: right;
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-total .is-crossedout {
+                float: left;
+                margin-left: 0;
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-remove .mzaccount-remove-item {
+                background: transparent;
+                border: none;
+            }
+            .mz-carttable-item-product .mz-productimage {
+                // min-height: 75px !important; 
+                width: 100% !important;
+                img {
+                    width: 100%;
+                }
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-remove {
+                font-family: 'montserratregular';
+                border: 1px solid #000;
+                margin-top: 10px;
+                border-radius: 11px;
+            }
+            .mz-tablestructure .cart-brd .mz-carttable-item-remove .mz-accoutreturn {
+                font-size: 18px;
+            }
+            .mz-tablestructure .cart-brd {
+                padding: 5px 10px;
+                .mz-mobile {
+                font-size: 14px; 
+                .name {
+                color: #979696; 
+                }
+                }
+            }
+            .mz-tablestructure .cart-brd .mz-table-cart-items {
+                padding: 5px 0px;
+            }
+            .mz-itemlisting .mz-itemlisting-actions {
+                margin: 0;
+            }
+        }
+        .mz-l-stack-large {
+            width: 100% !important;
+        }
+        .mz-orderhistory .mz-myordercollapse .mz-billinginormation .right-billing .mz-shippinginformation {
+            padding: 10px 5px   !important;
+        }
+        .mz-orderhistory {
+            .mz-carttable-item-qty {
+                .amp-mblcontent {
+                    display: inline-block;
+                    color: #39393C;
+                    font-size: 14px;
+                    .open_sans_semibold();
+                }
+            }
+            .mz-accountvalues .mz-accountvaluestd1 {
+                text-align: right   !important;
+            }
+            .mz-totalgrandvalue {
+                border-bottom: 2px solid #f4f4f4;
+                .mz-accountvaluestd1 {
+                    text-align: right   !important;
+                }
+            }
+            .order-comments-mobile{
+                h6{
+                    text-align: left; 
+                    position: relative;
+                    top: 3px;
+                }
+                .body{
+                    color: #979696;
+                    text-align: left;
+                    font-size: 12px;
+                }
+            }
+        }
+        .mz-orderhistory .mz-myordercollapse .mz-billinginormation .right-billing .mz-shippinginformation .mz-shippingaccount {
+            width: 100%  !important;
+            float: none !important; 
+        }
+        .mz-orderhistory .mz-myordercollapse .mz-billinginormation .right-billing .mz-shippinginformation .mz-rightinfomation {
+            width: 100%  !important;
+            float: none  !important;
+            clear: both  !important;
+        }
+        .mz-orderhistory .mz-myordercollapse .mz-billinginormation .right-billing .mz-shippinginformation .mz-rightinfomation p:first-child {
+            margin-bottom: 6px;
+            width: 188px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .accountborder {
+            border: 1px solid #f6f6f6;
+        }
+    }
+    //MY ACCOUNT //
+    .mz-temp-sitenav .mz-subnav {
+        background: #fff;
+    }
+    .bgimgmbl {
+        display: none!important;
+    }
+    .order-listing_toggle {
+        a {
+            width: 22px;
+            display: inline-block;
+            background: url("../resources/images/myaccount-icons/plus.svg") no-repeat;
+            text-indent: -9999px;
+            text-indent: -9999px;
+            background-size: 78%;
+            float: right;
+            margin-top: 10px;
+            margin-right: 5px;  
+            height: 22px;
+            &.expanded {
+                background: url("../resources/images/myaccount-icons/minus.svg") no-repeat;
+
+            }
+        }
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-name {
+        width: auto !important;
+        padding-top: 7%;
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-refno {
+        width: auto  !important;
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-placed {
+        width: auto  !important;
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-total {
+        width: auto !important;
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-status {
+        width: auto !important;
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-redorderdetails ul li.mz-reorder-icon {
+        width: auto !important;
+    }
+    .mz-anonymous-account .mz-itemactionlink {
+        float: none;
+        width: 100%;
+        .mz-itemlisting-action {
+            display: block;
+            padding: 6px 6px;
+            background: transparent;
+            clear: both;
+            color: #343434;
+        }
+    }
+    .refundingmbl {
+        .mz-refundmbl {
+            margin: 0;
+            position: fixed;
+            top: 0%;
+            width: 100%;
+            padding: 16px;
+            background-color: white;
+            z-index: 1002;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 460px;
+            left: 3px;
+        }
+    }
+    .mz-anonymous-account {
+        .refundingmbl {
+            .mz-refundmbl {
+                height: 100%;
+                overflow: hidden;
+                .mz-orderrefund {
+                    padding: 0;
+                    background: transparent!important;
+                    border: none;
+                    padding-top: 43px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    .mz-orderrefund:after {
+                        border-bottom-color: transparent;
+                        border-width: 0px;
+                    }
+                    .mz-detailsrefund .mz-selectons {
+                        width: 100%;
+                    }
+                    .mz-detailsrefund .mz-accountsave {
+                        width: 100%;
+                        margin-bottom: 9px!important;
+                    }
+                    .mz-detailsrefund .mz-accountcancel {
+                        width: 100%;
+                    }
+                    .mz-detailsrefund .mz-refundselect {
+                        width: 100%;
+                    }
+                    .mz-orderrefund:after,
+                    .mz-orderrefund:before {
+                        position: relative!important;
+                    }
+                }
+            }
+        }
+    }
+    .mz-anonymous-account .mz-orderhistory .mz-myordercollapse .mz-orderrefund:after {
+        border-bottom-color: #f3f3f3;
+        border-width: 0;
+    }  
+
+
+
+}   
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+.mz-anonymous-account .mz-l-pagecontent .mz-orderhistory .mz-accountvalues .order-comments{
+    width: 45%;
+}
+}
+
+    

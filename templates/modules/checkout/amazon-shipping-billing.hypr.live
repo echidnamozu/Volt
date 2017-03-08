@@ -1,0 +1,40 @@
+
+{% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("name", "PayWithAmazon") as payWithAmazon %} 
+	{%with payWithAmazon.credentials|findwhere("apiName", "clientId") as clientId%}
+		<script>
+			window.onAmazonLoginReady = function() {
+				amazon.Login.setClientId("{{clientId.value}}"); 
+		};
+		</script>
+	{%endwith%}
+  
+	{%with payWithAmazon.credentials|findwhere("apiName", "environment") as environment%}
+		{%with payWithAmazon.credentials|findwhere("apiName", "region") as region%}
+			{% if environment.value == "sandbox" %}
+				{% if region.value == "uk" || region.value == "de"%}  
+					<script type='text/javascript' src='https://static-eu.payments-amazon.com/OffAmazonPayments/{{region.value}}/sandbox/lpa/js/Widgets.js'></script>
+				{%else%}
+					<script type='text/javascript' src='https://static-na.payments-amazon.com/OffAmazonPayments/us/sandbox/js/Widgets.js'></script>
+				{%endif%}
+			{%else%}
+				{% if region.value == "uk" || region.value == "de"%}  
+					<script type='text/javascript' src='https://static-eu.payments-amazon.com/OffAmazonPayments/{{region.value}}/lpa/js/Widgets.js'></script>
+				{%else%}
+					<script type='text/javascript' src='https://static-na.payments-amazon.com/OffAmazonPayments/us/js/Widgets.js'></script>
+				{%endif%}	
+			{%endif%}
+		{%endwith%}
+	{%endwith%}
+		
+{% endwith %}
+
+
+
+<div class="small-12 medium-12">
+	<div class="amazon-block "><div id="amazonAddressBookWidgetDiv"></div></div>
+	<div class="amazon-block "><div id="walletWidgetDiv"></div></div>
+</div>
+
+		
+<button id="cancel" class="amazon-but mz-button mz-button-medium" data-mz-action="redirectToCart">{{ labels.cancel }}</button>
+<button id="continue" class="amazon-but mz-button mz-button-medium" style="display:none;" data-mz-action="submit">{{ labels.continue }}</button>

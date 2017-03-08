@@ -1,0 +1,66 @@
+﻿.mz-accountpaymentmethods {
+    .mz-accountpaymentmethods-list {
+        min-height: 200px; 
+        margin-top: @gutter/2;
+        list-style-image: none;
+        list-style-type: none;
+    }
+    .mz-paymentmethod {
+       // border-right: 1px solid #eee;
+        margin: 0 @gutter/2 @gutter/2 0;
+        &:last-child {
+            border-right-width: 0;
+        }
+        .clearfix();
+    }  
+    .mz-personalinformation {
+        float: none;
+        min-height: 0px; 
+    }
+    .mz-accountpaymentmethods-form {
+        float: none; 
+        margin: 0 @gutter/2 @gutter/2 0;
+        //border-bottom: 1px solid #cdcdcd;
+        padding-bottom: 25px;
+            &.panel-border {
+            width: 40%;
+            display: inline-block;
+            background: #fcfcfc;
+            padding-bottom: 0;
+            min-height: 150px;
+            margin-right: 5%; 
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ececec;
+            .heading {
+                padding-bottom: 10px;
+                font-weight: bold;
+                border-bottom: 1px solid #ececec;
+                } 
+        }   
+    }
+
+    .mz-creditcard-billingaddresses {
+        .mz-l-formfieldgroup-cell {
+            vertical-align: top;
+        }
+    }
+}
+
+.mz-myaccount {
+    .myaccount-paymentmethod {
+        .none-field {
+  
+      display: none;
+        }
+    }
+    .mz-contactselector {
+        .none-field {
+        display: none;   
+        }
+    }
+    
+    
+}
+
+

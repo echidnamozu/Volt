@@ -1,0 +1,129 @@
+
+    <div class="mz-contractor-form">
+		<div class="application-form">
+			<form method="post" id="contract-form" autocomplete="off" data-mz-contractor-form action="{{ model.config.formUrl }}" novalidate>
+				<input type="hidden" name="adminEmail" value="{{ model.config.adminEmail }}">
+				<input type="hidden" name="spreadsheetId" value="{{ model.config.spreadsheetId }}">
+				<input type="hidden" name="contactName" value="{{ model.config.contactName }}">
+				<div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+	    		<h1>{{ labels.appform }}</h1>
+				
+				<div class="form-column1 form-clear">
+					<h2>{{ labels.email }} *</h2>
+					<input name="emailaddress" id="mz-app-emailaddress" maxlength="255" placeholder="Enter Your Email" type="email" class="contact-input" tabindex="1" value="{% if not user.isAnonymous%} {{user.email}} {% endif %}" {% if not user.isAnonymous%} readonly {% endif %} />
+				</div>
+				{% if user.isAnonymous %}
+				    <p>{{ labels.contracttext }} <a href="javascript:void(0);" class="mz-utilitynav-link mz-item1 loginlink" data-mz-loginpopup="">Login</a> / <a href="javascript:void(0);" class="mz-utilitynav-link mz-item1 loginlink" data-mz-signup=""> Register </a> </p> 
+				{% endif %}
+				<h3>{{ labels.businessinfo }}</h3>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.firstName }} *</h2>
+						<input name="firstname" id="mz-app-firstname" maxlength="320" placeholder="Enter First Name" type="text" class="contact-input" tabindex="2" value="{% if not user.isAnonymous%} {{user.firstName}} {% endif %}"/>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.lastName }} *</h2>
+						<input name="lastname" id="mz-app-lastname"  maxlength="320" placeholder="Enter Last Name" type="text" class="contact-input" tabindex="3" value ="{% if not user.isAnonymous%} {{user.lastName}} {% endif %}" />
+					</div>
+				</div>
+				<div class="form-column1 form-clearfloat">
+					<h2>{{ labels.companyName }}</h2>
+					<input name="company" id="mz-app-company" maxlength="320" placeholder="Enter Company Name" type="text" class="contact-input" tabindex="4"/>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.address }} *</h2>
+						<input name="address" id="mz-app-address" maxlength="320" placeholder="Enter Address" type="text" class="contact-input"/ tabindex="5">
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.addressLineTwo }}</h2>
+						<input name="addressLine2" id="mz-app-addressl2" maxlength="320" placeholder="Enter Adress Line 2" type="text" class="contact-input" tabindex="6"/>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.cityTown }} *</h2>
+						<input name="city" id="mz-app-city" maxlength="320" placeholder="Enter City / Town" type="text" class="contact-input" tabindex="7"/>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.zipcode }} *</h2>
+						<input name="zipcode" id="mz-app-zipcode" maxlength="10" pattern="^[a-zA-Z0-9]+$" placeholder="Enter Zip Code" type="text" class="contact-input" tabindex="8"/>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.stateOrProvince }} *</h2>
+						<select name="state" id="mz-app-state" tabindex="9">
+						</select>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.country }} *</h2>
+						<select name="country" id="mz-app-country" tabindex="10">
+						</select>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.phones }} *</h2>
+						<input name="phno" id="mz-app-phno" maxlength="20" placeholder="Enter Phone Number" type="tel" class="contact-input" tabindex="11"/>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.mobile }}</h2>
+						<input name="mobno" id="mz-app-mobno" maxlength="20" placeholder="Enter Mobile Number" type="tel" class="contact-input" tabindex="12"/>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.companyUrl }} *</h2>
+						<input name="website" id="mz-app-website" maxlength="320" placeholder="Enter Website URL" type="text" class="contact-input" tabindex="13"/>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.years }} *</h2>
+						<input name="years" id="mz-app-years" maxlength="3" max="3" placeholder="Enter Years" type="text" class="contact-input" tabindex="14"/>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.installation }} *</h2>
+						<textarea name="installed" id="mz-app-installed" maxlength="320"class="slot1-textarea" tabindex="15"></textarea>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.spent }} *</h2>
+						<textarea name="spend" id="mz-app-spend" maxlength="320" class="slot1-textarea" tabindex="16"></textarea>
+					</div>
+				</div>
+				<div class="clearfloat">
+					<div class="form-column1">
+						<h2>{{ labels.brands }} *</h2>
+						<input name="brands" id="mz-app-brands" maxlength="320" placeholder="Enter Brands" type="text" class="contact-input" tabindex="17"/>
+					</div>
+					<div class="form-column2">
+						<h2>{{ labels.placeofpurchase }} *</h2>
+						<input name="details" id="mz-app-details" maxlength="320" placeholder="Enter Details" type="text" class="contact-input" tabindex="18"/>
+					</div>
+				</div>
+				<div class="form-column1 form-clearfloat">
+					<h2>{{ labels.oursite }} *</h2>
+					<input name="find" id="mz-app-find" maxlength="320" type="text" class="contact-input" tabindex="19"/>
+				</div>
+				
+				<div class="form-column1 form-clearfloat">
+				    <div class="g-recaptcha" data-sitekey="{{model.config.sitekey}}"></div>
+				</div>
+
+				<button {% if user.isAnonymous%} disabled {% endif %} name="submit-button" type="submit"  class=" mz-button contact-button {% if user.isAnonymous%} is-disabled {% endif %}" tabindex="20">Apply</button>
+				{% if user.isAnonymous%}
+    				    <a href="javascript:void(0);" class="mz-utilitynav-link mz-item1 loginlink" data-mz-loginpopup="">Login</a> / <a href="javascript:void(0);" class="mz-utilitynav-link mz-item1 loginlink" data-mz-signup=""> Register </a>
+    				    <p style="color:red">
+                            {{ labels.contracttextsubmit }}  
+    				    </p>
+				{% endif %}
+			</form>
+		</div>
+	</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+
+
+

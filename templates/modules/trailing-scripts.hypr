@@ -1,0 +1,59 @@
+﻿{% with themeSettings.useDebugScripts|default:pageContext.isDebugMode as debugMode %}
+
+<script src="{{siteContext.cdnPrefix}}/js/require-{% if debugMode %}debug{% else %}min{% endif %}.js"></script>
+
+<script type="text/javascript">
+var d = new Date();
+   var n = d.getTime(); 
+    require.config({
+      cdnPrefix: "{{ siteContext.cdnPrefix }}",
+      cacheKey: "{{ siteContext.hashString }}", 
+      urlArgs: "theme={{siteContext.themeId}}&cacheKey={{ siteContext.hashString }}&version={{themeSettings.version}}",
+      baseUrl: "{{ siteContext.cdnPrefix }}{% if not debugMode %}/compiled{% endif %}/scripts",
+      paths: {
+        jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery{% if not debugMode %}.min{% endif %}", 
+		underscore: "vendor/underscore/underscore",
+		backbone: "vendor/backbone/backbone"
+      },
+       "shim": { 
+		"vendor/jquery.jscrollpane": ["jquery","vendor/jquery.mousewheel"],
+		'vendor/prototype': {
+            exports: 'Prototype'
+            }, 
+        'vendor/calendarview': {  
+            deps: ['vendor/prototype'],
+            exports: 'Calendar'
+            }
+        },
+         waitSeconds: 30 
+  });
+  {% if debugMode %}
+  require([{% all_scripts %}]);
+  {% else %}
+  require(['jquery'], function() { require(['modules/common'], function() { require([{% all_scripts %}]); }); });
+  {% endif %}
+ 
+</script> 
+
+{% if siteContext.generalSettings.isGoogleAnalyticsEnabled %}
+  {% include "modules/analytics/google-analytics-tracking-code" %}
+{% endif %}
+{{themeSettings.addrollScript|safe}}
+{% if PageContext.cmsContext.template.path != "checkout" and PageContext.cmsContext.template.path != "confirmation" %} 
+{{themeSettings.olarkScript|safe}}
+{% endif %}
+{%endwith%}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

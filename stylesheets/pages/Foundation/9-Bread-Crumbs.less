@@ -1,0 +1,68 @@
+// Section - 9 
+// Bread Crumbs
+
+.breadcrumbs {
+	display: block;
+	padding: 0.5625rem 0.875rem 0.5625rem;
+	overflow: hidden;
+	margin-left: 0;
+	list-style: none;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #f4f4f4;
+	border-color: gainsboro;
+	border-radius: 3px;
+	> * {
+		margin: 0;
+		float: left;
+		font-size: 0.6875rem;
+		line-height: 0.6875rem;
+		text-transform: uppercase;
+		color: #008CBA;
+		&:hover a, &:focus a {
+			text-decoration: underline;
+		}
+		a {
+			color: #008CBA;
+		}
+		&.current {
+			cursor: default;
+			color: #333333;
+			a {
+				cursor: default;
+				color: #333333;
+			}
+			&:hover, &:hover a, &:focus, &:focus a {
+				text-decoration: none;
+			}
+		}
+		&.unavailable {
+			color: #999999;
+			a {
+				color: #999999;
+			}
+			&:hover, &:hover a, &:focus, a:focus {
+				text-decoration: none;
+				color: #999999;
+				cursor: default;
+			}
+		}
+		&:before {
+			content: "/";
+			color: #AAAAAA;
+			margin: 0 0.75rem;
+			position: relative;
+			top: 1px;
+		}
+		&:first-child:before {
+			content: " ";
+			margin: 0;
+		}
+	}
+}
+
+/* Accessibility - hides the forward slash */
+[aria-label="breadcrumbs"] [aria-hidden="true"]:after {
+  content: "/"; }
+
+

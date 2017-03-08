@@ -1,0 +1,29 @@
+﻿{% if not Model.config %} 
+    <div class="mz-cms-image-cover" style="background-image: url('/admin/scripts/resources/images/legacy/AddPhotos.png');"></div>
+{% else %}
+    {% if pageContext.isDesktop or pageContext.isTablet  %}
+    {% require_script "widgets/video" %}
+    <div class="mz-cms-video-placeholder"
+         data-url="//youtu.be/{{Model.config.url}}"
+         {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+         >
+        <div class="mz-cms-video-player"></div>
+        <div class="mz-cms-video-cover"></div>
+        <div class="mz-cms-video-play">Play</div>
+    </div>
+    {% else %}
+        {% with Model.config.url|split("/") as videoUrls %}
+        {% with videoUrls|last as videoUrl %}
+        <div class="mz-cms-video-placeholder mz-mobile"
+             data-url="//youtu.be/{{Model.config.url}}"
+             {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+             >
+            <div class="videopop">
+                <span class="videoicon mz-cms-video-play"></span>
+                <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ videoUrl }}/sddefault.jpg);" data-video="//www.youtube.com/embed/{{videoUrl}}"></div>
+            </div>
+        </div>
+        {% endwith %}   
+        {% endwith %}
+    {% endif %}
+{% endif %}

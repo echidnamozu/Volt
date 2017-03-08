@@ -1,0 +1,110 @@
+
+<div class="articleproduct"> 
+    <div class="main-article">
+        <div class="articlename-wrap">
+            <h1 class='articlename'>{{model.content.productName|safe}}</h1>
+        </div>
+        <div class="large-12 articleImgs">
+            <div class="articleImgs-innerwrap">
+            {% if model.content.productImages %}
+                {% if model.content.productImages.length > 1 %}
+                    {% for pordimg in model.content.productImages %}
+                        {% if pageContext.isMobile  %}
+                            {% if forloop.first %}
+                                <img class='mz-articleimage-mainimage articleimage' src="{% make_url "image" pordimg with max=700 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                            {% else %}
+                                <img class='articleimage mz-articleimage-mainimage owl-lazy' data-src="{% make_url "image" pordimg with max=700 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}"/>
+                            {% endif %}
+                        {% else %} 
+                            {% if pageContext.isTablet  %}
+                                {% if forloop.first %}
+                                    <img class='mz-articleimage-mainimage articleimage' src="{% make_url "image" pordimg with max=800 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                                {% else %}
+                                    <img class='articleimage mz-articleimage-mainimage owl-lazy' data-src="{% make_url "image" pordimg with max=800 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                                {% endif %}
+                            {% else %}
+                                {% if forloop.first %}
+                                    <img class='mz-articleimage-mainimage articleimage' src="{% make_url "image" pordimg with max=1400 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                                {% else %}
+                                    <img class='mz-articleimage-mainimage articleimage owl-lazy' data-src="{% make_url "image" pordimg with max=1400 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                                {% endif %}
+                            {% endif %}
+                        {% endif %} 
+                    {% endfor %}
+                {% else %}
+                    {% if pageContext.isMobile  %}  
+                        <img class='articleimage' src="{% make_url "image" model.mainImage with max=700 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                    {% else %} 
+                        {% if pageContext.isTablet  %}
+                            <img class='articleimage' src="{% make_url "image" model.mainImage with max=800 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                        {% else %} 
+                            <img class='articleimage' src="{% make_url "image" model.mainImage with max=1400 quality=themeSettings.cdnQuality as_parameter %}" alt ="{{model.content.productName|safe}}" />
+                        {% endif %}
+                    {% endif %} 
+                {% endif %}   
+            {% endif %}   
+            </div>   
+        </div>
+        
+        <div class="large-12 mainprojectdescription">
+            <div class='projdescription'>{{model.content.productFullDescription|safe}}</div>
+            {% if pagecontext.isMobile %} <a class="more-link" href="javascript:void(0)">More</a> {% endif %}
+        </div>  
+        <div class="lower-panel-wrap">
+            <div class="lower-panel">
+                <div class="share-wrap large-3 medium-3 small-12 column">
+                {% if pagecontext.isEditMode %} Share dropzone {% endif %}
+                    <span class='sharelabel large-2 medium-2 small-3 column '>Share</span>
+                    <div class="share-icons large-10 medium-10 small-9 column">
+                        {% dropzone "share-article" scope="template" %}  
+                    </div>
+                </div>
+                <div class="subscribe-wrap large-9 medium-9 small-12 column">
+                    <div class="subscribe-text-copy large-7 medium-7 small-12 column">
+                        {% if pagecontext.isEditMode %} subscribe text copy dropzone {% endif %}
+                        {% dropzone "subscribe-article" scope="template" %}
+                    </div>
+                    <div class="subscribe-email-box large-5 medium-5 small-12 column">
+                        <span class="success-msg-on-submit"></span>   
+                        <input name="subscribe" maxlength="320" placeholder="Enter your Email Address" id="bronto-email-subscription" type="text" class="bronto-email-pdp" />
+                        <input name="subscribe-button" type="button" data-val="article" class="bronto-subscription-btn mz-button mz-button-large" value="subscribe" />
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="buttons-panel">
+            {% dropzone "return-articles" scope="template" %}
+           
+            {% with model|get_product_attribute_value("tenant~start-shopping") as linkstring %}
+                {% if linkstring %}
+                    {% with linkstring|split(":") as link %}
+                        {% with link|first as label %} 
+                        {% with link|last as link %}
+                        <a href="{{link}}" class="start-shopping">
+                            <button class="mz-button mz-button-large">
+                                <span class="button-icon">
+                                    <img src="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/start-shopping_1.png"  alt="Shopping"/>
+                                </span>
+                                {{label}}
+                            </button>
+                        </a>
+                        {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    <a href="/" class="start-shopping">
+                        <button class="mz-button mz-button-large">
+                            <span class="button-icon">
+                                <img src="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/start-shopping_1.png" alt="Shopping"/>
+                            </span>
+                            Start Shopping
+                        </button>
+                    </a>
+                {% endif %}
+            {% endwith %}
+            {% dropzone "review-gallery" scope="template" %}
+            
+        </div>
+    </div>  
+</div>
+{% require_script "modules/article-detail" %}

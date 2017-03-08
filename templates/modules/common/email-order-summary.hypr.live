@@ -1,0 +1,166 @@
+﻿<table width="100%" cellpadding="5" cellspacing="0">
+    <tbody>
+        <tr>
+            <td width="50%" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.product }}</font></td>    
+            <td width="10%" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.qty }}</font></td>
+            <td width="20%" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.each }}</font></td>
+            <td width="20%" style="font-weight:600;text-align: right;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.subtot }}</font></td>
+        </tr>
+    {% for item in model.items %}
+     {% with item.product|get_product_attribute("tenant~hide-product") as hidden %}   
+               
+        <tr>
+            <td width="50%" valign="top" style="padding-top: 10px;padding-bottom: 10px;border-bottom: 1px solid #f2f2f2;color:#000!important;font-weight:600;">
+             <p style="color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">
+             {% if hidden %}
+             {% for val in hidden.values %}
+             {% if forloop.first %}
+             <a style="color:#000!important;text-decoration:none!important;" {% if val.value %} href="javascript:void(0)" {% else %} href="http://{{domainName}}/p/{{item.product.productCode}}" {% endif %} target="_blank">{{ item.product.name }}</a></font></p>
+             {% endif %}
+             {% endfor %}
+             {% else %}
+                <a style="color:#000!important;text-decoration:none!important;" href="http://{{domainName}}/p/{{item.product.productCode}}" target="_blank">{{ item.product.name }}</a></font></p>
+             {% endif %}
+                {% if item.product.productUsage == 'Bundle' %}
+                    {% for bundledProduct in item.product.bundledProducts %}
+                        {%comment%}<p style="line-height:20px;color:#666;padding: 0 0 0 0;margin: 0 0 0 0;font-weight: normal;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ bundledProduct.productCode }}</font></p>{%endcomment%}
+                        <p style="line-height:20px;color:#666;padding: 0 0 0 0;margin: 0 0 0 0;font-weight: normal;{%if forloop.first%}margin-top: 10px;{%endif%}"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</font></p>
+                    {% endfor %}
+                {% endif %} 
+                {% for options in item.product.options %}
+                    <p style="line-height:20px;color:#000;padding: 0 0 0 0;margin: 0 0 0 0;font-weight: normal;{%if forloop.first%}margin-top: 10px;{%endif%}">
+                        <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{options.stringValue}}</font>
+                    </p>
+                {% endfor %}
+            </td>
+            <td width="10%" valign="middle" style="border-bottom: 1px solid #f2f2f2;font-weight:600;color:#666;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ item.quantity }}</font></td>
+            <td width="20%" valign="middle" style="border-bottom: 1px solid #f2f2f2;font-weight:600;color:#666;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% include "modules/common/email-item-price" %}</font></td>
+            <td width="20%" valign="middle" style="border-bottom: 1px solid #f2f2f2;font-weight:600;text-align: right;color:#666;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% include "modules/common/email-item-total" %}</font></td>
+        </tr>
+    {% endwith %}     
+    {% endfor %}
+    </tbody>
+</table>
+
+<table width="100%" cellpadding="5" cellspacing="0">
+    <tr>
+        <td valign="top" class='w320' width="50%">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td valign="top">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.orderComments|safe}}</font></td>
+                            </tr>
+                            <tr>    
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% if model.shopperNotes.comments %}{{ model.shopperNotes.comments }}{% endif %}</font></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td valign="top" class='w320' width="50%">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td valign="top" style="padding-bottom: 5px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="middle"  style="font-weight: 600;color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.subtot }}</font></td>
+                            <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.discountedSubTotal|currency }}</font></td>
+                        </tr>
+                    </table>
+                  </td>
+                </tr>
+                {% for discount in model.orderDiscounts %}
+                    {% if not discount.excluded %}
+                        <tr>
+                          <td valign="top" style="padding-bottom: 5px;">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ discount.discount.name }}</font></td>
+                                    <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ discount.impact|currency }}</font></td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                {% if model.dutyTotal > 0 %}
+                    <tr>
+                        <td valign="top"  style="padding-bottom: 5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.taxDuty }}:</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{% filter currency %} {{ model.dutyTotal|add:model.taxTotal}} {% endfilter %}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                {% else %}
+                {% if model.taxTotal %}
+                    <tr>
+                        <td valign="top" style="padding-bottom: 5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.tax }}:</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.taxTotal|currency }}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% endif %}
+
+                    <tr>
+                        <td valign="top" style="padding-bottom: 5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.shippingHandling }}:</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.shippingTotal|currency }}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                {% for shippingDiscount in model.shippingDiscounts %}
+                    <tr>
+                        <td valign="top" style="padding-bottom: 5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ shippingDiscount.discount.discount.name }}:</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">-{{ shippingDiscount.discount.impact|currency }}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% if model.handlingAmount %}
+                    <tr>
+                        <td valign="top" style="padding-bottom: 5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="color: #666;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.additionalHandling }}{% if model.handlingAmount > model.handlingTotal  %}<span class="is-crossedout" {% block crossedout-inline-style %}{% endblock crossedout-inline-style %}> ({{ model.handlingAmount|currency }})</span>{% endif %}</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #666;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.handlingTotal|currency }}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                {% endif %}
+                    <tr>
+                        <td valign="top" style="border-top: 1px solid #f2f2f2;padding-top:5px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle"  style="font-weight: 600;color: #000;text-align: left;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.total }}</font></td>
+                                <td valign="middle"  style="font-weight: 600;color: #000;text-align: right;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.total|currency }}</font></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+
+

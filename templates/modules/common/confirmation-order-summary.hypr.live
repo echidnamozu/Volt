@@ -1,0 +1,232 @@
+        <table class="mz-ordersummary">
+       
+            <tr>
+                <th class="mz-ordersummary-header-product">{{ labels.fullDesc }}</th> 
+                <th class="mz-ordersummary-header-each">{{ labels.cartprice }}</th>
+                <th class="mz-ordersummary-header-qty">{{ labels.productqty }}</th>
+                <th class="mz-ordersummary-header-options">{{ labels.cartextras }}</th> 
+                <th class="mz-ordersummary-header-total">{{ labels.subtotal }}</th>
+            </tr>
+       
+        {% for item in model.items %}
+            <tbody class="mz-ordersummary-lineitems">
+              <tr class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
+                    <td class="mz-ordersummary-item-product">
+                      {{ item.product.name|safe }}
+                        {% for option in item.product.options %}
+                         <div class="optionContainer">
+                           <div class="option-values">
+                            {% if option.attributeFQN == "tenant~color" %}
+                              <label class="mz-finish">Color/Finish :</label>
+                              <span class="mzcolor-text">{{option.stringValue}}</span>   
+                           {% endif %}
+                           {% if option.attributeFQN == "tenant~lead-wire" %}
+                              <label class="mz-finish">{{option.name}} :</label>
+                              <span class="mzcolor-text">{{option.stringValue}}</span>   
+                           {% endif %}
+                           {% if option.attributeFQN == "tenant~color-temperature-option" %}
+                              <label class="mz-finish">{{option.name}} :</label>
+                              <span class="mzcolor-text">{{option.stringValue}}</span>   
+                           {% endif %}
+                           {% if option.attributeFQN == "tenant~size" %}
+                              <label class="mz-finish">{{option.name}} :</label>
+                              <span class="mzcolor-text">{{option.stringValue}}</span>   
+                           {% endif %}
+                           </div>
+                           </div>
+                           {% endfor %}
+                        
+                      
+                    </td>
+                    <td class="mz-ordersummary-item-price">
+                        {% include "modules/common/item-price" %}
+                    </td>
+                    <td class="mz-ordersummary-item-quantity">{{ item.quantity }}</td>
+                    
+                    <td class="mz-ordersummary-item-options">
+                        {% if  item.product.options.length >  0  %}
+                        {% for option in item.product.options %}
+                          <label>
+                              
+                              {% comment %}
+                              <span>{% if option.attributeFQN !='tenant~color' and option.attributeFQN !='tenant~lead-wire' and option.attributeFQN!="tenant~color-temperature-option" and option.attributeFQN!="tenant~size" %}+({{ item.quantity }} X {% if option.deltaPrice%}{{option.deltaPrice|currency}} {%else%}$0.00{% endif %}){% endif %}</span>
+                              {% endcomment %}   
+                              
+                            {% if option.attributeFQN !='tenant~color' and option.attributeFQN !='tenant~lead-wire' and option.attributeFQN!="tenant~color-temperature-option" and option.attributeFQN!="tenant~size" %}
+                                {{ option.stringValue }}
+                            {% endif %}
+                        </label>
+                        {% endfor %} 
+                        {% else %}
+                        <label> No Options </label>
+                        {% endif %}
+                    </td>
+                    
+                    <td class="mz-ordersummary-item-total">{% include "modules/common/item-total" %} 
+                    </td>
+                </tr>
+                {% if item.productDiscounts %}
+                <tr>
+                    <td colspan="5">
+                        {% for productDiscount in item.productDiscounts %}
+                          <div class="mz-item-discount">
+                            <span class="mz-item-discountname">{{ productDiscount.discount.name }}</span>
+                            {% if productDiscount.discount.freeShipping %}
+                            <span class="mz-item-discountamt">{{ labels.freeShipping }}</span>
+                            {% else %}
+                            <span class="mz-item-discountamt"> -{{ productDiscount.impact|currency }}</span>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        {% endfor %}
+        <tbody>
+          <tr class="customer-link">
+            {% if pageContext.isDesktop or pageContext.isTablet %}
+            <td>
+              <h4>Order comments</h4>
+              <p class="comments">{{ model.shopperNotes.comments }}</p>
+              <p>Questions about this order?</p>
+              <p> Please call Customer Support at <a href="#">{{ labels.phoneNumber }}</a></p>
+            </td>
+            {% endif %}
+            <td colspan="4">
+        {% if  model.orderDiscounts.length == 0 %}
+                <div class="mz-ordersummary-subtotal">
+              <label colspan="5">
+                <span class="mz-ordersummary-totalname">{{ labels.subtotal }}:</span>
+                <span class="mz-ordersummary-totalvalue">{{ model.discountedSubtotal|currency }}</span>
+              </label>
+            </div>  
+        {% endif %}
+		
+
+		  {% if model.orderDiscounts %}
+            {% for discount in model.orderDiscounts %}
+            {% if not discount.excluded %}
+            <div class="mz-ordersummary-discount"> 
+              <label colspan="5">
+                
+                <div class="mz-ordersummary-subtotal">
+              <label colspan="5">
+                <span class="mz-ordersummary-totalname">{{ labels.subtotal }}:</span>
+                <span class="mz-ordersummary-totalvalue">{{ model.discountedSubtotal|currency }}</span> 
+              </label>
+            </div>  
+               
+              </label>
+            </div>
+             
+            
+            <div class="mz-ordersummary-tax">
+                <label colspan="5">
+                    <span class="mz-ordersummary-totalname">{{ labels.orderDiscounts}}:</span>
+                    {% for discount in model.orderDiscounts %}    
+                        <span class="mz-ordersummary-totalvalue">-{{ discount.impact |currency }}</span>
+                    {% endfor %}            
+                </label>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+			<div class="mz-ordersummary-tax">
+         <label colspan="5">
+            <span class="mz-ordersummary-totalname">{{ labels.orderDiscounts }}:</span>
+            <span class="mz-ordersummary-totalvalue">$0.00</span>
+         </label>
+      </div>
+			{% endif %}
+           
+           <div class="mz-ordersummary-shippingtotal">
+              <label colspan="5">
+                <span class="mz-ordersummary-totalname">{{ labels.shippingHandling }}:</span>
+                <span class="mz-ordersummary-totalvalue">{{ model.shippingSubTotal|add:model.handlingTotal|currency }}</span>
+              </label>
+            </div>
+            {% for shippingDiscount in model.shippingDiscounts %} 
+            <div class="mz-ordersummary-shippingdiscount">
+              <label colspan="5">
+                <span class="mz-ordersummary-totalname">{{ shippingDiscount.discount.discount.name }}:</span>
+                <span class="mz-ordersummary-totalvalue">-{{ shippingDiscount.discount.impact|currency }}</span>
+              </label>
+            </div>
+            {% endfor %}
+           
+            {% comment %}{% if model.taxTotal %}{% endcomment %}
+            <div class="mz-ordersummary-tax">
+                <label colspan="5">
+                    <span class="mz-ordersummary-totalname">{{ labels.tax }}:</span>
+                    <span class="mz-ordersummary-totalvalue">{{ model.taxTotal|currency }}</span>
+                </label>
+            </div>
+            {% comment %}{% endif %}{% endcomment %}
+           
+            {% comment %}
+            {% if model.handlingTotal %}
+            <div class="mz-ordersummary-additionalhandling">
+                <label colspan="5">
+                  <span class="mz-ordersummary-totalname">{{ labels.additionalHandling }}:{% if model.handlingAmount > model.handlingTotal  %}<span class="is-crossedout" {% block crossedout-inline-style %}{% endblock crossedout-inline-style %}> ( {{ model.handlingAmount|currency }} )</span>{% endif %}</span>
+                  <span class="mz-ordersummary-totalvalue">{{ model.handlingTotal|currency }}</span>
+                </label>
+            </div>
+            {% endif %}
+        {% endcomment %} 
+          <div class="mz-ordersummary-grandtotal">
+                <label colspan="5">
+                    <span class="mz-ordersummary-totalname">{{ labels.grandTotal }}:</span>
+                    <span class="mz-ordersummary-totalvalue">{{ model.total|currency }}</span>
+                </label>
+            </div>
+        {% if model.billingInfo and model.billingInfo.digitalCreditPaymentTotal %}
+          <div class="mz-ordersummary-digitalcreditpayment">
+            <label colspan="5">
+              <span class="mz-ordersummary-totalname">{{ labels.digitalCreditTotal }}</span>
+              <span class="mz-ordersummary-totalvalue">{{ labels.digitalCreditSubtractFromOrderPrefix }}{{ model.billingInfo.digitalCreditPaymentTotal|currency }}{{ labels.digitalCreditSubtractFromOrderSuffix }}</span>
+            </label>
+          </div>
+          <div class="mz-ordersummary-grandtotal">
+                <label colspan="5">
+                    <span class="mz-ordersummary-totalname">{{ labels.remainingBalance }}:</span>
+                    <span class="mz-ordersummary-totalvalue">{{ model.billingInfo.nonStoreCreditTotal|currency }}</span>
+                </label>
+            </div>
+       {% endif %}
+     </td>
+     {% if pageContext.isMobile %}
+            <td>
+              <h4>Order comments</h4>
+              <p class="comments">{{ model.shopperNotes.comments }}</p>
+              <p>Questions about this order?</p>
+              <p> Please call Customer Support at <a href="#">{{ labels.phoneNumber }}</a></p>
+            </td>
+            {% endif %}
+     </tr>
+        </tbody>
+        
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

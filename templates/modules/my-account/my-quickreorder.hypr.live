@@ -1,0 +1,198 @@
+
+<div  class="quickreorder-preloader" > 
+  <p class="loading-text"></p>
+  <svg height="120" width="120" class="svg-circle1">
+    <path class="svg-circle-path2" d="M28,60a32,32 0 1,0 64,0a32,32 0 1,0 -64,0" fill="none" stroke="yellow" stroke-width="7" stroke-dasharray="160, 247"/>
+  </svg>
+ </div> 
+<div  data-mz-quickorderlist class="mz-quickreorder wrap mz-quickreorder-main"> 
+    <div class="panel-border">
+        <div class="mz-personalinformation">
+            <span>Quick Order</span>
+        </div> 
+        <div class="mz-tablestructure">             
+            <div class="cart-brd">
+                <div class="mz-backorder-popup">  
+                    <div class="mz-backorder-popup-content">
+                        <span class="mz-backorder-content-message">
+                        
+                        
+                        </span>  
+                        
+                        <button backorder="yes" data-mz-action="addQuickToCart" href="" data-mz-item-id="" quantity="1" class=" backorder large-5 column mz-button mz-button-large">
+                            OK
+                        </button>
+                        <button class="mz-backorder-popup-close large-6 column mz-button mz-button-large"> 
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+                {% if model.totalCount > 0 %}
+                    <div class="row text-center cart-section">
+                        <div class="mz-carttable-header-desc bold large-5 text-left medium-5 large-push-0 small-2 columns nopadding">DESCRIPTION</div>
+                        <div class="mz-carttable-header-qty bold large-1 medium-2  large-push-0 small-2 columns">QUANTITY</div>
+                        <div class="mz-carttable-header-total bold large-2 medium-2 large-push-0  small-2 columns">Extras</div>
+                        <div class="mz-carttable-item-remove bold large-2 medium-2 large-push-0  small-2 columns"> &nbsp; &nbsp;</div>
+                    </div>
+                    {% for itemdata in model.items %} 
+                    {% for item in itemdata.items %} 
+                    {% if item.product %}
+                    {% with item.product|get_product_attribute_value("tenant~hide-product") as hidden %} 
+                    {% if hidden or item.product.productCode=="Z-ARCHIVED" or item.product.productCode=="nothanks" or item.product.productCode=="NoLamps" %}
+                    {% else %} 
+                    <div class="mz-table-cart-items">
+                        <div class="row text-center cart-hover">
+                            <div class="cart-row clear-both">
+                                <div class="row mzcart-mobile text-left mz-padding">
+                                    <div class="mz-carttable-item-info-wrap ">
+                                        <div class="mz-productimage small-4 columns nopaddding ">
+                                            <a href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/>
+                                            </a>
+                                        </div>
+                                        <a class="small-8 columns" href="{{item.product.url}}">{{ item.product.name| safe }}</a>
+                                    </div>
+                                </div>
+                                <div class="mz-carttable-item-product large-5 medium-5 large-push-0  small-4 columns nopadding">
+                                    <div class="large-4 mz-desktop columns medium-4 nopadding">
+                                        <a class="mz-carttable-item-title" href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}" {% else %}alt="{{ item.product.productName }}"{% endif %}/></a>
+                                    </div>
+                                    <div class="large-8  medium-8 columns text-left mz-desktop nopadding">
+                                        <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name| safe }}</a> 
+                                        {% for option in item.product.options %} 
+                                            {% if option.attributeFQN == 'tenant~lead-wire' or option.attributeFQN == 'tenant~color' or option.attributeFQN == 'tenant~size' or option.attributeFQN == 'tenant~color-temperature-option' %}
+                                            <div class="option-values">
+                                                <label class="mz-finish">{{option.name}}:</label>
+                                                <span class="mzcolor-text">{{ option.stringValue }}</span>
+                                            </div>
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </div> 
+                                </div>   
+                                <div class="mz-carttable-item-info-wrap mz-mobile small-12 columns">
+                                    {% for option in item.product.options %} 
+                                        {% if option.attributeFQN == 'tenant~lead-wire' or option.attributeFQN == 'tenant~color' or option.attributeFQN == 'tenant~size' or option.attributeFQN == 'tenant~color-temperature-option' %}
+                                        <div class="option-values">
+                                            <label class="mz-finish">{{option.name}}:</label>
+                                            <span class="colorbox {{ option.stringValue|lower}}"></span><span class="mzcolor-text">{{ option.stringValue }}</span>
+                                        </div>
+                                        {% endif %} 
+                                    {% endfor %}
+                                    <div class="mz-carttable-header-options">
+                                        {% if item.product.options.length > 0 %} 
+                                            {% for option in item.product.options %} 
+                                                {% if option.attributeFQN != 'tenant~lead-wire' and option.attributeFQN != 'tenant~color' and option.attributeFQN != 'tenant~size' and option.attributeFQN != 'tenant~color-temperature-option' %}  
+                                                    <div class="clearfix">
+                                                        <label>{{ option.stringValue }}</label>
+                                                    </div>
+                                                {% endif %} 
+                                            {% endfor %} 
+                                        {% else %}
+                                        <label> No Options </label>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="mz-carttable-item-qty large-1 medium-2 large-push-0  small-12 small-text-left columns">
+                                    <span class="nopadding text-left amp-mblcontent mz-mobile small-4">Quantity</span>
+                                    <input class="nopadding mz-carttable-qty-field small-cart large-9 medium-9 small-6 mz-fquantity-reorder" type="text" min="1" max="3" data-mz-cart-item="cf5a8811a228431d8182a47c00784bbf" data-mz-value="quantity" value="1">
+                                </div>
+                                <div class="mz-carttable-item-total large-4 medium-3 large-push-0 columns small-12 mz-desktop">
+                                    <div class="mz-carttable-header-options">
+                                        {% if item.product.options.length > 0 %} 
+                                            {% for option in item.product.options %} 
+                                                {% if option.attributeFQN != 'tenant~lead-wire' and option.attributeFQN != 'tenant~color' and option.attributeFQN != 'tenant~size' and option.attributeFQN != 'tenant~color-temperature-option' %} 
+                                                <div class="clearfix">
+
+                                                    <span><!--+({{ item.quantity }} X $0.00)--></span>
+                                                    <label> {{ option.stringValue }}</label>
+                                                </div>
+                                                {% endif %} 
+                                            {% endfor %} 
+                                        {% else %}
+                                            <label> No Options </label>
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="mz-carttable-item-remove mz-mblcontent large-2 medium-2 large-push-0 columns small-12">
+                                    {% if item.product.options.length ==1 %} 
+                                        {% for modprod in item.product.options %} 
+                                            {% if modprod.attributeFQN=="tenant~color" %}
+                                                <a href="{{item.product.productCode}}" color_value="{{modprod.value}}" data-mz-action="addcoloroption" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large color">{{ labels.addToCart }}
+                                                </a> 
+                                            {% else %}
+                                                {% if item.product.variations %}
+                                                    {% if item.product.variations.length > 0 %}
+                                                        <a href="{% if item.product.productUsage==" Configurable "%}{{item.product.variationProductCode}}{% else %}{{item.product.productCode}}{% endif %}" data-mz-action="addQuickToCart" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large">
+                                                            {{ labels.addToCart }} 
+                                                        </a>    
+                                                    {% else %}
+                                                        <a href="{{item.product.productCode}}" data-mz-action="addMultiQuickToCart" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" attrvalue="{% for modproditm in item.product.options %} 
+                                                        {% if forloop.last %} 
+                                                            {{modproditm.attributeFQN}}:{{modproditm.value}} 
+                                                        {% else %} 
+                                                            {{modproditm.attributeFQN}}:{{modproditm.value}},
+                                                        {% endif %}
+                                                        {% endfor %} 
+                                                        "> 
+                                                            {{ labels.addToCart }}
+                                                        </a>    
+                                                    {% endif %}
+                                                {% else %}
+                                                    <a href="{{item.product.productCode}}" data-mz-action="addMultiQuickToCart" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" attrvalue="{% for modproditm in item.product.options %} 
+                                                    {% if forloop.last %} 
+                                                        {{modproditm.attributeFQN}}:{{modproditm.value}} 
+                                                    {% else %} 
+                                                        {{modproditm.attributeFQN}}:{{modproditm.value}},
+                                                    {% endif %}
+                                                    {% endfor %} 
+                                                    "> 
+                                                        {{ labels.addToCart }}
+                                                    </a>  
+                                                {% endif %}
+                                            {% endif %} 
+                                        {% endfor %} 
+                                    {% else %} 
+                                        {% if item.product.options.length > 1 %}
+                                            <a href="{{item.product.productCode}}" data-mz-action="addMultiQuickToCart" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" attrvalue="{% for modproditm in item.product.options %} 
+                                            {% if forloop.last %} 
+                                                {{modproditm.attributeFQN}}:{{modproditm.value}} 
+                                            {% else %} 
+                                                {{modproditm.attributeFQN}}:{{modproditm.value}},
+                                            {% endif %}
+                                            {% endfor %} 
+                                            "> 
+                                                {{ labels.addToCart }}
+                                            </a> 
+                                        {% else %}
+                                            <a href="{{item.product.productCode}}" data-mz-action="addQuickToCart" data-mz-item-id="{{ item.id }}" id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large">
+                                                {{ labels.addToCart }}
+                                            </a> 
+                                        {% endif %} 
+                                    {% endif %} 
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %} 
+                    {% endwith %}
+                    {% endif %} 
+                    {% endfor %} 
+                    {% endfor %}
+                    {% if model.allLoaded != 2 %}
+                    <div class="quick-order-btn">
+                        <button class="mz-more-order" data-mz-action-load-more-items data-mz-action="loadMoreItems">VIEW MORE ORDERS</button>
+                    </div>
+                    {% endif %} 
+                {% else %}
+                <div class="mz-carttable-noitems">
+                    <div>
+                        <div class="myaccountno-orders">{{ labels.cartEmpty}}</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,116 @@
+﻿{% extends "page" %}   
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.orderstatus %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
+{% block breadcrumbs %}
+    
+<div itemprop="breadcrumb" class="mz-breadcrumbs">  
+    <div class="breadcrumbs-center">
+        <a href="/" class="mz-breadcrumb-link is-first" title="Home">Home</a> 
+            <div class="mz-breadcrumbs-orderstatus" style="display:inline-block;">
+                <span class="sb-divider ">/</span>  Order Lookup
+            </div> 
+</div>
+</div>             
+{% endblock breadcrumbs %}
+
+{% block body-content %}
+   <div class="login-page">   
+        <div class="order">
+        <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+        <h1>{{ labels.orderStatus }}</h1> 
+        {% dropzone "login-orderstatus" scope="template" %}
+        <form method="post" class="mz-loginform " name="mz-anonymousorder">
+            <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
+            <div class="mz-l-formfieldgroup">
+                <div class="mz-l-formfieldgroup-row">  
+                    <div class="mz-l-formfieldgroup-cell">
+                        <h2 for="ordernum">{{ labels.orderNumber }}</h2>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input class="large-10 medium-10 small-12" placeholder="Enter Order Number" name="ordernum" value="" type="text" data-mz-order-number />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <h2 for="verifywith">{{ labels.verifyWith }}</h2>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <select class="large-10 medium-10 small-12" data-mz-verify-with>
+                            {% if themeSettings.billingEmailEnabled %}<option textdata="Enter Billing Email" value="email">{{ labels.billingEmail }}</option>{% endif %}
+                            {% if themeSettings.zipCodeEnabled %}<option textdata="Enter Billing Zip Code" value="zipCode">{{ labels.billingPostalCode }}</option>{% endif %}
+                            {% if themeSettings.phoneNumberEnabled %}<option textdata="Enter Billing Phone Number" value="phoneNumber">{{ labels.billingPhoneNumber }}</option>{% endif %}
+                        </select>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <h2 for="verification">{{ labels.verification }}</h2>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input class="large-10 medium-10 small-12" name="verification" placeholder="Enter Billing Email" value="" type="text" data-mz-verification />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell"></div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <button class="mz-button mz-button-large mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>
+                        <div class="mz-l-formfieldgroup-cell">
+                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> 
+    </div>
+    <div class="login"  data-mz-userlogin> 
+        <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+      
+        <h1>{{ labels.logIn2 }}</h1>
+        
+        {% dropzone "login-top" scope="template" %}
+
+        <form method="post" class="mz-loginform " name="mz-loginform"> 
+            <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+
+            <div class="mz-l-formfieldgroup">
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <h2 for="email">{{ labels.logInInput }}</h2>
+                    </div>  
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input class="large-10 medium-10 small-12" name="email" placeholder="Enter Your Email" id="mz-userlogin-email"s value="{{model.email|default:user.email}}" type="email" data-mz-login-email />
+                    </div> 
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <h2 for="password">{{ labels.password }}</h2>
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input class="large-10 medium-10 small-12" name="password" placeholder="Enter Your Password" id="mz-userpassword"  type="password" data-mz-login-password/>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <p class="redtext">{{ labels.loginpagenewtext | safe }}</p>
+                </div> 
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                        </div>
+                    <div class="small-12 login-button">  
+                        
+                        
+                        <button class="mz-button mz-button-large mz-login-button" data-mz-action="loginpage-submit" data-mz-login-btn>{{ labels.logIn }}</button>
+                        <a href="/user/forgotpassword" class="mz-forgot mz-links" >Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row signuplink">
+                    <a href="javascript:void(0)" class="mz-signuplink mz-signup-links" data-mz-signup>{{ labels.signUpLink }}</a>
+                </div>
+            </div>
+        </form>
+    </div>          
+</div>
+{% endblock body-content %}  
+{% require_script "modules/login-links" %}

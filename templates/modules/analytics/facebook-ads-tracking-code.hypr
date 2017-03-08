@@ -1,0 +1,43 @@
+
+<!-- Facebook Pixel Code -->
+ 
+<script>
+
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', '516348708535967');
+    fbq('track', "PageView");
+    {% if pageContext.pageType == "product" %}
+      fbq('track', 'ViewContent', {
+    content_ids: ['{{  model.productCode  }}'], 
+    content_type: 'product',
+   
+    currency: 'USD' 
+
+    });
+    {% else%} 
+     {%if pageContext.pageType=="cart" %}
+     {% if not model.isEmpty %}
+       var products = [];
+      
+        fbq('track', 'AddToCart',  { 
+        content_type: 'product', 
+        content_ids: [{% for mdl in model.items %}'{{ mdl.product.productCode}}',{% if mdl.product.options.length > 0 %}{% for opt in mdl.product.options %}{% if opt.value != "null" %}'{{opt.value}}'{% endif%},{% endfor %}{% endif %}{% if forloop.last %}{% else %}{% endif %}{% endfor%}],  
+        content_name: 'Shopping cart',
+        value: {{model.total}}, 
+        currency: 'USD' 
+    }); 
+    {% endif %}  
+    {% endif %}  
+{% endif %}
+
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=516348708535967&ev=PageView&noscript=1"
+ alt="img-noscript"/></noscript>
+  
+<!-- End Facebook Pixel Code -->

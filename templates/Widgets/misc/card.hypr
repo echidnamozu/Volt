@@ -1,0 +1,58 @@
+
+ <div class="accordionwidget {% if model.config.accordimg==""%}accordionoimage{% endif %}">
+     <div class="medium-12 acc-close">
+		
+			 <div class="acc-head-container">
+			    <div class="mz-img-accrd">
+				    <img class="titleimg" src="{{model.config.accordimg}}"  border="0" alt="imgsrc" /> 
+				</div>
+				<div class="mz-accrd-title" style="overflow:hidden;">
+					    <h3 class="accordimg gray-txt">{{ model.config.head}}</h3> 
+				     </div>
+				  
+		    </div> 
+	
+     </div>
+      
+     <div class="row content widgetcss"  >
+		<div class="medium-11 columns medium-centered">
+			<div class="medium-12 columns" style="padding:10px 0 7px 0;">
+			
+				  <div class="lefaccordiondiv medium-6 columns">
+					 <h4>{{model.config.title1 |safe}}</h4>
+						<h5>{{model.config.title2}}</h5>
+                        {% if pageContext.isMobile  %}
+                            <img src="{{Model.config.img}}?max={{themeSettings.productMainImagesizeMobile}}&quality={{themeSettings.cdnQuality}}"  border="0" alt="imgsrc" />
+                        {% else %}
+                            {% if pageContext.isTablet  %}
+                                <img src="{{Model.config.img}}?max={{themeSettings.productMainImagesizeTablet}}&quality={{themeSettings.cdnQuality}}"  border="0" alt="imgsrc" />
+                            {% else %}
+                                <img src="{{Model.config.img}}?max={{themeSettings.productMainImagesizeDesktop}}&quality={{themeSettings.cdnQuality}}"  border="0" alt="imgsrc" />
+                            {% endif %}
+                        {% endif %}
+						
+					</div>
+	  
+				 <div class="rightaccordiondiv medium-5 columns">
+						{{model.config.content|safe}}
+				</div>
+    
+			</div>
+		</div>
+     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

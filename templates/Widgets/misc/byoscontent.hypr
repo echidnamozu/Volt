@@ -1,0 +1,3 @@
+
+{% include_products "modules/byos-product" with productCodes=Model.config.productCodes  as_parameter %}  
+

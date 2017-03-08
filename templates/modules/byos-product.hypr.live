@@ -1,0 +1,184 @@
+
+{% for mdl in model.items %}
+
+    {% if forloop.first %}
+        <h2 class="Categorytitle"></h2>
+        <ul class="byosproduct">
+    {% endif %} 
+        <li class="mz-productlist-item" data-mz-product="{{mdl.productCode}}" {% if pagecontext.isEditMode %}{% if forloop.first %} {% else %} style="display:none;"{% endif %}        
+        {% endif %}>  
+            <div class="mz-productlisting " data-mz-product="{{mdl.productCode}}"> 
+                <div class="mz-productlisting-image" itemscope="" itemtype="http://schema.org/ImageObject">  
+                    <a itemprop="url" href="{{mdl.url}}" target="_blank">
+                    {% if mdl.mainImage.imageUrl %} 
+                                {% if pageContext.isMobile  %}
+                                        <img itemprop="image"  src="{% make_url "image" mdl.mainImage with max=themeSettings.productMainImagesizeMobile quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{mdl.productName}}"{% endif %} />
+                                {% else %} 
+                                {% if pageContext.isTablet  %}
+                                        <img itemprop="image"  src="{% make_url "image" mdl.mainImage with max=themeSettings.productMainImagesizeTablet quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{mdl.productName}}"{% endif %} />
+                                {% else %}  
+                                        <img itemprop="image"  src="{% make_url "image" mdl.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" {% if prod.mainImage.altText %}alt="{{ prod.mainImage.altText }}"{% else %}alt="{{mdl.productName}}"{% endif %} />
+                                {% endif %}
+                            {% endif %} 
+                        {% else %}
+                            <img  src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg" alt="No-Image"/>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="mz-productlisting-info">
+                        <a class="mz-productlisting-title" href="{{mdl.url}}" target="_blank">{{mdl.content.productName}}</a>
+                        <div class=" mz-productlisting-price"> 
+                            <div class="salePrice">
+                               {% include "modules/product/price-stack" with model=mdl %}
+                            </div>
+                        </div>
+                          <div class="mz-product-desc">
+                                {{ mdl.content.productShortDescription|safe}} 
+                            </div>
+                            {% with mdl.options|findwhere('attributeFQN',"tenant~color") as option %}
+                            {% with mdl.options|findwhere('attributeFQN',"tenant~lead-wire") as wireSize %}
+                            {% with mdl.options|findwhere('attributeFQN',"tenant~color-temperature-option") as colorTemp %}
+                            {% with mdl.options|findwhere('attributeFQN',"tenant~size") as size %} 
+                            {% if mdl.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}  
+        
+                                <div class="mz-backorder-popup">
+                                    <div class="mz-backorder-popup-content">
+                                        <span class="mz-backorder-content-message">
+                                        {% with mdl|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                            {% if backorderdate %}
+                                                {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                    {% if Discontinued.length > 1 %}  
+                                                        {{ backorderdate }}
+                                                    {% else %}
+                                                       {{ labels.backOrder }} Expected By:{{ backorderdate }}
+                                                    {% endif %}    
+                                                {% endwith %}
+                                            {% else %}
+                                                     {{ labels.backOrder }} 
+                                            {% endif %}
+                                        {% endwith %}
+                                        </span>
+                                        
+                                        {% if mdl.options.length > 0 %}
+                                            {% if mdl.options.length ==1 %}
+                                            {% for modprod in mdl.options %}
+                                                {% if modprod.attributeFQN|lower=="tenant~color" %}
+                                                    <button  mzd-quick-add-to-cart="{{mdl.productCode}}" class="color_buy_product backorder large-5 column mz-button mz-button-large">
+                                                        OK
+                                                    </button>  
+                                                {% else %}
+                                                    {% with modprod.values|first as info %}
+                                                        {% if wireSize or size or colorTemp %}
+                                                            
+                                                        {% else %}     
+                                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                                <button  mz-quick-add-to-cart="{{mdl.productCode}}" data-mz-extracode="{{info.value}}" class="color_buy_product backorder large-5 column mz-button mz-button-large">
+                                                                    OK
+                                                                </button>
+                                                            {% endif %} 
+                                                        {% endif %} 
+                                                    {% endwith %}    
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        {% else %}
+                                            <button  mzd-quick-add-to-cart="{{mdl.productCode}}" class=" backorder large-5 column mz-button mz-button-large">
+                                                OK
+                                            </button>   
+                                        {% endif %} 
+                                        <button class="mz-backorder-popup-close large-6 column mz-button mz-button-large"> 
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="mz-button-listing">
+                                
+                                    {% if mdl.options.length > 0 %}
+                                        {% if mdl.options.length ==1 %}
+                                            {% for modprod in mdl.options %}
+                                                {% if modprod.attributeFQN|lower=="tenant~color" %}
+                                                    <a  class="color_buy_product" mz-quick-add-to-cart="{{mdl.productCode}}" id="add-tocart" title="{{ labels.addToCart }}">{{ labels.addToCart }}</a>    
+                                                {% else %}
+                                                    {% with modprod.values|first as info %}
+                                                        {% if wireSize or size or colorTemp %}
+                                                            <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ mdl.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }} </a>                                                 
+                                                        {% else %}   
+                                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                                {% if mdl.inventoryInfo.onlineStockAvailable == 0 and mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}
+                                                                    <a id="add-tocart" data-mz-action="backorderbutton" backorderbutton="backorder" title="Add To Cart"> Add To Cart </a>
+                                                                {% else %}
+                                                                    <a mz-quick-add-to-cart="{{mdl.productCode}}"  class="color_buy_product" href="javascript:void(0);" data-mz-extracode="{{info.value}}" {% if not mdl.purchasableState.isPurchasable and mdl.purchasableState.messages.length > 1 %}disabled="disabled"{% endif %} title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ mdl.productCode }}" >{% if not mdl.purchasableState.isPurchasable and mdl.purchasableState.messages.length > 1 %}{{labels.outOfStock}}{% else %}{{ labels.addToCart }}{% endif %}</a> 
+                                                                {% endif %} 
+                                                            {% else %} 
+                                                                <a  href="javascript:void(0);"  {% if not mdl.purchasableState.isPurchasable %} disabled="disabled" {% endif %} title="{{ labels.customAddToCart }}" data-mz-prcode="{{ mdl.productCode }}"  datamz-action="showCustomOption" class="customcart" >{% if not mdl.purchasableState.isPurchasable %} {{ labels.outOfStock }} {% else %} {{ labels.customAddToCart }} {% endif %}</a> 
+                                                            {% endif %} 
+                                                        {% endif %} 
+                                                    {% endwith %}
+                                                {% endif %}
+                                                
+                                            {% endfor %}  
+                                        {% else %}
+                                            {% for modprod in mdl.options %} 
+                                            {% with mod.options  as prd %}
+                                                {% with modprod.values|first as info %}
+                                                    {% if wireSize or option or size or colorTemp %}
+                                                        {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                            {% if forloop.last %} 
+                                                                <a  class="color_buymultiple_product" href="javascript:void(0);" {% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in mdl.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ mdl.productCode }}" >{% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ mdl.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }} </a>                                                 
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% if mdl.inventoryInfo.onlineStockAvailable > 0 %}
+                                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                                {% if forloop.last %} 
+                                                                    <a  class="color_buymultiple_product" href="javascript:void(0);" {% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in mdl.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ mdl.productCode }}" >{% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ mdl.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }}</a>             
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                                {% if forloop.last %} 
+                                                                    <a  class="color_buymultiple_product" href="javascript:void(0);" {% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in mdl.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ mdl.productCode }}" >{% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a  href="javascript:void(0);" {% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled" {% endif %} title="{{ labels.customAddToCart }}" data-mz-prcode="{{ mdl.productCode }}"  datamz-action="showCustomOption" class="customcart" >{% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}  {{ labels.customAddToCart }} {% else %}  {{ labels.outOfStock }} {% endif %}</a>             
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}       
+                                                {% endwith %}        
+                                            {% endwith %}        
+                                            {% endfor %} 
+                                        {% endif %}
+                                    {% else %}
+                                        <a {% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} {% if mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder" and mdl.inventoryInfo.onlineStockAvailable == 0 %} backorderbutton="backorder" {% else %} mzd-quick-add-to-cart="{{mdl.productCode}}" {% endif %} title="{{ labels.addToCart }}">{% if mdl.inventoryInfo.manageStock and mdl.inventoryInfo.onlineStockAvailable > 0 or mdl.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}   {{ labels.addToCart }} {% else %} {{ labels.outOfStock }} {% endif %}</a>
+                                    {% endif %}        
+                                
+                            </div>
+                            {% endwith %} 
+                            {% endwith %} 
+                            {% endwith %} 
+                            {% endwith %} 
+                             {% if mdl.options.length > 0 %}
+                                 <a href="javascript:void(0)" id="add-to-wishlistpopup" data-mz-productcode="{{mdl.productCode}}" class="mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                             {% else %}
+                                 <a href="javascript:void(0)" id="{% if user.isAnonymous %}guestwishlist{% else %}add-to-wishlist{% endif %}" data-mz-productcode="{{mdl.productCode}}" class="mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                            {% endif %} 
+                        <div class="mz-productlisting-rating">  
+                             
+                        </div>
+                </div>
+            </div>
+        </li>  
+
+    {% if forloop.last %}
+    </ul>
+    <a id="shopall" class="mz-shopall" target="_blank"></a>
+    {% endif %}
+{% endfor %}
+{% require_script "pages/byos" %}
+{% require_script "pages/product-listing" %}
+

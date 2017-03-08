@@ -1,0 +1,128 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-homepage {% endblock body-tag-classes %}
+
+{% block body-content %}
+  
+  <h1 style="display: none;" itemprop="name">{{pagecontext.metaTitle}} </h1>
+  <div class="Homepage_content">
+
+    <div class="row Big_sale">
+      {% dropzone "Sale1" scope="template" %}      
+    </div>
+    
+    <div class="row SpotA_block">
+
+      {% dropzone "Spot_A" scope="template" %} 
+       
+    </div>      
+
+    <div class="row site_promo">
+      {% dropzone "site_promo" scope="template" %}
+    </div>   
+
+    <div class="row imagetext">
+      {% dropzone "mz-drop-zone-imagetext" scope="template" %}
+    </div> 
+
+    <div class="mz-shop-landscape-lighting">
+        <div class="category-home" style="background-image:url('{{ siteContext.cdnPrefix }}/cms/{{ siteContext.siteId}}/files/{{themeSettings.homebackgroundimage}}')">    
+
+            <div class="mz-slots-header">
+             {% dropzone "Professional quality" scope="template" %}
+                
+                
+            </div>
+            <div class="homecateogry row">
+                    {% dropzone "category-imageSlot-1" scope="template" %}
+            </div>
+            
+            <div class="mz-slots-header">
+               {% dropzone "IndoorLighting" scope="template" %} 
+              
+            </div>
+            <div class="homecateogry row">
+                    {% dropzone "category-imageSlot-2" scope="template" %}
+            </div>
+            
+        </div>
+    </div>
+     
+     <div class="row factoryDirect">
+        {% dropzone "factory_Title" scope="template" %}
+        {% dropzone "factory_Content" scope="template" %}
+    </div>
+
+
+    <div class="row Volt_journey">
+      {% dropzone "Volt_journey" scope="template" %}
+      
+        <div class="">    
+            {% dropzone "Volt_journey_workflow-desktop" scope="template" %}
+        </div>    
+    </div>     
+    
+    <div class="row accordionheader">
+      {% dropzone "accordionheader" scope="template" %}
+    </div>   
+
+  
+          
+    <div class="row google_trust">
+        {% dropzone "google_trust" scope="template" %}
+    </div>
+
+
+
+    <div class="row Learning_center">
+
+      <div class="learning_video_block small-12 medium-6 columns">
+        <div class="Learning_center_video">
+          {% dropzone "Learning_center_video" scope="template" %}
+        </div>
+        <div class="Learning_center_video_content">
+          {% dropzone "Learning_center_video_content" scope="template" %}
+        </div>
+      </div>
+      
+      <div class=" learning_image_block small-12 medium-6 columns">
+        <div class="Learning_center_image">
+          {% dropzone "Learning_center_image" scope="template" %}
+        </div>
+        <div class="Learning_center_image_content">
+          {% dropzone "Learning_center_image_content" scope="template" %}
+        </div>
+      </div>
+ 
+    </div>
+
+
+
+    <div class="row mutlislider">
+        {% dropzone "mutlislider" scope="template" %}
+    </div>
+    
+    <div class="row Biggest_sale mz-mobile">
+      {% dropzone "Biggest_sale1" scope="template" %}
+    </div>
+    <div class="row Biggest_sale mz-desktop">
+      {% dropzone "Biggest_sale" scope="template" %}
+    </div>
+
+    <div class="recently-viewed">
+        {% dropzone "recently-viewed-title" scope="template" %}
+        {% dropzone "recently-viewed-content" scope="template" %}
+    </div>
+
+
+    
+  </div>
+
+    {% endblock body-content %}
+
+    {% block body-below-content %}
+
+    {% endblock body-below-content %}
+ 

@@ -1,0 +1,29 @@
+<h2>Your Landscape Lighting System</h2>
+<div class="cartitems">
+    <h3>
+        <span class="prod">Product</span>
+        <span class="qty">Quantiy</span>
+        <span class="price">Price</span>
+    </h3>
+    {% for mdl in model.items %} 
+    <p>
+        <span class="prod">{{mdl.product.name}}</span> 
+        <span class="qty">{{mdl.quantity}}</span>
+        <span class="price">${{mdl.total}}</span>
+    </p>
+    {% endfor %}
+</div>
+
+<p class="estimated-total">
+    <span class="text">Estimated Total</span>
+    <span class="total">${{model.total}}</span>
+</p>
+<a href="{{ sitecontext.secureHost }}/cart/checkout" id="chkout-btn" {% if model.totalCount == 0%}disabled{% endif %}>Checkout</a>
+<div class="queries">
+    <span class="q-text">In case of any queries, issues</span>   
+    <span class="q-text1">CALL CUSTOMER SUPPORT</span>
+    <a href="tel:000-000-000" class="q-btn">(000) 000-000</a>  
+</div>
+
+
+

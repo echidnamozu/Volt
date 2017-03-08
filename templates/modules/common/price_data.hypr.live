@@ -1,0 +1,106 @@
+﻿
+<div class="mz-price-block">  
+    {% if model.properties %}
+    {% with model|get_product_attribute_value("tenant~price-label") as aliasName %} 
+   
+            {% with aliasName|split(",") as documentData %}
+                {% with documentData|first as label1 %}
+                    {% with documentData|last as label2%}
+                    
+                        {% if model.price.msrp %} 
+                            <div>
+                              <span class="originalprice customerprice">{% if label1 %} {{label1}} {% else %} {{themeSettings.msrplabel}}{% endif %} :</span> 
+                              <span class="mz-price originalprice">$</span><span class="mz-price originalprice">
+                                   {{model.price.msrp|floatformat(2)}}
+                               </span>
+                            </div>
+                        {% endif %}    
+                        
+                        <div>
+                            
+                            {% if model.price.salePrice %}
+                                {% if model.price.discount.discount.name %}
+                                    {% if model.segpricelabel %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                    {% else %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="mz-price-discountname customersaleprice">{{model.price.discount.discount.name}} &ndash;</span>
+                                    {% endif %} 
+                                    <span class="mz-price  is-saleprice" itemprop="priceCurrency" content="USD"> $</span><span itemprop="price"  class="mz-price is-saleprice">{{model.price.salePrice|floatformat(2)}}</span>
+                                {% else %}
+                                    {% if model.segpricelabel %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                    {% else %}
+                                        <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.salepricelabel}}{% endif %} :</span>  
+                                    {% endif %}    
+                                    
+                                    <span class="mz-price is-crossedout">
+                                        {{model.price.price|currency}} 
+                                    </span>
+                                    <span class="mz-price is-saleprice" {% if model.productType|lower !=="project" %} itemprop="priceCurrency" {% endif %} content="USD"> $</span><span  {% if model.productType|lower !=="project" %} itemprop="price" {% endif %} class="mz-price is-saleprice">
+                                        {{model.price.salePrice|floatformat(2)}}
+                                    </span>
+                                {% endif %}    
+                            {% else %} 
+                                {% if model.segpricelabel %}
+                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>  
+                                {% else %}
+                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.pricelabel}}{% endif %} :</span>  
+                                {% endif %} 
+                                 
+                                <span class="mz-price" {% if model.productType|lower !=="project" %} itemprop="priceCurrency" {% endif %} content="USD"> $</span><span  itemprop="price" class="mz-price">
+                                    {{model.price.price|floatformat(2)}}
+                                </span>
+                                {% if model.price.priceType == "MAP" %} 
+                                    <div>add to cart to see final price</div>
+                                {% endif %}
+                            {% endif %} 
+                        </div>    
+                    {% endwith %}
+                {% endwith %}
+            {% endwith %} 
+    {% endwith %}
+    {% else %}
+
+        {% if model.price.msrp %} 
+            <div>
+              <span class="originalprice customerprice">{{themeSettings.msrplabel}} :</span> 
+              <span class="mz-price originalprice">$</span><span class="mz-price originalprice">
+                   {{model.price.msrp|floatformat(2)}}
+               </span>
+            </div>
+        {% endif %}    
+        
+        <div>
+            
+            {% if model.price.salePrice %}
+                {% if model.price.discount.discount.name %}
+                    
+                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="mz-price-discountname customersaleprice">{{model.price.discount.discount.name}} &ndash;</span>
+                    <span class="mz-price  is-saleprice" {% if model.productType|lower !=="project" %} itemprop="priceCurrency" {% endif %} content="USD"> $</span><span {% if model.productType|lower !=="project" %} itemprop="price" {% endif %}  class="mz-price is-saleprice">{{model.price.salePrice|floatformat(2)}}</span>
+                {% else %}
+                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{themeSettings.salepricelabel}} :</span>  
+                    
+                    <span class="mz-price is-crossedout">
+                        {{model.price.price|currency}} 
+                    </span>
+                    <span class="mz-price is-saleprice" {% if model.productType|lower !=="project" %} itemprop="priceCurrency" {% endif %} content="USD"> $</span><span {% if model.productType|lower !=="project" %} itemprop="price" {% endif %} class="mz-price is-saleprice">
+                        {{model.price.salePrice|floatformat(2)}}
+                    </span>
+                {% endif %}    
+            {% else %} 
+                <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{themeSettings.pricelabel}} :</span>  
+                 
+                <span class="mz-price" {% if model.productType|lower !=="project" %} itemprop="priceCurrency" {% endif %} content="USD"> $</span><span {% if model.productType|lower !=="project" %} itemprop="price" {% endif %} class="mz-price">
+                    {{model.price.price|floatformat(2)}}
+                </span>
+                {% if model.price.priceType == "MAP" %} 
+                    <div>add to cart to see final price</div>
+                {% endif %}
+            {% endif %} 
+        </div>
+
+    {% endif %}
+</div>    
+ {% if model.price.msrp %}
+ <p class="mz-productlisting-savings">You save: <span></span></p>
+ {% endif %}

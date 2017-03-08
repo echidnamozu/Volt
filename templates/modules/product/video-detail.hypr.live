@@ -1,0 +1,129 @@
+
+<div class="videoproduct"> 
+    <div class="main-video">
+        <div class="videoname-wrap">
+            <h1 class='videoname'>{{model.content.productName|safe}}</h1>
+        </div>  
+        <div class="large-12 videoImgs">
+            <div class="videoImgs-innerwrap large-8 medium-12 small-12">
+                <div class="video-linkcontainer">
+                   {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                        {% if aliasName %}  
+                            {% with aliasName|split("/") as videoLinks %}
+                                {% with videoLinks|last as youtubeId %}
+                                <div class="video-linkcontainer-item">
+                                <script type="application/ld+json">
+                                    { "@context": "http://schema.org", 
+                                    "@type": "VideoObject",
+                                    "description":"{{model.content.productName |safe|replace('"','\"')}}",  
+                                    "embedUrl": "www.youtube.com/watch?v={{youtubeId}}", 
+                                    "name": "{{ model.content.productName |safe|replace('"','\"') }}", 
+                                    "thumbnailUrl": "http://img.youtube.com/vi/{{ youtubeId }}/0.jpg", 
+                                    "uploadDate": "{{model.createDate}}" }  
+                                </script> 
+                                {% if pageContext.isDesktop or pageContext.isTablet  %}
+                                    {% require_script "widgets/video" %}
+                                    <div class="mz-cms-video-placeholder"
+                                         data-url="//youtu.be/{{youtubeId}}"
+                                         {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+                                         >
+                                        <div class="mz-cms-video-player"></div>
+                                        <div class="mz-cms-video-cover"></div>
+                                        <div class="mz-cms-video-play">Play</div>
+                                    </div>
+                                {% else %}
+                                    <div class="mz-cms-video-placeholder"
+                                         {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+                                         >
+                                        <div class="videopop">
+                                            <span class="videoicon mz-cms-video-play"></span>
+                                            <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg);" data-video="//www.youtube.com/embed/{{youtubeId}}"></div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                </div>
+                                {% endwith %}
+                             {% endwith %}
+                        {% endif %} 
+                    {% endwith %}
+                </div>
+            </div>   
+        </div>
+         
+        
+        <div class="large-12 mainprojectdescription">
+            <div class='projdescription'>{{model.content.productFullDescription|safe}}</div>
+        </div>  
+        <div class="lower-panel-wrap">
+            <div class="lower-panel">
+                <div class="share-wrap large-3 medium-3 small-12 column">
+                {% if pagecontext.isEditMode %} Share dropzone {% endif %}
+                    <span class='sharelabel large-2 medium-2 small-3 column '>Share</span>
+                    <div class="share-icons large-10 medium-10 small-9 column">
+                        {% dropzone "share-video" scope="template" %}  
+                    </div>
+                </div>
+                <div class="subscribe-wrap large-9 medium-9 small-12 column">
+                    <div class="subscribe-text-copy large-7 medium-7 small-12 column">
+                        {% if pagecontext.isEditMode %} subscribe text copy dropzone {% endif %}
+                        {% dropzone "subscribe-video" scope="template" %}
+                    </div>
+                    <div class="subscribe-email-box large-5 medium-5 small-12 column">
+                        <span class="success-msg-on-submit"></span>   
+                        <input name="subscribe" maxlength="320" placeholder="Enter your Email Address" id="bronto-email-subscription" type="text" class="bronto-email-pdp" />
+                        <input name="subscribe-button" type="button" data-val="video" class="bronto-subscription-btn mz-button mz-button-large" value="subscribe" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="proj-prod products-gallery">  
+        {% with model|get_product_attribute_values("tenant~product-related") as products %} 
+            {% if products %}
+                <h3 id="projProduct" class="products-tittle">Products Related to this Video</h3>
+                <ul class="products-list project-products medium-block-grid-3 small-block-grid-1">
+                {% for product in products %}
+                    {% include_products "modules/product/project-product" with  productCodes=product as_parameter %}
+                {% endfor %}  
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </div>
+
+        <div class="buttons-panel">
+        {% dropzone "return-videos" scope="template" %}
+            
+            {% with model|get_product_attribute_value("tenant~start-shopping") as linkstring %}
+                {% if linkstring %}
+                    {% with linkstring|split(":") as link %}
+                        {% with link|first as label %} 
+                        {% with link|last as link %}
+                        <a href="{{link}}" class="start-shopping">
+                            <button class="mz-button mz-button-large">
+                                <span class="button-icon">
+                                    <img src="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/start-shopping_1.png" alt="Shopping"/>
+                                </span>
+                                {{label}}
+                            </button>
+                        </a>
+                        {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    <a href="/" class="start-shopping">
+                        <button class="mz-button mz-button-large">
+                            <span class="button-icon">
+                                <img src="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/start-shopping_1.png" alt="Shopping"/>
+                            </span>
+                            Start Shopping
+                        </button>
+                    </a>
+                {% endif %}
+            {% endwith %}
+            {% dropzone "review-gallery2" scope="template" %}
+        </div>
+    </div>  
+</div>
+
+{% require_script "modules/video-detail" %}
+

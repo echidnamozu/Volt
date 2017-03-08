@@ -1,0 +1,12 @@
+<div class="ft-mini-cart-details">
+   	<a class="mz-utilitynav-link mz-utilitynav-link-cart" href="{{pageContext.secureHost}}/cart">{{ labels.viewCart }} 
+   		<span class="mz-cartmonitor" data-mz-role="cartmonitor">{{ model.count}}</span>
+        
+        {% require_script "modules/cart-monitor" %}
+    
+    </a>
+            
+    <ul class="ft-mini-cart-wrap"></ul>
+</div>
+
+

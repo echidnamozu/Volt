@@ -1,0 +1,45 @@
+
+{% for facet in  model.facets %} 
+    {% if facet.facetType ==  "Hierarchy" %}
+       
+    {% else %} 
+        {% for val in facet.values %}   
+            {% if val.isApplied %}
+                <div class="mobile-selected-values"><p>{{val.label}}</p> 
+                 <a custom-clear-facet href="{% make_url "facet" val %}" data-mz-action="clearFacet" data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ val.value }}">
+                <span class="x-show">X</span>
+            </a>
+            
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    
+{% endfor %}
+ 
+
+    {% for facet in  model.facets %}
+        {% for val in facet.values %}  
+            {% if val.isApplied %}
+                    {% set_var hideThisCat=true %}
+            {% endif %}
+        {% endfor %} 
+    {% endfor %}    
+ 
+ 
+ {% if hideThisCat %}
+
+    <a  href="javascript:void(0)"  class="mz-facetingform-clearall" data-mz-action="clearFacets" >Clear all</a>
+{% endif %}
+        
+  
+
+
+
+
+
+
+
+
+
+

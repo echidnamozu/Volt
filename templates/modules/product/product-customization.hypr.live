@@ -1,0 +1,64 @@
+<div class="cart-overlay"></div>
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+	<div class="mz-modal__wrapper" data-mz-role="modal-window">
+		 <div class="mz-modal__inner clearfix" data-mz-role="modal-contents"> 
+		   <div class="mz-messagepopup">
+		    {% include "modules/common/message-bar" %}
+		    </div>
+		    {% include "modules/product/product-options"  model=model %}
+		    <div class="customProdImage"></div>
+		   
+		   <div class="mz-price-addcart">
+			    <div class="price-qty-block">      
+			        <div class="qty-block">
+			            <label>Select Quantity</label>
+			            <span class="mz-quantity">
+				            <span class="mz-sub-qty">&ndash;</span>
+				            <input type="text" value="1" maxlength="3" oncopy="return false" onpaste="return false" class="mz-productdetail-qty"/>
+				            <span class="mz-add-qty">+</span>
+			            </span>
+			        </div>
+			        <div class="price-block">
+			            <label>Updated Price:</label>   
+			              <span class="upd_price">
+    			              {% if model.hasPriceRange %}
+    			                    {% if model.priceRange.lower.salePrice %} {{model.priceRange.lower.salePrice|currency}} {% else %} {{model.priceRange.lower.price|currency}}{% endif %}
+    			              {% else %}
+    			                    {% if model.price.salePrice%} {{model.price.salePrice|currency}}{% else %}{{model.price.price|currency}}{% endif %}
+    			              {% endif %} 
+			              </span>
+			        </div>
+			    </div>  
+			    
+			    <div class="add-to-cart-block">
+			        <p>Select options before adding to cart</p> 
+			        <button id="add-to-wishlist" class="mz-productdetail-addtowiishlist"  data-mz-action="{% if not user.isAnonymous %}addToWishlist{% else %}guestCustomWishlist{% endif %}"  title="ADD TO WISHLIST"  disabled="disabled">ADD TO WISHLIST</button>
+	    		    <button id="add-to-cart" class="mz-productdetail-addtocart productcustomize  mz-button mz-button-large data-mz-action="addToCart" disabled="disabled" >
+	                    {{ labels.addToCart }}
+	                </button>
+	            </div>
+	        </div>
+            <div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

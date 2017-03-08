@@ -1,0 +1,10 @@
+{% with model.items|first as itm %}
+<li class="products-list-item projects-featuring-gallery-item">
+    <a href="/p/{{itm.productCode}}" class="projects-featuring-gallery-item-inner">
+        <figure class="projects-featuring-gallery-image-wrap">
+            <img class="projects-featuring-gallery-image" src="{{itm.mainImage.imageUrl}}?max={% block thumbnail-size %}{{ themeSettings.listProductThumbSize }}{% endblock thumbnail-size %}&quality={{themeSettings.cdnQuality}}" {% if model.mainImage.altText %}alt="{{ itm.mainImage.altText }}"{% else %}alt="{{itm.productName}}" {% endif %} />
+        </figure>
+        <h4 class="projects-featuring-gallery-name">{{itm.content.productName}}</h4>
+    </a>
+</li>
+{% endwith %}

@@ -1,0 +1,44 @@
+// Section - 29 - Progress Bar 
+
+/* Progress Bar */
+
+.progress {
+	background-color: #F6F6F6;
+	height: 1.5625rem;
+	border: 1px solid white;
+	padding: 0.125rem;
+	margin-bottom: 0.625rem;
+	.meter {
+		background: #008CBA;
+		height: 100%;
+		display: block;
+	}
+	&.secondary .meter {
+		background: #e7e7e7;
+		height: 100%;
+		display: block;
+	}
+	&.success .meter {
+		background: #43AC6A;
+		height: 100%;
+		display: block;
+	}
+	&.alert .meter {
+		background: #f04124;
+		height: 100%;
+		display: block;
+	}
+	&.radius {
+		border-radius: 3px;
+		.meter {
+			border-radius: 2px;
+		}
+	}
+	&.round {
+		border-radius: 1000px;
+		.meter {
+			border-radius: 999px;
+		}
+	}
+}
+

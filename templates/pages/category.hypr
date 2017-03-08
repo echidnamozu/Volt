@@ -1,0 +1,29 @@
+{% extends "page" %}
+
+
+{% block seo-meta-tag %} 
+	{% if siteContext.themeSettings.metaurls == "hello" %}
+		<meta  name="robots" content="NOINDEX, NOFOLLOW">
+	{% endif %}
+{% endblock seo-meta-tag %} 
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-category {% if pageContext.categoryId == themeSettings.article_Cid or pageContext.categoryId == themeSettings.Project_Cid or pageContext.categoryId == themeSettings.resource_Cid or pageContext.categoryId == themeSettings.News_Cid or pageContext.categoryId == themeSettings.video_Cid %}mz-resource-center{% endif %}{% if pageContext.categoryId == themeSettings.Project_Cid %} mz-gallery {% endif %} {% endblock body-tag-classes %}  
+
+{% block body-content %}
+	<h1 style="display: none;" itemprop="name">{{pagecontext.metaTitle}} </h1>
+	
+
+	{% preload_json model "category" %}
+	
+
+	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
+
+	     {% include "pages/category-interior" %} 
+	      
+	</div>
+
+{% require_script "pages/category" %}
+
+	{% require_script "pages/product-listing" %}
+{% endblock body-content %}

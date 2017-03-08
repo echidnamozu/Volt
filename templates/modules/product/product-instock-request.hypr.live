@@ -1,0 +1,19 @@
+<div class="mz-instock-request">
+    {% if subscribed %}
+    <p>{{ labels.notifyWidgetSuccess }}</p>
+    {% else %}
+    <a id="EmailMeWhenStock" class="mz-instock-request-popUp">{{ labels.notifyWidgetHeader }}</a>
+    <div class="mz-modal-instockEmail">
+        <div class="mz-modal__wrapper">
+            <div class="mz-modal__inner clearfix">
+                <div class="close-icon"></div>
+                <p>{{ labels.notifyWidgetHeader }}</p>
+                {{ labels.email }}: 
+                <input type="text" data-mz-role="email" value="{{ user.email }}" placeholder="Enter your Email" class="mz-instock-request-email" />
+                <button class="mz-button" data-mz-action="widgetNotifyUserAction">{{ labels.notifyWidgetButton }}</button>
+                <span class="mz-validationmessage" data-mz-validationmessage-for="email"></span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

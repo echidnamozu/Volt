@@ -1,0 +1,83 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.checkout %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-checkout {% endblock body-tag-classes %}
+
+{% block site-nav %}{% endblock site-nav %}
+
+{% block body-content %}
+ 
+{% preload_json model "checkout" %} 
+
+<div class="mz-l-container"> 
+    <div class="row checkout-header">
+        <div class="large-10 large-centered medium-12 columns">
+            <h1 class="mz-pagetitle">
+                {{ labels.checkout }}
+                {% if not user.isAuthenticated %}   
+                <span class="mz-pagetitle-note">
+                    {{ labels.registeredCustomer }} <a data-mz-action="login" data-placement="left" href="javascript;">{{ labels.logIn }}</a>
+                </span>
+                {% endif %}
+            </h1>
+        </div>
+    </div>
+
+    <form id="checkout-form" class="small-12 large-10 large-centered columns mz-checkoutform mz-l-2column mz-l-2column-right" method="post" onsubmit="return false;">
+        {% include "modules/common/message-bar" with model=model.messages %}
+    
+        <div class="row">
+            <div class="mz-l-column small-12 large-8 medium-7 columns small-push-12" id="checkout-leftcol"> 
+                <div class="mz-formstep mz-checkoutform-shippingaddress is-incomplete" id="step-shipping-address">  
+                    {% include "modules/checkout/step-shipping-address" %}
+                </div>
+                <div class="mz-formstep mz-checkoutform-shippingmethod" id="step-shipping-method" {% if not model.requiresFulfillmentInfo %}style="display:none"{% endif %}>
+                    {% include "modules/checkout/step-shipping-method" %}
+                </div>
+                <div class="mz-formstep mz-checkoutform-paymentinfo" id="step-payment-info">
+                    {% include "modules/checkout/step-payment-info" %}
+                </div>
+
+                <div class="mz-formstep mz-checkoutform-review" id="step-review">
+                    {% include "modules/checkout/step-review" %} 
+                </div>
+            </div>  <!-- left .column -->
+            <div class="mz-l-column small-12 large-4 medium-5 columns small-pull-12" id="checkout-rightcol">
+                <div class="mz-formstep mz-checkoutform-ordersummary" id="order-summary">
+                    {% include "modules/checkout/checkout-order-summary" %}
+                </div>
+                <div class="mz-l-formfieldgroup comments-field ">
+                    <div class="mz-checkoutform-couponcode mz-l-formfieldgroup-row row" id="coupon-code-field" >
+                        {% include "modules/checkout/coupon-code-field" %}
+                    </div>
+                    <div class="clearfix"></div>
+                    {% if themeSettings.showCheckoutCommentsField %}
+                    <div class="mz-checkoutform-comments mz-l-formfieldgroup-row" id="comments-field" >
+                        {% include "modules/checkout/comments-field" %}
+                    </div>
+                    {% endif %} 
+                </div>
+            </div>
+        </div>
+         <div id="AmazonPayButton" style="display:none;"/>
+    </form>
+</div>
+{% require_script "pages/checkout" %}    
+{% endblock body-content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

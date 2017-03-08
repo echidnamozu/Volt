@@ -1,0 +1,21 @@
+
+{% dropzone "category-biggest-sale" scope="page" %}
+
+<div class="{% if not pageContext.isEditmode %}max-height-fixed{% else %}set-margin{% endif %}">
+	{% dropzone "category-page-top" scope="page"%} 
+</div>
+
+{% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy %} 
+{% if pagecontext.categoryID == themeSettings.News_Cid %}
+{% include_products "modules/product/faceted-products" with includeFacets=themeSettings.showCategoryFacets and pageWithUrl=true and sortWithUrl=true and sort="tenant~pressdate+desc" and  pageSize=themeSettings.defaultPageSize as_parameter %} 
+{% else %}
+{% include_products "modules/product/faceted-products" with includeFacets=themeSettings.showCategoryFacets and pageWithUrl=true and sortWithUrl=true and pageSize=themeSettings.defaultPageSize as_parameter %} 
+{% endif %}
+{% endpartial_cache %}
+
+{% dropzone "category-content-col3" scope="template" %}
+{% dropzone "category-content-col2" scope="template" %} 
+<div class="recently-viewed">
+	{% dropzone "recently-viewed-title-1" scope="page" %}
+	{% dropzone "recently-viewed-1" scope="page" %}
+</div>  

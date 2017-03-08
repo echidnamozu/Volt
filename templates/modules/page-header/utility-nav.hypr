@@ -1,0 +1,327 @@
+
+
+{% if not user.isAnonymous %}   
+    <nav class="mz-utilitynav small-12 medium-10 columns after-login" id="vt-header-right">
+{%else%}
+    <nav class="mz-utilitynav small-12 medium-10 columns before-login" id="vt-header-right"> 
+{% endif %}
+    <ul class="mz-utilitynav-list right mz-navlist medium-12">
+        <li class="search_section">
+            {% block search-box %}
+                {% include "modules/page-header/search-box" %}
+            {% endblock search-box %}
+        </li>  
+
+        <li class="user-utility">
+            <ul>
+            {% if not user.isAnonymous %}
+
+                <li class="mz-utilitynav-item mz-logout">
+                    <span class="link-icons">
+                        <svg version="1.1" class="svg-login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <g>
+                            <g>
+                                <g>
+                                    <path class="st0" d="M19.6,7.2c0,3.4-2.7,6.1-6.1,6.1c-3.4,0-6.1-2.7-6.1-6.1c0-3.4,2.7-6.1,6.1-6.1C16.9,1,19.6,3.8,19.6,7.2z"
+                                        />
+                                    <path class="st0" d="M24.9,26.3c0,3.6-22.8,3.6-22.8,0c0-5.4,5.1-9.5,11.4-9.5C19.8,16.7,24.9,20.8,24.9,26.3z"/>
+                                </g>
+                            </g>
+                        </g>
+                        </svg>
+                    </span>
+                    <div id="mz-logged-in-notice">
+                        {{ labels.orderWelcome }},&nbsp;<a href="/myaccount" class="mz-utilitynav-link">{{user.firstName|default(user.emailAddress)}}</a>
+                    </div>
+                    <div class="mz-logoutaction mz-content">
+                        <ul>
+                            <li class="my-profile"><a class="view-account" href="/myaccount">View My profile</a></li>
+                                <li><a class="view-order" href="/myaccount#paymentmethods" data-target="account-paymentmethods">Saved Cards</a></li>
+                                <li><a class="view-order" href="/myaccount#orderhistory" data-target="account-orderhistory">Orders</a></li>
+                                <li><a class="view-returns" href="/myaccount#addressbook" data-target="account-addressbook">Address Book</a></li>
+                                <li><a class="view-quick-order" href="/myaccount#reorder" data-target="account-quickorder">Reorder</a></li>
+                                <li><a class="view-wishlist" href="/myaccount#wishlist" data-target="account-wishlist">Wishlist</a></li>
+                                <li><a class="view-wishlist" href="/myaccount#storcredits" data-target="account-storecredit">Store Credit</a></li> 
+                            <li><a href="/logout" data-mz-action="logout" class="glossy uppercase" title="Log Out">Log Out</a></li>
+                        </ul>
+
+                    </div>
+                </li> 
+
+                <li class="mz-utilitynav-item icon-accorder">
+                    <span class="link-icons">
+                        <svg version="1.1" class="svg-quick-order" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <polygon class="st0" points="12.1,1.1 4.3,16.8 11.3,16.8 5.5,28.9 22.7,13.5 12.6,13.5 18.9,1.1 "/>
+                        </svg>
+                    </span>
+
+                    <a href="/quick-order" title="Quick Order" id="vt-quickorder-txt">Quick Order</a>
+
+                </li>
+
+                <li class="siteprice mz-minicart-link">
+
+                    <a class="mz-utilitynav-link-cart" href="{{pageContext.secureHost}}/cart"  >
+
+                        <span class="link-icons">
+                            <svg version="1.1" class="svg-cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 82 80" style="enable-background:new 0 0 82 80;" xml:space="preserve">
+                            <style type="text/css">
+                                .st0{fill:#FCDA00;}
+                            </style>
+                            <g id="jXG0nn.tif">
+                                <g>
+                                    <path class="st0" d="M81.7,0.8l-3.3,7.6c0,0-5.5,0-8.3,0c-0.9,3.3-1.8,6.6-2.7,9.9C63.6,32,59.8,45.9,56,59.7
+                                        c-0.9,3.3-3.7,5.4-7.2,5.4c-12.6,0-18.4,0-31,0c-0.2,0-0.8,0-0.8,0l-2.2-7.6c0,0,22,0,32.9,0c0.6,0,1-0.1,1.1-0.8
+                                        c0.4-1.8,1-3.6,1.5-5.5c-10.7,0-18.1,0-28.7,0c-2.7,0-8,0-8,0S1.4,17.5,0.3,13.4c20.2,0,40.4,0,60.6,0c1-3.6,2-7.1,2.9-10.6
+                                        c0.2-0.7,0.3-1.4,0.5-2.1C69,0.8,81.7,0.8,81.7,0.8z"/>
+                                    <path class="st0" d="M26,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1c2.4-0.6,4.7,0.7,5.3,3.1
+                                        c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C27.1,79.2,26.6,79.2,26,79.2z"/>
+                                    <path class="st0" d="M41.9,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1
+                                        c2.4-0.6,4.7,0.7,5.3,3.1c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C42.9,79.2,42.4,79.2,41.9,79.2z"/>
+                                </g>
+                            </g>
+                            </svg>
+                            <span  class="cart-count" data-mz-role="cartmonitor"></span>
+                        </span> 
+
+
+
+                    </a>
+
+                    <span class="cart-total">{{ model.total|currency }}</span>
+
+                    <div class="mz-minicart"  data-role="mz-softcart-trigger">
+                        {% include "modules/common/cart-popup" model="cart" %} 
+                    </div>
+
+                </li>  
+
+            {% else %}
+                <li class="mz-utilitynav-item mz-login">
+                    <span class="link-icons">
+                        <svg version="1.1" classs="svg-login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <g>
+                            <g>
+                                <g>
+                                    <path class="st0" d="M19.6,7.2c0,3.4-2.7,6.1-6.1,6.1c-3.4,0-6.1-2.7-6.1-6.1c0-3.4,2.7-6.1,6.1-6.1C16.9,1,19.6,3.8,19.6,7.2z"
+                                        />
+                                    <path class="st0" d="M24.9,26.3c0,3.6-22.8,3.6-22.8,0c0-5.4,5.1-9.5,11.4-9.5C19.8,16.7,24.9,20.8,24.9,26.3z"/>
+                                </g>
+                            </g>
+                        </g>
+                        </svg>
+                    </span>
+
+                    <a {% if pageContext.isSecure  %} href="javascript:void(0);" {% else %} href="{{pageContext.secureHost}}/signinform" {% endif %}  class="mz-utilitynav-link mz-item1 loginlink" {% if pageContext.isSecure %} {% if pageContext.title == "SignInForm" or pageContext.title == "SignUpForm" %} {% else %} data-mz-loginpopup{% endif %}{% endif %}>{{ labels.login | safe }}</a> | 
+                    <a {% if pageContext.isSecure  %}href="javascript:void(0);" {% else %} href="{{pageContext.secureHost}}/signupform" {% endif %} class="mz-utilitynav-link mz-item1 loginlink" {% if pageContext.isSecure %} {% if pageContext.title == "SignInForm" or pageContext.title == "SignUpForm" %} {% else %}  data-mz-signup {% endif %}{% endif %}> {{ labels.signUp | safe }}</a>
+
+                </li>
+
+                <li class="mz-utilitynav-item icon-accorder">
+                    <span class="link-icons">
+                        <svg version="1.1" class="svg-quick-order" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <polygon class="st0" points="12.1,1.1 4.3,16.8 11.3,16.8 5.5,28.9 22.7,13.5 12.6,13.5 18.9,1.1 "/>
+                        </svg>
+                    </span>
+
+                    <a href="/quick-order" title="Quick Order" id="vt-quickorder-txt">Quick Order</a>
+
+                </li>
+
+                <li class="siteprice mz-minicart-link">
+
+                    <a class="mz-utilitynav-link-cart" href="{{pageContext.secureHost}}/cart"  >
+                        <span class="link-icons">
+                            <svg version="1.1" class="svg-cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 82 80" style="enable-background:new 0 0 82 80;" xml:space="preserve">
+                            <style type="text/css">
+                                .st0{fill:#FCDA00;}
+                            </style>
+                            <g id="jXG0nn.tif">
+                                <g>
+                                    <path class="st0" d="M81.7,0.8l-3.3,7.6c0,0-5.5,0-8.3,0c-0.9,3.3-1.8,6.6-2.7,9.9C63.6,32,59.8,45.9,56,59.7
+                                        c-0.9,3.3-3.7,5.4-7.2,5.4c-12.6,0-18.4,0-31,0c-0.2,0-0.8,0-0.8,0l-2.2-7.6c0,0,22,0,32.9,0c0.6,0,1-0.1,1.1-0.8
+                                        c0.4-1.8,1-3.6,1.5-5.5c-10.7,0-18.1,0-28.7,0c-2.7,0-8,0-8,0S1.4,17.5,0.3,13.4c20.2,0,40.4,0,60.6,0c1-3.6,2-7.1,2.9-10.6
+                                        c0.2-0.7,0.3-1.4,0.5-2.1C69,0.8,81.7,0.8,81.7,0.8z"/>
+                                    <path class="st0" d="M26,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1c2.4-0.6,4.7,0.7,5.3,3.1
+                                        c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C27.1,79.2,26.6,79.2,26,79.2z"/>
+                                    <path class="st0" d="M41.9,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1
+                                        c2.4-0.6,4.7,0.7,5.3,3.1c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C42.9,79.2,42.4,79.2,41.9,79.2z"/>
+                                </g>
+                            </g>
+                            </svg>
+                            <span  class="cart-count" data-mz-role="cartmonitor"></span>
+                        </span> 
+
+                    </a>
+
+                    <span class="cart-total">{{ model.total|currency }}</span>
+
+                    <div class="mz-minicart"  data-role="mz-softcart-trigger">
+                        {% include "modules/common/cart-popup" model="cart" %} 
+                    </div>
+
+                </li>
+            </ul>
+        {% endif %}
+        </li>
+    </ul>
+</nav> 
+
+{% if not user.isAnonymous %} 
+<nav class="mz-utilitynav-additional small-12 medium-10 columns after-login" id="vt-additional-header">
+{%else%}
+<nav class="mz-utilitynav-additional small-12 medium-10 columns before-login" id="vt-additional-header">
+{% endif %}
+
+    <div class="headerhelp_text medium-3 columns">NEED HELP? {{ labels.phoneNumber }}</div>
+
+    <ul class="mz-utilitynav-list medium-7 columns right ">
+
+        <li class="add_search_section">
+            <div class="add_search">
+                {% block search-box %}
+                    {% include "modules/page-header/search-box" %}
+                {% endblock search-box %}
+            </div>
+            
+            <a {% if pageContext.isDesktop %}{% else %}href="#popup" {% endif %} class="link-icons icon-srch" >
+                <svg version="1.1" class="icon-search2" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 56 58" style="enable-background:new 0 0 56 58;" xml:space="preserve">
+        <style type="text/css">
+            .st0{fill:#BBBBBB;}
+        </style>
+        <path class="st0" d="M24.6,45.4c-12.3,0-22.2-9.9-22.2-22.2S12.3,1,24.6,1c12.3,0,22.2,9.9,22.2,22.2S36.9,45.4,24.6,45.4z
+             M24.6,5.4c-9.8,0-17.8,8-17.8,17.8c0,9.8,8,17.8,17.8,17.8s17.8-8,17.8-17.8C42.4,13.4,34.4,5.4,24.6,5.4z M53.6,46.3L52.5,57
+            L40.2,44.7l5.9-5.9L53.6,46.3z"/>
+        </svg>
+            </a>
+        </li>
+        
+        {% if user.isAnonymous %}
+            <li class="mz-utilitynav-item mz-login">
+                <a {% if pageContext.isSecure  %} href="javascript:void(0);" {% else %} href="{{pageContext.secureHost}}/signinform" {% endif %}  data-placement="bottom" class="mz-utilitynav-link mz-item1" {% if pageContext.isSecure %} {% if pageContext.title == "SignInForm" or pageContext.title == "SignUpForm" %} {% else %} data-mz-loginpopup{% endif %}{% endif %}><span class="link-icons icon-accorder">
+                <svg version="1.1" class="svg-login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <g>
+                            <g>
+                                <g>
+                                    <path class="st0" d="M19.6,7.2c0,3.4-2.7,6.1-6.1,6.1c-3.4,0-6.1-2.7-6.1-6.1c0-3.4,2.7-6.1,6.1-6.1C16.9,1,19.6,3.8,19.6,7.2z"
+                                        />
+                                    <path class="st0" d="M24.9,26.3c0,3.6-22.8,3.6-22.8,0c0-5.4,5.1-9.5,11.4-9.5C19.8,16.7,24.9,20.8,24.9,26.3z"/>
+                                </g>
+                            </g>
+                        </g>
+                        </svg>
+                </span></a>
+            </li> 
+        
+        {% else %}
+
+            <li class="mz-utilitynav-item icon-accorder mz-logout">
+                <span>
+                    <a {% if pageContext.isDesktop %} href="/myaccount" {% endif %}><span class="link-icons icon-accorder">
+                        <svg version="1.1" class="svg-login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <g>  
+                            <g>
+                                <g>
+                                    <path class="st0" d="M19.6,7.2c0,3.4-2.7,6.1-6.1,6.1c-3.4,0-6.1-2.7-6.1-6.1c0-3.4,2.7-6.1,6.1-6.1C16.9,1,19.6,3.8,19.6,7.2z"
+                                        />
+                                    <path class="st0" d="M24.9,26.3c0,3.6-22.8,3.6-22.8,0c0-5.4,5.1-9.5,11.4-9.5C19.8,16.7,24.9,20.8,24.9,26.3z"/>
+                                </g>
+                            </g>
+                        </g>
+                        </svg>
+                    </span></a>
+                    <div class="mz-logoutaction mz-content" id="mz-logoutid" > 
+                        <ul>
+                        <li class="my-profile"><a class="view-account" href="/myaccount">View My profile</a></li>
+                                <li><a class="view-order" href="/myaccount#paymentmethods" data-target="account-paymentmethods">Saved Cards</a></li>
+                                <li><a class="view-order" href="/myaccount#orderhistory" data-target="account-orderhistory">Orders</a></li>
+                                <li><a class="view-returns" href="/myaccount#addressbook" data-target="account-addressbook">Address Book</a></li>
+                                <li><a class="view-quick-order" href="/myaccount#reorder" data-target="account-quickorder">Reorder</a></li>
+                                <li><a class="view-wishlist" href="/myaccount#wishlist" data-target="account-wishlist">Wishlist</a></li>
+                                <li><a class="view-wishlist" href="/myaccount#storcredits" data-target="account-storecredit">Store Credit</a></li> 
+                                          
+                            <li><a href="/logout" data-mz-action="logout" class="glossy uppercase" title="Log Out">Log Out</a></li>
+                        </ul>
+                    </div>
+                </span> 
+
+            </li>
+        {% endif %}
+
+        <li class="mz-utilitynav-item icon-accorder">
+            <a href="/quick-order" ><span class="link-icons">
+                <svg version="1.1" class="svg-quick-order" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 30" style="enable-background:new 0 0 27 30;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#D0D0D0;}
+                        </style>
+                        <polygon class="st0" points="12.1,1.1 4.3,16.8 11.3,16.8 5.5,28.9 22.7,13.5 12.6,13.5 18.9,1.1 "/>
+                        </svg>
+            </span>  </a>
+        </li> 
+
+        <li class="siteprice mz-minicart-link">
+            <span>
+                <a class="mz-utilitynav-link-cart" href="{{pageContext.secureHost}}/cart"  >
+                    <span class="link-icons">
+                        <svg version="1.1" class="svg-cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 82 80" style="enable-background:new 0 0 82 80;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:#FCDA00;}
+                        </style>
+                        <g id="jXG0nn.tif">
+                            <g>
+                                <path class="st0" d="M81.7,0.8l-3.3,7.6c0,0-5.5,0-8.3,0c-0.9,3.3-1.8,6.6-2.7,9.9C63.6,32,59.8,45.9,56,59.7
+                                    c-0.9,3.3-3.7,5.4-7.2,5.4c-12.6,0-18.4,0-31,0c-0.2,0-0.8,0-0.8,0l-2.2-7.6c0,0,22,0,32.9,0c0.6,0,1-0.1,1.1-0.8
+                                    c0.4-1.8,1-3.6,1.5-5.5c-10.7,0-18.1,0-28.7,0c-2.7,0-8,0-8,0S1.4,17.5,0.3,13.4c20.2,0,40.4,0,60.6,0c1-3.6,2-7.1,2.9-10.6
+                                    c0.2-0.7,0.3-1.4,0.5-2.1C69,0.8,81.7,0.8,81.7,0.8z"/>
+                                <path class="st0" d="M26,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1c2.4-0.6,4.7,0.7,5.3,3.1
+                                    c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C27.1,79.2,26.6,79.2,26,79.2z"/>
+                                <path class="st0" d="M41.9,79.2c-0.2-0.1-0.4-0.1-0.6-0.2c-1.8-0.6-3.1-2.4-3-4.3c0.1-1.9,1.4-3.6,3.3-4.1
+                                    c2.4-0.6,4.7,0.7,5.3,3.1c0.6,2.3-0.7,4.7-3,5.4c-0.2,0-0.3,0.1-0.5,0.2C42.9,79.2,42.4,79.2,41.9,79.2z"/>
+                            </g>
+                        </g>
+                        </svg>
+                        <span class="cart-count" data-mz-role="cartmonitor"></span>  
+                    </span> 
+
+                    
+                </a>
+                <span class="cart-total">{{ model.total|currency }}</span> 
+         
+                <div class="mz-minicart"  data-role="mz-softcart-trigger">
+                    {% include "modules/common/cart-popup" model="cart" %}  
+                </div> 
+
+            </span>
+        </li>
+       
+    </ul> 
+     
+</nav>
+
+</div>
+</div>
+
+
+
+
+
+

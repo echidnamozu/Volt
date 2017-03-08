@@ -1,0 +1,98 @@
+﻿{% if model.no_of_itemsearch ==0 %}  
+    <script>
+        dataLayer.push({
+          'pageTypeContext': 'Notfound' 
+        });
+        console.log(2);
+    </script>
+{% endif %}
+
+
+
+<div  class="mz-productlist {% block module-classes %}{% endblock module-classes %}"> 
+
+    {% if model.items %}  
+        
+           {% if pageContext.categoryId == themeSettings.resource_Cid %} 
+            
+            <div id="articles" style="display:block;"> 
+              
+                <ul  class="mz-productlist-list mz-articles mz-l-tiles" >
+                    {% for article in model.items %}
+                    {% if article.productType|lower == themeSettings.articleType|lower %}
+                    
+                        <li class="mz-productlist-item" data-mz-product="{{ article.productCode }}">{% include "modules/product/product-listing" with model=article %}</li>
+                    
+                  {% endif %}
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div>
+            </div>    
+            
+           {% else %}
+            <div id="videos"  style="display:block;">
+                
+                <ul class="mz-productlist-list mz-videos mz-articles mz-l-tiles"> 
+                    {% for video in model.items %}
+                      {% if video.productType|lower == themeSettings.videoType|lower %}
+                      
+                         <li class="mz-productlist-item" data-mz-product="{{ video.productCode }}">{% include "modules/product/product-listing" with model=video %}</li>
+                         
+                      {% endif %}
+                    {% endfor %}
+                </ul> 
+                
+                <div style="clear:both;"></div>  
+                
+            </div>    
+                
+            
+           <!--articles-->
+           
+           <div id="articles" style="display:block;"> 
+              
+                <ul  class="mz-productlist-list mz-articles mz-l-tiles" >
+                    {% for article in model.items %}
+                    {% if article.productType|lower == themeSettings.articleType|lower %}
+                    
+                        <li class="mz-productlist-item" data-mz-product="{{ article.productCode }}">{% include "modules/product/product-listing" with model=article %}</li>
+                    
+                  {% endif %}
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div>
+            </div>    
+                
+            <!--press-->
+           
+           <div id="press" style="display:block;"> 
+             
+                <ul class="mz-productlist-list pr-section mz-articles mz-l-tiles" >
+                    {% for press in model.items %}
+                    {% if press.productType|lower == themeSettings.pressType|lower or  press.productType|lower == themeSettings.newsType|lower%}
+                    
+                        <li class="mz-productlist-item" data-mz-product="{{ press.productCode }}">{% include "modules/product/product-listing" with model=press %}</li>
+                    
+                  {% endif %}
+                {% endfor %}
+                </ul>
+            
+                <div style="clear:both;"></div> 
+            </div> 
+            
+           <!--articles-->
+           
+           
+             {% endif %}
+      
+    {% endif %}
+</div>  
+
+
+
+
+
+
+

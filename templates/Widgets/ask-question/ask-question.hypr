@@ -1,0 +1,25 @@
+
+<div class="contact-slot2">
+<div class="hdr"><span class="slot">02</span><span class="slot-name">Ask A Question</span></div>
+
+<form method="post" id="question-form" autocomplete="off" data-mz-question-form action="{{ model.config.formUrl }}">
+<div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+<input type="hidden" name="adminEmail" value="{{ model.config.adminEmail }}">
+	<input type="hidden" name="spreadsheetId" value="{{ model.config.spreadsheetId }}">
+	<input type="hidden" name="contactName" value="{{ model.config.contactName }}">
+<h2>Name *</h2>
+<input name="username" id="username" placeholder="Enter Name" type="text" class="contact-input"/>
+<h2>Address *</h2>
+<input name="address" id="address" placeholder="Enter Address" type="text" class="contact-input"/>
+<h2>Phone Number *</h2>
+<input name="phno" id="phno" placeholder="Enter Phone Number" maxlength="15" type="text" class="contact-input"/>
+<h2>Email Address *</h2>
+<input name="emailaddress" id="emailaddress" placeholder="Enter Email" type="email" class="contact-input"/>
+<h2>What Is Your Question? *</h2>
+<textarea name="question" id="question" placeholder="Enter Question" class="slot1-textarea"></textarea>
+
+<button name="submit-button" type="submit" class="contact-button">Submit</button>
+</form>
+ 
+</div> 
+

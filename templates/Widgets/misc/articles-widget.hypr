@@ -1,0 +1,15 @@
+<div class="mz-articleWidget">
+    <div class="mz-articleWidget-image {{ Model.config.articleImagePosition }}">
+        <div class="mz-articleWidget-image-wrap" style="border: 1px solid {{ Model.config.articleBorderColor }}">
+            <img class="image" src="{{Model.config.articleImage.imageUrl}}?max={{themeSettings.productMainImagesizeTablet}}&quality={{themeSettings.cdnQuality}}" border="0" alt="Article Image">
+        </div>
+    </div>
+    <div class="mz-articleWidget-content">
+        <span class="article-type">{{Model.config.articleType|safe}}</span>
+        <h3 class="article-title">{{Model.config.articleTitle|safe}}</h3>
+        <p class="article-content">{{Model.config.articleContent|safe}}</p>
+        <a class="article-link" href="{{Model.config.articleButtonLink}}">
+            <button class="article-readmore" value="Read-More">{{Model.config.articleButton|safe}}</button>
+        </a>
+    </div>
+</div>

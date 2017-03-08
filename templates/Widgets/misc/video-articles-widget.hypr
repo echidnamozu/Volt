@@ -1,0 +1,36 @@
+<div class="mz-videoArticleWidget">
+    <div class="mz-videoArticleWidget-image {{ Model.config.videoArticleImagePosition }}">
+        <div class="mz-articleWidget-image-wrap" style="border: 1px solid {{ Model.config.videoArticleBorderColor }}">
+            {% if not Model.config %} 
+                <div class="mz-cms-image-cover" style="background-image: url('/admin/scripts/resources/images/legacy/AddPhotos.png');"></div>
+            {% else %}
+                <div class="mz-cms-video-placeholder"
+                     data-url="{{Model.config.videoArticleUrl}}"
+                     {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+                     >
+                    {% with Model.config.videoArticleUrl|split("/") as videoUrls %}
+                    {% with videoUrls|last as videoUrl %}
+                    <div class="videopop">
+                            <span class="videoicon mz-cms-video-play"></span>
+                            <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ videoUrl }}/sddefault.jpg);" data-video="www.youtube.com/embed/{{videoUrl}}"></div>
+                    </div>
+                    {% endwith %}
+                    {% endwith %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mz-videoArticleWidget-content">
+        <span class="videoArticle-type">{{Model.config.videoArticleType|safe}}</span>
+        <h3 class="videoArticle-title">{{Model.config.videoArticleTitle|safe}}</h3>
+        <p class="videoArticle-content">{{Model.config.videoArticleContent|safe}}</p>
+        <a  class="videoArticle-link-readmore" href="{{Model.config.videoArticleButtonLink}}">
+            <button class="videoArticle-readmore" value="Read-More">{{Model.config.videoArticleButton|safe}}</button>
+        </a>
+        {% if Model.config.videoArticleLinkText %}
+        <a class="videoArticle-link"  href="{{Model.config.videoArticleLink}}">
+            Visit our <span>{{Model.config.videoArticleLinkText|safe}}</span>
+        </a>
+        {% endif %}
+    </div>
+</div>

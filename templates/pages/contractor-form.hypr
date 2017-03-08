@@ -1,0 +1,20 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-contractor-form {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+	 <div>{{model.properties.blurb|safe}}<div>
+
+<div class="contractor-form mz-static-page"> 
+      {% dropzone "promoslot" scope="template" %} 
+      {% dropzone "contractor-form" scope="template" %}  
+	
+</div>
+
+{% require_script "pages/countries"%} 
+{% require_script "pages/contractor-form"%}
+{% endblock body-content %}

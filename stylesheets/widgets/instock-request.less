@@ -1,0 +1,77 @@
+.mz-instock-request {
+    .mz-instock-request-popUp {
+        text-decoration: underline;
+    }
+    button {
+        border: none;
+        .roboto_bold();
+        font-size: 0.75em;
+        text-transform: uppercase;
+        border-radius: 5px;
+        padding: 15px 25px;
+        margin: 0;
+    }       
+    input {
+        width: 350px;
+    }
+    .mz-modal-instockEmail {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.75);
+        height: 100%;
+        left: 0;
+        padding: 10px 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1001;
+        -webkit-animation: fadein 2s;
+        -moz-animation: fadein 2s;
+        -ms-animation: fadein 2s;
+        -o-animation: fadein 2s;
+        animation: fadein 2s;
+        .mz-modal__wrapper {
+            background-color: @white;
+            max-width: 500px;
+            max-height: 240px;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            padding: 30px 40px;
+            .mz-modal__inner {
+                p{
+                    .roboto_regular();
+                }
+            }
+        }
+    }
+    .close-icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: url('../resources/images/icons/overlay-close.png');
+        width: 20px;
+        height: 20px;
+        background-size: 100%;
+        cursor: pointer;
+    }
+}
+
+@media @mobile {
+    .mz-instock-request {
+        input {
+            width: 100%;
+        }
+        .mz-modal-instockEmail {
+            .mz-modal__wrapper {
+                width: 90%;
+                max-height: 210px;
+                padding: 20px 20px;
+            }
+        }
+    }
+}

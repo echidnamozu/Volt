@@ -1,0 +1,2 @@
+<div class ="mz-recentProductsGallery" data-max-product="{{ Model.config.maxProductsRecent }}"> </div>
+{% require_script "widgets/recent-products" %}

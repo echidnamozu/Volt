@@ -1,0 +1,209 @@
+﻿<h5 class="section-title">{{ themeSettings.mywishlisttext }}</h5>
+<div class="mz-wishlist panel-border">
+
+  <div class="mz-personalinformation">
+    <span> My Wishlist  </span>  
+  </div> 
+     {% if model.hasItems %} 
+      <div class="mz-tablestructure"> 
+        <div class="cart-brd">
+          <div class="row text-center cart-section">
+            <div class="bold large-4 text-left medium-5 large-push-0 small-2 columns nopadding">DESCRIPTION</div>
+            <div class="bold large-2 large-text-left medium-2 large-push-0 small-2 columns qty">QUANTITY</div>
+            <div class="bold large-3 large-text-left medium-2 large-push-0  small-2 columns extras">EXTRAS</div>
+            <div class="bold large-3 medium-2 large-push-0  small-2 columns"> &nbsp; &nbsp;</div>
+          </div> 
+            <div class="mz-backorder-popup">  
+                <div class="mz-backorder-popup-content">
+                    <span class="mz-backorder-content-message">
+                    
+                    
+                    </span>  
+                    
+                    <button backorder="yes" data-mz-action="addItemToCart" data-mz-item-id="" quantity="1" class=" backorder large-5 column mz-button mz-button-large">
+                        OK
+                    </button>
+                    <button class="mz-backorder-popup-close large-6 column mz-button mz-button-large"> 
+                        Cancel
+                    </button>
+                </div>
+            </div>
+ {% for item in model.items %} 
+        {% with item.product|get_product_attribute_value("tenant~hide-product") as hidden %}   
+            {% if hidden or item.product.productCode=="Z-ARCHIVED" or item.product.productCode=="nothanks" or item.product.productCode=="NoLamps" %}
+            {% else %} 
+                    
+                            
+                           
+                          <div class="mz-table-cart-items">
+                     
+                            <div class="row text-center cart-hover">
+                    
+                              <div class="cart-row clear-both"> 
+                                <div class="mz-cart-img large-1 medium-1 large-push-0 small-4 text-left columns nopadding">
+                                  <a href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/></a>
+                                </div>
+                                <div class="small-8 medium-4 mzcart-mobile text-left mz-padding columns">
+                                  <div class="mz-carttable-item-info-wrap "> 
+                                    {% with item.product|get_product_attribute_value("tenant~hide-product") as hidden %}   
+                                        {% if hidden or item.product.productCode=="Z-ARCHIVED" or item.product.productCode=="nothanks" or item.product.productCode=="NoLamps" %}
+                                            <a class="mz-carttable-item-title" href="javascript:void(0)" style="cursor:text">{{ item.product.name| safe }}</a>
+                                        {% else %}
+                                            <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name| safe }}</a>
+                                        {% endif %}
+                                    {% endwith %}  
+                                  </div>
+                                </div>
+                    
+                                <div class="large-3 medium-4 large-push-0  small-12 columns nopadding wishlist-product-title">
+                                  <div class="text-left">
+                                    <a class="mz-carttable-item-title mz-desktop" href="{{item.product.url}}">{{ item.product.name| safe }}</a>
+                                    <div class = "mz-wishlist-product-option">
+                                        {% if item.product.options.length > 0 %} 
+                                        {% for option in item.product.options %} 
+                                            {% if option.attributeDetail.usageType == "Option" %}
+                                            {% if option.attributeFQN == 'tenant~color' %}
+                                                <div>
+                                                <span>{{option.attributeDetail.name}}: </span>
+                                                <label>
+                                                    {{option.value|lower}}
+                                                </label>
+                                                </div>
+                                            {% else %}
+                                                {% for ss in option.values %}
+                                                    {% if ss.value == option.value %}
+                                                    <div>
+                                                        <span>{{option.attributeDetail.name}}: </span>
+                                                        <label> {{ ss.stringValue }}</label>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %} 
+                                            {% endif %} 
+                                        {% endfor %}
+                                        {% endif %} 
+                    
+                                        <div class="mz-mobile">
+                                        {% if item.product.options.length > 0 %} 
+                                            {% for option in item.product.options %} 
+                                                {% if option.attributeDetail.usageType != "Option" %}
+                                                    {% for ss in option.values %}
+                                                        {% if ss.value == option.value %}
+                                                        <div>
+                                                            <label> {{ ss.stringValue }}</label>
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %} 
+                                            {% endfor %}
+                                        {% else %}
+                                            <label> No Options </label>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                  
+                                <div class="mz-carttable-item-qty large-2 medium-2 large-push-0  small-12 columns nopadding">
+                                  <span class="amp-mblcontent mz-mobile small-4 columns nopadding text-left">Quantity</span>
+                                  <input class="mz-carttable-qty-field small-cart large-4 medium-4 small-2 columns pull-left" id="mz-fquantity" type="text" min="1" max="3" data-mz-cart-item="cf5a8811a228431d8182a47c00784bbf" data-mz-value="quantity" value="1">
+                                </div>
+                                  
+                                <div class="mz-carttable-item-info-wrap large-3 medium-2 large-text-left small-12 columns mz-desktop nopadding">
+                                    <div class="mz-carttable-header-options">
+                                    {% if item.product.options.length > 0 %} 
+                                        {% for option in item.product.options %} 
+                                            {% if option.attributeDetail.usageType != "Option" %}
+                                                {% for ss in option.values %}
+                                                    {% if ss.value == option.value %}
+                                                        <label> {{ ss.stringValue }}</label>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %} 
+                                        {% endfor %}
+                                    {% else %}
+                                        <label> No Options </label>
+                                    {% endif %} 
+                                    </div>
+                                </div>
+                                  
+                                <div class="mz-carttable-item-total large-2 medium-2 large-push-0 columns small-12 hide">
+                                    {% include "modules/common/item-total" %}
+                                    
+                                  <div class="clear"></div>
+                                </div>
+                                
+                                   
+                                <div class="mz-carttable-item-remove mz-mblcontent large-3 medium-3 large-push-0 columns pull-right">  
+                                    
+                                {% if item.purchasableStatusType == "purchasable" %} 
+                                    <a class="mz-button mz-button-large" href="javascript:;" data-mz-action="addItemToCart" data-mz-item-id="{{ item.id }}">{{ labels.addToCart }}</a>
+                                {% else %}
+                                    <a class="mz-button mz-button-large is-disabled" disabled="disabled" data-mz-action="addToCart" data-mz-item-id="{{ item.id }}">
+                                        {{ labels.outOfStock }}
+                                    </a>
+                                {% endif %}
+                                    
+                                 <div class="mz-removeclickitem">
+                                  <a href="javascript:;" data-mz-action="finishRemoveItem" data-mz-item-id="{{ item.id }}">
+                                 <span>Remove from wishlist</span></a>
+                                 </div> 
+                                 
+                      
+                                </div>
+                                <div class="clear"></div>
+                                  <div class="small-12 mz-mobile mz-mlremve">
+                                    {% if item.purchasableStatusType == "purchasable" %}
+                                        <a class="mzaccount-remove-item mz-button small-12 columns" checkbackorder="no"  href="javascript:;" data-mz-action="addItemToCart" data-mz-item-id="{{ item.id }}">{{ labels.addToCart }}</a>
+                                    {% else %}
+                                    <a   class="mzaccount-remove-item mz-button small-12 columns is-disabled" disabled="disabled" data-mz-action="addToCart" data-mz-item-id="{{ item.id }}">
+                                        {{ labels.outOfStock }}
+                                    </a>
+                                    {% endif %}
+                                      
+                                  </div>
+                                <div class="small-12 mz-mobile mz-accoutreturn text-center">
+                                  <a href="javascript:;" data-mz-action="finishRemoveItem" data-mz-item-id="{{ item.id }}">
+                                    <span>Remove from wishlist1</span>
+                                  </a>
+                                </div>
+                                <div class="clear"></div> 
+                    
+                              </div>
+                            </div>
+                    
+                          </div>
+                          {% endif %}
+                          {% endwith %}
+              {% endfor %}
+    </div> 
+
+
+  </div>
+
+    {% else %}
+    <div class="myaccountno-orders">{{ labels.accountNoWishlists }}</div>
+      {% endif %}
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

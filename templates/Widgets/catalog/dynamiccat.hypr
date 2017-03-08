@@ -1,0 +1,36 @@
+	
+<div class="catimage" >
+	<figure class="figure1"> 
+		<a href="{{model.config.link_url}}">
+	    {% if pageContext.isMobile %} 
+	    	<img class="medium-12" src="{{model.config.img}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	    {% else %}
+	        {% if pageContext.isTablet  %}
+	        	<img class="medium-12" src="{{model.config.img}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	        {% else %}
+	        	<img class="medium-12" src="{{model.config.img}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	        {% endif %}
+	    {% endif %}
+	    </a>
+	    <figcaption>
+	    	<a href="{{model.config.link_url}}" title="" style="color:{{model.config.link_text_color1}};">{{model.config.link_text}}</a>
+	    </figcaption>
+	</figure>
+	
+	<figure class="figure2" > 
+	    <a href="{{model.config.link_url}}">
+	    {% if pageContext.isMobile  %}
+	    	<img class="medium-12" src="{{model.config.accordimg}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	    {% else %}
+	        {% if pageContext.isTablet  %}
+	        	<img class="medium-12" src="{{model.config.accordimg}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	        {% else %}
+	        	<img class="medium-12" src="{{model.config.accordimg}}?max={{themeSettings.dynamic_category_product_size}}&quality={{themeSettings.cdnQuality}}"  alt="{{model.config.link_text}}"/>
+	        {% endif %}
+	    {% endif %}
+	    </a>
+	    <figcaption>
+	    	<a href="{{model.config.link_url}}" title="" style="color:{{model.config.link_text_color2}};">{{model.config.link_text}}</a>
+	    </figcaption>
+	</figure>
+</div>

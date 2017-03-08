@@ -1,0 +1,56 @@
+﻿{% if pageContext.pageType == "my_account" %}   
+  <h5 class="section-title">{{ themeSettings.myorderstext }}</h5>
+
+    <div  class="quickreorder-preloader" > 
+        <p class="loading-text"></p>
+        <svg height="120" width="120" class="svg-circle1">
+          <path class="svg-circle-path2" d="M28,60a32,32 0 1,0 64,0a32,32 0 1,0 -64,0" fill="none" stroke="yellow" stroke-width="7" stroke-dasharray="160, 247"/>
+        </svg>
+    </div>
+ {% endif %}
+
+<div class="mz-orderhistory panel-border">   
+ 
+    {% if pageContext.pageType == "my_account" %} 
+
+     <div class="mz-personalinformation">
+            <span> My Orders </span> 
+           
+        </div>
+
+    {% endif %}
+
+    <div class="mz-orderhistory-section mz-l-paginatedlist">     
+
+        {% if model.items %}
+            <div data-mz-orderlist class="mz-l-paginatedlist-list">
+
+            {% if pageContext.pageType == "my_account" %} 
+
+            {% else %}
+
+               {% include "modules/my-account/order-history-list" %}
+            {% endif %}
+            
+            </div>
+          
+        {% else %}
+          <div class="myaccountno-orders">{{ labels.accountNoOrders }}</div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

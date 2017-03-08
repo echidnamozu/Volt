@@ -1,0 +1,73 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-promooffers {% endblock body-tag-classes %}
+
+ {% block body-content %}
+
+<div class="mz-l-container">
+    <div class="subscribe-promo row">
+    	 <div class="large-5 medium-6 small-12 column">
+            {% dropzone "subscribe-article" scope="template" %}
+        </div>
+        <div class="large-5	medium-6 small-12 column email-col">
+            <span class="success-msg-on-submit"></span> 
+            <input name="subscribe" maxlength="320" placeholder="Enter your Email Address" id="bronto-email-subscription" type="text" class="bronto-email-pdp" />
+            <input name="subscribe-button" type="button" data-val="promo" class="bronto-subscription-btn mz-button mz-button-large" value="go" />
+        </div>
+    </div>
+    <h2 class="current-promo">{{labels.currentpromo}}</h2> 
+    <div class="mz-mobile">  
+        {% dropzone "mobile-promo-offer-1" scope="template" %}
+    </div>
+    <div class="mz-desktop">
+        {% dropzone "promo-offer-1" scope="template" %}
+    </div>
+    <div class="promo-offer-slots row">
+        <div class="large-4">
+            {% dropzone "promo-offer-slot1" scope="template" %}
+        </div>
+        <div class="large-4">
+            {% dropzone "promo-offer-slot2" scope="template" %}
+        </div>
+        <div class="large-4">
+            {% dropzone "promo-offer-slot3" scope="template" %}
+        </div>
+    </div>
+    <h2 class="current-promo contest">{{labels.contest}}</h2> 
+    <div class="contest-details row">
+        <div class="large-7 medium-12 small-12 column contest-description">
+            {% dropzone "contest-desc" scope="template" %}
+            <div class="share-wrap">
+            
+                <span class='sharelabel'>Share</span>
+                <div class="share-icons">
+                    {% dropzone "share-content" scope="template" %}  
+                </div>
+            </div>
+        </div>
+        <div class="large-5 medium-12 small-12 column email-col">
+           {% dropzone "contest-entry" scope="template" %}
+        </div>
+    </div>
+    <div class="contest-winner-details row">
+        <h3>Previous Contest Winner</h3>
+        <div class="large-7 medium-6 small-12 column contest-winner">
+            {% dropzone "contest-entry-winner" scope="template" %}
+        </div>
+        <div class="large-5 medium-6 small-12 column facebook-comments">
+            <iframe id="f2c5cd7d3063578" name="fdcc8ae9d539c4" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="https://www.facebook.com/plugins/comments.php?api_key=&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FP5DLcu0KGJB.js%3Fversion%3D42%23cb%3Dfb3187ab59774c%26domain%3Dwww.landscapelightingworld.com%26origin%3Dhttp%253A%252F%252Fwww.landscapelightingworld.com%252Ff32f9c8644a5df4%26relation%3Dparent.parent&amp;colorscheme=light&amp;href=http%3A%2F%2Fwww.landscapelightingworld.com%2Fgiveaways-contests-s%2F178.htm&amp;locale=en_US&amp;numposts=5&amp;sdk=joey&amp;skin=light&amp;version=v2.3&amp;width=450" style="border: none; overflow: hidden; height: 455px; width: 450px;"></iframe> 
+        </div>
+    </div>
+    <div class="common-promo-offer">
+    {% dropzone "common-promo-offer" scope="template" %}
+    </div>
+</div> 
+
+
+	
+
+
+{% endblock body-content %}
+

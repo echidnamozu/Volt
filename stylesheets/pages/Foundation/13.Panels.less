@@ -1,0 +1,62 @@
+// Section - 13 - Panels
+
+.panel {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #d8d8d8;
+	margin-bottom: 1.25rem;
+	padding: 1.25rem;
+	background: #f2f2f2;
+	color: #333333;
+	> :first-child {
+		margin-top: 0;
+	}
+	> :last-child {
+		margin-bottom: 0;
+	}
+	h1, h2, h3, h4, h5, h6, p, li, dl {
+		color: #333333;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		line-height: 1;
+		margin-bottom: 0.625rem;
+		&.subheader {
+			line-height: 1.4;
+		}
+	}
+	&.callout {
+		border-style: solid;
+		border-width: 1px;
+		border-color: #b6edff;
+		margin-bottom: 1.25rem;
+		padding: 1.25rem;
+		background: #ecfaff;
+		color: #333333;
+		> :first-child {
+			margin-top: 0;
+		}
+		> :last-child {
+			margin-bottom: 0;
+		}
+		h1, h2, h3, h4, h5, h6, p, li, dl {
+			color: #333333;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			line-height: 1;
+			margin-bottom: 0.625rem;
+			&.subheader {
+				line-height: 1.4;
+			}
+		}
+		a:not(.button) {
+			color: #008CBA;
+			&:hover, &:focus {
+				color: #0078a0;
+			}
+		}
+	}
+	&.radius {
+		border-radius: 3px;
+	}
+}
+

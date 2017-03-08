@@ -1,0 +1,21 @@
+    <div class="mz-youtube-popup {{ Model.config.videoArticleImagePosition }}">
+        <div class="mz-youtube-popup-wrap" >
+            {% if not Model.config %} 
+                <div class="mz-cms-image-cover" style="background-image: url('/admin/scripts/resources/images/legacy/AddPhotos.png');"></div>
+            {% else %}
+                <div class="mz-cms-video-placeholder"
+                     data-url="{{Model.config.videoArticleUrl}}"
+                     {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+                     >
+                    {% with Model.config.youtubePopUp|split("/") as videoUrls %}
+                    {% with videoUrls|last as videoUrl %}
+                    <div class="videopop">
+                            <span class="videoicon mz-cms-video-play"></span>
+                            <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ videoUrl }}/sddefault.jpg);" data-video="//www.youtube.com/embed/{{videoUrl}}"></div>
+                    </div>
+                    {% endwith %}
+                    {% endwith %}
+                </div>
+            {% endif %}
+        </div>
+    </div>

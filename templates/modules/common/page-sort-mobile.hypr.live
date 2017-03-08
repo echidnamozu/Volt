@@ -1,0 +1,99 @@
+<div  class="jb-mobile-sort">
+    <ul>
+        {% for modelitem in model.items %}
+        {% if forloop.first%}
+        {% if model.currentSort  %}
+            {% for sort in model.sorts %}  
+                    
+                {% if (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.articleType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.videoType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.newsType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.pressType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.projectType|lower) %} 
+        
+                {% else %}
+                    {% if (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.articleType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.videoType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.newsType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.pressType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.projectType|lower)  %}
+                    {% else %}
+                         {% if (sort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.pressType|lower or (sort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                            <li data-mz-url="{% make_url "sorting" model with sortBy='tenant~pressdate desc' %}" {% if sort.value %} data-mz-action="updateSortBy" {% endif %} class="{% if sort.value %} update-sortBy  {% endif %} {% if model.currentSort == "tenant~pressdate desc"  %}selected{% endif %}" value="tenant~pressdate desc">
+                        {{ sort.text }} 
+                        {% if model.currentSort == "tenant~pressdate desc"  %}
+                            <span class="jb-selection-tick"></span>
+                        {% endif %}
+                        <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span>
+                    </li>
+                    {% else %} 
+                     {% if (sort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.pressType|lower or (sort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                        <li data-mz-url="{% make_url "sorting" model with sortBy='tenant~pressdate asc' %}" {% if sort.value %} data-mz-action="updateSortBy" {% endif %} class="{% if sort.value %} update-sortBy  {% endif %} {% if model.currentSort =="tenant~pressdate asc" %}selected{% endif %}" value="tenant~pressdate asc">
+                            {{ sort.text }} 
+                            {% if model.currentSort =='tenant~pressdate asc' %}
+                                <span class="jb-selection-tick"></span>
+                            {% endif %}
+                            <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span>
+                        </li> 
+                    
+                     {% else %}
+                    <li data-mz-url="{% make_url "sorting" model with sortBy=sort.value %}" {% if sort.value %} data-mz-action="updateSortBy" {% endif %} class="{% if sort.value %} update-sortBy  {% endif %} {% if model.currentSort == sort.value  %}selected{% endif %}" value="{{ sort.value }}">
+                        {{ sort.text }} 
+                        {% if model.currentSort == sort.value %}
+                            <span class="jb-selection-tick"></span>  
+                        {% endif %}
+                        <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span>
+                    </li> 
+                    {% endif %}
+                    {% endif %}
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %} 
+            {% for tsort in model.sorts %}    
+                {% if tsort.text == "Default" %}
+                    <li data-mz-url="{% make_url "sorting" model with sortBy=tsort.value %}" {% if tsort.value %}  data-mz-action="updateSortBy" {% endif %} class="{% if tsort.value %} update-sortBy  {% endif %}{% if themeSettings.defaultSort == tsort.value  %}selected{% endif %}" value="{{tsort.value}}">
+                        {{ labels.sortBy }}
+                        <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span> 
+                    </li>
+                {% else %}
+                    {% if (tsort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.articleType|lower) or (tsort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.videoType|lower) or (tsort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.newsType|lower) or (tsort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.pressType|lower) or (tsort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.projectType|lower) %} 
+                    {% else %}
+                        {% if (tsort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.articleType|lower) or (tsort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.videoType|lower) or (tsort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.newsType|lower) or (tsort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.pressType|lower) or (tsort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.projectType|lower)  %}
+                        {% else %}
+                            {% if (tsort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.pressType|lower or (tsort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                               <li data-mz-url="{% make_url "sorting" model with sortBy='tenant~pressdate desc' %}" {% if tsort.value %}  data-mz-action="updateSortBy" {% endif %} class="{% if tsort.value %} update-sortBy  {% endif %}{% if themeSettings.defaultSort == tsort.value  %}selected{% endif %}" value="tenant~pressdate desc">
+                            {{ tsort.text }}
+                        <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span>    
+                        </li>
+                             
+                             
+                             {% else %}
+                             {% if (tsort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.pressType|lower or (tsort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                                    <li data-mz-url="{% make_url "sorting" model with sortBy='tenant~pressdate asc' %}" {% if tsort.value %}  data-mz-action="updateSortBy" {% endif %} class="{% if tsort.value %} update-sortBy  {% endif %}{% if themeSettings.defaultSort == tsort.value  %}selected{% endif %}" value="tenant~pressdate asc">
+                                    {{ tsort.text }}
+                                <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span>    
+                                </li>
+                             {% else %}
+                        <li data-mz-url="{% make_url "sorting" model with sortBy=tsort.value %}" {% if tsort.value %}  data-mz-action="updateSortBy" {% endif %} class="{% if tsort.value %} update-sortBy  {% endif %}{% if themeSettings.defaultSort == tsort.value  %}selected{% endif %}" value="{{tsort.value}}">
+                            {{ tsort.text }}
+                        <span data-mz-action="hideSortPopup" class="jb-mobile-sort-icon"></span> 
+                        </li>
+                        {% endif %}
+                        {% endif %} 
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    {% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,241 @@
+.age-content {
+	max-width: 300px;
+	margin: 0 auto;
+	p {
+		font-family: @fontPtSans;
+		font-size: 14px;
+		margin: 0 0 30px;
+		padding: 0;
+	}
+	.age-title {
+	    font-family: @fontPtSans;
+		font-weight: 700;
+		font-size: 20px;
+		margin: 8px 0 8px;
+		padding: 0;
+		text-transform : uppercase;
+	}
+	#accept {
+		.clearfix();
+		width: 125px;
+		background: @healthBlueDark;
+		color: white;
+		font-family: @fontPtSans ;
+		font-weight: 700;
+		font-size: 16px;
+		&:hover{
+			background: @healthBlueLight;
+		}
+	}
+	#deny {
+		.clearfix();
+		width: 125px;
+		width: 125px;
+		background: @needHelpFontColor;
+		color: white;
+		font-family: @fontPtSans;
+		font-weight: 700;
+		font-size: 16px;
+		&:hover{
+			background:efbf83
+		}
+	}	
+}
+
+.mz-btnclose{
+    background : url('../resources/images/icons/Remove.png') no-repeat;
+	width: 23px;
+	height: 23px;	
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover, &:focus{
+		background : url('../resources/images/icons/Remove_H.png') no-repeat;
+	}
+}
+
+
+
+
+.mz-modal {
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+  transition: opacity 0.25s linear;
+  background-color: rgba(0, 0, 0, 0.65);
+  height: 100%;
+  min-height: 5rem;
+  min-width: 5rem;
+  left: 0;
+  overflow: hidden;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2147483647;
+}
+
+.mz-modal .mz-button--x {
+  background: none white;
+  border: none;
+  color: #666666 !important;
+  height: 3.2rem;
+  padding: 1rem !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3.2rem;
+}
+
+.mz-modal .mz-button--x:hover {
+  color: #d10000;
+}
+
+.mz-modal .mz-button--x i {
+  display: block;
+  margin: 0;
+}
+
+.mz-modal__wrapper {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+  transition: opacity 0.25s linear;
+  -webkit-transform: translate(-50%, -50.1%);
+  -ms-transform: translate(-50%, -50.1%);
+  -moz-transform: translate(-50%, -50.1%);
+  transform: translate(-50%, -50.1%);
+  transition-delay: .25s;
+  border: 1px solid #dedede;
+  background-color: white;
+  left: 50%;
+  padding: 15px 0 27px;
+  position: absolute;
+  top: 50%;
+}
+
+.touch .mz-modal__wrapper {
+  overflow-y: auto;
+  max-height: 86vh;
+  max-width: 94vw;
+}
+
+.touch .mz-modal__wrapper .login-text {
+  display: none;
+}
+@media only screen and (min-width: 300px) and (orientation: portrait) {
+
+  .mz-modal__wrapper {
+    padding: 1rem !important;
+  }
+
+  .mz-modal__wrapper .mz-modal__title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+}
+
+.ft-modal-ageverification .mz-modal__wrapper {  
+  width: 390px;
+  text-align: center;
+}
+
+.mz-modal--login .mz-modal__title {
+  color: #1e1e1e;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  width: auto;
+}
+
+.mz-modal--login .mz-modal__title:first-of-type {
+  margin-top: 0;
+}
+
+.mz-modal--login .mz-l-column {
+  border-bottom: 1px solid #bebebe;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.mz-modal--login .mz-l-column:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.mz-modal--login .mz-form {
+  padding: 1rem 0;
+}
+
+.mz-modal--login .mz-form label {
+  *zoom: 1;
+  font-weight: bold;
+}
+
+.mz-modal--login .mz-form label:before,
+.mz-modal--login .mz-form label:after,
+.mz-modal--login .mz-form label::before,
+.mz-modal--login .mz-form label::after {
+  display: table;
+  content: ' ';
+}
+
+.mz-modal--login .mz-form label:after,
+.mz-modal--login .mz-form label::after {
+  clear: both;
+}
+
+.mz-modal--login .mz-form input {
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: .5rem;
+  width: 100%;
+}
+
+.mz-modal--login .mz-form .mz-forgot {
+  color: #666666;
+  display: block;
+  float: right;
+  font-style: italic;
+  padding: 1rem;
+  text-decoration: underline;
+}
+
+.mz-modal--login .mz-form .mz-forgot:hover {
+  color: #045493;
+}
+
+.mz-modal--login .mz-input-wrapper {
+  overflow: hidden;
+}
+
+.mz-modal--login .mz-button--cancelforgotpassword {
+  background-color: #d10000;
+  background-image: -webkit-linear-gradient(#d10000, #940000);
+  background-image: -moz-linear-gradient(#d10000, #940000);
+  background-image: -ms-linear-gradient(top, #d10000, #940000);
+  background-image: -o-linear-gradient(#d10000, #940000);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d10000), to(#940000));
+  border-color: #d10000;
+}
+
+.mz-modal--login .forgotpassword-message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #d10000;
+}
+
+.mz-modal--login .mz-button--login,
+.mz-modal--login .mz-button--close {
+  margin-top: 1rem;
+}
+
+.mz-modal--login button + button {
+  margin-left: 1rem;
+}
+
+
+

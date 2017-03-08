@@ -1,0 +1,3729 @@
+﻿//Updated CSS for mobile
+@media @mobile {
+    .mz-myaccount {
+        .header-intro h2 {
+            z-index: 1;
+        }
+        .mz-l-pagecontent {
+            .mz-accountparent {
+                .mz-accountparent-inner-wrap {
+                    display: block !important;
+                }
+                .mz-pagetitle {
+                    color: @black;
+                    padding: 10px 10px;
+                    font-size: 1.3em;
+                }
+                .selected-menu-mobile.mz-mobile {
+                    margin: 0;
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 0;
+                    span {
+                        color: @black;
+                        font-size: 1.2em;
+                        text-transform: none;
+                        height: 20px;
+                        .mz-scrollnav-link {
+                            margin-left: 5px;
+                            text-transform: capitalize;
+                        }
+                    }
+                    .toggle-mblicon {
+                        top: 2px;
+                        width: 25px;
+                        height: 20px;
+                    }
+                }
+                .mz-myaccount-panels.mz-l-stack.mz-l-stack-large {
+                    
+                    .mz-l-stack-section.mz-container {
+                        h5.section-title {
+                            font-size: 0.95em;
+                        }
+                        .mz-accountsettings {
+                            margin: 0 0 10px 0;
+                            width: 100%;
+                            .mz-rightfields {
+                                .mz-nextfields {
+                                    .mz-firstname,
+                                    .mz-lastname,
+                                    .mz-companyOrOrganization {
+                                        input[type="text"],
+                                        input[type="email"] {
+                                            width: 330px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .mz-accountpaymentmethods {
+                        .myaccount-paymentmethod {
+                            .mz-accountpaymentmethods-list {
+                                .mz-accountpaymentmethods-method {
+                                    width: 100%;
+                                    padding: 5px 20px 0 20px;
+                                    .heading {
+                                        padding-bottom: 5px;
+                                    }
+                                    .mz-paymentmethod.mz-paymentmethod-myaccount {
+                                        .mz-paymentmethod-actions {
+                                            position: static;
+                                            a {
+                                                padding: 9px 0;
+                                                text-decoration: none;
+                                                .roboto_regular();
+                                                &:last-child {
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .mz-wishlist {
+                        .mz-tablestructure {
+                            .cart-brd {
+                                padding: 0;
+                                .mz-table-cart-items {
+                                    margin-top: 15px;
+                                }
+                            }
+                        }
+                        .mz-carttable-item-qty {
+                            margin-top: 10px;
+                            padding-left: 20px !important;
+                        }
+                        .amp-mblcontent {
+                            font-size: 1em;
+                            width: auto;
+                            margin: 8px 0;
+                        }
+                        .mz-carttable-qty-field {
+                            font-size: 1em;
+                        }
+                        .mz-carttable-item-title {
+                            font-size: 1em;
+                            .roboto_medium();
+                            font-weight: normal;
+                        }
+                        .mz-accoutreturn {
+                            font-size: 1em; 
+                            clear: both;
+                            padding: 10px 0;
+                            text-decoration: underline;
+                        }
+                        .mz-wishlist-product-option {
+                            .roboto_light();
+                            color: #666;
+                            .mz-mobile {
+                                text-align: left;
+                            }
+                        }
+                        .mz-wishlist-product-option {
+                            margin-top: 10px;
+                            color: #666;
+                            font-size: 0.8em;
+                            .mz-mobile{
+                                text-align: left;
+                                label {
+                                    color: #666;
+                                }
+                            }
+                            label {
+                                color: #666;
+                            }
+                            span {
+                                .roboto_regular();
+                            }
+                        }
+                    }
+                    .mz-accountorderhistory {
+                        .mz-myordercollapse {
+                            background-color: #fcfcfc;
+                            &.accountborder {
+                                background-color: transparent;
+                            }
+                            .mz-billinginormation {
+                                .left-shipping.panel-border,.right-billing.panel-border {
+                                    border: none;
+                                    border-radius: 0px;
+                                }
+                                .right-billing {
+                                    .mz-shippinginformation {
+                                        .mz-rightinfomation {
+                                            width: 100%;
+                                            margin-bottom: 5px;
+                                        }
+                                    }
+                                }
+                                .left-shipping,.right-billing {
+                                    .mz-shippinginformation {
+                                        font-size: 1em;
+                                        .mz-rightinfomation {
+                                            p {
+                                                font-size: 1em;
+                                                width: auto;
+                                                &:first-child {
+                                                    width: auto;
+                                                    font-size: 1em;
+                                                }
+                                            }
+                                        }
+                                        .mz-shippingaccount {
+                                            font-size: 1em;
+                                            width: 100%;
+                                            .mz-shippinginformatonship,.mz-shippinginformatonship0,.mz-shippinginformatonship2 { 
+                                                font-size: 1em;
+                                                width: auto;
+                                            }
+                                        }   
+                                    }
+                                    .left-shippingdetails {
+                                        font-size: 1em;
+                                        span {
+                                            .roboto_bold();
+                                            font-size: 1em;
+                                        }
+                                    }
+                                }
+                            }
+                            .mz-redorderdetails.bgclass,.mz-redorderdetails {
+                                width: 100%;
+                                display: inline-flex;
+                                ul {
+                                    width: 100%;
+                                    li {
+                                        .mz-name,.mz-value {
+                                            display: block;
+                                            width: 50%;
+                                            float: left;
+                                            font-size: 1em;
+                                            &.order-comment,&.po-number {
+                                                width: auto;
+                                                max-width: 25%;
+                                            }
+                                        }
+                                    }
+                                    .mz-reorder-status {
+                                        border: none;
+                                    }
+                                }
+                            }
+                            .mz-orderstructure {
+                                padding: 0;
+                                p {
+                                    font-size: 1em;
+                                }
+                            }
+                            .mz-tablestructure {
+                                .mz-carttable-item-info-wrap {
+                                    margin-bottom: 10px;
+                                }
+                                .unit-price {
+                                    span {
+                                        padding: 0;
+                                        float: left;
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+                        }
+                        .mz-totalgrandvalue {
+                            table {
+                                width: 100%;
+                            }
+                        }
+                        .order-comments-mobile{
+                            h6{
+                                text-align: left;
+                            }
+                            body{
+                                color: #979696;
+                                text-align: left;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .mz-quickreorder {
+                        padding: 10px 15px;
+                        .mz-tablestructure {
+                            .cart-brd {
+                                padding: 0;
+                                .mz-table-cart-items {
+                                    margin-top: 10px;
+                                    .mz-carttable-item-info-wrap {
+                                        margin-top: 6px;
+                                        padding: 0;
+                                        .option-values {
+                                            text-align: left;
+                                            font-size: 1em;
+                                            color: #9b9b9b;
+                                            line-height: normal;
+                                            .mz-finish,.mzcolor-text {
+                                                color: #9b9b9b;
+                                                font-size: 1em;
+                                                line-height: normal;
+                                            }
+                                        }
+                                        .mz-carttable-header-options {
+                                            label {
+                                                font-size: 1em;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .mz-carttable-item-qty {
+                            width: 60%;
+                            padding: 0 !important;
+                            span {
+                                margin-top: 6px;
+                            }
+                            .mz-carttable-qty-field {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .mz-l-sidebar.mz-myaccount-nav {
+                    .mz-navmobile.mz-scrollnav.mz-mobile#myaccount-mbl {
+                        overflow: auto;
+                        .mz-scrollnav-list.nav.mz-content {
+                            top: 7%;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            height: auto;
+                            margin: 0 auto;
+                            position: relative;
+                            width: 95%;
+                            overflow: auto;
+                            background-color: #f6f6f6;
+                            .close-mzaccount {
+                                .close {
+                                    width: 15px;
+                                    height: 15px;
+                                    margin-right: 0;
+                                }
+                            }
+                            .mz-myaccountsettings {
+                                padding-left: 0;
+                                margin-bottom: 10px;
+                                color: @black;
+                                .roboto_medium();
+                                border-bottom: 1px solid #eaeaea;
+                                &:last-child {
+                                    border-bottom: none !important;
+                                }
+                                .mz-myaccountsettings-title {
+                                    padding-left: 40px;
+                                    margin-bottom: 10px;
+                                    display: inline-block;
+                                }
+                                ul {
+                                    margin: 0;
+                                }
+                                .mz-scrollnav-item.active-tab {
+                                    .mz-myaccountsettings & {
+                                        color: @black;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media @tablet {
+    .mz-myaccount {
+        .mz-orderhistory {
+            .mz-myordercollapse {
+                .mz-redorderdetails {
+                    ul {
+                        li.mz-reorder-icon {
+                            padding: 5px 5px 5px 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//validation msg
+//validation msg
+.clear {
+    clear: both;
+}
+.input-required {
+        border:1px solid #ED1F24 !important;
+        background: #ffeee5!important
+    }
+table {
+    background: transparent;
+    margin-bottom: 0;
+    border: none;
+    table-layout: auto;
+}
+
+.mz-myaccount {
+    .mz-backorder-popup {
+        display: none;
+        z-index: 1009;
+        position: fixed;
+        width: 100%;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.5);
+        text-align: center;
+        .mz-backorder-popup-content {
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 38%;
+            height: 220px;
+            margin: auto;
+            padding: 50px 30px;
+            background-color: @white;
+            span {
+                color: @black;
+                display: block;
+            } 
+            button.mz-button {
+                margin-top: 30px;
+            }
+            button.mz-productdetail-addtocart {
+                width: 200px;
+            }
+            button.mz-backorder-popup-close {
+                width: 200px;
+                background-color: transparent;
+                border: 1px solid @black;
+            }
+            button.mz-backorder-popup-close:hover {
+                background-color: @black;
+            } 
+        }
+    }  
+    .mysavedshipping {
+        display: none;
+    }
+    .validationmsg {
+        border: 1px solid red!important;
+        background: #FFCECE!important;
+    }
+    .validationfreemsg {
+        border: 1px solid #e8e8e8!important;
+        background: #f7f7f7!important;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="month"],
+    input[type="week"],
+    input[type="email"],
+    input[type="number"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="time"],
+    input[type="url"],
+    input[type="color"],
+    textarea {
+        background: #fcfcfc;
+    }
+    &.pop-position-mob {
+        position: fixed;
+        overflow: hidden;
+    }
+    .mz-breadcrumbs {
+        .mz-validationmessage {
+            color: #b94a48;
+            font-size: 9px;
+            display: block;
+            //position: absolute;
+            //top: 67px;
+        }
+    }
+    .mz-validationmessage {
+        color: #b94a48;
+        font-size: 12px;
+        display: block;
+        //position: absolute;
+        //top: 67px;
+    }
+    .mz-validationmessage.success {
+        color: #4a8f10;
+    }
+    .mz-myaccount-panels {
+        float: left;
+        width: 100%;
+    }
+    .mz-myaccount-nav {
+        min-height: 0;
+        width: 22%;
+        box-sizing: border-box;
+        float: left;
+        // padding: 20px 0px; 
+        z-index: 1;
+        position: relative;
+        background: #f6f6f6;
+        padding: 2% 0 2% 3%;
+    }
+    .mz-l-stack-large {
+        box-shadow: -15px 5px 28px 0 rgba(234, 233, 233, 0.8);
+        min-height: 0;
+        height: auto;
+        width: 78%;
+    }
+    .mz-contacttype-isprimary {
+        font-size: @fontSizeSmall;
+        font-style: italic;
+        display: block;
+        margin-top: 3px;
+        text-indent: 5px;
+    }
+    .is-required {
+        color: black;
+    }
+    .myaccountno-orders {
+        text-align: center;
+        padding: 10px 0px;
+    }
+    
+    @media (max-width: 600px) {
+        .mz-myaccount-panels {
+            margin-left: 0;
+        }
+        .mz-myaccount-nav {
+            float: none;
+            width: auto;
+            margin-bottom: @gutter;
+            .clearfix();
+            .mz-scrollnav-item {
+                float: left;
+                margin: @gutter/4;
+            }
+        }
+    }
+    
+    label {
+        //color: #353538;
+        display: inline-block;
+        cursor: auto;
+        //font-family: initial;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #000;
+        //margin-left: 2px;  
+    }
+    .mz-myaccountbreadcrumb {
+        width: 100%;
+        background: #f0f0f0;
+        padding: 40px 0 21px 0;
+        span {
+            .roboto_bold();
+            font-size: 13px;
+            width: 85%;
+            margin: 0 auto;
+            display: inherit;
+        }
+        .home {
+            color: #C7C7C7;
+            .roboto_bold();
+            text-transform: capitalize;
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+    .clear {
+        clear: both;
+    }
+    .mz-requiredmsg {
+        font-size: 12px;
+        color: red;
+        margin: 0px;
+        padding: 0px;
+    }
+    .mz-accountparent {
+        //padding: 0px 100.5px; 
+        .mz-pagetitle {
+            .roboto_bold();
+            font-size: 28px;
+            color: #39393c;
+            //padding: 10px 0 13px;
+            padding: 2.5% 3%;
+            border-bottom: 1px solid #c9c9c9;
+            margin-bottom: 0px;
+            sup {
+                font-size: 17px;
+            }
+        }
+        .mz-scrollnav {
+           
+            .mz-scrollnav .mz-scrollnav-link:hover,
+            .mz-scrollnav .mz-scrollnav-link:focus,
+            .mz-scrollnav .mz-scrollnav-link:active {
+                text-decoration: none;
+            }
+            .mz-myaccountsettings {
+                color: #737373;
+                font-size: 14px;
+                padding: 3px 0px 3px 10px;
+                font-weight: bold;
+                //padding-left: 18%;
+                text-transform: uppercase;
+            }
+            .mz-scrollnav-item {
+                padding: 7px 0px 3px 10px;
+                margin: 0;
+                a {
+                    font-size: 14px;
+                    position: relative;
+                    bottom: 5px;
+                    text-transform: capitalize;
+                    color: #666666;
+                    &:hover {
+                        color: initial;
+                        text-decoration: none;
+                    }
+                    &:focus {
+                        text-decoration: none;
+                    }
+                }
+                .mz-icon {
+                    display: inline-block;
+                    width: 32px;
+                    height: 20px;
+                    .st0 {
+                        fill: #C2C2C2;
+                    }
+                }
+                &.active-tab {
+                    border-radius: 5px; 
+                    background-color: #e7e7e7;
+                    a {
+                        .roboto_medium();
+                        color: black;
+                    }
+                    .mz-icon {
+                        .st0 {
+                            fill: black;
+                        }
+                    }
+                }
+                &:hover {
+                    .mz-icon {
+                        width: 32px;
+                    }
+                    a {
+                        color: black;
+                        text-decoration: none;
+                    }
+                    &.active-tab {
+                        .mz-icon {
+                            .st0 {
+                                fill: black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .active-tab {
+            //background: #fddb00; 
+            a {
+                color: black;
+            }
+        }
+        #password-section,
+        #account-wishlist,
+        #account-orderhistory,
+        #account-returnhistory,
+        #account-paymentmethods,
+        #account-addressbook,
+        #account-storecredit {
+            display: none;
+        }
+        .welcome-msg {
+            padding: 35px 35px 0 35px;
+        }
+        .mz-container {
+            padding: 35px;
+            &#account-quickorder {
+                //padding: 35px;
+            }
+         }
+
+
+        .mz-accpassworddetails {
+            .mz-accountsettings-passwordedit {
+               // background: #39393c;
+                //color: #fff;
+               // font-weight: bold;
+                padding: 10px 18px !important;
+                font-size: 14px !important;
+                border: none;
+                //margin: 0 0 0 20px !important;
+               
+                .uppercase();
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+            input[type="password"] {
+                width: 260px;
+                border: 1px solid #e8e8e8;
+                background: #f7f7f7;
+                height: 40px;
+                float: left;
+                margin: 5px 0 15px 0;
+                 &:focus {
+                    background: #fff;
+                }
+            }
+            .mz-accountpasswords {
+                float: left;
+                width: 100%;
+                display: block;
+            }
+            label {
+                display: inline-block;
+                cursor: auto;
+                margin: 0;
+                padding-bottom: 6px;
+                .roboto_medium();
+                font-size: 12px;
+                color: #39393c;;
+            }
+            .mz-accountpassword {
+                padding: 25px 25px 25px 0;
+                .mzoldnewpass {
+                    max-width: 360px;
+                    .mz-oldpass, .mz-newpass {
+                        max-width: 360px;
+                        float: none;
+                    }
+                }
+                .mz-confirmpass {
+                    max-width: 360px;
+                    //float: left;
+                    clear: both;
+                }
+            }
+        }
+
+        .mz-accountsettings {
+            clear: both;
+            float: left;
+            width: 90%;
+            padding: 5px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ececec;
+            &.edit-acct-spacing {
+                .mz-accountsettings-password {
+                    .mz-validationmessage.password-changed {
+                        color: #31ff00;
+                    }
+                    padding: 0;
+                    margin-top: 5%;
+                }
+            }
+            .mz-l-stack-sectiontitle {
+                font-size: 14px;
+                border-bottom: 1px solid #d2d2d2;
+                padding: 10px 0px 25px 0px;
+                min-height: 40px;
+                margin-bottom: 0px;
+            }
+            .mz-accounttopborder {
+                // border-top: 1px solid #c9c9c9;
+                margin-top: 10px;
+            }
+            .mz-accountsettings-passwordedit {
+                width: 200px;
+                text-transform: uppercase;
+                border: 0;
+                font-weight: bold;
+                height: 40px;
+                margin-bottom: 20px; 
+            }
+            &:first-child {
+                .mz-personalinformation {
+                    border-bottom: 1px solid #848484;
+                    margin: 0 0 10px 0;
+                }
+            }
+            &:last-child {
+                .mz-personalinformation {
+                    border-bottom: 1px solid #ececec;
+                }
+            }
+            .mz-personalinformation {
+                padding: 10px 0;
+                // margin: 10px 0 0 0;
+                border-bottom: 1px solid #ececec;
+                font-weight: bold;
+                text-transform: capitalize;
+                span {
+                    font-size: 17px;
+                    color: #343434;
+                }
+                .mz-accountsettings-nameedit {
+                    float: right;
+                    border: none;
+                    background: transparent;
+                    //color: #fddb00;
+                    text-decoration: underline;
+                    font-size: 14px;
+                    .capitalize();
+                    width: auto;
+                }
+            }
+            .mz-accountpassword {
+                input {
+                    width: 260px;
+                }
+            }
+            .mz-edittext {
+                font-size: 15px;
+                color: #000;
+                margin: 0;
+                padding: 10px 0px 0px 0px;
+            }
+            .mz-accountsettings-section {
+                //padding-left: 20px;
+                font-size: 14px;
+                .mz-leftfields {
+                    .mz-spanemail {
+                        display: inline-block;
+                        color: #979696;
+                        width: 120px;
+                        font-size: 14px;
+                    }
+                }
+                .mz-rightfields {
+                    div {
+                        line-height: 2em;
+                    }
+                    .mz-accountsettings-displayemail,
+                    .mz-accountsettings-displayname {
+                        display: block;
+                        margin: 10px 0px;
+                        font-size: 13px;
+                    }
+                    .mz-f {
+                        float: left;
+                        font-size: 14px;
+                        //color: #979696;
+                        width: 125px;
+                    }
+                }
+            }
+            .required {
+                color: initial;
+                display: inline-block;
+            }
+            .mz-rightfields {
+                width: 100%;
+                float: left;
+                .mz-nextfields {
+                    .mz-firstname,
+                    .mz-lastname,
+                    mz-companyOrOrganization {
+                        float: left;
+                        width: 280px;
+                        margin: 15px 0px;
+                        p {
+                            margin: 10px 0px;
+                            font-size: 12px;
+                            color: #39393c;
+                        }
+                        input[type="text"],
+                        input[type="email"] {
+                            width: 260px;
+                            border: 1px solid #e8e8e8;
+                            background: #f7f7f7;
+                            height: 40px;
+                            float: left;
+                            &:focus {
+                                background: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+            .mz-accpassworddetails {
+                .mz-accountsettings-passwordedit {
+                    // background: #39393c;
+                    //color: #fff;
+                    // font-weight: bold;
+                    padding: 10px 18px !important;
+                    font-size: 14px !important;
+                    border: none;
+                    //margin: 0 0 0 20px !important;
+                    .uppercase();
+                    &:hover {
+                        opacity: 0.7;
+                    }
+                }
+                input[type="password"] {
+                    width: 260px;
+                    border: 1px solid #e8e8e8;
+                    background: #f7f7f7;
+                    height: 40px;
+                    float: left;
+                    margin: 5px 0 15px 0;
+                    &:focus {
+                        background: #fff;
+                    }
+                }
+                .mz-accountpasswords {
+                    float: left;
+                    width: 100%;
+                    display: block;
+                }
+                label {
+                    display: inline-block;
+                    cursor: auto;
+                    margin: 0;
+                    padding-bottom: 6px;
+                    .roboto_medium();
+                    font-size: 12px;
+                    color: #39393c;
+                }
+                .mz-accountpassword {
+                    padding: 25px 25px 25px 0;
+                    .mzoldnewpass {
+                        width: 711px;
+                        .mz-oldpass,
+                        .mz-newpass {
+                            width: 280px;
+                            float: left;
+                        }
+                    }
+                    .mz-confirmpass {
+                        width: 280px;
+                        //float: left;
+                        clear: both;
+                    }
+                }
+            }
+            .mz-buttons {
+                clear: both;
+                .mz-accountsave {
+                    width: 110px;
+                    background: @btn-secondary;
+                    color: #fff;
+                    border: none;
+                    margin-right: 10px;
+                    margin-top: 5px!important;
+                    font-size: 12px;
+                    .uppercase();
+                    &:hover {
+                        background: @btn-secondary-hover;
+                    }
+                }
+                .mz-accountcancel {
+                    width: 110px;
+                    background: @btn-primary;
+                    color: @black;
+                    border: none;
+                    margin-top: 5px!important;
+                    .roboto_bold();
+                    font-size: 12px;
+                    .uppercase();
+                    &:hover {
+                        color: @white;
+                        background: @btn-primary-hover;
+                    }
+                }
+            }
+            .mz-validationmessage {
+                //margin-top: -38px;
+                //margin-left: 5px;
+                //top: auto;
+                font-size: 12px;
+            }
+        }
+    }
+
+
+
+
+    .validationmsg
+{
+    border: 1px solid red!important;
+    background: #FFCECE!important;
+}
+.validationfreemsg
+{
+    border: 1px solid #e8e8e8!important;
+    background:#f7f7f7!important;
+}
+ input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea
+ {
+ background : #fcfcfc; 
+ }
+        &.pop-position-mob {
+            position: fixed; 
+            overflow: hidden;
+        }
+        .mz-breadcrumbs { 
+    .mz-validationmessage {  
+          color: #b94a48;
+          font-size: 9px;
+          display: block;
+          //position: absolute;
+          //top: 67px;
+        }        }
+        .mz-validationmessage {
+          color: #b94a48;
+          font-size: 12px; 
+          display: block;
+          //position: absolute;
+          //top: 67px;
+        }
+    .mz-myaccount-panels {
+        float: left;
+        width: 100%;
+    }
+    .mz-myaccount-nav { 
+        min-height: 0;
+        width: 22%;
+        box-sizing: border-box;
+        float: left;
+       // padding: 20px 0px; 
+       z-index:1; 
+       position:relative;
+       background: #f6f6f6;
+        padding: 2% 0 2% 3%;
+    }
+    .mz-l-stack-large{
+      box-shadow:  -15px 5px 28px 0 rgba(234,233,233, 0.8);
+      min-height: 0;
+      overflow-x: hidden;
+        overflow-y: auto;
+      height: auto;
+      width: 78%;
+    } 
+    .mz-contacttype-isprimary {
+        font-size: @fontSizeSmall;
+        font-style: italic;
+        display: block;
+        margin-top: 3px;
+        text-indent: 5px;
+    }
+    .is-required {
+        color: black;
+    }
+    .myaccountno-orders{
+        // font-family: open_sanssemibold;
+         text-align:center;
+         padding:10px 0px;
+    }
+    
+    
+    @media (max-width: 600px) {
+        .mz-myaccount-panels {
+            margin-left: 0;
+        }
+        .mz-myaccount-nav {
+            float: none;
+            width: auto;
+            margin-bottom: @gutter;
+            .clearfix();
+            .mz-scrollnav-item {
+                float: left;
+                margin: @gutter/4;
+            }
+        }
+    }
+    label {
+        //color: #353538;
+        display:inline-block;
+        cursor: auto;
+        //font-family: initial;
+        font-size: 1em;
+        margin-bottom: 5px;
+
+        color: #000; 
+        //margin-left: 2px;  
+    }
+    .mz-myaccountbreadcrumb {
+        width: 100%;
+        background: #f0f0f0;
+        padding: 40px 0 21px 0;
+        span {
+            .montserrat_bold(); 
+            font-size: 13px;
+            width: 85%;
+            margin: 0 auto;
+            display: inherit;
+        }
+        .home{
+            color: #C7C7C7;
+            font-family: 'montserratbold';
+            text-transform: capitalize;
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+    .clear {
+        clear: both;
+    }
+    .mz-requiredmsg {
+        
+        font-size: 12px;
+        color: red;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    .myaccount-paymentmethod {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #ececec;
+        .mz-accountpaymentmethods-method {
+            .mz-contactselector-summarywrapper {
+                //display: none;          
+            }
+        }
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0px 25px 0px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-paymentmethod-myaccount {
+            //margin-left: 20px; 
+            min-height: 95px;
+            // margin-top: 10px;
+            margin: 0;
+            width: 100%;
+            border-bottom: 1px solid #cdcdcd;
+            &:last-child {
+                border: 0 none;
+            }
+            .mz-paymentmethod-actions {
+                //float: none;  
+                margin: 0px;
+                text-align: left;
+                line-height: 14px;
+                margin-top: 20px;
+                overflow: hidden;
+                clear: both;
+                a {
+                    //color: #1C1C1C;
+                    padding-right: 20.25px;
+                    border-right: 0;
+                    padding-left: 0;
+                    text-decoration: underline;
+                    font-size: 14px;
+                    text-align: left !important;
+                }
+                a:last-child {
+                    border-right: 0px solid #000;
+                    padding-left: 20.25px;
+                }
+            }
+            .mz-paymentmethod-methoddetails {
+                line-height: 25px;
+                font-size: 13px;
+                color: #979696;
+                width: 90%;
+                margin: 10px 0;
+                border-right: none;
+                label {
+                    display: inline-block;
+                    width: 100px;
+                }
+                .mz-paymentmethod-methodtype {
+                    width: 49%;
+                    display: inline-block;
+                }
+                .mz-paymentmethod-cardnumber {
+                    color: initial;
+                    width: 49%;
+                    display: inline-block;
+                }
+                .mz-paymentmethod-cardexp {
+                    span {
+                        width: 49%;
+                        display: inline-block;
+                    }
+                    strong {
+                        color: initial;
+                        width: 49%;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+        .mz-personalinformation {
+            padding: 10px 0px;
+            border-bottom: 1px solid #f6f6f6;
+            span {
+                color: #343434;
+                font-size: 1.1em;
+                .roboto_medium();
+                // font-weight: bold; 
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                //color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+                .uppercase();
+            }
+        }
+        .paymentnocards {
+            font-size: 14px;
+            text-align: center;
+            color: #adadad;
+            margin: 15px 0 5px 0;
+        }
+        .mz-imagenocards {
+            background: url("../resources/images/icons/add-new.png") no-repeat;
+            height: 160px;
+            width: 105px;
+            margin: 0 auto;
+            background-size: contain;
+        }
+        .mz-btnaccount {
+            //margin: 0 auto;
+            width: 100%;
+            margin: 3% 0;
+            //text-align: center;
+            .mz-myaccount {
+                .mz-myaccount-panels {
+                    float: left;
+                }
+                .mz-myaccount-nav {
+                    width: 20%;
+                    box-sizing: border-box;
+                    float: left;
+                    padding: 20px 0px;
+                    border-right: 1px solid rgba(232, 231, 231, 1);
+                }
+                .mz-contacttype-isprimary {
+                    font-size: @fontSizeSmall;
+                    font-style: italic;
+                    display: block;
+                    margin-top: 3px;
+                    text-indent: @gutter;
+                }
+                .is-required {
+                    color: #fddb00;
+                }
+                @media (max-width: 600px) {
+                    .mz-myaccount-panels {
+                        margin-left: 0;
+                    }
+                    .mz-myaccount-nav {
+                        float: none;
+                        width: auto;
+                        margin-bottom: @gutter;
+                        .clearfix();
+                        .mz-scrollnav-item {
+                            float: left;
+                            margin: @gutter/4;
+                        }
+                    }
+                }
+                label {
+                    color: #353538;
+                    cursor: auto;
+                    .roboto_medium();
+                    font-size: 12px;
+                    margin-bottom: 5px;
+                }
+                .mz-l-formfieldgroup input[type="text"],
+                .mz-l-formfieldgroup input[type="password"],
+                .mz-l-formfieldgroup input[type="tel"],
+                .mz-l-formfieldgroup input[type="email"],
+                .mz-l-formfieldgroup select {
+                    border: 1px solid #e8e8e8;
+                    background: #fcfcfc !important;
+                    width: 250px;
+                }
+                .mz-myaccountbreadcrumb {
+                    width: 100%;
+                    background: #f0f0f0;
+                    min-height: 60px;
+                    padding-top: 15px;
+                    span {
+                        .roboto_bold();
+                        font-size: 14px;
+                        padding: 0px 117px;
+                    }
+                }
+                .clear {
+                    clear: both;
+                }
+                .mz-accountparent {
+                    padding: 0px 110.5px;
+                    .mz-pagetitle {
+                        .roboto_bold();
+                        font-size: 28px;
+                        color: #39393c;
+                        padding: 15px 0px;
+                        border-bottom: 1px solid #c9c9c9;
+                        margin-bottom: 0px;
+                    }
+                    .mz-scrollnav {
+                        .mz-myaccountsettings {
+                            color: #737373;
+                        }
+                        .mz-scrollnav-item {
+                            padding: 5px 0px 5px 20px;
+                            a {
+                                color: #1e1e1e;
+                                font-size: 12px;
+                            }
+                            &:hover {
+                                background: red;
+                                a {
+                                    color: #fff;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+                    #password-section,
+                    #account-wishlist,
+                    #account-orderhistory,
+                    #account-returnhistory,
+                    #account-paymentmethods,
+                    #account-addressbook,
+                    #account-storecredit {
+                        display: none;
+                    }
+                    .mz-accountsettings {
+                        clear: both;
+                        float: left;
+                        width: 100%;
+                        .mz-l-stack-sectiontitle {
+                            font-size: 14px;
+                            border-bottom: 2px solid #d2d2d2;
+                            padding: 10px 0px 25px 0px;
+                            min-height: 40px;
+                            margin-bottom: 0px;
+                        }
+                        .mz-accounttopborder {
+                            // border-top: 2px solid #d2d2d2;
+                        }
+                        .mz-personalinformation {
+                            padding: 10px 0px;
+                            border-bottom: 1px solid #f6f6f6;
+                            span {
+                                color: #343434;
+                                font-size: 18px;
+                            }
+                            .mz-accountsettings-nameedit {
+                                float: right;
+                                border: none;
+                                background: transparent;
+                                color: #fddb00;
+                                text-decoration: underline;
+                                font-size: 14px;
+                            }
+                        }
+                        .mz-edittext {
+                            font-size: 17px;
+                            color: #000;
+                            margin: 0;
+                            padding: 20px 0px 0px 0px;
+                        }
+                        .mz-accountsettings-section {
+                            padding-left: 20px;
+                            font-size: 14px;
+                            .mz-leftfields {
+                                .mz-spanemail {
+                                    display: inline-block;
+                                    color: #979696;
+                                    width: 136px;
+                                }
+                            }
+                            .mz-rightfields {
+                                .mz-accountsettings-displayemail,
+                                .mz-accountsettings-displayname {
+                                    display: block;
+                                    margin: 10px 0px;
+                                    font-size: 14px;
+                                }
+                                .mz-f {
+                                    float: left;
+                                    font-size: 14px;
+                                    color: #979696;
+                                    width: 140px;
+                                }
+                            }
+                        }
+                        .required {
+                            color: #fddb00;
+                            display: inline-block;
+                        }
+                        .mz-rightfields {
+                            width: 100%;
+                            float: left;
+                            .mz-nextfields {
+                                .mz-firstname,
+                                .mz-lastname,
+                                .mz-companyOrOrganization {
+                                    float: left;
+                                    width: 280px;
+                                    margin: 15px 0px;
+                                    p {
+                                        margin: 10px 0px;
+                                        font-size: 14px;
+                                        color: #000;
+                                    }
+                                    input[type="text"],
+                                    input[type="email"] {
+                                        width: 260px;
+                                        border: 2px solid #e8e8e8;
+                                        background: #f7f7f7;
+                                        height: 40px;
+                                        float: left;
+                                    }
+                                }
+                            }
+                        }
+                        .mz-accpassworddetails {
+                            .mz-accountsettings-passwordedit {
+                                // background: #39393c;
+                                //color: #fff;
+                                width: 170px;
+                                // font-weight: bold; 
+                                border: none;
+                                margin: 25px 20px!important;
+                                .uppercase();
+                                &:hover {
+                                    opacity: 0.7;
+                                }
+                            }
+                            input[type="password"] {
+                                width: 260px;
+                                border: 2px solid #e8e8e8;
+                                background: #f7f7f7;
+                                height: 40px;
+                                float: left;
+                            }
+                            .mz-accountpasswords {
+                                float: left;
+                                width: 100%;
+                                display: block;
+                            }
+                            label {
+                                display: inline-block;
+                                cursor: auto;
+                                margin: 0;
+                                padding-bottom: 6px;
+                                .roboto_medium();
+                                font-size: 14px;
+                                color: #000;
+                            }
+                            .mz-accountpassword {
+                                padding: 25px;
+                                .mzoldnewpass {
+                                    width: 711px;
+                                    .mz-oldpass,
+                                    .mz-newpass {
+                                        width: 280px;
+                                        float: left;
+                                    }
+                                }
+                                .mz-confirmpass {
+                                    width: 280px;
+                                    float: left;
+                                }
+                            }
+                        }
+                        .mz-requiredmsg {
+                            font-size: 12px;
+                            color: #979696;
+                            margin: 0px;
+                            padding: 0px;
+                        }
+                        .mz-buttons {
+                            clear: both;
+                            .mz-accountsave {
+                                width: 110px;
+                                background: @btn-secondary;
+                                color: #fff;
+                                border: none;
+                                margin-right: 10px;
+                                margin-top: 5px!important;
+                                font-size: 12px;
+                                .uppercase();
+                                &:hover {
+                                    background: @btn-secondary-hover;
+                                }
+                            }
+                            .mz-accountcancel {
+                                width: 110px;
+                                background: @btn-primary;
+                                color: #fff;
+                                border: none;
+                                margin-top: 5px!important;
+                                font-size: 12px;
+                                .uppercase();
+                                &:hover {
+                                    background: @btn-primary-hover;
+                                }
+                            }
+                        }
+                    }
+                }
+                .myaccount-paymentmethod {
+                    width: 60%;
+                    padding: 15px;
+                    clear: both;
+                    float: left;
+                    width: 100%;
+                    .mz-l-stack-sectiontitle {
+                        .roboto_medium();
+                        font-size: 14px;
+                        border-bottom: 2px solid #d2d2d2;
+                        padding: 0px 0px;
+                        min-height: 40px;
+                        margin-bottom: 0px;
+                        padding-bottom: 10px;
+                    }
+                    .mz-personalinformation {
+                        padding: 10px 0px;
+                        border-bottom: 1px solid #d2d2d2;
+                        span {
+                            color: #343434;
+                            font-size: 18px;
+                        }
+                        .mz-accountsettings-nameedit {
+                            float: right;
+                            border: none;
+                            background: transparent;
+                            color: #fddb00;
+                            text-decoration: underline;
+                            font-size: 14px;
+                        }
+                    }
+                    .paymentnocards {
+                        .roboto_bold();
+                        font-size: 14px;
+                        text-align: center;
+                        color: #b8b7b7;
+                        margin-top: 15px;
+                    }
+                    .mz-btnaccount {
+                        margin: 0 auto;
+                        width: 100%;
+                        text-align: center;
+                        .mz-accountsettings-addcard {
+                            //  background: #39393c;
+                            //color: #fff;
+                            // font-weight: bold;
+                            width: 170px;
+                            border: none;
+                            margin: 0px!important;
+                        }
+                    }
+                    .mz-creditcardform {
+                        width: 572px;
+                    }
+                    .large-6 {
+                        width: 47%;
+                        padding: 0;
+                    }
+                }
+            }
+            .mz-accountsettings-addcard {
+                // background: #39393c;
+                //color: #fff;
+                // font-weight: bold; 
+                width: 155px;
+                border: none;
+                margin: 0px!important;
+                font-size: 14px;
+                .uppercase();
+            }
+        }
+        .mz-creditcardform {
+            width: 100%;
+            //margin: 0px 20px;
+            .mz-payment-credit-card-defaultflag-row {
+                clear: both;
+                input,
+                label {
+                    cursor: pointer;
+                }
+            }
+            .mz-creditcard-billingaddresses {
+                clear: both;
+            }
+            .mz-l-formfieldgroup-row {
+                display: inline-block;
+                width: 48%;
+                vertical-align: top;
+                float:left;
+
+                &.mz-addressform-city
+                {
+                    clear: both;
+                }
+                &.mz-payment-credit-card-name-row
+                {
+                    clear: both;
+                }
+                .mz-validationmessage.card-expire {
+                    clear: both; 
+                }
+            }
+            .mz-contactselector-summarywrapper {
+                .mz-l-formfieldgroup-row {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+        .large-6 {
+            width: 47%;
+        }
+        .cvv-info {
+            display: block;
+            position: absolute;
+            left: 0px;
+            font-size: 11px;
+            color: #9a9a9a;
+            bottom: -3px;
+            cursor: pointer;
+        }
+        .shop-tip {
+            color: #fddb00;
+            .roboto_regular();
+            text-decoration: underline;
+        }
+        .cvv-info:hover .cvv-info-details {
+            display: block;
+        }
+        .cvv-info-details {
+            display: none;
+            margin-left: 20px;
+            background: #fff;
+            border: 1px solid #c4c4c4;
+            padding: 10px 0 5px 10px;
+            position: absolute;
+            top: 25px;
+            left: -37px;
+            width: 180px;
+            font-size: 11px;
+            z-index: 10;
+            -webkit-box-shadow: 0 3px 5px -3px #ccc;
+            -moz-box-shadow: 0 3px 5px -3px #ccc;
+            box-shadow: 0 3px 5px -3px #ccc;
+            P {
+                .roboto_regular();
+                font-size: 12px;
+            }
+        }
+        .cvv-info .cvv-info-details:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 18px;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border-color: transparent transparent #ccc transparent;
+            border-style: solid;
+            border-width: 7px;
+        }
+        .mz-l-formfieldgroup-halfsize {
+            width: 41% !important;
+        }
+        .mz-l-formfieldgroup select {
+            // background-image: url("../resources/images/header/arrow_down_selector.png");
+            background-repeat: no-repeat;
+            background-position: 100% 50%;
+            background-color: #f7f7f7;
+        }
+        .mz-l-formfieldgroup input[type="text"],
+        .mz-l-formfieldgroup input[type="password"],
+        .mz-l-formfieldgroup input[type="tel"],
+        .mz-l-formfieldgroup input[type="email"],
+        .mz-l-formfieldgroup input[type="number"],
+        .mz-l-formfieldgroup select {
+            border: 1px solid #e8e8e8;
+            background-color: #f7f7f7;
+            //width: 250px;
+            width: 85%;
+            border-radius: 4px;
+            padding-left: 10px;
+            padding-right: 20px;
+            font-size: 12px;
+            color: #979696;
+            &:focus {
+                background: #fff;
+            }
+        }
+        .columns {
+            padding: 0;
+        }
+        .mz-buttons {
+            //margin: 0 20px; 
+            clear: both;
+            .mz-accountsave {
+                width: 110px;
+                background: @btn-secondary;
+                color: #fff;
+                border: none;
+                margin: 7px 7px 0 0 !important;
+                font-size: 12px;
+                .uppercase();
+                &:hover {
+                    background: @btn-secondary-hover;
+                }
+            }
+            .mz-accountcancel {
+                width: 110px;
+                background: @btn-primary;
+                color: @black;
+                border: none;
+                margin-top: 5px!important;
+                font-size: 12px;
+                .uppercase();
+                &:hover {
+                    background: @btn-primary-hover;
+                    color: @white;
+                }
+            }
+        }
+    }
+    // Address Book //
+    .mz-accountadressbook {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #ececec;
+        ul.mz-accountaddressbook-contactk-list {
+            margin-left: 0;
+            ul {
+                margin-left: 0;
+            }
+        }
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0 25px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-personalinformation {
+            padding: 10px 0px;
+            border-bottom: 1px solid #ececec;
+            clear: both;
+            span {
+                font-size: 18px;
+                .roboto_bold();
+                color: #343434;
+                text-transform: capitalize;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                //color: #fddb00;
+                text-decoration: underline;
+                .uppercase();
+                font-size: 14px;
+            }
+        }
+        .paymentnocards {
+            color: #adadad;
+            font-size: 14px;
+            text-align: center;
+            color: #b8b7b7;
+            margin: 15px 0 5px;
+        }
+        .mz-imagenocards {
+            background: url("../resources/images/icons/add-new.png") no-repeat;
+            height: 160px;
+            width: 105px;
+            margin: 0 auto;
+            background-size: contain;
+        }
+        .mz-btnaccount {
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+        .mz-accountsettings-addcard {
+            width: 200px;
+            border: none;
+            //margin: 0px!important;
+            .uppercase();
+            //background: @btn-secondary;
+            //color: @white;
+            // font-weight: bold;
+            float: left;
+            padding: 15px;
+        }
+        .mz-accountaddressbook-form {
+            width: 591px!important;
+        }
+        .mz-l-stack-subtitle {
+            font-size: 18px;
+            .roboto_bold();
+            margin: 20px 0;
+            border-bottom: 1px solid #ececec;
+        }
+        .large-6 {
+            width: 47%;
+        }
+        .columns {
+            padding: 0;
+        }
+        .mz-l-formfieldgroup-cell input[type="text"],
+        .mz-l-formfieldgroup-cell input[type="number"],
+        .mz-l-formfieldgroup-cell input[type="password"],
+        .mz-l-formfieldgroup-cell input[type="tel"],
+        .mz-l-formfieldgroup-cell input[type="email"],
+        .mz-l-formfieldgroup-cell select {
+            border: 1px solid #e8e8e8;
+            background-color: #f7f7f7;
+            width: 250px;
+            font-size: 12px;
+            &:focus {
+                background: #fff;
+            }
+        }
+        .mz-contacttype-isprimary {
+            font-size: @fontSizeSmall;
+            font-style: normal;
+            display: inline-block;
+            margin-top: 6px;
+            float: left;
+            clear: both;
+           
+            /* /stylesheets/pages/myaccount.less:L1089 */
+            input[type=checkbox].css-checkbox {
+                display: none;
+            }
+            /* /stylesheets/pages/myaccount.less:L1092 */
+            input[type=checkbox].css-checkbox:checked + span.css-label.cb3 {
+                background-position: 0 -16px;
+            }
+            /* /stylesheets/pages/myaccount.less:L1095 */
+            .css-label.cb3 {
+                background: url("../resources/images/icons/redoption.png") no-repeat 0 -16px;
+                -webkit-touch-callout: none;
+                /* -webkit-user-select: none; */
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            /* /stylesheets/pages/myaccount.less:L1104 */
+            input[type=checkbox].css-checkbox + span.css-label.cb3 {
+                height: 16px;
+                display: inline-block;
+                line-height: 16px;
+                background-repeat: no-repeat;
+                background-position: 0 0;
+                font-size: 1em;
+                vertical-align: middle;
+                cursor: pointer;
+                float: left;
+                color: #000;
+                text-indent: 25px;
+            }
+            /* /stylesheets/pages/myaccount.less:L1115 */
+            input[type=checkbox].css-checkbox {
+                position: absolute;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                width: 1px;
+                margin: -1px;
+                padding: 0;
+                border: 0;
+            }
+        }
+        .mz-contacttypes {
+            margin-bottom: 16px;
+            .primarycheck {
+                margin-top: 8px;
+//                margin-left: 8%;
+                input[type=checkbox].css-checkbox + span.css-label.cb3 {
+                    color: #666;
+                }
+                input[type=checkbox].css-checkbox:checked + span.css-label.cb3 {
+                    color: @black;
+                }  
+            }
+            input[type="checkbox"] {
+                margin-bottom: 8px;
+            }
+            label {
+//                padding-left: 18px;
+            }
+            .mz-contacttype {
+                    margin-bottom: 7px;
+                    overflow: hidden;
+                    &:first-child {
+                        margin-bottom: 15px; 
+                        overflow: hidden;
+                    }
+                    
+                } 
+            }
+        .mz-buttons {
+            clear: both;
+            .mz-accountsave {
+                width: 110px;
+                background: @btn-secondary;
+                color: #fff;
+                border: none;
+                margin-right: 10px;
+                margin-top: 5px!important;
+                font-size: 12px;
+                .uppercase();
+                &:hover {
+                    background: @btn-secondary-hover;
+                }
+            }
+            .mz-accountcancel {
+                width: 110px;
+                background: @btn-primary;
+                color: #fff;
+                border: none;
+                margin-top: 5px!important;
+                font-size: 12px;
+                .uppercase();
+                &:hover {
+                    background: @btn-primary-hover;
+                }
+            }
+        }
+        .mz-accountaddressbook-contact {
+            .mz-accountaddressbook-actions {
+                float: none;
+                margin: 0px;
+                text-align: left;
+                line-height: 14px;
+                margin-bottom: 15px;
+                clear: both;
+                a {
+                    //color: #1C1C1C;
+                    padding-right: 20.25px;
+                    border-right: 0;
+                    padding-left: 0;
+                    text-decoration: underline;
+                    font-size: 14px;
+                    text-align: left !important;
+                }
+                a:last-child {
+                    border-right: 0px solid #000;
+                    padding-left: 20.25px;
+                }
+            }
+            .mz-accountaddressbook-contactdetails {
+                line-height: 25px;
+                font-size: 13px;
+                //color: #979696;
+                width: 258px;
+                border-right: none;
+                margin-bottom: 15px;
+            }
+        }
+        .mz-accountaddressbook-contacttype {
+            color: #979696;
+            margin: 20px 0 0 0;
+            strong,
+            em {
+                font-size: 13px;
+                color: #2a2a2a;
+            }
+        }
+        .mz-validationmessage {
+            top: 39px;
+        }
+    }
+    //end Address Book //
+    //ORder History //
+    .mz-orderhistory {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        width: 100%;
+        display: none;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ececec;
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0 25px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-accounttopborder {
+            //border-top: 2px solid #d2d2d2;
+        }
+        .mz-personalinformation {
+            .roboto_bold();
+            padding: 10px 0px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f6f6f6;
+            text-transform: capitalize;
+            span {
+                //color: #343434;
+                font-size: 18px;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .mz-orderhistory-section {
+            .mz-l-paginatedlist-list {
+                .text-center();
+                .mz-orderlist {
+                    .text-left();
+                    margin-bottom: 20px;
+                }
+                .mz-more-order {
+                    padding: 8px 15px;
+                    font-size: 14px;
+                    border: 0;
+                    .border-radius(5px);
+                    color: @white;
+                    background: @btn-secondary;
+                    &:hover {
+                        background: @btn-secondary-hover;
+                    }
+                }
+            }
+        }
+        .mz-myordercollapse {
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #ececec;
+            .mz-redorderdetails {
+                background: #fcfcfc;
+                .roboto_bold();
+                border: 1px solid #f6f6f6;
+                &.bgclass {
+                    background: #fcfcfc !important;
+                    border-bottom: 1px solid #ececec !important;
+                }
+                ul {
+                    margin: 0;
+                    li {
+                        display: inline-block;
+                        font-size: 14px;
+                        padding: 5px 10px 5px 15px;
+                        margin-bottom: 0;
+                        line-height: 2.5em;
+                        vertical-align: middle;
+                        .mz-value {
+                            color: initial;
+                        }
+                        .mz-name {
+                            // font-weight: bold; 
+                            text-transform: uppercase;
+                        }
+                        &.mz-reorder-name {
+                            width: 8%;
+                        }
+                        &.mz-reorder-refno {
+                            width: 28%;
+                            .mz-value {
+                                max-width: 48.7%;
+                                overflow: hidden;
+                                display: inline-block;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                vertical-align: bottom;
+                            }
+                        }
+                        &.mz-reorder-placed {
+                            width: 27%;
+                        }
+                        &.mz-reorder-total {
+                            width: 12%;
+                        }
+                        &.mz-reorder-status {
+                            border-right: 1px solid #ececec;
+                            width: 16%;
+                        }
+                        &.mz-reorder-icon {
+                            width: 6%;
+                        }
+                    }
+                    .mz-namevalue {
+                        color: #000;
+                        font-size: 13px;
+                    }
+                    .mz-name {
+                        color: #979696;
+                        font-family: 'roboto_light';
+                        font-size: 14px;
+                        display: block;
+                    }
+                }
+            }
+            .mz-billinginormation {
+                .left-shipping {
+                    width: 45%;
+                    float: left;
+                    padding: 10px;
+                    &.panel-border {
+                        padding: 2%;
+                        margin: 2%;
+                        border-radius: 6px;
+                        background: #fcfcfc;
+                        border: 1px solid #ececec;
+                    }
+                    .left-shippingdetails {
+                        font-family: 'roboto_light';
+                        border-bottom: 1px solid #ececec;
+                        span {
+                            margin-bottom: 6px;
+                            // font-weight: bold;
+                            display: inline-block;
+                            font-family: "roboto_regular";
+                            font-size: 15px;
+                            color: #000;
+                        }
+                    }
+                    .mz-shippinginformation {
+                        padding: 4% 0;
+                        .roboto_bold();
+                        font-size: 14px;
+                        .mz-shippingaccount {
+                            float: left;
+                            width: 49%;
+                            margin: 0;
+                            font-size: 14px;
+                            .mz-shippinginformatonship {
+                                text-transform: capitalize;
+                                min-height: 145px;
+                                font-size: 14px;
+                                margin: 0;
+                                font-family: "roboto_light";
+                                color: #666666;
+                                // font-weight: bold;
+                                letter-spacing: 1px;
+                            }
+                            .mz-shippinginformatonship2 {
+                                font-size: 14px;
+                                margin: 0;
+                                font-family: "roboto_light";
+                                color: #666666;
+                                // font-weight: bold;
+                                letter-spacing: 1px;
+                            }
+                        }
+                        .mz-rightinfomation {
+                            float: right;
+                            text-align: left;
+                            width: 50%;
+                            a {
+                                color: #fddb00;
+                                text-decoration: underline;
+                                font-size: 11px;
+                                margin: 0 3px;
+                                &:hover {
+                                    color: @btn-primary-hover;
+                                }
+                            }
+                            p {
+                                margin: 0px;
+                                //color: #979696;
+                                font-size: 12px;
+                                font-family: sans-serif;
+                                // font-weight: bold; 
+                            }
+                            p:first-child {
+                                color: #1c1c1c;
+                                font-size: 12px;
+                                margin-bottom: 8px;
+                            }
+                            p:last-child {
+                                // margin-top: 39px;
+                            }
+                            .nocolor {
+                                color: initial;
+                            }
+                        }
+                    }
+                }
+                .right-billing {
+                    width: 45%;
+                    float: left;
+                    padding: 10px;
+                    &.panel-border {
+                        padding: 2%;
+                        margin: 2%;
+                        border-radius: 6px;
+                        background: #fcfcfc;
+                        border: 1px solid #ececec;
+                    }
+                    .left-shippingdetails {
+                        font-family: 'roboto_light';
+                        border-bottom: 1px solid #ececec;
+                        span {
+                            //font-weight: bold;
+                            margin-bottom: 6px;
+                            display: inline-block;
+                            font-family: "roboto_light";
+                            font-size: 15px;
+                            color: #1c1c1c;
+                        }
+                    }
+                    .mz-shippinginformation {
+                        padding: 4% 0;
+                        font-family: 'roboto_light';
+                        font-size: 14px;
+                        .mz-shippingaccount {
+                            float: left;
+                            width: 50%;
+                            margin: 0;
+                            font-size: 14px;
+                            .mz-shippinginformatonship {
+                                min-height: 115px;
+                                font-size: 14px;
+                                margin: 0;
+                                font-family: "roboto_light";
+                                color: #666666;
+                                // font-weight: bold; 
+                                letter-spacing: 0.5px;
+                            }
+                            .mz-shippinginformatonship2 {
+                                font-size: 14px;
+                                margin: 0;
+                                font-family: "roboto_light";
+                                color: #666666;
+                                // font-weight: bold; 
+                                letter-spacing: 0.5px;
+                            }
+                            .mz-shippinginformatonship0 {
+                                font-size: 14px;
+                                margin-bottom: 2px;
+                                font-family: "roboto_light";
+                                color: #666666;
+                                // font-weight: bold;
+                                letter-spacing: 0.5px;
+                            }
+                        }
+                        .mz-rightinfomation {
+                            float: right;
+                            text-align: left;
+                            width: 50%;
+                            p {
+                                margin: 0px;
+                                //color: #979696;
+                                font-size: 12px;
+                                font-family: sans-serif;
+                                //font-weight: bold; 
+                                letter-spacing: 0.5px;
+                            }
+                            p:first-child {
+                                word-wrap: break-word;
+                                //color: #1c1c1c;
+                                font-size: 12px;
+                                margin-bottom: 8px;
+                            }
+                            p:last-child {
+                                // margin-top: 21px;
+                            }
+                            .nocolor {
+                                color: initial;
+                            }
+                        }
+                    }
+                }
+            }
+            .mz-orderstructure {
+                //background: #f7f7f7;
+                // font-weight: bold; 
+                padding: 10px 15px;
+                p {
+                    margin: 0;
+                    .uppercase();
+                    .roboto_bold();
+                    color: #1c1c1c;
+                    font-size: 15px;
+                    padding-left: 10px;
+                    // font-weight: bold; 
+                }
+            }
+            .toggle-icon {
+                width: 32px;
+                display: inline-block;
+                background: url("../resources/images/myaccount-icons/plus.svg") no-repeat;
+                text-indent: -9999px;
+                background-size: 78%;
+                position: relative;
+                bottom: -5px;
+                height: 25px;
+            }
+            .toggle-icon-down {
+                background: url("../resources/images/myaccount-icons/minus.svg") no-repeat;
+                background-size: 78%;
+                bottom: -5px;
+                height: 25px;
+            }
+            .mz-orderrefund {
+                background: #f3f3f3;
+                float: left;
+                .roboto_regular();
+                font-size: 14px;
+                width: 100%;
+                padding-left: 59px;
+                padding-top: 20px;
+                padding-bottom: 25px;
+                border-radius: 6px;
+                position: relative;
+                padding-right: 47px;
+                border: 4px solid #f3f3f3;
+                top: 15px;
+                .checkbox1 {
+                    width: 18%;
+                    float: left;
+                    label {
+                        .roboto_regular();
+                        font-size: 14px;
+                    }
+                    label input {
+                display: none;/* <-- hide the default checkbox */
+                }
+                label span {/* <-- style the artificial checkbox */
+                height: 10px;
+                width: 10px;
+                border: 1px solid grey;
+                display: inline-block;
+                  margin-right: 10px;
+
+                }
+                [type=checkbox]:checked + span {/* <-- style its checked state */
+                background: black;
+                } 
+              }
+              .checkbox2{
+                width: 18%;  
+                float: left; 
+                label{
+                        .roboto_regular();
+                font-size: 14px; 
+                 }
+                label input {
+                display: none;/* <-- hide the default checkbox */
+                }
+                label span {/* <-- style the artificial checkbox */
+                height: 10px;
+                width: 10px;
+                border: 1px solid grey;
+                display: inline-block;
+                }
+                [type=checkbox]:checked + span {/* <-- style its checked state */
+                background: black;
+                } 
+              }
+              .mz-detailsrefund{
+                       text-align:left;  
+                 .mz-refundselect{
+            border: 1px solid #e8e8e8;
+            background-color: #f7f7f7;
+            width: 250px;
+                 } 
+                 input[type="number"]{
+                        border: 1px solid #e8e8e8;
+            background-color: #f7f7f7;
+            width: 93px;
+                 }
+                 .mz-textarea{
+                 textarea{
+                border: 1px solid #e8e8e8;
+                background-color: #f7f7f7;
+                width:250px;
+                height:68px;
+                 }
+                 }
+                 .mz-buttons{
+                     margin:0 20px;
+                       clear: both;
+
+                 }
+                 .mz-accountsave{
+                width: 110px;
+               // background: #39393c;
+                //color: white;
+                border: none;
+                margin: 7px 7px 0 0 !important;
+                font-size: 12px;
+                        .roboto_regular();
+                text-transform: uppercase;
+                 }
+                 .mz-accountcancel {
+                width: 110px;
+                background: #fddb00;
+                color: white;
+                border: none;
+                margin-top: 5px!important;
+                font-size: 12px;
+                        .roboto_regular();
+                text-transform: uppercase;
+                }
+                .mz-selectons{
+                    float:left;
+                      width: 36%;
+                }
+              }
+          .mz-l-formfieldgroup-cell:first-child{
+             text-align:left;
+         }
+              
+            }
+              .mz-orderrefund:after, .mz-orderrefund:before {
+                    bottom: 100%;
+                    left: 15%;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+
+                .mz-orderrefund:after {
+
+                    border-bottom-color: #f3f3f3;
+                    border-width: 30px;
+
+                }
+                .mz-orderrefund:before {
+                //  border-color:  #f3f3f3;
+                //  border-bottom-color: #c2e1f5;
+                //  border-width: 36px;
+                //  margin-left: -36px;
+                } 
+                .item-listing-block{
+                    border-bottom:1px solid #f6f6f6;
+                     .mz-itemlisting{
+                         padding-top:20px;
+                         .mz-item-price {
+                         padding: 0 7%;  
+                         }
+                          .mz-itemlisting-actions{
+                           float:none;   
+                          } 
+                    }
+                .mz-item-discount {
+                    color: #4a4a4a;
+                    font-size: 12px;
+                    padding: 10px;
+                    margin: 1%;
+                    text-align: left;
+                    font-weight: normal;
+                    background: #fcf6ce;
+                    border-radius: 5px;
+                    border: 1px dashed #fde12f;
+                    .mz-item-discountname {
+                        display: inline-block;
+                        text-align: left;
+                        width: 77%;
+                    }
+                    .mz-item-discountamt {
+                        display: inline-block;
+                        text-align: right;
+                        width: 22%;
+                        color: #4a4a4a;
+                    }
+                }
+            }
+        }
+        .mz-tablestructure {
+            .cart-brd {
+                padding: 0 10px;
+                .mz-table-cart-items {
+                    border-bottom: 1px solid #c9c9c9;
+                    padding: 25px 0px;
+                }
+                .cart-section {
+                    // .roboto_bold();
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    color: #979696;
+                    padding: 5px 0px;
+                    border-bottom: 1px solid #f6f6f6;
+                    border-top: 1px solid #f6f6f6;
+                }
+                .mz-carttable-item-product {
+                    .mz-productimage {
+                        border: 1px solid #f3f3f3;
+                        -moz-box-shadow: 1px 2px 13px #fefefe;
+                        -webkit-box-shadow: 0px 2px 7px #F3F3F3;
+                        box-shadow: 0px 2px 7px #F3F3F3;
+                        float: left;
+                        margin-right: 10px;
+                        padding: 8px;
+                        width: 25%;
+                        img {
+                            max-width: 100%;
+                        }
+                    }
+                    .mz-carttable-item-title {
+                        .roboto_regular();
+                        font-size: 13px;
+                        color: #3f3f3f;
+                        text-align: left;
+                    }
+                    .mz-itemlisting-description {
+                        float: left;
+                    }
+                    .option-values {
+                        text-align: left;
+                        .mz-finish {
+                            display: inline-block;
+                            width: auto;
+                            .roboto_regular();
+                            font-size: 12px;
+                        }
+                        .bronze {
+                            height: 25px;
+                            width: 45px;
+                            display: inline-block;
+                            position: relative;
+                            top: 9px;
+                            .roboto_regular();
+                            font-size: 12px;
+                        }
+                        .mzcolor-text {
+                            display: inline-block;
+                            .roboto_regular();
+                            font-size: 12px;
+                            margin-top: 10px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+                .amp-cross {
+                    //.roboto_regular();
+                    color: #ccc;
+                    font-size: 14px;
+                }
+                .is-saleprice {
+                    // .roboto_regular();
+                    font-size: 16px;
+                    color: #000;
+                    display: block;
+                }
+                .amp-quantityvalue {
+                    //.roboto_regular();
+                    font-size: 14px;
+                }
+                .mz-carttable-header-options label {
+                    //.roboto_regular();
+                    font-size: 13px;
+                    font-weight: normal;
+                    color: #979696;
+                    text-align: left;
+                }
+                .mz-carttable-header-options {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+                .mz-carttable-header-options label span {
+                    //  font-weight: bold;
+                    color: black;
+                    margin-right: 10px;
+                }
+                .mz-carttable-item-total .is-crossedout {
+                    .roboto_regular();
+                    font-size: 14px;
+                    color: #cccccc;
+                    display: block;
+                    margin-left: -15px;
+                }
+                .mz-carttable-item-total .savepercent {
+                    display: block;
+                    font-size: 12px;
+                    color: #cccccc;
+                }
+                .mz-carttable-item-total .amp-price {
+                    .roboto_bold();
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .mz-carttable-item-remove {
+                    .roboto_regular();
+                    .mzaccount-remove-item {
+                        font-size: 14px;
+                    }
+                    .mz-accoutreturn {
+                        font-size: 10px;
+                        border: 1.5px solid #b3b3b4;
+                        padding: 7px;
+                        border-radius: 6px;
+                        .roboto_bold();
+                        text-transform: uppercase;
+                        a {
+                            color: #000;
+                            &:hover {
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .mz-accountvalues {
+            width: 100%;
+            float: left;
+            border-bottom: 1px solid #f6f6f6;
+            margin-top: 20px;
+            .order-comments {
+                float: left;
+                width: 50%;
+                .body {
+                    color: #979696;
+                    text-align: left;
+                    font-size: 12px;
+                }
+            }
+            table {
+                background: transparent;
+                float: right;
+                tr {
+                    background: transparent;
+                    td {
+                        text-align: left;
+                    }
+                }
+            }
+            .roboto_regular();
+            font-size:16px;
+            letter-spacing: 1px;
+            font-weight: normal;
+            .mz-accountvaluestd1 {
+                color: grey;
+                width: 200px;
+                text-align: left;
+                &.total {
+                    color: initial;
+                }
+            }
+            .mz-accountvaluestd2 {
+                color: grey;
+                width: 150px;
+                text-align: right;
+                &.total {
+                    color: initial;
+                }
+            }
+        }
+        .mz-totalgrandvalue {
+            width: 100%;
+            float: left;
+            .roboto_regular();
+            font-size: 16px;
+            //border-bottom: 1px solid #c9c9c9;
+            padding: 15px 0px;
+            .print-reciept {
+                float: left;
+                color: #979696;
+                padding-left: 15px; 
+                a {
+                    color: grey;
+                    text-decoration: underline;
+                }
+            }
+            table {
+                background: transparent;
+                float: right;
+                width: 50%;
+            }
+            .mz-accountvaluestd1 {
+                color: grey;
+                width: 200px;
+                text-align: left;
+                letter-spacing: 1px;
+                font-weight: normal;
+                &.total {
+                    color: initial;
+                }
+            }
+            .mz-accountvaluestd2 {
+                color: grey;
+                width: 150px;
+                text-align: right;
+                letter-spacing: 1px;
+                font-weight: normal;
+                &.total {
+                    color: initial;
+                }
+            }
+        }
+        .toggle {
+            display: inline-block;
+        }
+        .bgclass {
+            background: #fddb00 !important;
+        }
+        .bordrnone {
+            border: none!important;
+        }
+        .mz-validationmessage {
+            top: 48px;
+        }
+        .mz-returnform-optionalcomments {
+            .mz-validationmessage {
+                position: relative;
+                top: 0;
+            }
+        }
+    }
+    .mz-itemactionlink {
+        float: right;
+        .mz-itemlisting-action {
+            font-size: 13px;
+            border: 1px solid #39393C;
+            color: #343434;
+            padding: 4px 6px;
+            border-radius: 6px;
+            .uppercase();
+            &:hover {
+                background: @btn-secondary-hover;
+                border: 1px solid @btn-secondary-hover;
+                color: @white;
+                text-decoration: none;
+            }
+        }
+    }
+    //ORder History //
+    //My returns //
+    .mz-accountreturns {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        border: 1px solid #f6f6f6;
+        width: 100%;
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0 25px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-personalinformation {
+            padding: 10px 0px;
+            border-bottom: 1px solid #f6f6f6;
+            span {
+                font-size: 17px;
+                color: initial;
+                //  font-weight: bold;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .mz-tablestructure {
+            .cart-brd {
+                border-radius: 4px;
+                padding: 20px 0px;
+                //background: #fcfcfc;
+                //border-bottom: 1px solid #f6f6f6;
+                margin-bottom: 10px;
+                .order-details {
+                    border: 1px solid #f6f6f6;
+                    .order-row {
+                        background: #fcfcfc;
+                        border: 1px solid #f6f6f6;
+                        .mz-toggle-icon {
+                            cursor: pointer;
+                            position: relative;
+                            .icon-toggle {
+                                width: 32px;
+                                display: inline-block;
+                                background: url("../resources/images/myaccount-icons/plus.svg") no-repeat;
+                                text-indent: -9999px;
+                                background-size: 78%;
+                                position: absolute;
+                                height: 25px;
+                                right: 15px;
+                                height: 25px;
+                                bottom: -8px;
+                            }
+                        }
+                        &.active {
+                            .mz-toggle-icon {
+                                cursor: pointer;
+                                .icon-toggle {
+                                    background: url("../resources/images/myaccount-icons/minus.svg") no-repeat;
+                                }
+                            }
+                        }
+                    }
+                }
+                .return-details {
+                    padding: 20px;
+                    display: none;
+                    .panel-border {
+                        padding-left: 0;
+                        padding-right: 0;
+                        background: #fcfcfc;
+                        .panel-heading {
+                            padding: 10px;
+                            h6 {
+                                font-weight: bold;
+                                border-bottom: 1px solid rgba(151, 150, 150, 0.59);
+                                font-size: 0.9em;
+                                padding: 1%;
+                                &.details-ret {
+                                    font-weight: bold;
+                                    font-size: 0.9em;
+                                    border-bottom: 0;
+                                }
+                            }
+                        }
+                        .panel-body {
+                            .row {
+                                //padding-left: 10px;
+                                //padding-right: 10px;
+                                padding: 10px;
+                                &.row-table {
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    th,
+                                    td {
+                                        padding: 1% 3%;
+                                        &:nth-child(2) {
+                                            text-align: center;
+                                        }
+                                    }
+                                    .nopadding {
+                                        padding-right: 0;
+                                    }
+                                }
+                            }
+                            .mz-carttable-item-product {
+                                padding-left: 0;
+                            }
+                            .return-det {
+                                margin: 1% 0;
+                                padding: 2%;
+                            }
+                        }
+                    }
+                }
+                .mz-table-cart-items {
+                    //border-bottom: 1px solid #f6f6f6; 
+                    padding: 20px 0px 18px 0px
+                }
+                .cart-section {
+                    font-size: 13px;
+                    color: #979696;
+                    padding: 5px 0px;
+                    //border-bottom: 1px solid #848484;
+                    .uppercase();
+                }
+                .mz-carttable-item-product {
+                    .mz-productimage {
+                        border: 1px solid #f7f7f7;
+                        -moz-box-shadow: 1px 2px 13px #fefefe;
+                        -webkit-box-shadow: 0px 2px 7px #F3F3F3;
+                        box-shadow: 0px 2px 7px #F3F3F3;
+                        float: left;
+                        margin-right: 10px;
+                        padding: 0;
+                        width: 25%;
+                        img {
+                            width: 100%;
+                            max-width: 100%;
+                        }
+                    }
+                    .mz-carttable-item-info-wrap {
+                        float: left;
+                        width: 70%;
+                    }
+                    .mz-carttable-item-title {
+                        font-size: 16px;
+                        color: #000;
+                        text-align: left;
+                        display: inherit;
+                    }
+                    .option-values {
+                        text-align: left;
+                        .mz-finish {
+                            display: inline-block;
+                            width: auto;
+                            font-size: 12px;
+                            margin: 0 30px 0 0;
+                            color: #4A4A4A;
+                            .roboto_bold();
+                        }
+                        .bronze {
+                            height: 25px;
+                            width: 50px;
+                            display: inline-block;
+                            position: relative;
+                            top: 9px;
+                            font-size: 12px;
+                            .capitalize();
+                        }
+                        .mzcolor-text {
+                            display: inline-block;
+                            font-size: 12px;
+                            margin-top: 10px;
+                            margin-left: 5px;
+                            color: #9b9b9b;
+                            .lowercase();
+                            &:first-letter {
+                                .uppercase();
+                            }
+                        }
+                    }
+                }
+                .amp-cross {
+                    .roboto_regular();
+                    color: #9b9b9b;
+                    font-size: 13px;
+                }
+                .is-saleprice {
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .amp-quantityvalue {
+                    font-size: 14px;
+                }
+                .mz-carttable-header-options {
+                    margin: 25px 0 0 0;
+                    clear: both;
+                }
+                .mz-carttable-header-options label {
+                    font-size: 14px;
+                    font-weight: normal;
+                    color: #9B9B9B;
+                    text-align: left;
+                    margin: 0;
+                }
+                .mz-carttable-header-options label span {
+                    // font-weight: bold;
+                    font-size: 13px;
+                    color: #595959;
+                    display: inline-block;
+                    width: 100px;
+                }
+                .mz-carttable-item-total .is-crossedout {
+                    font-size: 14px;
+                    color: #cccccc;
+                    display: block;
+                    margin-left: -15px;
+                }
+                .mz-carttable-item-total .savepercent {
+                    display: block;
+                    font-size: 13px;
+                    color: #9b9b9b;
+                }
+                .mz-carttable-item-total .amp-price {
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                .mz-carttable-item-remove {
+                    .mzaccount-remove-item {
+                        font-size: 14px;
+                    }
+                    .mz-accoutreturn {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        .text-orderhistory {
+            background: #fddb00;
+            margin: 10px 0px;
+            background: #f7f7f7;
+            p {
+                padding: 10px 10px 10px 20px;
+                font-size: 14px;
+                a {
+                    color: #fddb00;
+                    text-decoration: underline;
+                    .uppercase();
+                }
+            }
+        }
+        .mz-damagedreason {
+            width: 100%;
+            padding: 5px;
+            background: #eeeeee;
+            .roboto_regular();
+            font-size: 14px;
+            margin-top: 10px;
+            .mz-reason {
+                color: red;
+            }
+        }
+    }
+    //My returns //
+    //My wishlist //
+    .mz-wishlist {
+        clear: both;
+        float: left;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ececec;
+        padding: 15px 15px 15px 25px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        .wishlist-product-title {
+            .mz-wishlist-product-option {
+                padding-left: 15px;
+                font-size: 0.8em;
+                color: #666;
+                label {
+                    margin: 0;
+                    color: #666;
+                }
+                span {
+                    .roboto_regular();
+                }
+            }
+            .mz-carttable-item-title.mz-desktop{
+                padding-left: 15px;
+            }
+        }
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0 25px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-personalinformation {
+            padding: 10px 0px;
+            border-bottom: 1px solid #f6f6f6;
+            span {
+                color: #343434;
+                font-size: 17px;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .mz-tablestructure {
+            .mz-cart-img {
+                border: 2px solid #f7f7f7;
+                -moz-box-shadow: 1px 2px 13px #fefefe;
+                -webkit-box-shadow: 1px 2px 13px #fefefe;
+                box-shadow: 1px 2px 13px #fefefe;
+                padding: 0;
+                //width: 10%;
+                img {
+                    max-width: 100%;
+                }
+            }
+            .cart-brd {
+                padding: 20px 0;
+                width: 100%;
+                .mz-table-cart-items {
+                    border-bottom: 1px solid #f6f6f6;
+                    padding: 25px 0px;
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+                    .mz-carttable-item-qty {
+                        //left: 3%;
+                    }
+                }
+                .cart-section {
+                    //.roboto_bold();
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    color: #979696;
+                    padding: 5px 0px;
+                    border-bottom: 1px solid #f6f6f6;
+                    .qty,
+                    .extras {
+                        padding: 0; 
+                    }
+                    .mz-carttable-header-price {
+                        left: -3%;
+                    }
+                    .mz-carttable-header-qty {
+                        text-align: left;
+                        left: 6%;
+                    }
+                    .mz-carttable-header-total {
+                        left: 3%;
+                    }
+                }
+                .mz-carttable-item-product {
+                    .mz-productimage {
+                        // min-height: 160px;
+                        height: auto;
+                        float: left;
+                        img {
+                            margin-right: 10px;
+                        }
+                    }
+                    .mz-carttable-item-info-wrap {
+                        float: left;
+                        width: 75%;
+                    }
+                    .mz-carttable-item-title {
+                        font-size: 13px;
+                        color: #3f3f3f;
+                        text-align: left;
+                    }
+                    .option-values {
+                        text-align: left;
+                        .mz-finish {
+                            display: inline-block;
+                            width: auto;
+                            font-size: 12px;
+                        }
+                        .colorbox {
+                            height: 25px;
+                            width: 45px;
+                            display: inline-block;
+                            position: relative;
+                            top: 9px;
+                            font-size: 12px;
+                        }
+                        .white {
+                            background: #fff;
+                            border: 2px solid #9c9c9c
+                        }
+                        .mzcolor-text {
+                            display: inline-block;
+                            font-size: 12px;
+                            margin-top: 10px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+                .amp-cross {
+                    color: #9b9b9b;
+                    font-size: 13px;
+                }
+                .is-saleprice {
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .amp-quantityvalue {
+                    font-size: 14px;
+                }
+                .mz-carttable-header-options label {
+                    font-size: 14px;
+                    font-weight: normal;
+                    color: #9b9b9b;
+                    text-align: left;
+                    //
+                }
+                .mz-carttable-header-options label span {
+                    //  font-weight: bold;
+                    color: @black;
+                    margin-right: 10px;
+                }
+                .mz-carttable-item-total .is-crossedout {
+                    font-size: 14px;
+                    color: #9b9b9b;
+                    display: block;
+                    margin-left: -15px;
+                }
+                .mz-carttable-item-total .savepercent {
+                    display: block;
+                    font-size: 12px;
+                    color: #9b9b9b;
+                    .roboto_regular();
+                }
+                .mz-carttable-item-total .amp-price {
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .mz-carttable-item-remove {
+                    .mz-button.mz-button-large {
+                        font-size: 16px;
+                        padding: 12.5px 28px;
+                        text-transform: uppercase;
+                        //  font-weight: bold; 
+                    }
+                    .mz-accoutreturn {
+                        font-size: 10px;
+                    }
+                    .mz-removeclickitem {
+                        padding: 5%;
+                        color: #979696;
+                        span {
+                            text-decoration: underline;
+                            font-size: 14px;
+                            //.uppercase();
+                            color: #979696;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+            .mz-carttable-qty-field {
+                text-align: center;
+                border: 1px solid #f7f7f7;
+                background: #fcfcfc;
+                position: relative;
+                margin: 0 auto;
+                height: 40px;
+                .roboto_regular();
+                font-size: 12px;
+                padding: 0;
+                width: 45%;
+            }
+        }
+    }
+    //My wishlist //
+    //Store Credit//
+    .mz-storecredit {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ececec;
+        padding: 15px 15px 15px 25px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        .mz-personalinformation {
+            .roboto_bold();
+            padding: 10px 0px;
+            border-bottom: 1px solid #ececec;
+            // font-weight: bold; 
+            span {
+                color: #000;
+                font-size: 17px;
+                .roboto_regular();
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .store-balance {
+            // font-weight: bold; 
+            margin-top: 20px;
+            h3 {
+                //font-weight: bold;  
+                .roboto_medium();
+                color: #343434;
+                font-size: 14px;
+                &.nth-of-type(2) {
+                    color: #4A4A4A;
+                }
+            }
+            p {
+                //padding-left: 20px;
+                color: #595959;
+                font-size: 14px;
+            }
+            span {
+                font-weight: normal;
+                font-size: 1em;
+                //margin-left: 5px;
+                color: #343434;
+            }
+            .mz-storecreditinput {
+                p {
+                    margin: 0;
+                    font-size: 13px;
+                    color: #39393c;
+                }
+                .input-text {
+                    //padding-left: 20px;
+                    input[type="text"] {
+                        display: inline-block;
+                        margin: 0;
+                        display: inline-block;
+                        margin: 0;
+                        width: 270px;
+                        background: #f7f7f7;
+                        border: 1px solid #e3e3e3;
+                        color: #343434;
+                        height: 40px;
+                        font-size: 14px;
+                        &:focus {
+                            background: #fff;
+                        }
+                    }
+                    button {
+                        width: 125px;
+                        font-weight: bold;
+                        border: 2px solid rgb(167, 167, 167);
+                        margin-top: 5px!important;
+                        margin-left: 5px;
+                        .uppercase();
+                        background: transparent;
+                        &:hover {
+                            border: 2px solid rgb(167, 167, 167);
+                            &.mz-accountstorecredit-add {
+                                color: initial;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //Store Credit//
+    //My preference//
+    .my-preferenceaccount {
+        padding: 15px 15px 15px 25px;
+        clear: both;
+        float: left;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ececec;
+        padding: 15px 15px 15px 25px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #c9c9c9;
+            padding: 10px 0 25px;
+            min-height: 40px;
+            margin-bottom: 0px;
+        }
+        .mz-personalinformation {
+            //padding: 10px 0 10px 12px;
+            border-bottom: 1px solid #f6f6f6;
+            font-weight: bold;
+            span {
+                //
+                font-weight: bold;
+                color: initial;
+                font-size: 18px;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .store-balance {
+            font-weight: bold;
+            margin-top: 20px;
+            h3 {
+                font-weight: bold;
+                color: #595959;
+                font-size: 14px;
+            }
+            h4 {
+                color: #343434;
+                font-size: 16px;
+                //margin: 0 0 0 12px;
+                .uppercase();
+            }
+            p {
+                padding-left: 20px;
+                color: #595959;
+                font-size: 12px;
+            }
+        }
+        /* /stylesheets/pages/myaccount.less:L1084 */
+        .mz-contacttype-isprimary {
+            font-size: 12px;
+            font-style: normal;
+            display: inline-block;
+        }
+        /* /stylesheets/pages/myaccount.less:L1089 */
+        .mz-contacttype-isprimary input[type=checkbox].css-checkbox {
+            display: none;
+        }
+        /* /stylesheets/pages/myaccount.less:L1092 */
+        .mz-contacttype-isprimary input[type=checkbox].css-checkbox:checked + span.css-label.cb3 {
+            background-position: 0 -16px;
+        }
+        /* /stylesheets/pages/myaccount.less:L1095 */
+        .mz-contacttype-isprimary .css-label.cb3 {
+            background-image: url("../resources/images/icons/redoption.png");
+            -webkit-touch-callout: none;
+            /* -webkit-user-select: none; */
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        /* /stylesheets/pages/myaccount.less:L1104 */
+        .mz-contacttype-isprimary input[type=checkbox].css-checkbox + span.css-label.cb3 {
+            height: 16px;
+            display: inline-block;
+            line-height: 16px;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            font-size: 14px;
+            vertical-align: middle;
+            cursor: pointer;
+            float: left;
+            color: rgba(0, 0, 0, 0.5);
+            text-indent: 25px;
+            sup {
+                top: 0;
+                font-size: 1.2em;
+            }
+        }
+        /* /stylesheets/pages/myaccount.less:L1115 */
+        .mz-contacttype-isprimary input[type=checkbox].css-checkbox {
+            position: absolute;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            width: 1px;
+            margin: -1px;
+            padding: 0;
+            border: 0;
+        }
+    }
+    //My preference//
+    //QUICK ORDER//
+    .quickreorder-preloader {
+        display: block;
+        //position: fixed;
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 75%;
+        height: 80%;
+        z-index: 7;
+        text-align: center;
+    }
+    .mz-quickreorder {
+        clear: both;
+        float: left;
+        width: 100%;
+        display: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ececec;
+        .mz-l-stack-sectiontitle {
+            font-size: 14px;
+            border-bottom: 1px solid #d2d2d2;
+            padding: 0px 0px;
+            min-height: 40px;
+            margin-bottom: 0px;
+            width: 851px;
+            padding-bottom: 10px;
+        }
+        .mz-personalinformation {
+            padding: 10px 0px;
+            border-bottom: 1px solid #f6f6f6;
+            .roboto_bold();
+            span {
+                color: #1e1e1e;
+                font-size: 18px;
+            }
+            .mz-accountsettings-nameedit {
+                float: right;
+                border: none;
+                background: transparent;
+                color: #fddb00;
+                text-decoration: underline;
+                font-size: 14px;
+            }
+        }
+        .mz-carttable-qty-field {
+            text-align: center;
+            border: 1px solid #f7f7f7;
+            background: #fcfcfc;
+            position: relative;
+            height: 35px;
+            .roboto_regular();
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+        }
+        .mz-tablestructure {
+            .cart-brd {
+                padding: 10px 0px;
+                //margin-left: 15px;
+                .mz-table-cart-items {
+                    border-bottom: 1px solid #f6f6f6;
+                    padding: 25px 0px;
+                    .mz-carttable-item-image {
+                        border: 2px solid #f7f7f7;
+                        width: 100%;
+                    }
+                }
+                .cart-section {
+                    //.roboto_bold();
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    color: #979696;
+                    padding: 5px 0px;
+                    border-bottom: 1px solid #f6f6f6;
+                    .mz-carttable-header-price {
+                        left: 25px;
+                        span {
+                            font-size: 11px;
+                        }
+                    }
+                    .mz-carttable-header-qty {
+                        padding: 0;
+                        text-align: left;
+                    }
+                    .mz-carttable-header-total {
+                        text-align: left;
+                    }
+                }
+                .mz-carttable-item-product {
+                    .mz-productimage {
+                        border: 1px solid #f3f3f3;
+                        -moz-box-shadow: 1px 2px 13px #fefefe;
+                        -webkit-box-shadow: 0px 2px 7px #F3F3F3;
+                        box-shadow: 0px 2px 7px #F3F3F3;
+                        float: left;
+                        margin-right: 10px;
+                        padding: 8px;
+                        width: 25%;
+                        img {
+                            max-width: 100%;
+                        }
+                    }
+                    .mz-carttable-item-info-wrap {
+                        line-height: 18px;
+                    }
+                    .mz-carttable-item-title {
+                        font-size: 16px;
+                        color: #000;
+                        text-align: left;
+                        //
+                    }
+                    .mz-carttable-header-options {
+                        float: right;
+                        width: 74%;
+                    }
+                    .option-values {
+                        text-align: left;
+                        color: #9b9b9b;
+                        line-height: normal;
+                        .mz-finish {
+                            color: #9b9b9b;
+                            line-height: normal;
+                            display: inline-block;
+                            width: auto;
+                            margin: 0; 
+                            font-size: 12px;
+                        }
+                        .colorbox {
+                            height: 25px;
+                            width: 45px;
+                            display: inline-block;
+                            position: relative;
+                            top: 9px;
+                            .roboto_regular();
+                            font-size: 12px;
+                        }
+                        .bronze {
+                            height: 25px;
+                            width: 45px;
+                            display: inline-block;
+                            position: relative;
+                            top: 9px;
+                            .roboto_regular();
+                            font-size: 12px;
+                        }
+                        .mzcolor-text {
+                            display: inline-block;
+                            .roboto_regular();
+                            font-size: 12px;
+                            margin-top: 0;
+                            margin-left: 5px;
+                            line-height: normal;
+                        }
+                    }
+                }
+                .amp-cross {
+                    .roboto_regular();
+                    color: #ccc;
+                    font-size: 14px;
+                }
+                .is-saleprice {
+                    .roboto_regular();
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .amp-quantityvalue {
+                    .roboto_regular();
+                    font-size: 14px;
+                }
+                .mz-carttable-header-options span {
+                    font-weight: bold;
+                    font-size: 11px;
+                    width: 33%;
+                    float: left;
+                    margin-right: 3px;
+                    color: @black;
+                }
+                .mz-carttable-header-options label {
+                    // .roboto_regular();
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: #9b9b9b;
+                    float: left;
+                    //width: 65%;  
+                    text-align: left;
+                }
+                .mz-carttable-item-total .is-crossedout {
+                    .roboto_regular();
+                    font-size: 14px;
+                    color: #cccccc;
+                    display: block;
+                    margin-left: -15px;
+                }
+                .mz-carttable-item-total .savepercent {
+                    display: block;
+                    font-size: 12px;
+                    color: #cccccc;
+                }
+                .mz-carttable-item-total .amp-price {
+                    .roboto_bold();
+                    font-size: 16px;
+                    color: #fddb00;
+                    display: block;
+                }
+                .mz-carttable-item-remove {
+                    .roboto_regular();
+                    a {
+                        font-size: 11px;
+                        //color: #fff;
+                        .uppercase();
+                        &.mz-button.mz-button-large {
+                            padding: 12.5px 25px;
+                            font-weight: bold;
+                        }
+                        &:hover {
+                            background: #000;
+                            color: #fff;
+                        }
+                    }
+                    .mzaccount-remove-item {
+                        font-size: 14px;
+                        padding: 10px 5px!important;
+                        font-size: 12px!important;
+                        //background: red;
+                        border-radius: 6px;
+                        .roboto_regular();
+                        /* margin-top: 15px!important; */
+                        color: #fff;
+                        text-transform: uppercase;
+                        border: none;
+                        display: inline-block;
+                    }
+                    .mz-accoutreturn {
+                        font-size: 10px;
+                    }
+                }
+            }
+            .mzaccountadditemquick {
+                a {
+                    background: red;
+                    padding: 5px 9px;
+                    font-size: 13px;
+                    border-radius: 4px;
+                    color: #fff;
+                }
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+        .mz-carttable-item-qty {
+            padding: 0px!Important;
+            .roboto_bold();
+        }
+        .quick-order-btn {
+            text-align: center;
+            padding: 10px 0;
+            .mz-more-order {
+                padding: 8px 15px;
+                font-size: 14px;
+                border: 0;
+                .border-radius(5px);
+                color: @white;
+                background: @btn-secondary;
+                &:hover {
+                    background: @btn-secondary-hover;
+                }
+            }
+        }
+    }
+    //QUICK ORDER//
+    .mz-scrollnav .mz-scrollnav-link {
+        color: #1e1e1e;
+    }
+    .mz-more-order {
+        padding: 8px 15px;
+        font-size: 14px;
+        border: 0;
+        .border-radius(5px);
+        color: @white;
+        background: @btn-secondary;
+        &:hover {
+            background: @btn-secondary-hover;
+        }
+    }
+    select {
+        -moz-appearance: none;
+    }
+    
+    .mz-l-stack-section {
+        display: none;
+    }
+    .mz-l-stack-section:first-child {
+        display: block;
+    }
+}

@@ -1,0 +1,31 @@
+﻿<div class="mz-contactselector">
+{% block contact-selector %}
+     
+  <div class="mz-l-formfieldgroup-cell">
+     <p class="mysavedshipping">My Saved Shipping Address</p>
+    <select id="mz--contactselector-savedcontact" class="mz-contactselector shippingcontact" data-mz-value="{{ contactcontext }}contactId" name="contactId" >
+      <option disabled >{{labels.selectSavedAddress}}</option>
+      <option value="new" data-mz-action="beginAddContact" >Add New Address</option>
+      {% for contact in model.contacts %}
+          <option value="{{ contact.id }}"  
+                  {% if model.id == contact.id %} 
+                    selected 
+                  {% else %}
+                    {% if model.contactId == contact.id %}
+                        selected 
+                    {% endif %}
+                  {% endif %}> {% include "modules/common/address-list" with model=contact %}</option>
+      {% endfor %}
+    </select>   
+     <div class="mz-contactselector-contact mz-contactselector-new mz-checkoutform-shipping">
+      <span class="mz-contactselector-summarywrapper">
+        {% block enter-new-form %}
+        {% include "modules/common/address-form" with model=editingContact %}
+        {% endblock enter-new-form %}
+      </span>     
+    </div>  
+  </div> 
+        
+{% endblock contact-selector %}
+  
+</div>

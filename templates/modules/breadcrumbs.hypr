@@ -1,0 +1,46 @@
+﻿
+<div itemprop="breadcrumb" class="mz-breadcrumbs">  
+    <div class="breadcrumbs-center">
+        <a href="/" class="mz-breadcrumb-link is-first" title="Home">Home</a> 
+        
+        {% if pageContext.pageType == "search"%}
+            <div class="mz-breadcrumbs-search-row">
+                <span class="sb-divider ">/</span>  {{ labels.searchResults }} <span class="mz-searchresults-query">"{{ pageContext.search.query }}"</span></h1>
+            </div>
+        {% endif %}
+         
+        {% for crumb in navigation.breadcrumbs %}
+            
+            {% if crumb.name == "PRODUCTS" %} 
+            
+            {% else %}
+                <span class="mz-breadcrumb-separator">/</span>
+                {% if forloop.last %}
+                    <span class="mz-breadcrumb-current">
+                    {{ crumb.name|safe }}
+                    </span>
+                {% else %}
+                    <a href="{{crumb.url}}" title="{{crumb.name|safe }}" class="mz-breadcrumb-link{% if forloop.first %} is-first{% endif %}">{{crumb.name|safe}}</a>     
+                {% endif %}
+            {% endif %}
+
+        {% endfor %} 
+
+        {% if pageContext.pageType == "my_anonymous_account"%}
+            <div class="mz-breadcrumbs-orderstatus">
+                <span class="sb-divider ">/</span>  Order-Status
+            </div>
+        {% endif %}
+        {% if pageContext.pageType == "confirmation"%}
+            <span class="mz-breadcrumbs-orderstatus">
+                <span class="sb-divider ">/</span>  Order Confirmation
+            </span>
+        {% endif %} 
+        {% if pageContext.pageType == "cart"%}
+            <span class="mz-breadcrumbs-orderstatus"> 
+                <span class="sb-divider ">/</span>  Shopping Cart
+            </span>
+        {% endif %}
+        
+    </div> 
+</div> 

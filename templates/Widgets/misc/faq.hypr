@@ -1,0 +1,59 @@
+ 
+<h1>{{ labels.faq|safe }}</h1>
+<div class="faq-content" {% data_attributes Model %}>
+	{% for categoryObj in {{Model.config.data}} %}
+		{% if forloop.first %}
+		<div class="left-navigation">
+			<h2>{{ labels.faqhdr|safe }}</h2>
+			<div class="faq-accordion">
+		{% endif %}
+
+				<div class="faq-accordion-header">
+					<h3 class="{% if forloop.first %}active{% endif %}" id="row-{{categoryObj.Category | slugify }}"><span>{{categoryObj.Category|safe}}</span>
+						<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+						<span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+					</h3>
+				</div>
+
+					<div class="faq-accordion-content"> 
+
+						{% if {{categoryObj.head}} %}
+						<h2>{{categoryObj.head|safe}}</h2>
+						{% endif %}
+						{% for questionsObj in categoryObj.Questions %}
+							<h2>{{questionsObj.qus|safe}}</h2>
+							<p>{{questionsObj.ans|safe}}</p>	
+						{% endfor %}
+					</div>	
+
+		{% if forloop.last %}
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+
+	{% for categoryObj in {{Model.config.data}} %}
+		<div class="right-content" data-mz-row="row-{{categoryObj.Category | slugify }}">
+			{% if {{categoryObj.head}} %}
+			<h2>{{categoryObj.head|safe}}</h2>
+			{% endif %}
+			<div class="faq-accordion">
+
+				{% for questionsObj in categoryObj.Questions %}
+					<div class="faq-accordion-header">
+						<h3>{{questionsObj.qus|safe}}
+						<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+						<span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+						</h3> 
+					</div>
+					<div class="faq-accordion-content">
+						<p>{{questionsObj.ans|safe}}</p>
+					</div>
+				{% endfor %}
+			</div> 
+		</div>
+	{% endfor %}
+
+</div>
+
+

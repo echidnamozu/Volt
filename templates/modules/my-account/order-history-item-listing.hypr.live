@@ -1,0 +1,18 @@
+﻿
+{% extends "modules/common/item-listing" %}
+   <div class="clear"></div>
+{% block item-name %}
+    {% if model.dateShipped %} {{ labels.shipped }}: {{ model.dateShipped|date("F j, Y") }}{% endif %}
+    {% parent %}
+{% endblock item-name %}
+
+{% block item-listing-extras %}
+{% if returning == model.id %}
+{% endif %}
+{% endblock item-listing-extras %}
+
+
+
+
+
+

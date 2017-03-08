@@ -1,0 +1,52 @@
+﻿
+
+<footer class="mz-pagefooter row">
+
+
+
+
+
+<div class="htmlcontent">
+<div class="widget1">
+{% dropzone "htmlcontent" scope="site" %}
+</div>
+<div class="widget2 row">
+    <div class="medium-9 columns medium-centered column-footer">
+        <div class="medium-4 columns"> 
+        {% dropzone "leftcontent" scope="site" %} 
+        </div>
+        <div class="medium-4 columns">
+        {% dropzone "middlecontent" scope="site" %}
+        </div>
+        <div class="medium-4 columns">
+        {% dropzone "rightcontent" scope="site" %}
+        </div>
+    </div>    
+</div>
+</div>
+    {% dropzone "footer1" scope="site" %} 
+    
+    
+    {% dropzone "footer2" scope="site" %} 
+    
+<div id="gts-container"></div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

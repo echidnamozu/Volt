@@ -1,0 +1,18 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-faq {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="faq mz-static-page"> 
+      {% dropzone "faq" scope="template" %} 
+    </div>
+
+{% endblock body-content %}
+
+

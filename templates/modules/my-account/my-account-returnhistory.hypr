@@ -1,0 +1,259 @@
+﻿{% if pageContext.pageType == "my_account" %}  
+    <h5 class="section-title">{{ themeSettings.returnstext }}</h5>
+{% endif %}    
+<div class="mz-accountreturns panel-border">  
+      {% if pageContext.pageType == "my_account" %}   
+    <div class="mz-personalinformation"> <span>Returns</span> </div>
+    {% endif %}
+    <div class="mz-tablestructure">
+
+        <div class="cart-brd">  
+        
+            {% if model.totalCount > 0 %}
+            {% for itemdata in model.items %}
+         
+            
+            <div class="order-details">
+                <div class="order-row"> 
+                    <div class="row text-center cart-section">
+                        <div class="mz-carttable-header-desc bold large-4 text-left medium-4 large-push-0 small-2 columns">STATUS</div>
+                        <div class="mz-carttable-header-price bold large-2 medium-2 large-push-0 small-2 columns large-text-left medium-text-left">RMA #</div>
+                        <div class="mz-carttable-header-qty bold large-2 medium-2  large-push-0 small-2 columns text-left">TOTAL</div>
+                        <div class="mz-carttable-header-total bold large-2 medium-2 large-push-4  small-2 columns">&nbsp;</div>
+                    </div>           
+                    <div class="mz-table-cart-items"> 
+                        <div class="row text-center cart-hover order-collapse">
+                            <div class="cart-row clear-both">
+                                {% if pageContext.pageType == "my_account" %} 
+                                <div class="mz-carttable-item-total mz-toggle-icon large-2 medium-2 large-push-0 small-12 columns mz-mobile"> 
+                                    <span class=" small-push-8 medium-push-0 large-push-0"></span>
+                                    <span class="icon-toggle">
+     
+                                    </span> 
+                                </div> 
+                                {% endif %}
+                                <div class="small-12 mzcart-mobile text-left mz-padding">
+                                <div class="small-5 columns text-left mz-mobile name">STATUS</div> 
+                                <div class=" large-12 small-7 columns text-left">{{ itemdata.status }}</div>
+                                </div>
+                                <div class="mz-carttable-item-product large-4 medium-4 large-push-0 small-4 columns mz-desktop">
+                                <div class="text-left">
+                                {{ itemdata.status }}
+                                </div>
+                                </div>
+                            </div>
+                            <div class="mz-carttable-item-price large-2 medium-2  large-push-0 small-12 columns text-left nopadding">
+                                <div class="small-5 columns text-left mz-mobile name">RMA #</div> 
+                                <span class="large-12 small-7 medium-12 columns text-left"> {{ itemdata.returnNumber}}</span> 
+                            </div>
+                            <div class="nopadding large-2 medium-2 large-push-0 small-12 columns left" style="padding:0">
+                                <div class="small-5 columns text-left mz-mobile name ">TOTAL</div> 
+                                <span class="amp-quantityvalue large-12 medium-12 small-7 columns text-left">{{ itemdata.productLossTotal|currency }}
+                            </span> </div>
+                            {% if pageContext.pageType == "my_account" %} 
+                            <div class="mz-desktop mz-carttable-item-total mz-toggle-icon large-2 medium-2 large-push-0 small-12 columns"> <span class=" small-push-8 medium-push-0 large-push-0 mz-desktop"></span>
+                            <span class="icon-toggle">
+  
+                            </span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!--  details -->
+                <div class="return-details">
+                    <div class="panel-border">
+                        <div class="panel-heading">
+                            <h6>RETURNING</h6>
+                        </div>
+                        <div class="panel-body">
+
+                            {% for item in itemdata.items %}
+                            {% with item.product|get_product_attribute("tenant~hide-product") as hidden %}   
+                            <div class="cart-row row">
+
+                                <div class="mz-carttable-item-product large-6 medium-6 large-push-0 small-4 columns mz-desktop">
+                                    <div class="mz-productimage">
+                                     {% if hidden %}
+                                     {% for val in hidden.values %}
+                                     {% if forloop.first %}
+                                     {% if val.value %} 
+                                     <img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/>
+                                      {% else %} 
+                                      <a href="/p/{{ item.product.productCode }}" >
+                                      <img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/></a> 
+                                      {% endif %}
+                                     {% endif %}
+                                     {% endfor %}
+                                     {% else %}
+                                        <a href="/p/{{ item.product.productCode }}" >
+                                     <img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/></a> 
+                                     {% endif %}
+                                     
+
+                                     </div>
+                                    
+                                    <div class="mz-carttable-item-info-wrap"> 
+                                        {% if hidden %}
+                                         {% for val in hidden.values %}
+                                         {% if forloop.first %}
+                                         {% if val.value %}
+                                            <div class="mz-carttable-item-title" >{{ item.product.name| safe }}</div> 
+                                         {% else %} 
+                                         <a href="/p/{{ item.product.productCode }}" >
+                                            <div class="mz-carttable-item-title" >{{ item.product.name| safe }}</div> 
+                                        </a>
+                                         {% endif %}
+                                         {% endif %}
+                                         {% endfor %}
+                                         {% else %}
+                                            <a href="/p/{{ item.product.productCode }}" >
+                                            <div class="mz-carttable-item-title" >{{ item.product.name| safe }}</div> 
+                                        </a>
+                                         {% endif %}
+
+                                        
+
+                                        {% for option in item.product.options %} 
+                                            {% if option.attributeFQN == 'tenant~lead-wire' or option.attributeFQN == 'tenant~color' or option.attributeFQN == 'tenant~size' or option.attributeFQN == 'tenant~color-temperature-option' %}
+                                            <div class="option-values">
+                                                <label class="mz-finish">{{option.name}}:</label>
+                                                <span class="mzcolor-text">{{ option.stringValue }}</span>
+                                            </div>
+                                            {% endif %} 
+                                        {% endfor %}
+                                        
+                                        <div class="mz-carttable-header-options"> 
+                                            {% if item.product.options.length > 0 %} 
+                                            {% for option in item.product.options %}
+                                                {% if option.attributeFQN != 'tenant~lead-wire' and option.attributeFQN != 'tenant~color' and option.attributeFQN != 'tenant~size' and option.attributeFQN != 'tenant~color-temperature-option' %} 
+                                                <label> {{ option.stringValue }}</label>
+                                                {% endif %} 
+                                            {% endfor %} 
+                                            {% else %}
+                                            <label> No Options </label> 
+                                            {% endif %} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mz-mobile row">
+                                    <div class="columns small-4">
+                                    {% if hidden %}
+                                     {% for val in hidden.values %}
+                                     {% if forloop.first %}
+                                     {% if val.value %} <a href="javascript:void(0)" > {% else %} <a href="{{item.product.url}}" >{% endif %}
+                                     {% endif %}
+                                     {% endfor %}
+                                     {% else %}
+                                        <a href="{{item.product.url}}" >
+                                     {% endif %}
+
+
+                                     <img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}" {% endif %}/></a> </div>
+                                    <div class="columns small-8"> <div >{{ item.product.name| safe }}</div> </div>
+                                    <div class="mz-carttable-item-info-wrap small-12">
+                                        {% for option in item.product.options %} 
+                                            {% if option.attributeFQN == 'tenant~lead-wire' or option.attributeFQN == 'tenant~color' or option.attributeFQN == 'tenant~size' or option.attributeFQN == 'tenant~color-temperature-option' %}
+                                            <div class="option-values">
+                                                <label class="mz-finish">{{option.name}}:</label>
+                                                <span class="colorbox {{ option.stringValue|lower}}"></span><span class="mzcolor-text">{{ option.stringValue }}</span>
+                                            </div>
+                                            {% endif %} 
+                                        {% endfor %}
+                                        <div class="mz-carttable-header-options">
+                                            {% if item.product.options.length > 0 %} 
+                                                {% for option in item.product.options %} 
+                                                    {% if option.attributeFQN != 'tenant~lead-wire' and option.attributeFQN != 'tenant~color' and option.attributeFQN != 'tenant~size' and option.attributeFQN != 'tenant~color-temperature-option' %}  
+                                                        <div class="clearfix">
+                                                            <label>{{ option.stringValue }}</label>
+                                                        </div>
+                                                    {% endif %} 
+                                                {% endfor %} 
+                                            {% else %}
+                                            <label> No Options </label>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row row-table">
+                                <div class="nopadding text-left large-12 medium-12 columns">
+                                    <div class="panel-heading">
+                                    <h6 class="details-ret">RETURN DETAILS</h6>
+                                    </div> 
+                                    
+                                    <table class="nopadding large-12 medium-12 mz-desktop columns"> 
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Reason for return
+                                                </th>
+                                                <th>
+                                                    Quantity of Return
+                                                </th>
+                                                <th>
+                                                    Comments (Optional)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                                <tr>
+                                                {% with item.reasons|first as reasons %}    
+                                                    <td>
+                                                        {{ reasons.reason }}
+                                                    </td>
+                                                    <td>
+                                                       {{ reasons.quantity }}
+                                                    </td>
+                                                    {% endwith %}
+                                                    <td>
+                                                        {{ item.notes.text }}
+                                                    </td>       
+                                                </tr>
+                                        </tbody>   
+                                    </table>       
+                                
+                                    <div class="row mz-mobile">
+                                        {% with item.reasons|first as reasons %} 
+                                        <div class="columns small-7 text-left name">
+                                            Reason for return
+                                        </div>
+                                        <div class="columns small-5 text-left value">
+                                             {{ reasons.reason }}
+                                        </div>
+                                        
+                                        <div class="columns small-7 text-left name">
+                                        Quantity of Return
+                                        </div>
+                                        <div class="columns small-5 text-left value">
+                                            {{ reasons.quantity }}
+                                        </div>
+                                        <div class="columns small-7 text-left name">
+                                        Comments
+                                        </div>
+                                        <div class="columns small-5 text-left value">
+                                             {{ item.notes.text   }}
+                                        </div>
+                                    </div>
+                                    {% endwith %}
+                                </div>
+                            </div>
+                             {% endwith %}
+                            {%  endfor %}
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
+                {% endfor %}
+                {% endif %}
+                
+            </div>
+                </div>
+                </div>
+                  
+      
+
+
+

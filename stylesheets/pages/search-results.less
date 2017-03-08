@@ -1,0 +1,224 @@
+.mz-searchresults {
+     .quickview-preloader {
+       display: block; 
+       position: absolute;
+       top: 0%;
+        background-color: rgba(255,255,255,0.9);
+        width: 100%;
+        height: 100%;
+        z-index: 7;
+        text-align: center;
+        overflow: hidden;
+      }
+
+    .mz-breadcrumbs {
+        &:last-child {
+            display: block;
+        }
+    }
+    .vt-noreuslts {
+        #searchbox {
+            .tt-dropdown-menu {
+                display: none !important;
+
+            }
+        }
+    }
+  
+    .vt-container { 
+    display: block;
+        .mz-l-sidebaritem {
+            display:block;       
+        }
+    }
+    
+   .polpular-searches {
+        margin: 80px 0 40px 0;
+        text-align: center;
+        width: 100%;
+            ul {
+                margin:0; 
+                line-height: 1;
+                li {
+                    color: #000;
+                    display: inline-block;
+                    font-size: 0.875em;
+                    margin-right: 5px;
+                    .roboto_bold();
+                    padding: 0;
+                    line-height: 1;
+                    a {
+                        color: #666;
+                        display: inline-block;
+                        font-size: 1em;
+                        .roboto_regular();
+                        padding: 0;
+                        line-height: 1;
+                        &:hover {
+                            color:#2e2e2e;
+                        }
+                    }
+            }
+        }
+    }
+}
+
+.mz-searchresults .mz-productlist-tiled .mz-project .mz-productlist-item .mz-productlisting-info {
+  clear: both;
+  margin-top: 30px;
+  margin: 30px auto 0;
+  width: 97%;
+}
+/*** START - NO SEARCH RESULTS PAGE ***/ 
+
+
+
+/** Search Results**/
+
+.vt-container{
+    
+}
+.vt-noreuslts{
+    margin: 125px auto 0 auto;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+
+    #searchbox
+    {
+        display: inline;
+        width: auto;
+        position: relative;
+    }
+
+    .mz-pagetitle{
+        font-size: 1.313em;
+        word-wrap: break-word;
+        font-family: 'roboto_regular';
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        color: #000;
+        margin: 0 0 20px 0;
+
+        .mz-searchresults-query
+        {
+            font-size: 1em;
+            .roboto_medium();
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+            color: #000;
+        }
+    }
+    .mz-searchresults-noresultstext{
+        .roboto_light();
+        font-size: 1em;
+        line-height: 1;
+        margin: 0 0 25px 0;
+        padding: 0;
+        color: #666;
+    }
+
+    .noresults{
+        text-align: center;
+        display: inline-block;
+        width: 35%;
+        border: 1px solid #dbdbdb;
+        margin: 0;
+        text-align: left;
+        .roboto_regular();
+        font-size: 0.875em;
+        padding: 12px 30px;
+        border-radius: 25px;
+        color: #bababa;
+        vertical-align: inherit !important;
+
+        &:focus
+        {
+            color:#2e2e2e;
+        }
+    }
+    .vt-btnno{
+        position: absolute;
+        border: none;
+        width: 28px;
+        height: 28px;
+        background: transparent;
+        padding: 0;
+        right: 15px;
+        top: -4px;
+
+        .st0
+        {
+            fill: #b4b4b4;
+        }
+    }
+    .twitter-typeahead{
+         display:initial !Important;
+    }
+    .noresultspage-images{
+      margin:15px 0px 25px 0px;
+        // .no-rimg{
+        //      width: 970px;
+        //     height: 320px;
+            
+            
+        // }
+    }
+    
+    
+}
+
+
+/*** END - NO SEARCH RESULTS PAGE ***/
+
+
+/* css for I-pad above */
+
+@media (min-width:768px) and (max-width:1024px) {  
+  .mz-searchresults .mz-productlist-list.mz-project .mz-productlist-item .mz-productlisting-info .clamped-2 {
+    height: 50px;
+}
+.mz-searchresults .mz-productlist-tiled .mz-productlist-list.mz-project .mz-productlist-item:nth-child(3n) {
+    margin-right: 15px !important;
+}
+}
+
+
+
+@media (min-width:768px) and (max-width:1330px)  { 
+  
+    
+}
+
+
+
+@media (min-width:1px) and (max-width:767px) {  
+
+.mz-searchresults .mz-productlist-list.mz-project .mz-productlist-item .mz-productlisting-info .clamped-2 {
+    height: 50px;
+}
+.mz-searchresults .mz-productlist-tiled .mz-project .mz-productlist-item .mz-productlisting-info {
+  clear: both;
+  margin: 25px  0 0 10px !important;
+  width: 91% !important;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

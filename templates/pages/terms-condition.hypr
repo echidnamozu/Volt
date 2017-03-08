@@ -1,0 +1,17 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-tnc {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="tnc mz-static-page"> 
+      {% dropzone "tnc" scope="template" %}  
+    </div>
+
+{% endblock body-content %}
+

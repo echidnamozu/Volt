@@ -1,0 +1,528 @@
+
+<div class=" mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+
+
+    <div class="mz-productlisting-image" itemscope itemtype="http://schema.org/ImageObject">  
+       
+        {% block product-image %}           
+
+            <a itemprop="url"  href="{% make_url "product" model %}">  
+                {% if model.productType == 'video type' %} 
+                    {% with model.content.productImages|first as value %}  
+                    <div class="video-icon-play"></div>
+                     {% for prop in model.properties %}
+                        {% if prop.attributeFQN|lower == "tenant~video-links" %} 
+                            {% for propval in prop.values %}
+                                {% if model.productType == 'Article type' or model.productType == 'video type' %}
+                                    {% if model.mainImage %}
+                                        <img data-video="{{ propval.value }}"  data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />           
+                                    {% else %}
+                                        <img data-video="{{ propval.value }}"  data-src="{{value.imageUrl}}?max={{themeSettings.listProductThumbSize}}&quality={{themeSettings.cdnQuality}}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />           
+                                    {% endif %} 
+                                {% else %}
+                                    <img data-video="{{ propval.value }}" data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />           
+                                {% endif %}
+                                <script type="application/ld+json">
+                                {
+                                  "@context": "http://schema.org",
+                                  "@type": "ImageObject",
+                                  "contentUrl": "{{ propval.value }}"
+                                }
+                                </script>
+                            {% endfor %}
+                        {% endif %}
+                     {% endfor %}
+                {% endwith %} 
+                {% else %}
+                    {% if model.mainImage.imageUrl %} 
+                        {% if pageContext.isMobile  %}
+                                {% if model.productType != 'project' %}
+                                    {% if model.productType == 'Article type' or model.productType == 'video type' %}
+                                        <img itemprop="image"   data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                    {% else %}
+                                        {% if model.productType == 'project' %}
+                                        {% else %}
+                                            <img itemprop="image" data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                        {% endif %}
+                                    {% endif %}
+                                {% else%}
+                                    <img itemprop="image"  data-src="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                {% endif %}
+
+                        {% else %} 
+                            {% if pageContext.isTablet  %}
+                                {% if model.productType != 'project' %}
+                                    {% if model.productType == 'Article type' or model.productType == 'video type' %}
+                                        <img itemprop="image"  data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                    {% else %}
+                                        {% if model.productType == 'project' %}
+                                        {% else %}
+                                            <img itemprop="image"   data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                        {% endif %}
+                                    {% endif %}
+                                {% else%}
+                                    <img itemprop="image"   data-src="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                {% endif %}
+                            {% else %}  
+                                {% if model.productType != 'project' %}
+                                    {% if model.productType == 'Article type' or model.productType == 'video type' %}
+                                        <img itemprop="image"   data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                    {% else %}
+                                        {% if model.productType == 'project' %}
+                                        {% else %}
+                                            <img itemprop="image"   data-src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                        {% endif %}
+                                    {% endif %}
+                                {% else%}
+                                    <img itemprop="image"  data-src="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% else %}alt="{{model.content.productName}}"{% endif %} />
+                                {% endif %}
+                            {% endif %}
+                        {% endif %} 
+                    {% else %}
+                        <img  data-src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg"  alt="No-Image"/>
+                    {% endif %}
+                {% endif %}
+            </a>
+        {% endblock product-image %} 
+    </div>
+  
+
+{% if model.productType=="project" %}
+{% else%}
+    <div class="mz-color-block">       
+        {% with model|get_product_attribute_value("tenant~default-option-product-code") as defaultcolor %}
+                {% with model.variations|findwhere('productCode',defaultcolor) as defaultcolordata %}  
+                    {% with defaultcolordata.options|findwhere('attributeFQN',"tenant~color") as defaultcolorvalue %}
+                    
+                        {% for property in model.options %}
+                            {% if property.attributeFQN|lower == "tenant~color" %} 
+                            
+                                {% for v in property.values %}
+                                    {% if v.value %}
+                                        {% if forloop.first %}
+                                            <div class="mz-color-attribute">
+                                        {% endif %}
+                                        <a href="javascript:void(0)" class="color-swatches-icon" colorswatchcode="{{ model.productCode }}_{{v.value|lower}}" color_value="{{v.value}}" option-name="{{property.attributeFQN}}">
+                                            <span class="color-outer">
+                                            
+                                                {% if model.showswatchimage and model.colorswatchimage %}
+                                                    {% for imageobj in model.colorswatchimage %}
+                                                            {% if imageobj.value == v.value|lower %}
+                                                                <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}" class="color-span  {% if dcolor.value %} {% if dcolor.value|lower == v.value|lower %} active-color {% endif %}  {% else %} {% if forloop.counter==0 %}  active-color {% endif %} {% endif %}" color_value="{{ v.stringValue  }}"  color_data="{{v.value}}"> 
+                                                                    <img src="{% make_url "image" imageobj %}" width="25px" height="25px" 
+                                                                    class="{% spaceless %}{{v.value|lower}}{% endspaceless %} product_colors" alt=""/> 
+                                                                </span>
+                                                            {% endif %}
+                                                    {% endfor %}
+                                                {% else %} 
+                                                    {% if pagecontext.isMobile %}        
+                                                        <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}" class="{% spaceless %}{{v.value|lower}}{% endspaceless %} color-span {% if defaultcolorvalue.value %} {% if defaultcolorvalue.value|lower == v.value|lower %} mobile-active-color {% endif %}  {% else %} {% if forloop.first %}  mobile-active-color {% endif %} {% endif %}" color_value="{{ v.stringValue  }}" color_data="{{v.value}}" >
+                                                        </span>
+                                                    {% else %}
+                                                        <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}" class="{% spaceless %}{{v.value|lower}}{% endspaceless %} color-span  {% if defaultcolorvalue.value %} {% if defaultcolorvalue.value|lower == v.value|lower %} active-color {% endif %}  {% else %} {% if forloop.first %}  active-color {% endif %} {% endif %}" color_value="{{ v.stringValue  }}" color_data="{{v.value}}" >
+                                                            </span>
+                                                    {% endif %}
+                                                {% endif %}    
+                                            </span>
+                                        </a>   
+                                        {% if forloop.last%}
+                                        </div>
+                                        
+                                        {% endif %}
+                                    {%  endif %}  
+                                {% endfor %}   
+                            {% endif %}   
+                        {% endfor %}
+                    {% endwith %}        
+            {% endwith %}
+        {% endwith %}
+       </div>    
+    </div>
+
+{% endif %}
+
+    <div class="mz-productlisting-info" > 
+        
+        {% if model.productType == 'PressRelease' or model.productType=="loged-in-news"  or model.productType=="Product News" or model.productType=="Amp_pro_News" %} 
+            {% for prop in model.properties%}
+                {% if prop.attributeFQN|lower == "tenant~pressdate" %}
+                    {% for valu in prop.values%}
+                       <span class="dateFormatClass">{{ valu.value}}</span> 
+                    {% endfor %} 
+                {% endif  %} 
+            {% endfor %}
+        {% endif %} 
+
+        {% if model.productType=="project" %}
+            <a  class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName|truncatewords(20)|safe}}</a>
+        {% else %}
+            {% for porp in model.properties %} 
+                {% if porp.attributeFQN|lower=="tenant~ribbon" %} 
+                    {% for propval in porp.values %}
+                        <div class="ribbon-container"><span class="new-ribbon {{ propval.stringValue|lower }}" style="background: #{{propval.value | split("_") | last}};">{{ propval.stringValue }}</span></div>
+                    {% endfor %} 
+                {% endif %}  
+            {% endfor  %}
+            {% if model.url %}
+                <a  class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName|truncatewords(20)|safe}}</a>
+            {% else %}
+                <a  class="mz-productlisting-title" href="{% if model.content.seoFriendlyUrl %}/{{model.content.seoFriendlyUrl}}{% endif %}/p/{{model.productCode}}">{{model.content.productName|truncatewords(20)|safe}}</a>
+            {% endif %}
+        {% endif %}     
+
+        {% if model.productType=="Standard" or model.productType=="CustomizedProducts" or model.productType == 'customised_bulb_products' or model.productType == 'single_customised_bulbs' or model.productType == 'multiple_customised_bulbs' %} 
+ 
+            {% include "modules/product/price-stack" %}
+        
+            <div class="mz-productlisting-rating">  
+              
+                <div id="PRInlineRating-{{model.productCode}}" class="pr-inline-rating" data-mz-product-code="{{ model.productCode }}" data-mz-product-url="{{ model.url }}" >
+                        
+                    <div id="pr-snippet-{{model.productCode}}" class="pr-snippet" >  
+                            
+                        <div id="reviewSnippetProduct">
+                            <div class="pr-snippet-wrapper">         
+                                <a  href="{{model.url}}#tab-5" class="pr-snippet-stars">
+                                    {% if model|get_product_attribute('tenant~rating') %}
+                                        {% with model|get_product_attribute('tenant~rating') as rating %}
+                                            {% if rating.values|first|prop("value") != "" %}
+                                            {% with rating.values|first|prop("value")|floatformat as totalRating %}
+                                                {% if totalRating > 4.7 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-5-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating < 4.8 and totalRating > 4.2 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-4_5-sm">&nbsp;</div>
+                                                {% endif %}                            
+                                                {% if totalRating > 3.7 and totalRating < 4.3 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-4-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating < 3.8 and totalRating > 3.2 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-3_5-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating > 2.7 and totalRating < 3.3 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-3-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating < 2.8 and totalRating > 2.2 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-2_5-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating > 1.7 and totalRating < 2.3 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-2-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating < 1.8 and totalRating > 1.2 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-1_5-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating > 0.7 and totalRating < 1.3 %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-1-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating < 0.8 and totalRating > 0  %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-0_5-sm">&nbsp;</div>
+                                                {% endif %}
+                                                {% if totalRating == 0  %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div>
+                                                {% endif %}
+                                            {% endwith %}  
+                                            {% else %}
+                                                <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-0-sm"  title="That's good stuff">&nbsp;</div>
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% else %}
+                                        <div id="pr-snippet-star-image" class="pr-stars pr-stars-small pr-stars-0-sm" title="That's good stuff">&nbsp;</div>
+                                    {% endif %}
+                                    <div class="pr_num_review">(<span id="num_review"></span>)</div>
+                                </a>
+                                <div class="pr-clear"></div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+                {% with model.properties|findwhere('attributeFQN',"tenant~technologies") as featureImages %} 
+                {% if featureImages %}
+                <div class="technologies">
+                    <div class="mz-product-featured" >
+                        <div class="feature-images">  
+                        {% for featureImage in featureImages.values %}
+                            {% with "{0}"|string_format(featureImage.stringValue) as urlPath %}
+                            <div style="display:none">
+                                {{urlPath}}
+                            </div>
+                            {% endwith %}
+                            {{ featureImage.stringValue|safe }}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+        {% endif %}     
+        
+        {% if model.productType=="project"%}
+            <div class="gallery-details">
+                {% with model|get_product_attribute_value('tenant~location') as locvalue %}
+                {% if locvalue != " " and locvalue %}  
+                    <p><label>{{ labels.location }}:</label>
+                     <span> 
+                                {{ locvalue|safe }}
+                     </span></p>
+                 {% endif %} 
+                 {% endwith %}
+                 
+                 {% with model|get_product_attribute_value('tenant~designed-by') as disgvalue %} 
+                 {% if disgvalue != " " and disgvalue %}
+                    <p><label>{{ labels.designedBy }}:</label> 
+                    <span>
+                            {{ disgvalue|safe }}
+                     </span></p>
+                 {% endif %}  
+                 {% endwith %}
+                 
+                 {% with model|get_product_attribute_value('tenant~installed-by') as instvalue %}
+                 {% if instvalue != " " and instvalue %}
+                    <p><label>{{ labels.installedBy }}:</label> 
+                    <span> 
+                                {{ instvalue|safe }}
+                    </span></p>
+                 {% endif %} 
+                 {% endwith %}
+            </div>
+            <div class=" mz-productlisting-shortdesc">
+                <p class="">
+                   &#8243;{{model.content.productShortDescription | safe}}&#8243;  
+                </p> 
+            </div>
+        {% else %}
+
+            {% if model.productType=="video type"%}
+                <a href="{% make_url "product" model %}">
+                    <p>{{model.content.productShortDescription| safe}}</p>
+                </a>
+            {% else %}
+                {% if model.productType=="Article type" %}
+                  <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|safe }}</p>
+                 <div class="pr-btn">
+                    {% if model.url %}
+                        <a href="{% make_url "product" model %}">Read More</a>
+                    {% else %}
+                        <a href="{% if model.content.seoFriendlyUrl %}/{{model.content.seoFriendlyUrl}}{% endif %}/p/{{model.productCode}}">Read More</a>
+                    {% endif %}
+                 </div> 
+                
+                {% else %}
+                    {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                        <div class=" mz-productlisting-shortdesc"> 
+                            <div class="text">
+                            {% if pageContext.isMobile%}
+                                {{ model.content.productShortDescription | striptags| safe| truncatewords(20) }}
+                                {% else %}
+                                {% if pageContext.isTablet %}
+                                    {{ model.content.productShortDescription | safe }}
+                                {% else %}
+                                    {{ model.content.productShortDescription | safe }}  
+                                {% endif %}
+                            {% endif %}
+                            </div> 
+                        </div>
+                    {% endif %}
+                     
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        
+
+        {% if model.productType == 'project' %}  
+           
+            <ul class="tags">
+                {% for projectprop in model.properties %}
+                    {% if projectprop.attributeFQN|lower=="tenant~tags" %}
+                        {% for projectprop in projectprop.values %}
+                            {% if pageContext.pageType == "search" %}
+                                <li><a href="?query={{pageContext.search.query}}&categoryId={{themeSettings.Project_Cid}}&facetValueFilter=tenant~tags%3A{{projectprop.value}}">{{ projectprop.stringValue }}</a></li>
+                            {% else %}
+                                <li><a href="?facetValueFilter=tenant~tags%3A{{projectprop.value}}">{{ projectprop.stringValue }}</a></li>
+                            {% endif %} 
+                        {% endfor %} 
+                    {% endif %}
+                {% endfor %}
+            
+            </ul> 
+            
+            <ul class="project-btn {{model.content.seoFriendlyUrl}}">
+               <li><a href="{% if model.content.seoFriendlyUrl %}/{{model.content.seoFriendlyUrl}}{% endif %}/p/{{model.productCode}}" title="GO TO PROJECT">GO TO PROJECT</a></li> 
+               <!-- <li><a href="{% if model.content.seoFriendlyUrl %}/{{model.content.seoFriendlyUrl}}{% endif %}/p/{{model.productCode}}#projProduct" title="VIEW PRODUCTS USED">VIEW PRODUCTS USED</a></li> -->
+            </ul>
+              
+        {% endif %}  
+        
+        {% if model.productType=="PressRelease" or model.productType=="loged-in-news" or model.productType == 'Product News' or model.productType=="Amp_pro_News" %}
+            {% for prop in model.properties%}
+                {% if prop.attributeFQN|lower == "tenant~pressdate" %}
+                
+                {% endif  %} 
+             {% endfor %}
+             <div class="pr-btn">
+                {% if model.url %}
+                    <a href="{% make_url "product" model %}">Read More</a>
+                {% else %}
+                    <a href="{% if model.content.seoFriendlyUrl %}/{{model.content.seoFriendlyUrl}}{% endif %}/p/{{model.productCode}}">Read More</a>
+                {% endif %}
+             </div>
+        {% endif %} 
+
+
+        
+    
+
+    </div> 
+          
+
+{% if model.productType=="Standard" or model.productType=="CustomizedProducts" or model.productType == 'customised_bulb_products' or model.productType == 'single_customised_bulbs' or model.productType == 'multiple_customised_bulbs'  or model.productType == 'MR16 Bulb'  %}
+  
+        <div class="mz-messagebar cart-out-of-stock">
+            <p class="mz-errors">{{labels.outOfStock}}</p>
+        </div>
+        
+         {% with model.options|findwhere('attributeFQN',"tenant~color") as option %}
+        {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as wireSize %}
+        {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as colorTemp %}
+        {% with model.options|findwhere('attributeFQN',"tenant~size") as size %}
+        {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+        
+        <div class="mz-backorder-popup">
+            <div class="mz-backorder-popup-content">
+                <span class="mz-backorder-content-message">
+                {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                    {% if backorderdate %}
+                        {% with backorderdate|split("Discontinued") as Discontinued %} 
+                            {% if Discontinued.length > 1 %}
+                                {{ backorderdate }}
+                            {% else %}
+                               {{ labels.backOrder }} Expected By:{{ backorderdate }}
+                            {% endif %}    
+                        {% endwith %}
+                    {% else %}
+                             {{ labels.backOrder }} 
+                    {% endif %}
+                {% endwith %}
+                </span>
+                
+                {% if model.options.length > 0 %}
+                    {% if model.options.length ==1 %}
+                        {% for modprod in model.options %}
+                            {% if modprod.attributeFQN|lower=="tenant~color" %}
+                                <button mz-quick-add-to-cart="{{model.productCode}}" id="add-tocart" class="color_buy_product backorder large-5 column mz-button mz-button-large">
+                                    OK
+                                </button>  
+                            {% else %}
+                                {% with modprod.values|first as info %}
+                                    {% if wireSize or size or colorTemp %}
+                                        
+                                    {% else %}   
+                                        {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                            <button  mz-quick-add-to-cart="{{model.productCode}}" data-mz-extracode="{{info.value}}" class="color_buy_product backorder large-5 column mz-button mz-button-large">
+                                                OK
+                                            </button>
+                                        {% endif %} 
+                                    {% endif %} 
+                                {% endwith %}      
+                            {% endif %}
+                        {% endfor %}  
+                    {% endif %} 
+                {% else %}  
+                    <button id="add-tocart" mz-quick-add-to-cart="{{model.productCode}}" class=" backorder large-5 column mz-button mz-button-large">
+                        OK
+                    </button>
+                {% endif %} 
+                <button class="mz-backorder-popup-close large-6 column mz-button mz-button-large"> 
+                    Cancel
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="cart-block row">
+             
+               
+                <div class="add-cart small-7 columns">
+                    {% if model.options.length > 0 %}
+                        {% if model.options.length ==1 %}
+                            {% for modprod in model.options %}
+                                {% if modprod.attributeFQN|lower=="tenant~color" %}
+                                    <a  class="color_buy_product" mz-quick-add-to-cart="{{model.productCode}}" id="add-tocart" title="{{ labels.addToCart }}">{{ labels.addToCart }}</a>    
+                                {% else %}
+                                    {% with modprod.values|first as info %}
+                                        {% if wireSize or size or colorTemp %}
+                                            <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ model.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }} </a>                                                 
+                                        {% else %}   
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                {% if model.inventoryInfo.onlineStockAvailable == 0 and model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}
+                                                    <a id="add-tocart" data-mz-action="backorderbutton" backorderbutton="backorder" title="Add To Cart"> Add To Cart </a>
+                                                {% else %}
+                                                    <a  class="color_buy_product" href="javascript:void(0);" data-mz-extracode="{{info.value}}" {% if not model.purchasableState.isPurchasable and model.purchasableState.messages.length > 1 %}disabled="disabled"{% endif %} title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ model.productCode }}" >{% if not model.purchasableState.isPurchasable and model.purchasableState.messages.length > 1 %}{{labels.outOfStock}}{% else %}{{ labels.addToCart }}{% endif %}</a> 
+                                                {% endif %}
+                                            {% else %} 
+                                                <a  href="javascript:void(0);"  {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} title="{{ labels.customAddToCart }}" data-mz-prcode="{{ model.productCode }}"  datamz-action="showCustomOption" class="customcart" >{% if not model.purchasableState.isPurchasable %} {{ labels.outOfStock }} {% else %} {{ labels.customAddToCart }} {% endif %}</a> 
+                                            {% endif %} 
+                                        {% endif %} 
+                                    {% endwith %}
+                                {% endif %}
+                                
+                            {% endfor %}  
+                        {% else %}
+                            {% for modprod in model.options %} 
+                            {% with mod.options  as prd %}
+                                {% with modprod.values|first as info %}
+                                    {% if wireSize or option or size or colorTemp %}
+                                        {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                            {% if forloop.last %} 
+                                                <a  class="color_buymultiple_product" href="javascript:void(0);" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ model.productCode }}" >{% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ model.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }} </a>                                                 
+                                        {% endif %}
+                                    {% else %}
+                                        {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                {% if forloop.last %} 
+                                                    <a  class="color_buymultiple_product" href="javascript:void(0);" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ model.productCode }}" >{% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a  href="javascript:void(0);"  title="{{ labels.customAddToCart }}" data-mz-prcode="{{ model.productCode }}"  datamz-action="showCustomOption" class="customcart" >{{ labels.customAddToCart }}</a>             
+                                            {% endif %}
+                                        {% else %}
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                {% if forloop.last %} 
+                                                    <a  class="color_buymultiple_product" href="javascript:void(0);" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %}data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}"  title="{{ labels.addToCart }}" mz-quick-add-to-cart="{{ model.productCode }}" >{% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior =="AllowBackOrder" %}{{ labels.addToCart }}{% else %}{{ labels.outOfStock }}{% endif %}</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a  href="javascript:void(0);" {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} title="{{ labels.customAddToCart }}" data-mz-prcode="{{ model.productCode }}"  datamz-action="showCustomOption" class="customcart" >{% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%} {{ labels.customAddToCart }} {% else %} {{ labels.outOfStock }} {% endif %}</a>             
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}       
+                                {% endwith %}        
+                            {% endwith %}        
+                            {% endfor %} 
+                        {% endif %}
+                    {% else %}
+                        <a {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} id="add-tocart"  {% if model.inventoryInfo.outOfStockBehavior=="AllowBackOrder" and model.inventoryInfo.onlineStockAvailable == 0 %} data-mz-action="backorderbutton" backorderbutton="backorder" {% else %}  mz-quick-add-to-cart="{{model.productCode}}"  data-mz-action="addtocart"{% endif %} title="{{ labels.addToCart }}">{% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%} {{ labels.addToCart }} {% else %}{{ labels.outOfStock }}  {% endif %}</a>
+                    {% endif %}    
+                </div>   
+             
+        </div>
+        {% endwith %} 
+        {% endwith %} 
+        {% endwith %} 
+        {% endwith %}  
+        
+        
+        
+    {% endif %} 
+
+{% require_script "pages/cart" %}    
+
+
+
+
+

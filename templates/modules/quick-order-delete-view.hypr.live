@@ -1,0 +1,16 @@
+<div id="tz-cart-dialog" class="mz-modal mz-modal-outer">
+	<div class="mz-modal__wrapper" data-mz-role="modal-window">
+		<div class="mz-modal__inner clearfix" data-mz-role="modal-contents">
+			<p class="delete_text">Are you sure want to delete this item ?</p>
+			<div class="clearfix"></div>
+			<div class="confirm-btns clearfix">
+				<button class="mz-cart-model-btn mz-model-yes-btn" options="{{model.options}}" prcode="{{model.id}}" id="cart-del-confirm-yes" data-mz-delete-item="yes">Yes</button>
+				<button class="mz-cart-model-btn mz-model-no-btn" id="cart-del-confirm-no" value="{{model.value}}" quantity="{{model.quantity}}" data-mz-delete-item="no">No</button>
+			</div>
+		</div>		
+	</div>
+</div>
+
+
+
+

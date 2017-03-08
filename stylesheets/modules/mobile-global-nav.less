@@ -1,0 +1,299 @@
+	
+//------------Site Nav in home -----------------------------
+	@media only screen and (min-width: 1px) and (max-width: 767px) {
+	.mz-mobile-global-nav{
+	    .mz-bck{
+	        display:none;
+	        cursor: pointer; 
+            color: black;
+            padding: 2px 16px;
+            position: relative; 
+            font-size: 14px;
+            padding: 30px;
+            width: 100%; 
+            background: url("../resources/images/icons/back-arrow-icon.png") 2.5% center #eaeaea no-repeat;
+            background-size: 2.5%%;
+            padding-left: 46px;
+            .montserrat_regular();
+	    } 
+        .vertical_headline {
+            h3 {
+                margin:2.5%;
+            }
+        }
+        .square_headline { 
+            margin:2.5%;
+        }
+        .mz-temp-sitenav .mz-subnav .mz-subnav-content .mz-subnav-title a{
+	        padding-left: 5%;
+	        margin:0;
+	        color:black;
+	        background:none;
+	        padding: 0 !important;
+	    }
+        .medium-12.columns.big-sale {
+          display: none;
+        }
+	    .mz-subactive{
+	    	margin-right:0 !important;
+	    	display:block !important;
+	    	position: absolute !important;
+	    	overflow:hidden !important;
+	    }
+	    .mz-parentdeactive{
+	    	margin-left: -100%;
+			float: left;
+	    }
+	    .mz-prent-active{
+	    	margin-left:0;
+	    }
+	    .mz-temp-sitenav .mz-subnav .mz-subnav-content:after {
+		  content: '';
+		  position: absolute;
+		  top: 12px;
+		  bottom: 100%;
+		  margin-left: 0;
+		  width: 0;
+		  height: 0;
+		  border-bottom: 12px solid white;
+		  border-right: 12px solid transparent;
+		  border-left: 12px solid transparent;
+		  display:none;
+		}
+		.mz-home-nav{
+			position: relative;
+			background: white;
+			display: block;
+			color: black;
+			clear:both;
+			.mz-sitenav-list{
+				 background: #39393c none repeat scroll 0 0;
+                //display: block;
+                float: left;
+                height: 100%;
+                margin: 0;
+                padding: 40px 0 0;
+                position: relative;
+                width: 86%; 
+				li{
+					display: block;					
+					text-align: left; 
+					clear: both;
+					padding: 6px 0;				
+					border-bottom: 1px solid #111;
+					height: auto;
+					a{
+						display: block;
+						font-size: 12px;
+						color: black;
+						text-transform: uppercase;
+					    padding: 5px 15px !important;
+						margin-right: 5%;
+					}				
+					.mz-sitenav-link.mz-droparrow{
+						background:url("../resources/images/icons/down.png") center right no-repeat; 
+					}
+					.mz-uparrow{
+						background:url("../resources/images/icons/up.png") center right no-repeat !important;
+					}
+				}
+				.mz-home-linkmain{
+					display: none;
+				}	
+
+			}			
+
+			.mz-subnav.mz-sitenav-sub{
+				clear: both;
+				display: none;
+				position: relative;
+				margin-right: -100%;
+				float: right;
+				.mz-subnav-content{
+					margin: 0;
+					background: white;
+					display: block;
+					float: left;    
+					 padding: 0;
+                    width: 100%;
+                    box-shadow: none;
+				}
+				.mz-subnav-title{
+				    margin: 3% 6%;
+                    width: 82%;
+					a{
+					 
+					}
+				}
+				.mz-menu-promo{
+    				display: block;
+                    position: absolute;
+                    top: 320PX;
+                    clear: both;
+                    bottom: 0;
+                    width: 92%;
+                    & a:first-child{
+                        width:100%;
+                        display:block !important;
+                    }
+                    a{
+                        display:none;
+                    }
+				}
+				.mz-nav-filter{
+					margin: 0;
+					display: block;
+					padding:0;
+					width:100%;
+				
+					.mz-filter1{
+                          width: 100%;
+                          padding: 0;
+                          margin: 0;
+                          clear: both;
+                          float: right;
+                          display: block;
+                          &.menuvertical{
+                              li{
+                                  padding-left: 0% !important;
+                                  display: block !important;
+                                  float: left;
+                                  width: 100%;
+                                  border: none !important;
+                                  color: white !important;
+                                  cursor: pointer;
+                                  background: none;
+                                  padding: 8px 4% !important;
+                                  margin: 0; 
+                                  clear: none;
+                                  min-height: 100%;
+                                  border-bottom: 1px solid #eaeaea !important;
+                                  border-right: 1px solid #eaeaea !important;
+                                  border-top: none !important;
+                                  vertical-align: middle;
+                              }
+                          }
+						li:first-child{
+							span{
+								color: black;
+								background-position: center right;
+								display: block;
+								height: auto;
+								&:hover{
+								     color:black !important;
+								}
+							}
+						}
+						&.menusquare{
+                              li{
+                                   padding-left: 0% !important;
+                                  display: block !important;
+                                  float: left;
+                                  width: 50%;
+                                  border: none !important;
+                                  color: white !important;
+                                  cursor: pointer;
+                                  background: none;
+                                  padding: 9px !important;
+                                  margin: 0; 
+                                  clear: none; 
+                                  min-height: 100%;
+                                  border-bottom: none !important;
+                                  border-right: none !important;
+                                  border-top: none !important;
+                                  vertical-align: middle; 
+                                  span{
+                                      //  min-height: 110px;
+                                        height: auto;
+                                        font-size: 11px;
+                                  }
+                              }
+                          }
+                          &.menucircle{
+                             li{
+                                span img{
+                                    border: none;
+                                    &:hover{
+                                        background: transparent;
+                                    }
+                                }
+                                &:hover{
+                                    img{
+                                        background-color: transparent;
+                                    }
+                                }
+                             }
+                          }
+						li{
+							  padding-left: 0% !important;
+                              display: inline-block !important;
+                              float: left;
+                              width: 50%;
+                              border: none !important;
+                              color: white !important;
+                              cursor: pointer;
+                              background: none;
+                              padding: 6px !important;
+                              margin: 0;
+                              clear: none;
+                              min-height: 150px;
+                                border-bottom: 1px solid #eaeaea!important; 
+                              border-right: 1px solid #eaeaea!important;
+                              border-top: none !important;
+                              vertical-align: middle;
+                                padding-top: 17px !important;
+                              min-height: 166px;
+							a{ 
+								color: black !important;
+								height: auto;
+								padding:0 !important;
+							} 
+						}
+						.mz-sitenav-link.mz-sitenav-linktitle.mz-item{
+						    background: url("../resources/images/icons/order-plus.png") no-repeat;
+					    	background-position: center right;
+							display: block;
+							height: auto;
+						}
+						.mz-minus{  
+							background: url("../resources/images/icons/qty-minus.png") no-repeat !important;
+							background-position: center right !important;
+						}
+					}
+				} 
+					.megamenu-rgt .megamenu_3{
+					    margin:0;
+					}
+				.medium-4.columns.megamenu-rgt{
+                      padding-left: 27px !important;
+                      .row{
+                            margin: 0 !important;
+                      }
+                      .medium-12.columns.mega-headerbox {
+                          padding: 0;
+                        }
+                    .megamenu-buton{
+                          border: 1px solid black;
+                          width:100%;
+                    }
+				}
+				.big-sale{
+				  h3, span{
+				      font: bold 13px "montserratbold"; 
+				    }  
+				} 
+				
+			}
+		}
+	}
+}
+	//------------Site Nav in home END -----------------------------
+
+
+
+
+
+
+
+
+

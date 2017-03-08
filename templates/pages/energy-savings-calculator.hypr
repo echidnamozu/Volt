@@ -1,0 +1,15 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-article-wrapper {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+ 
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+     {% dropzone "calculator" scope="page" %}
+{% require_script "pages/energy-savings-calculator" %}
+{% endblock body-content %}
+

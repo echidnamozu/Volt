@@ -1,0 +1,17 @@
+<div data-mz-role="video-pop-up-wrapper" class="mz-modal mz-video-popup">
+	<div class=" mz-modal__wrapper" data-mz-role="modal-window">
+		<div class="mz-modal__inner" data-mz-role="modal-contents">
+			<section class="mz-l-row">
+				<div class="iframe-parent">
+					<div class="iframe-video">
+						<iframe src="{{ model.video }}?html5=1&rel=0&autoplay=1" frameborder="0" webkitallowfullscren mozallowfullscreen allowfullscreen></iframe>
+						
+					</div>
+                    <a class="mz-btnclose" href="javascript:void(0);" data-mz-role="modal-close" title="{{ labels.close }}">{{ labels.close }}</a>					
+				</div>
+			</section>
+		</div> 
+	</div>
+</div>
+
+ 

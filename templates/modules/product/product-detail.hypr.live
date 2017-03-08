@@ -1,0 +1,879 @@
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+    
+    
+    <div itemprop="description">{{ model.content.productFullDescription|safe }}</div>       
+    {% if model.content.productFullDescription %}<a href="#tab-1" class="read-more" title="Read More" data-mz-action="detailtab">Read More</a>{% endif %}
+</div>
+<div class="mz-productdetail-internalLinks">
+    <ul>
+        <li class="internalLinks small-4 large-4 medium-4">
+            <a href="#tab-3" class="specification internalLink">
+                <span class="icon">
+                    {% if sitecontext.siteId %}
+                    <img src="/resources/images/icons/pdp_infoLink.png?max=25" alt="Information"/>
+                {% else %}
+                    {% with sitecontext.cdnPrefix|split("-") as datacheck %}
+                        {% with datacheck|last as site %}
+                            <img src="/resources/images/icons/pdp_infoLink.png?max=25" alt="Information Link"/>
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+                </span>
+                Specification
+            </a>
+        </li>
+        <li class="internalLinks small-4 large-4 medium-4">
+            <a href="#tab-2" class="downloads internalLink">
+                <span class="icon">
+                    {% if sitecontext.siteId %}
+                    <img src="/resources/images/icons/pdp_downloadLink.png?max=25" alt="Download"/>
+                    {% else %}
+                        {% with sitecontext.cdnPrefix|split("-") as datacheck %}
+                            {% with datacheck|last as site %}
+                                <img src="/resources/images/icons/pdp_downloadLink.png?max=25" alt="Download Link"/>
+                            {% endwith %}
+                        {% endwith %}
+                    {% endif %}
+                </span>
+                Downloads
+            </a>
+        </li>
+        <li class="internalLinks small-4 large-4 medium-4">
+            <a href="#tab-6" class="videos internalLink">
+                <span class="icon">
+                    <img src="/resources/images/icons/pdp_videoLink.png?max=25" alt="Videos"/>
+                </span>
+                Videos 
+            </a>
+        </li>
+    </ul>
+</div>
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+<div  class="mz-productdetail-price mz-l-stack-section">
+ 
+ {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                    {% if hideinfo %}
+                        {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                            {% if hiddenproduct %}
+                               {% with model|get_product_attribute_value("tenant~price-label") as aliasName %} 
+                                    {% with aliasName|split(",") as documentData %}
+                                        {% with documentData|first as label1 %}
+                                        {% with documentData|last as label2%}
+                                            <div class="mz-price-block"> 
+                                                {% if model.segpricelabel %}
+                                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>
+                                                {% else %}
+                                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.pricelabel}}{% endif %} :</span>
+                                                {% endif %}
+                                                <span class="mz-price is-saleprice">N/A</span>
+                                            </div>    
+                                        {% endwith%}    
+                                        {% endwith%}    
+                                    {% endwith%}    
+                                {% endwith %}
+                            {% else %}
+                             {% include "modules/product/price-stack_data" %} 
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %} 
+                {% endwith %} 
+            {% endif %}
+ 
+
+</div>
+<div class="mz-color-block">
+{% with model|get_product_attribute_value("tenant~default-option-product-code") as prodCode %}
+{% with model.variations|findwhere('productCode',prodCode) as variationObj %} 
+    
+    {% with variationObj.options|findwhere('attributeFQN',"tenant~color") as varColor %} 
+    
+    {% with model.options|findwhere('attributeFQN',"tenant~color") as option %} 
+    {% with option.values|findwhere('isSelected',"true") as selectedColor %}
+    
+    <div class="mz-color-attribute mz-customdrop">
+            {% if option.attributeFQN|lower == "tenant~color" %}
+            <span class="color-lable">Color / Finish 
+                <span class="active-color-text">{{selectedColor.value}}</span>
+            </span>
+                {% for v in option.values %}
+                    {% if v.value %}
+                            <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}"  option-type="{{ option.attributeDetail.usageType }}" data-mz-product-option="tenant~color" class="{% spaceless %}{{v.value|lower}}{% endspaceless %} color-span {% if v.isSelected %}active{% endif %}" color_value="{% spaceless %}{{v.value}}{% endspaceless %}" >
+                            </span>
+                    {% endif %} 
+                {% endfor %} 
+            {% endif %}
+            {% if option.attributeDetail.inputType == "List" %}
+                {% if option.attributeDetail.usageType|lower == "option" %}    
+                    <select option-type="{{ option.attributeDetail.usageType }}" {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option {% if option.attributeFQN|lower == "tenant~color" %}sb-color{%endif%}" data-mz-product-option="{{ option.attributeFQN }}" style="display:none;">
+                        {% if not option.isMultiValue %}<option></option>{% endif %}
+                        {% for value in option.values %}
+                        <option 
+                            {% if not value.isEnabled %} class="is-disabled" {% endif %}
+                            
+                                {% if selectedColor %}
+                                    {% if value.isSelected %}
+                                        selected="true"
+                                    {% endif %}
+                                {% else %}
+                                    {% if not varColor %}
+                                        {% if forloop.first %}
+                                            selected="true"
+                                        {% endif %}
+                                    {% else %}
+                                        {% if value.value|lower == varColor.value|lower %}
+                                            selected="true"
+                                        {% else %}
+                                            {% if forloop.first %}
+                                                selected="true"
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            value="{{value.value}}">
+                            {{value.stringValue|default(value.value)}}
+                            {% if value.deltaPrice and value.deltaPrice > 0 %} 
+                                ( {{ value.deltaPrice|currency }} {{ labels.more }} )
+                            {% endif %}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}       
+            {% endif %}      
+    </div>
+    {% endwith %}
+    {% endwith  %}
+    {% endwith  %}
+</div>
+<div class="mz-size-block">
+    
+    {% with variationObj.options|findwhere('attributeFQN',"tenant~color-temperature-option") as varColorTemp %}  
+    
+    {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as colorTemp %} 
+    {% with colorTemp.values|findwhere('isSelected',"true") as selectedColorTemp %}
+    {% if colorTemp %}
+        <span class="mz-size-block-lable">{{colorTemp.attributeDetail.name}}</span>
+        <select option-type="{{ colorTemp.attributeDetail.usageType }}" class="mz-size-content {{colorTemp.attributeDetail.usageType}}" data-mz-product-option="{{colorTemp.attributeFQN}}" >
+        {% for colorTempValue in colorTemp.values %}
+            <option {% if not colorTempValue.isEnabled %} class="is-disabled" disabled="true" {% endif %} 
+                    {% if selectedColorTemp %}
+                        {% if colorTempValue.isSelected and colorTempValue.isEnabled %}
+                            selected="true"
+                        {% endif %}
+                     {% else %}
+                        {% if not varColorTemp %}
+                            {% if forloop.first %}
+                                selected="true"
+                            {% endif %}
+                        {% else %}
+                            {% if colorTempValue.value|lower == varColorTemp.value|lower %}
+                                selected="true"
+                            {% else %}
+                                {% if forloop.first and colorTempValue.isEnabled%}
+                                    selected="true"
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    value="{{colorTempValue.value}}">
+                {{colorTempValue.stringValue}}
+            </option>
+        {% endfor %}
+        </select>
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    
+    {% with variationObj.options|findwhere('attributeFQN',"tenant~lead-wire") as varWireSize %} 
+    
+    {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as wireSizeContent %} 
+    {% with wireSizeContent.values|findwhere('isSelected',"true") as selectedWireSize %}
+    {% if wireSizeContent %}
+        <span class="mz-size-block-lable">{{wireSizeContent.attributeDetail.name}}</span>
+        <select option-type="{{ wireSizeContent.attributeDetail.usageType }}" class="mz-size-content {{wireSizeContent.attributeDetail.usageType}}" data-mz-product-option="{{wireSizeContent.attributeFQN}}" >
+        {% for sizeValue in wireSizeContent.values %}
+            <option {% if not sizeValue.isEnabled %} class="is-disabled" disabled="true" {% endif %} 
+                    {% if selectedWireSize%}
+                        {% if sizeValue.isSelected and sizeValue.isEnabled %}
+                            selected="true"
+                        {% endif %}
+                     {% else %}
+                        {% if not varWireSize %}
+                            {% if forloop.first %}
+                                selected="true"
+                            {% endif %}
+                        {% else %}
+                            {% if sizeValue.value|lower == varWireSize.value|lower %}
+                                selected="true"
+                            {% else %}
+                                {% if forloop.first and sizeValue.isEnabled%}
+                                    selected="true"
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    value="{{sizeValue.value}}">
+                {{sizeValue.stringValue}}
+            </option>
+        {% endfor %}
+        </select>
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    
+    {% with variationObj.options|findwhere('attributeFQN',"tenant~size") as varSize %} 
+    
+    {% with model.options|findwhere('attributeFQN',"tenant~size") as sizeContent %}
+    {% with sizeContent.values|findwhere('isSelected',"true") as selectedSize %}
+    {% if sizeContent %}
+        <span class="mz-size-block-lable">{{sizeContent.attributeDetail.name}}</span>
+        <select option-type="{{ sizeContent.attributeDetail.usageType }}" class="mz-size-content {{sizeContent.attributeDetail.usageType}}" data-mz-product-option="{{sizeContent.attributeFQN}}">
+        {% for sizeValue in sizeContent.values %}
+            <option {% if not sizeValue.isEnabled %} class="is-disabled" disabled="true" {% endif %} 
+                    {% if selectedSize%}
+                        {% if sizeValue.isSelected and sizeValue.isEnabled %}
+                            selected="true"
+                        {% endif %}
+                     {% else %}
+                        {% if not varSize %}
+                            {% if forloop.first %}
+                                selected="true"
+                            {% endif %}
+                        {% else %}
+                            {% if sizeValue.value|lower == varSize.value|lower %}
+                                selected="true"
+                            {% else %}
+                                {% if forloop.first and sizeValue.isEnabled%}
+                                    selected="true"
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    value="{{sizeValue.value}}">
+                {{sizeValue.stringValue}}
+            </option>
+        {% endfor %}
+        </select>
+    {% endif %}
+    {% endwith %}   
+    {% endwith %}   
+    {% endwith %}   
+{% endwith %}   
+{% endwith %}   
+    
+</div>
+<section class="mz-l-stack-section mz-productdetail-conversion">
+    <div class="mz-productdetail-conversion-controls">
+        <span class="mz-qty-label">{{ labels.productqty }}</span>
+        <input class="mz-productdetail-qty" oncopy="return false" onpaste="return false" type="text" value="1" min="1" maxlength="3" data-mz-value="quantity" />
+            
+            {% if model.productUsage =="Configurable" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                    {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                        {% if checkVal %}
+                                 <span href="http://schema.org/InStock"  itemprop="availability" class="hide">{{ labels.outOfStock }}</span>
+                            {% else %}
+                                <span href="http://schema.org/InStock"  itemprop="availability" class="hide">{{ labels.inStock }}</span>
+                        {% endif %}
+                    {% endwith %} 
+                {% endwith %}
+            {% endif %}   
+            
+           {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+                <span class="mz-qty-stock-lable">Availability:
+                    <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                        {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                            {% if checkVal %}
+                                Not For Sale 
+                            {% else %}
+                                {{ labels.inStock }}
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}    
+                    
+                    </span>
+                </span>
+            {% else %}
+                {% if model.inventoryInfo.outOfStockBehavior == "DisplayMessage" %} 
+                    {% if model.purchasableState.isPurchasable == false %}
+                        {% if model.productUsage == "Bundle" %}
+                            <span class="mz-qty-stock-lable">Availability:
+                                <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                    {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                        {% if checkVal %}
+                                            Not For Sale 
+                                        {% else %}
+                                            {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                                 {% if backorderdate %}
+                                                {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                    {% if Discontinued.length > 1 %}
+                                                        {{ backorderdate }}
+                                                    {% else %}
+                                                        {{ labels.temporarilyoutofstock }} - Expected on {{ backorderdate }}
+                                                    {% endif %}    
+                                                {% endwith %}
+                                                {% else %}
+                                                    {{ labels.notavailableforsale }}
+                                                {% endif %}
+                                            {% endwith%}
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endwith %}   
+                                </span>
+                            </span>
+                        {% else %}
+                            {% if model.productUsage == "Standard" %}   
+                                <span class="mz-qty-stock-lable">Availability:
+                                    <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                        {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                            {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                                {% if checkVal %}
+                                                    Not For Sale 
+                                                {% else %}
+                                                    {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                                        {% if backorderdate %}
+                                                            {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                                {% if Discontinued.length > 1 %}
+                                                                    {{ backorderdate }}
+                                                                {% else %} 
+                                                                   {{ labels.temporarilyoutofstock }} - Expected on {{ backorderdate }}
+                                                                {% endif %}    
+                                                            {% endwith %}
+                                                        {% else %}
+                                                            {{ labels.notavailableforsale }}
+                                                        {% endif %}
+                                                    {% endwith%}
+                                                {% endif %}
+                                            {% endwith %} 
+                                        {% endwith %} 
+                                    </span>
+                                </span>
+                            {% else %}
+                            {% with model.purchasableState.messages|findwhere('validationType','IncompleteProductConfiguration') as data %}
+                                    {% if data %}
+                                        <span class="mz-qty-stock-lable">Availability:
+                                            <span class="mz-qty-stock">
+                                                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                                    {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                                        {% if checkVal %}
+                                                            Not For Sale 
+                                                        {% else %}
+                                                          {% if model.variationProductCode %}
+                                                            {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                                                {% if backorderdate %}
+                                                                    {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                                        {% if Discontinued.length > 1 %}
+                                                                            {{ backorderdate }}
+                                                                        {% else %}
+                                                                            {{ labels.temporarilyoutofstock }} - Expected on {{ backorderdate }}
+                                                                        {% endif %}    
+                                                                    {% endwith %}
+                                                                {% else %}
+                                                                    {{ labels.notavailableforsale }}
+                                                                {% endif %}
+                                                            {% endwith%}
+                                                            {% else %}
+                                                            Processing  
+                                                        {% endif %}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endwith %}
+                                            
+                                               
+                                            </span>
+                                        </span>
+                                    {% else %}
+                                        <span class="mz-qty-stock-lable">Availability:
+                                            <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                                    {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                                        {% if checkVal %}
+                                                            Not For Sale 
+                                                        {% else %}
+                                                        {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                                            {% if backorderdate %}
+                                                                {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                                    {% if Discontinued.length > 1 %}
+                                                                        {{ backorderdate }}
+                                                                    {% else %}
+                                                                        {{ labels.temporarilyoutofstock }} - Expected on {{ backorderdate }}
+                                                                    {% endif %}    
+                                                                {% endwith %}
+                                                            {% else %}
+                                                                {{ labels.notavailableforsale }}
+                                                            {% endif %}
+                                                        {% endwith%} 
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endwith %}
+                                            
+                                          
+                                            </span>
+                                        </span>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}        
+                        {% endif %}
+                    {% endif %}
+                {% else %} 
+                    {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+                    <span class="mz-qty-stock-lable">Availability:
+                        <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock back-order">
+                            {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                    {% if checkVal %}
+                                        Not For Sale 
+                                    {% else %}
+                                        {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                                            {% if backorderdate %}
+                                                {% with backorderdate|split("Discontinued") as Discontinued %} 
+                                                    {% if Discontinued.length > 1 %}
+                                                        {{ backorderdate }}
+                                                    {% else %}
+                                                       {{ labels.backOrder }} Expected By:{{ backorderdate }}
+                                                    {% endif %}    
+                                                {% endwith %}
+                                            {% else %}
+                                                 {{ labels.backOrder }} 
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                        </span> 
+                    </span>
+                    {% else %}
+                        {% if model.productUsage == "Bundle" %}
+                            <span class="mz-qty-stock-lable">Availability:
+                                <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                        {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                            {% if checkVal %}
+                                                Not For Sale 
+                                            {% else %}
+                                               {{ labels.inStock }}
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endwith %}
+                                </span>
+                            </span>
+                        {% else %}
+                            {% if model.purchasableState.isPurchasable %}
+                                <span class="mz-qty-stock-lable">Availability:
+                                    <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                        {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                            {% if checkVal %}
+                                                Not For Sale 
+                                            {% else %}
+                                               {{ labels.inStock }}
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endwith %}
+                                    </span>
+                                </span>
+                            {% else %}
+                                <span class="mz-qty-stock-lable">Availability:
+                                    <span {% if model.productUsage =="Configurable" %}{% else %} itemprop="availability" href="http://schema.org/InStock"{% endif %} class="mz-qty-stock">
+                                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as aliasName %}  
+                                        {% with aliasName.values|findwhere('value',true) as checkVal %} 
+                                            {% if checkVal %}
+                                                Not For Sale 
+                                            {% else %}
+                                               {{ labels.outOfStock }}
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endwith %}
+                                    </span>
+                                </span>
+                            {% endif %} 
+                        {% endif %} 
+                    {% endif %}  
+                {% endif %}
+            {% endif %}
+        
+        <dl class="mz-productcodes mz-l-stack-section">
+          <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
+          <dd class="mz-productcodes-productcode"  itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
+          
+        </dl>
+        
+        <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+    </div>
+    <div class="mz-productdetail-conversion-buttons">
+        <div class="mz-productdetail-conversion-cart">
+            {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                    {% if hideinfo %}
+                        {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                            {% if hiddenproduct %}
+                              
+                            {% else %}
+                                {% include "modules/product/product-detail-cart" %}
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %} 
+                {% endwith %} 
+            {% endif %} 
+            
+        </div>
+        
+        
+    {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+    
+         {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                    {% if hideinfo %}
+                        {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                            {% if hiddenproduct %}
+                               <button id="add-to-cart" disabled class=" large-6 column mz-button mz-button-large">
+                                   Not For Sale
+                                </button> 
+                            {% else %}
+                                {% if not user.isAnonymous %}
+            {% if model.options.length == 0 %}
+                <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="addToWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+            {% else %}
+                 {% if model.options.length <= 2 %}
+                    
+                    {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsizeWire %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~size") as modsize %}
+                    {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as modcolorTemp %}
+                        {% if modprod and modsizeWire %}
+                           <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="addToWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                        {% else %}
+                            {% if modprod or modsizeWire or modsize or modcolorTemp %}
+                                {% if model.options.length == 1 %}
+                                    <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="addToWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                {% else %}
+                                    <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                {% endif %} 
+                            {% else %}
+                                {% if model.options.length == 1 %}
+                                    {% with model.options|first as modprod %}
+                                        {% with modprod.values|first as info %}
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="addToWishlistExtra" data-mz-extracode="{{info.value}}" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                            {% else %}
+                                                <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                            {% endif %} 
+                                        {% endwith %} 
+                                    {% endwith %} 
+                                {% else %}
+                                    {% for modprod in model.options %} 
+                                        {% with mod.options  as prd %}
+                                            {% with modprod.values|first as info %}
+                                                {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                    {% if forloop.last %} 
+                                                        <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}" title="ADD TO WISHLIST" data-mz-action="addToWishlistExtra">Add To Wishlist</a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if forloop.last %} 
+                                                        <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% endif %} 
+                            {% endif %}  
+                        {% endif %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                {% else %}
+                    {% for modprod in model.options %} 
+                        {% with mod.options  as prd %}
+                            {% with modprod.values|first as info %}
+                                {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                    {% if forloop.last %} 
+                                    <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}" title="ADD TO WISHLIST" data-mz-action="addToWishlistExtra">Add To Wishlist</a>
+                                    {% endif %}
+                                {% else %}
+                                    {% if forloop.last %} 
+                                    <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% endfor %}
+                {% endif %} 
+            {% endif %}
+        {% else %}
+            {% if model.options.length == 0 %}
+                <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="guestWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+            {% else %}
+                {% if model.options.length <= 2 %}
+                    {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsizeWire %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~size") as modsize %} 
+                    {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as modcolorTemp %}
+                        {% if modprod and modsizeWire %}
+                           <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="guestWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                        {% else %}
+                            {% if modprod or modsizeWire or modsize or modcolorTemp %}
+                                {% if model.options.length == 1 %}
+                                    <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-action="guestWishlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                {% else %}
+                                    <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                {% endif %} 
+                            {% else %}
+                                {% if model.options.length == 1 %}
+                                    {% with model.options|first as modprod %}
+                                        {% with modprod.values|first as info %}
+                                            {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-extracode="{{info.value}}" data-mz-action="guestWishlistExtra" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                            {% else %}
+                                                <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endwith %}
+                                {% else %}
+                                    {% for modprod in model.options %} 
+                                        {% with mod.options  as prd %}
+                                            {% with modprod.values|first as info %}
+                                                {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                                    {% if forloop.last %} 
+                                                    <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}" title="ADD TO WISHLIST" data-mz-action="guestWishlistExtra">Add To Wishlist</a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if forloop.last %} 
+                                                    <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% endif %} 
+                            {% endif %} 
+                        {% endif %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                    {% endwith %} 
+                {% else %}
+                    {% for modprod in model.options %} 
+                        {% with mod.options  as prd %}
+                            {% with modprod.values|first as info %}
+                                {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                    {% if forloop.last %} 
+                                    <a id="add-to-wishlist" class="large-6 column mz-wishproductlist" data-mz-extracode="{% for modprods in model.options %}{% with modprods.values|first as info %}{{info.value }}{% endwith %}{% if not forloop.last %},{% endif %}{% endfor %}" title="ADD TO WISHLIST" data-mz-action="guestWishlistExtra">Add To Wishlist</a>
+                                    {% endif %}
+                                {% else %} 
+                                    {% if forloop.last %} 
+                                    <a id="add-to-wishlist" class="mz-prdOption large-6 column mz-wishproductlist" title="ADD TO WISHLIST">Add To Wishlist</a>
+                                    {% endif %} 
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% endfor %}
+                {% endif %} 
+            {% endif %}
+        {% endif %}
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %} 
+                {% endwith %} 
+            {% endif %} 
+    
+        
+    {% endif %} 
+        <!--{% if siteContext.generalSettings.isWishlistCreationEnabled %}
+ 
+  <button id="add-to-wishlist" {% if model.notDoneConfiguring %} disabled="disabled" {% endif %} class="mz-productdetail-addtowishlist mz-button" data-mz-action="addToWishlist">
+      {{ labels.addToWishlist }}
+  </button>
+ 
+  {% endif %}-->
+        {% if siteContext.supportsInStorePickup %}
+        <form class="mz-instorepickup" method="POST" data-mz-localstoresform action="/location/product">
+            <button type="submit" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %} disabled="disabled" {% endif %} class="mz-button mz-instorepickuplink-button {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %}is-disabled{% endif %}" data-mz-action="checkLocalStores">{{ labels.checkLocalStores }}</button>
+            <input type="hidden" data-mz-localstoresform-input name="item" value="{% json_attribute model %}" />
+        </form>
+        {% endif %}
+        
+        {% if model.inventoryInfo.outOfStockBehavior == "AllowBackOrder" %}
+        
+        <div class="mz-backorder-popup">
+            <div class="mz-backorder-popup-content">
+                <span class="mz-backorder-content-message">
+                {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                    {% if backorderdate %}
+                        {% with backorderdate|split("Discontinued") as Discontinued %} 
+                            {% if Discontinued.length > 1 %}
+                                {{ backorderdate }}
+                            {% else %}
+                               {{ labels.backOrder }} Expected By:{{ backorderdate }}
+                            {% endif %}    
+                        {% endwith %}
+                    {% else %}
+                             {{ labels.backOrder }} 
+                    {% endif %}
+                {% endwith %}
+                </span>
+                {% if model.options.length == 0 %}
+                    <button class="mz-productdetail-addtocart mz-button large-6 column mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
+                        OK
+                    </button>
+                {% else %} 
+                
+                    {% if model.options.length >= 2 %}
+                        {% with model.options|findwhere('attributeFQN',"tenant~color") as modprod %} 
+                        {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as modsize %} 
+                            {% if model.options.length==2 and modprod and modsize %}
+                                <button class="mz-productdetail-addtocart mz-button large-5 column mz-button-large" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
+                                    OK
+                                </button>
+                            {% else %}
+                                <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart backorder large-5 column mz-button mz-button-large">
+                                    OK
+                                </button>
+                            {% endif %}
+                        {% endwith %}
+                        {% endwith %}  
+                    {% else %}
+                        {% if model.options.length == 1 %}   
+                            {% with model.options|first as modprod %} 
+                                {% with modprod.values|first as info %}
+                                    {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                                        
+                                            <button {% if model.inventoryInfo.manageStock and model.inventoryInfo.onlineStockAvailable > 0 or model.inventoryInfo.outOfStockBehavior=="AllowBackOrder"%}{% else %} disabled="disabled"{% endif %} class="mz-productdetail-addtocart mz-button large-6 column mz-button-large" data-mz-extracode="{{info.value}}" data-mz-action="addTocartExtra">
+                                                 OK 
+                                            </button>
+                                    {% else %}
+                                        <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart backorder large-5 column mz-button mz-button-large">
+                                                OK
+                                        </button>    
+                                    {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                        {% else %}
+                            <button id="add-to-cart" class="mz-prdOption mz-productdetail-addtocart backorder large-5 column mz-button mz-button-large">
+                                    OK
+                            </button>
+                        {% endif %}        
+                    {% endif %}
+                {% endif %}
+                <button class="mz-backorder-popup-close large-6 column mz-button mz-button-large"> 
+                    Cancel
+                </button>
+            </div>
+        </div>
+        {% endif %}
+
+</section>
+</div>
+<div  class="pdp-float-header row"  data-mz-prodtcode="{{ model.productCode }}">
+    <div class="small-12 small-centered large-12 large-centered column pdp-float-header-inner"> 
+      <figure class="small-3 medium-2 large-1 column mz-productimages-main-heading">    
+            {% if model.mainImage %}
+                <img  class="mz-productimages-mainimage floating"  src="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />
+            {% else %}
+                <img  class="mz-productimages-mainimage floating"  src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg?max=themeSettings.productMainImagesizeDesktop&quality=themeSettings.cdnQuality" alt="No-image" />
+            {% endif %} 
+      </figure> 
+        <div class="small-12 large-8 medium-6 column product-title-price">
+            <h2 class="mz-pagetitle" id="pageheader_title" >
+                <label >{{ model.content.productName|safe}}</label> 
+            </h2>
+            <div  class="mz-product-title-price mz-l-stack-section">
+             {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                    {% if hideinfo %}
+                        {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                            {% if hiddenproduct %}
+                               {% with model|get_product_attribute_value("tenant~price-label") as aliasName %} 
+                                    {% with aliasName|split(",") as documentData %}
+                                        {% with documentData|first as label1 %}
+                                        {% with documentData|last as label2%}
+                                            <div class="mz-price-block"> 
+                                                {% if model.segpricelabel %}
+                                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {{model.segpricelabel}} :</span>
+                                                {% else %}
+                                                    <span {% if not user.isAnonymous %} style="display:none" {% endif %}  class="customersaleprice"> {% if label2 %} {{label2}}{% else %}{{themeSettings.pricelabel}}{% endif %} :</span>
+                                                {% endif %}
+                                                <span class="mz-price is-saleprice">N/A</span>
+                                            </div>    
+                                        {% endwith%}    
+                                        {% endwith%}    
+                                    {% endwith%}    
+                                {% endwith %}
+                            {% else %}
+                               {% include "modules/product/price-stack" %}
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %} 
+                {% endwith %} 
+            {% endif %}
+             
+             
+            </div>
+        </div>
+        <div class="product-details-float  small-12 large-3 medium-4 column">
+
+            {% with model.options|findwhere('attributeFQN',"tenant~lead-wire") as sizeContent %} 
+            {% if sizeContent %}
+            <div class="product-size-selected">
+                <label>Lead-Wire </label>
+                <span class="product-leadwire-selected-value"></span>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            {% with model.options|findwhere('attributeFQN',"tenant~size") as sizeContent %} 
+            {% if sizeContent %}
+            <div class="product-size-selected">
+                <label>Size </label>
+                <span class="product-size-selected-value"></span>
+            </div>
+            {% endif %}
+            {% endwith %}  
+            
+            {% with model.options|findwhere('attributeFQN',"tenant~color-temperature-option") as sizeContent %} 
+            {% if sizeContent %}
+            <div class="product-size-selected">
+                <label>Color-Temperature </label>  
+                <span class="product-temperature-selected-value"></span>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            {% with model.options|findwhere('attributeFQN',"tenant~color") as option %}
+            {% if option %}
+            <div class="product-color-selected">
+                <label>Color/Finish</label>
+                <span class="product-color-selected-value"></span>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="add-cart">
+                {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                        {% if hideinfo %}
+                            {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                                 {% if hiddenproduct %}
+                                    <button id="add-to-cart" disabled class=" large-6 column mz-button mz-button-large">
+                                        Not For Sale
+                                    </button> 
+                                {% else %}
+                                    {% include "modules/product/product-detail-cart" %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %} 
+                    {% endwith %} 
+                {% endif %}
+            </div>
+            <div class="pdp-top-arrow"> <span class="pdp-top-arrow-btn"></span> </div>
+        </div>
+    </div>
+</div>
+
+
+
+

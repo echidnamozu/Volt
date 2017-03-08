@@ -1,0 +1,17 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-contractor-form {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+	 <div>{{model.properties.blurb|safe}}<div>
+
+<div class="share-your-story"> 
+      {% dropzone "share-your-story-form" scope="template" %}  
+	
+</div>
+{% require_script "pages/share-your-story_mailTo"%} 
+{% endblock body-content %}

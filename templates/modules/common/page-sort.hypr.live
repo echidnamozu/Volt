@@ -1,0 +1,36 @@
+﻿
+
+<label class="mz-pagingcontrols-pagesort-label mz-customdrop">
+  <div class="select_style medium-12"> 
+
+    {% for modelitem in model.items %}
+        {% if forloop.first%}  
+          <select data-mz-value="sortBy" class="mz-pagingcontrols-pagesort-dropdown" autocomplete="off">   
+            {% block sort-types %} 
+            {% for sort in model.sorts %}    
+              {% if (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.articleType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.videoType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.newsType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.pressType|lower) or (sort.text == "Price: Low to High" and modelitem.productType|lower == themeSettings.projectType|lower) %} 
+          
+              {% else %}  
+                {% if (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.articleType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.videoType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.newsType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.pressType|lower) or (sort.text == "Price: High to Low" and modelitem.productType|lower == themeSettings.projectType|lower)  %}
+                
+                {% else %}   
+                    {% if (sort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.pressType|lower or (sort.text == "Date Added: Most Recent First" and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                        <option data-mz-url="{% make_url "sorting" model with sortBy="tenant~pressdate desc" %}" value="pressdate desc"{% if model.currentSort =="tenant~pressdate desc" %} selected="selected"{% endif %}>{% if sort.text == "Default" %}{{ labels.sortBy }}{% else %}{{ sort.text }}{% endif %}</option>          
+                    {% else %}  
+                        {% if (sort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.pressType|lower or (sort.text == "Date Added: Most Recent Last"  and modelitem.productType|lower == themeSettings.newsType|lower) %}
+                            <option data-mz-url="{% make_url "sorting" model with sortBy="tenant~pressdate asc" %}" value="pressdate asc"{% if model.currentSort == "tenant~pressdate asc" %} selected="selected"{% endif %}>{% if sort.text == "Default" %}{{ labels.sortBy }}{% else %}{{ sort.text }}{% endif %}</option>          
+                        {% else %}
+                        
+                            <option data-mz-url="{% make_url "sorting" model with sortBy=sort.value %}" value="{{ sort.value }}"{% if model.currentSort == sort.value %} selected="selected"{% endif %}>{% if sort.text == "Default" %}{{ labels.sortBy }}{% else %}{{ sort.text }}{% endif %}</option>
+                        {% endif %}
+                    {% endif %}     
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% endblock sort-types %}
+          </select>  
+        {% endif %}
+    {% endfor %}
+  </div>
+</label> 
+

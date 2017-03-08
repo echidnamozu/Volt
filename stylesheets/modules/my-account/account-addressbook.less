@@ -1,0 +1,100 @@
+﻿.mz-accountaddressbook {
+    .mz-accountaddressbook-list {
+        margin-top: @gutter/2;
+        margin-left: 0;
+        list-style-type:none;
+        h4 {
+              font-size: 14px;
+              color: #343434;   
+              .montserrat_regular();
+        }
+        ul {
+            list-style-type: none;
+            margin-top: 25px;
+            li {
+                display: inline-block;
+            }
+        }
+    }
+    .mz-accountaddressbook-contact {
+        //margin: 0 @gutter/2 @gutter/2 0;
+        margin: 0 12.5px 12.5px 85px;
+      //  float: left;
+        list-style-type: none;
+        min-height: @addressTileHeight;
+        width: 38%;
+       // border-right: 1px solid #cdcdcd;
+        &:nth-child(2n) {
+            border: 0 none;
+            margin-left: 100px;
+            margin-right: 0;
+        }
+        &.mz-accountaddressbook-form {
+        margin: 0 12.5px 12.5px 0;    
+        }
+        .clearfix();
+        &.panel-border {
+            margin: 0; 
+            width: 40%;
+            display: inline-block;
+            background: #fcfcfc;
+            min-height: 200px;
+            margin-right: 5%;
+            margin-top: 3%; 
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ececec;
+                .heading {
+                    .roboto_bold();
+                padding: 3% 0;
+                //font-weight: bold;
+                border-bottom: 1px solid #ececec;
+                    .mz-accountaddressbook-contacttype {
+                        .roboto_regular();
+                    }
+                } 
+        } 
+    }
+
+    .mz-accountaddressbook-form {
+        width: @addressTileWidth - (@gutter/2);
+        float: left;
+        margin: 0 @gutter/2 @gutter/2 0; 
+        padding-right: @gutter/2;
+
+        .mz-l-formfieldgroup-row {
+        display: inline-block;
+        width: 48%; 
+        vertical-align: top; 
+        }
+    }
+
+    .mz-accountaddressbook-actions { 
+        float: right;
+        margin: 0 @gutter/2;
+        a {
+            .permalink(#666);
+            display: inline-block;
+            padding: 0 @gutter/4;
+            border-right: 1px solid #eee;
+            color: initial;
+            &:last-child {
+                border-right-width: 0;
+                padding-right: 0;
+            }
+        }
+    }
+    .mz-accountaddressbook-contactdetails {
+        float: left;
+        clear: both;
+    }
+}
+
+
+
+
+
+
+
+
+

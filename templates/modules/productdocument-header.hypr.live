@@ -1,0 +1,38 @@
+<script>
+$(document).ready(function(){
+    $(".preloader").hide();
+});
+</script>
+
+{% if model.items.length > 0 %}
+    {% for itemdata in model.items %}       
+    
+        {% with itemdata|get_product_attribute_value("tenant~documents") as docuemnts %} 
+    	
+        	<div class="products-accordion-header" mz-qo-id-toggle="{{itemdata.productCode}}" {% if docuemnts == "" %}empty{% endif %}>
+        		<h3><span>{{ itemdata.content.productName| safe}}</span>
+        			<span class="mz-acc-icon" style="background: url('../resources/images/icons/extra-icons/img-acc-plus.png');"></span>
+    			    <span class="mz-acc-open" style="background: url('../resources/images/icons/extra-icons/img-acc-minus.png');"></span>
+    		    </h3>
+        	</div>
+            <div class="products-accordion-content" mz-qo-id="{{itemdata.productCode}}"> 
+                {% if docuemnts != "" %}
+                            {% for document in docuemnts|split(",") %}
+                                {% with document|split(":") as documentData %}
+                                {% with documentData|first as documentDataName %}
+                                {% with documentData|last as documentDataLink %}
+                                <p class="data">
+                                    <span>{{ documentDataName }}</span>
+                                    <a target="_blank" href="{{ siteContext.cdnPrefix }}/cms/{{ siteContext.siteId}}/files/{{ documentDataLink }}">{{ documentDataLink }}</a>
+                                </p>
+                                {% endwith %}
+                                {% endwith %}
+                                {% endwith %}  
+                            {% endfor %} 
+                {% endif%}
+            </div>
+        {% endwith %}    
+    {% endfor %}
+{% else %}
+<div class="emptydiv"></div>
+{% endif%}

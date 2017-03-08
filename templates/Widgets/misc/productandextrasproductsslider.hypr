@@ -1,0 +1,10 @@
+<div class="projectGallery">
+    <div class="projectGallery-visitProject-wrap">
+        {% if model.config.galleryTitle %}
+        <h3 class="projectGallery-title">{{model.config.galleryTitle|safe}}</h3>
+        {% endif %}
+        <a href="{{model.config.ButtonLink}}" class="projectGallery-visitProject">{{model.config.ButtonText}}</a>
+    </div> 
+    {% include_products "modules/product/product_extra_main" with  productCodes=model.config.products as_parameter %}
+</div>
+{% require_script "widgets/extrasproductsslider" %}

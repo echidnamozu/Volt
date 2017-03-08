@@ -1,0 +1,2 @@
+<input type="hidden" id="prROIWidget" value="1">
+{% require_script "widgets/powerreviews" %}

@@ -1,0 +1,298 @@
+.ft-mobile-site-nav{
+    .ft-mobile-only;
+    background:@healthBlueDark;
+    padding:14px 0 0 0;
+    position:relative;
+    ul{
+        .nav-ul-default;
+        .clearfix();
+        li{
+            float:left;
+            width:25%;
+            position:relative;
+            a{
+                display:block;
+                padding:14px 0;
+                text-align: center;
+                background:url('../resources/images/icons/sep.png') no-repeat center right;
+                &:hover,&:focus,&.active{
+                    background: -webkit-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+                    background: -moz-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+                    background: -o-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+                }
+            }
+        }
+    }
+    ul li a .fa{
+        color: #fff;
+        font-size: 32px;
+    }
+    ul li.ft-item-cart-menu{
+        a{
+            .permalink (#fff);
+            background:none;
+            span{
+                .border-radius (20px);
+                position:absolute;
+                top:0;
+                right:20%;
+                height:22px;
+                width:22px;
+                color:#fff;
+                font-size:15px;
+                font-weight:700;
+                text-align:center;
+                background:#0c3;
+            }
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+                background: -moz-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+                background: -o-linear-gradient(0deg,#498aea 25%,#2e5c9f) no-repeat;
+            }
+        }
+    }
+    
+    
+    // Mobile drop down site link
+    .ft-sitenav-wrap{
+        border-top:1px dashed @healthBlueLight;   
+        position:absolute;
+        top:100%;
+        z-index:9999;
+        width:100%;
+        .ft-sitenav-inner-wrap{
+            padding:0;
+            .mz-sitenav{
+                width:100%;
+            }
+            .mz-sitenav-list li{
+                float:none;
+                width:100%;
+                a{
+                    font-size:16px;
+                    font-weight:400;
+                    text-transform:capitalize;
+                    padding:12px 0;
+                    background:none;
+                    border-bottom:1px dashed @healthBlueLight;  
+                }
+            }
+        }
+    }
+    
+    // Drop Login
+    
+    .ft-login-wrapper{
+        width:100%;
+        right:0;
+        top:100%;
+        z-index:9999;
+        border:none;
+        border-top:1px dashed @healthBlueLight;
+        padding: 30px 0 0 0;
+        box-shadow: 0 0 0;
+        a{
+            width:150px;
+        }
+    }
+    
+    // Drop Down Search
+    
+    .search-wrap{
+        border-top:1px dashed @healthBlueLight;   
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 9999;
+        .search-inner-wrap{
+            padding:12px 0;
+        }
+        .mz-searchbox-input{
+            width:70%;
+            padding:5px 5%;
+        }
+        .mz-searchbox-button{
+            width:20%;
+        }
+    }
+    
+}
+
+
+//Wellness
+.wellness{
+    .ft-mobile-site-nav{
+        background:@wellnessGreenDark;
+        ul li a{
+            background:url('../resources/images/icons/sep-2.png') no-repeat center right;
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+                background: -moz-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+                background: -o-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+            }
+        }
+        ul li.ft-item-cart-menu a{
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+                background: -moz-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+                background: -o-linear-gradient(0deg,#3aa267 25%,#387638) no-repeat;
+            }
+        }
+        .ft-sitenav-wrap{
+            border-top:1px dashed @wellnessGreenLight;
+        }
+        .ft-sitenav-wrap .ft-sitenav-inner-wrap .mz-sitenav-list li a{
+            border-bottom:1px dashed @wellnessGreenLight; 
+        }
+        .ft-login-wrapper{
+            border-top:1px dashed @wellnessGreenLight;
+        }
+        .search-wrap{
+            border-top:1px dashed @wellnessGreenLight;
+        }
+    }
+}
+
+//petcare
+.pet-care
+{
+     .ft-mobile-site-nav{
+        background:@petcareGreenDark;
+        ul li a{
+            background:url('../resources/images/icons/sep-4.png') no-repeat center right;
+            &:hover,&:focus,&.active{
+                 background: -webkit-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+                 background: -moz-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+                 background: -o-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+            }
+        }
+        ul li.ft-item-cart-menu a{
+            &:hover,&:focus,&.active{
+                 background: -webkit-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+                 background: -moz-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+                 background: -o-linear-gradient(0deg, #29c5ca 25%, #018287) no-repeat;
+            }
+        }
+        .ft-sitenav-wrap{
+            border-top:1px dashed @petcareGreenLight;
+        }
+        .ft-sitenav-wrap .ft-sitenav-inner-wrap .mz-sitenav-list li a{
+            border-bottom:1px dashed @petcareGreenLight; 
+        }
+        .ft-login-wrapper{
+            border-top:1px dashed @petcareGreenLight;
+        }
+        .search-wrap{
+            border-top:1px dashed @petcareGreenLight;
+        }
+    }
+}
+//diabetes
+.diabetes
+{
+         .ft-mobile-site-nav{
+        background:@diabetesGreenDark;
+        ul li a{
+             background:url('../resources/images/icons/sep-3.png') no-repeat center right;
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+                background: -moz-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+                background: -o-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+            }
+        }
+        ul li.ft-item-cart-menu a{
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+                background: -moz-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+                background: -o-linear-gradient(0deg, #b45db8 25%, #6a325c) no-repeat;
+            }
+        }
+        .ft-sitenav-wrap{
+            border-top:1px dashed @diabetesGreenDark;
+        }
+        .ft-sitenav-wrap .ft-sitenav-inner-wrap .mz-sitenav-list li a{
+            border-bottom:1px dashed @diabetesGreenDark; 
+        }
+        .ft-login-wrapper{
+            border-top:1px dashed @diabetesGreenDark;
+        }
+        .search-wrap{
+            border-top:1px dashed @diabetesGreenDark;
+        }
+    }
+}
+//baby & kids
+.baby-kids{
+        .ft-mobile-site-nav{
+        background:@baby-kidsGreenDark;
+        ul li a{
+            background:url('../resources/images/icons/sep-2.png') no-repeat center right;
+            &:hover,&:focus,&.active{
+              background: -webkit-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+              background: -moz-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+              background: -o-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+            }
+        }
+        ul li.ft-item-cart-menu a{
+            &:hover,&:focus,&.active{
+                background: -webkit-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+                background: -moz-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+                background: -o-linear-gradient(0deg, #1dce91 25%, #0b9968) no-repeat;
+            }
+        }
+        .ft-sitenav-wrap{
+            border-top:1px dashed @baby-kidsGreenDark;
+        }
+        .ft-sitenav-wrap .ft-sitenav-inner-wrap .mz-sitenav-list li a{
+            border-bottom:1px dashed @baby-kidsGreenDark; 
+        }
+        .ft-login-wrapper{
+            border-top:1px dashed @baby-kidsGreenDark;
+        }
+        .search-wrap{
+            border-top:1px dashed @baby-kidsGreenDark;
+        }
+    }
+}
+
+//nicotine
+.nicotine
+{
+    .ft-mobile-site-nav{
+        background:@nicotineGreenDark;
+        ul li a{
+            background:url('../resources/images/icons/sep-1.png') no-repeat center right;
+            &:hover,&:focus,&.active{
+                  background: -webkit-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+                  background: -moz-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+                  background: -o-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+            }
+        }
+        ul li.ft-item-cart-menu a{
+            &:hover,&:focus,&.active{
+              background: -webkit-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+              background: -moz-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+              background: -o-linear-gradient(0deg, #8b6ad1 25%, #4b326a) no-repeat;
+            }
+        }
+        .ft-sitenav-wrap{
+            border-top:1px dashed @nicotineGreenDark;
+        }
+        .ft-sitenav-wrap .ft-sitenav-inner-wrap .mz-sitenav-list li a{
+            border-bottom:1px dashed @nicotineGreenDark; 
+        }
+        .ft-login-wrapper{
+            border-top:1px dashed @nicotineGreenDark;
+        }
+        .search-wrap{
+            border-top:1px dashed @nicotineGreenDark;
+        }
+    } 
+}
+
+
+
+
+
+
+

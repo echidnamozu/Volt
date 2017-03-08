@@ -1,0 +1,69 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-tech {% endblock body-tag-classes %}
+
+ {% block body-content %}
+ 
+<script>
+$(document).ready(function(){
+	
+    _techpara = $('.tech #tech-desc');
+    _techparahtml = _techpara.html();
+
+    if( ($( window ).width()) < 767 ){
+        displaystr();
+    }
+
+    function displaystr()
+    {
+        _strmax = 180;
+        if(_techparahtml.length > _strmax)
+        {
+            _substr = _techparahtml.substring(0,_strmax).trim();
+            _splitstr = _substr.split(' ');
+            _laststr=_splitstr[_splitstr.length-1];
+
+            if(_laststr.indexOf('<')!= -1)
+            {
+                _index = _laststr.indexOf('<');
+                _str = _laststr.substring(0,_index);
+                _substr = _substr.replace(_laststr,_str);
+            }
+             _techparastr = _substr + "...";
+            _techpara.html(_techparastr);
+
+        }
+        else
+        {
+            _techpara.html(_techparahtml);
+            $('.tech #for-mobile').hide();
+        }
+    }
+
+    $(document).on('click',".tech #for-mobile", function(e){
+       
+        if($(this).text() == "More") 
+        {
+            _techpara.html(_techparahtml);
+            $(this).text("Less");
+        }
+        else
+        {
+            _techpara.html(_techparastr);
+            $(this).text("More");
+        }
+    });
+});
+</script>
+
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="tech mz-static-page"> 
+      {% dropzone "tech" scope="template" %} 
+    </div>
+
+
+{% endblock body-content %}
+

@@ -1,0 +1,145 @@
+
+ {% for option in model.options %}        
+ 
+    {% if option.attributeFQN  == themeSettings.singleCustomisedBulbMostPopularExtra %}     
+
+        <div class="mz-productoptions-valuecontainer mostpopular" mostopt="{{option.attributeFQN}}">
+        <div class="mz-option-space">
+            <h2 class="option-hdr extra-fonts mz-mobile">Most popular bulbs</h2>
+            <div class="img-slot">
+                <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png"  alt="Most Popular Bulbs"/>
+            </div> 
+           
+            {% if option.attributeDetail.inputType == "List" %}   
+            
+                <div class="option-container">    
+                    <h2 class="option-hdr mz-desktop extra-fonts">Most popular bulbs</h2>
+                    {% for value in option.values %} 
+                    {% if pageContext.title == "Quick Order" %}
+                    
+                        <div class="options">  
+                        
+                        {% if option.attributeDetail.usageType=="Option" %}  
+                            <input class="mz-productoptions-option custom_options" poption product-code="{{model.productCode}}" prnames="{{value.stringValue|default(value.value)}}" prcode="{{model.productCode}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name="select_bulb1" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"  optionprice=1 ><label class="mz-productoptions-label" for="{{model.productCode}}{{forloop.index}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span>){% endif %} </label> 
+                        {% else %}
+                           <input class="mz-productoptions-option custom_options" poption product-code="{{model.productCode}}" prnames="{{value.stringValue|default(value.value)}}" prcode="{{model.productCode}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' optionprice="{{value.deltaPrice}}" pordprice="{% if model.price.salePrice%} {{model.price.salePrice}}{% else %}{% if model.price.price %}{{model.price.price}}{% else %}{{model.priceRange.lower.price}}{% endif %}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name="select_bulb1" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"><label class="mz-productoptions-label" for="{{model.productCode}}{{forloop.index}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }} </span>){% endif %} </label>
+                         {% endif %}    
+
+                         <div class="description-mobile"></div>
+                         <div class="clearfix"></div>
+                        </div>
+                    {% else %}
+                        <div class="options">  
+                        
+                        {% if option.attributeDetail.usageType=="Option" %}
+                            <input class="mz-productoptions-option custom_options"  prnames="{{value.stringValue|default(value.value)}}" prcode="{{model.productCode}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name="select_bulb1" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"  optionprice=1 ><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span>){% endif %} </label> 
+                        {% else %}
+                           <input class="mz-productoptions-option custom_options" prnames="{{value.stringValue|default(value.value)}}" prcode="{{model.productCode}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' optionprice="{{value.deltaPrice}}" pordprice="{% if model.price.salePrice%} {{model.price.salePrice}}{% else %}{% if model.price.price %}{{model.price.price}}{% else %}{{model.priceRange.lower.price}}{% endif %}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name="select_bulb1" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }} </span>){% endif %} </label>
+                         {% endif %}    
+
+                         <div class="description-mobile"></div>
+                         <div class="clearfix"></div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}  
+                </div>
+                <div class="description">
+                    
+                </div>
+                <div class="clearfix"></div>  
+         
+            {% endif %}
+        </div>
+        </div>
+    {% endif %}
+    {% if option.attributeFQN  == themeSettings.singleCustomisedBulbExtra or option.attributeFQN  == themeSettings.TopCustomisedBulbExtra %}              
+        <div class="mz-productoptions-valuecontainer">
+            <h2 class="seperator"><span>OR</span></h2>
+            <div class="mz-option-space">
+                <div class="extra-margin mz-desktop"></div>
+                <div class="option-container">
+                    <h2 class="option-hdr extra-fonts">PICK YOUR OWN BULB</h2>
+                    <div class="options">  
+                        <input class="select_customised_bulb" name="select_bulb1" type="radio" id="select_custom_{{option.attributeFQN}}" ><label class="mz-productoptions-label" for="select_custom_{{option.attributeFQN}}"> Select your Bulb </label>
+                        
+                        <div class="clearfix"></div>
+                    </div>  
+                </div>
+                <div class="clearfix"></div>   
+            </div> 
+        </div>
+        <div class="customise_block" style="display:none;">  
+            <div class="customizebulb mz-productoptions-valuecontainer" valopt="{{option.attributeFQN}}">
+            </div>
+            <div class="customise_products" style="display:none;">
+                
+                <div class="mz-productoptions-valuecontainer" >  
+                     
+                    <div class="mz-option-space">
+                        <h2 class="option-hdr mz-mobile">Wattage</h2>
+                        <div class="img-slot">
+                            <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png" alt="Wattage"/> 
+                        </div> 
+                        <div class="option-container ">
+                            <h2 class="option-hdr mz-desktop">Wattage</h2>
+                            {% if option.attributeDetail.inputType == "List" %}
+                                {% if pageContext.title == "Quick Order" %}
+                                {% for value in option.values %}
+                                    <div class="options" style="display:none;">       
+                                    
+                                    {% if option.attributeDetail.usageType=="Option" %}
+                                        <input class="mz-productoptions-option" poption product-code="{{model.productCode}}" prnames="{{value.stringValue|default(value.value)}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' prcode="{{model.productCode}}" pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"  optionprice=1 ><label class="mz-productoptions-label" >{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( <span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span> ){% endif %} </label> 
+                                    {% else %}
+                                       <input class="mz-productoptions-option " poption product-code="{{model.productCode}}" prnames="{{value.stringValue|default(value.value)}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' prcode="{{model.productCode}}" optionprice="{{value.deltaPrice}}" pordprice="{% if model.price.salePrice%} {{model.price.salePrice}}{% else %}{% if model.price.price %}{{model.price.price}}{% else %}{{model.priceRange.lower.price}}{% endif %}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"><label class="mz-productoptions-label" >{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( <span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span> ){% endif %} </label>
+                                     {% endif %}  
+                                    <div class="description-mobile">
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    </div>
+                                {% endfor %}
+                                {% else %}
+                                {% for value in option.values %}
+                                    <div class="options" style="display:none;">       
+                                    
+                                    {% if option.attributeDetail.usageType=="Option" %}
+                                        <input class="mz-productoptions-option" prnames="{{value.stringValue|default(value.value)}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' prcode="{{model.productCode}}" pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"  optionprice=1 ><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( <span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span> ){% endif %} </label> 
+                                    {% else %}
+                                       <input class="mz-productoptions-option " prnames="{{value.stringValue|default(value.value)}}" description='{{value.bundledProduct.content.productShortDescription|safe}}' prcode="{{model.productCode}}" optionprice="{{value.deltaPrice}}" pordprice="{% if model.price.salePrice%} {{model.price.salePrice}}{% else %}{% if model.price.price %}{{model.price.price}}{% else %}{{model.priceRange.lower.price}}{% endif %}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( <span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span> ){% endif %} </label>
+                                     {% endif %}  
+                                    <div class="description-mobile">
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    </div>
+                                {% endfor %}    
+                                {% endif %}    
+                            {% endif %}    
+                        </div>
+                        <div class="description">
+                            
+                        </div>
+                        <div class="clearfix"></div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>       
+  
+<div class="mz-productoptions-valuecontainer ">
+    <h2 class="seperator"><span>OR</span></h2>
+    <div class="mz-option-space">
+        <div class="extra-margin mz-desktop"></div>
+        <div class="option-container "> 
+            <h2 class="option-hdr extra-fonts">NO LAMP</h2>  
+            <div class="options">     
+               <input class="mz-productoptions-option custom_options" poption product-code="{{model.productCode}}" nothank_opt="{{option.attributeFQN}}" name="select_bulb1" customisenothanks="nothanks" prnames="No Lamp" prcode="{{model.productCode}}" optionprice="0"  pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="Extra" name="Extension Options" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_customnothanks" data-mz-product-option="{{ option.attributeFQN }}" value="nothanks"><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_customnothanks">Continue to next option</label>   
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+    {% endif %}
+{% endfor %}
+

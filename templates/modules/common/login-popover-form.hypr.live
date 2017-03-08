@@ -1,0 +1,48 @@
+<div class="mz-login-container hidden" >
+    <button id="amp-btn" class="mz-button mz-button-large mz-creatacc-btn sectionforlogin">{{ labels.login-createaccount }}</button>
+    <div class="mz-login-panel login-pop">
+        <form method="post" class="mz-loginform mz-loginform-page" autocomplete="off" data-mz-login-form>
+            <h6 class="mz-pagetitle">Login To VOLT<sup>&reg;</sup>ACCOUNT</h6>
+            <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+            <div class="mz-l-formfieldgroup">
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input autocomplete="off" type="email" maxlength="320" data-mz-forgotpassword-email name="email" id="mz-login-email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <input name="password" id="mz-password"  type="password" maxlength="20"  placeholder="Password" />
+                    </div>
+                    <div class="mz-l-formfieldgroup-cell">
+                        <a href="#" class="mz-fgtpwd-link" data-mz-value="FORGOT YOUR PASSWORD" title="FORGET PASSWORD?">FORGOT PASSWORD?</a>
+                        <button class="mz-button mz-button-large amp-login" title="{{ labels.popuplogIn }}"> {{ labels.popuplogIn }}</button>
+                    </div>
+                </div>
+            </div> 
+        </form>
+
+        <div id="tz-fgtpwd-panel" class="hidden"> 
+            <h6 class="mz-pagetitle">Forgot Your Password?</h6>
+
+            <form method="post" class="mz-forgot-password" autocomplete="off" data-mz-forgotpwd-form>
+                <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+                <div class="mz-l-formfieldgroup">
+                    <div class="mz-l-formfieldgroup-row">
+                        <div class="mz-l-formfieldgroup-cell">
+                            <input autocomplete="off" type="email" maxlength="320" data-mz-forgotpassword-email name="email" id="mz-login-forgot-pass" placeholder="Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row">								
+                    <div class="mz-l-formfieldgroup-cell">
+                        <a id="mz-close" class="mz-frgpassclose amp-close" href="javascript:void(0);"> &lt; Back  </a>
+                        <button class="mz-button mz-button-large amp-login">SEND</button>
+                    </div>
+                </div>
+            </form>	
+        </div>
+    </div>
+</div>
+
+

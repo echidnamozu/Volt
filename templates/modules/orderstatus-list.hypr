@@ -1,0 +1,84 @@
+
+<div class="orderstatus-container small-12 medium-12">
+    {% if model.items.length > 0 %}
+    <ul class="mz-orderlist small-12 medium-12">
+    {% for orders in model.items %}
+   
+        <li>
+            <div class="mz-orderlisting small-12 medium-12">
+                <div class="orderstatus-header small-12 medium-12">   
+                    <div class="orderstatus-datecontainer small-12 medium-2 column">   
+                        <span class="mz-orderlisting-date-icon"></span>
+                        <h3 class="mz-orderlisting-date">{% if orders.submittedDate %}
+                          {{ orders.submittedDate|date("F j, Y") }}
+                        {% else %}
+                          {{ orders.auditInfo.createDate|date("F j, Y") }}  
+                        {% endif %}</h3>
+                    </div>
+                    <div class="orderstatus-headerdetails small-12 medium-10 column">   
+                        <div class="block-order-info">
+                            <span class="dt ordnum">Order Number</span> 
+                            <span class="dd ordvalue">{{orders.orderNumber}}</span>
+                            
+                            <span class="dt totl">Total</span>
+                            <span class="dd">{{ orders.total|currency }}</span> 
+                            
+                        </div> 
+                        
+                        <div class="block-status-info">
+                            <span class="dt">Order Status</span>
+                            <span class="dd">{{orders.status}}</span>
+                            
+                            <span class="dt shipmt">Shipped to</span>
+                            {% if orders.fulfillmentInfo.fulfillmentContact %}
+                            <span class="dd shipname">{{ orders.fulfillmentInfo.fulfillmentContact.firstName }} {{ orders.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</span> 
+                            {% endif %}
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="orderstatus-list small-12 medium-12">
+                    <ul class="orderstatus-products small-12 medium-12">
+                        {% for orderpr in orders.items %}
+                        <li class="orderstatus-product small-12 medium-6 column">
+                            <div class="orderstatus-image small-6 medium-6">
+                            {% if orderpr.product.imageUrl %} 
+                                <a  href="">  
+                                {% if orderpr.product.imageUrl %}  
+                                    {% if pageContext.isMobile  %}
+                                            <img  src="{% make_url "image" orderpr.product.imageUrl with max=600 quality=88 as_parameters %}" {% if orderpr.product.imageAlternateText %}alt="{{ orderpr.product.imageAlternateText }}"{% else %}alt="{{ orderpr.product.productName }}"{% endif %} />
+                                    {% else %} 
+                                        {% if pageContext.isTablet  %}
+                                            <img  src="{% make_url "image" orderpr.product.imageUrl with max=800 quality=88 as_parameters %}" {% if orderpr.product.imageAlternateText %}alt="{{ orderpr.product.imageAlternateText }}"{% else %}alt="{{ orderpr.product.productName }}"{% endif %} />    
+                                        {% else %}  
+                                            <img  src="{% make_url "image" orderpr.product.imageUrl with max=1000 quality=88 as_parameters %}" {% if orderpr.product.imageAlternateText %}alt="{{ orderpr.product.imageAlternateText }}"{% else %}alt="{{ orderpr.product.productName }}"{% endif %} />
+                                        {% endif %}
+                                    {% endif %} 
+                                {% else %}
+                                    <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span></span>
+                                {% endif %}
+                                </a>
+                            {% endif %}
+                            </div>  
+                            <div class="orderstatus-details small-6 medium-6">
+                                <div class="orderstatus-data orderstatus-pname"><a href="{{ orderpr.product.url }}">{{ orderpr.product.name }}</a></div>
+                                <div class="orderstatus-data"><span class="qtyname">Qty </span><span class="qtyvalue">{{ orderpr.quantity }}</span></div>
+                                <div class="orderstatus-data"><span class="mz-price {% if orderpr.product.price.salePrice  %}is-crossedout {% endif %}">{{ orderpr.product.price.msrp|currency }}</span></div>
+                                {% if orderpr.product.price.salePrice  %}
+                                    <div class="orderstatus-data"><span class=" sale-price">{{ orderpr.product.price.salePrice|currency }}</span></div>
+                                {% endif %}    
+                                
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>    
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+

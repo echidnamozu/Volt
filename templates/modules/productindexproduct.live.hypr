@@ -1,0 +1,25 @@
+﻿{% if model.items.length > 0 %} 
+    {% for itemdata in model.items %}
+        <p>
+            <span class="product-name"><a href="{% if itemdata.content.seoFriendlyUrl %}/{{itemdata.content.seoFriendlyUrl}}{% endif %}/p/{{itemdata.productCode}}">{{ itemdata.content.productName| safe}}</a></span>
+            <span class="product-code">{{itemdata.productCode}}</span>
+            
+            {% if itemdata.priceRange%}
+                {% if itemdata.priceRange.lower.onSale %}
+                    <span class="product-price">{{itemdata.priceRange.lower.salePrice|currency}}</span>
+                {% else %}
+                    <span class="product-price">{{itemdata.priceRange.lower.price|currency}}</span>
+                {% endif %}
+            {% else %}   
+                {% if itemdata.price.onSale %}
+                    <span class="product-price">{{itemdata.price.salePrice|currency}}</span>
+                {% else %} 
+                    <span class="product-price">{{itemdata.price.price|currency}}</span>   
+                {% endif %}
+            {% endif %}
+             
+        </p> 
+    {% endfor %} 
+{% else %}
+     <p class="norecord">There are no Products in this Category.</p>
+{% endif %}

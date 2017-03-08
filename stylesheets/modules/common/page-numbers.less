@@ -1,0 +1,77 @@
+﻿.mz-pagenumbers {
+    div.mz-pagenum
+    {
+      display: inline;
+      padding: 14px 50px;
+      background: #f9f9f9;
+      border: 1px solid #d7d7d7;
+      border-radius: 8px;
+      margin: 0 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .mz-pagenumbers-number {
+        /* width: 38px; */
+        /* height: 38px; */
+        line-height: 1;
+        font: 18px "roboto_bold";
+        padding: 5px 15px;
+        margin: 0;
+        color: #000;
+        display: inline-block;
+    }
+    .mz-pagenumbers-number.is-current {
+        //default
+        //font-weight: bold;
+        //text-decoration: none;
+        //default end 
+        background: #fddf1c;
+        text-decoration: none;
+        color: #000;
+        pointer-events: none;
+        border-radius: 5px;
+    }
+    .mz-pagenumbers-next, .mz-pagenumbers-prev {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid #c7c7c7;
+        border-radius: 8px;
+        /* width: 38px; */
+        /* height: 38px; */
+        line-height: 1;
+        font: 14px "roboto_bold";
+        color: #000;
+        display: inline-block;
+        padding: 15px 50px;
+        margin:0;
+        transition: all ease-in 0.2s;
+        &.is-disabled {
+            color: #999;
+            &:hover{
+                background-color: rgba(255,255,255,0.1);
+                color: #999;    
+            } 
+        }
+        &:hover{
+            background-color: #2e2e2e;
+            color: white;    
+        }
+        /*&:before {
+            color: @linkColor;
+            font-size: @fontSizeSmall;
+            content: "\25C0";
+            
+        }*/
+    }
+    .mz-pagenumbers-next:before {
+       /* content: "\25B6"; */
+    }
+    .mz-pagenumbers-next:hover, .mz-pagenumbers-prev:hover {
+       /* background-color: #2e2e2e;
+        color: white;*/
+    }
+}
+
+
+
+

@@ -1,0 +1,9 @@
+﻿    <div class="mz-l-formfieldgroup-cell">
+      <label for="order-comments">{{ labels.refOrder }}:</label>
+    </div> 
+     <div class="mz-l-formfieldgroup-cell">
+      <input type="text" class="purchase-order" name="purchase-order" data-mz-value="ponumber"  value="{{ model.ponumber }}" maxlength="20" placeholder="Reference Purchase Order"/>   
+    </div>
+    <div class="mz-l-formfieldgroup-cell"> 
+      <textarea id="order-comments" class="mz-checkoutform-comments-field" name="comments" data-mz-value="shopperNotes.comments" placeholder="Order Comments">{{ model.shopperNotes.comments }}</textarea>
+    </div>

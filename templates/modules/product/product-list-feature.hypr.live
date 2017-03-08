@@ -1,0 +1,19 @@
+
+<div class="mz-productlist large-11 medium-centered columns {% block module-classes %}{% endblock module-classes %}">
+
+
+    {% if model.items %}
+   
+    <ul class="mz-productlist-list row {% block list-classes %}{% endblock list-classes %}">
+        {% for prod in model.items %}
+            <li class="mz-productlist-item small-1 medium-6 large-4 columns end" data-mz-product="{{ prod.productCode }}">{% include "modules/product/product-listing-featured" with model=prod %}</li>
+        {% endfor %}
+    </ul>
+    
+    
+    
+    {% endif %}
+</div>
+
+
+

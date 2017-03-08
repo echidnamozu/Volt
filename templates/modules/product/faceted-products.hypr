@@ -1,0 +1,491 @@
+{% if not pageContext.query.partial %}
+<script type="text/json" id="data-mz-preload-facetedproducts">
+   {
+       "facets": {% json model.facets %}, 
+       "items": {% json model.items %},
+       "currentPage": {{ model.currentPage }},
+       "firstIndex": {{ model.firstIndex }},
+       "hasNextPage": {{ model.hasNextPage|lower }},
+       "hasPreviousPage": {{ model.hasPreviousPage|lower }},   
+       "lastIndex": {{ model.lastIndex }},
+       "middlePageNumbers": {% json model.middlePageNumbers %},
+       "pageCount": {{ model.pageCount }},
+       "pageSize": {{ model.pageSize }},
+       "startIndex": {{ model.startIndex }},
+       "totalCount": {{ model.totalCount }},
+       "currentSort": "{{ model.currentSort }}"
+   }
+</script>
+{% endif %} 
+ 
+  
+{% with model.items|first as elemnt %}   
+{% if pageContext.pageType == "search" %}    
+    <div class="plpbreadcrumb-wrap">
+       <div class="row plpbreadcrumb">
+          <div class="medium-5 columns nopadding_mobile">
+             <div  class="mz-breadcrumbplp">
+                <div class="breadcrumbs-center">
+                   <div class="search-results">
+                      {% dropzone "category_header" scope="template" %}   
+                      <h1 class="mz-pagetitle">   
+                         <span class="mz-searchresults-query"> " {{ pageContext.search.query | truncatewords(4)}} " </span>  
+                         <span class="vt-searchdetails">
+                        {% if elemnt.productType == "multiple_customised_bulbs" or elemnt.productType == "single_customised_bulbs" or elemnt.productType == "standard" or elemnt.productType == "mr16 bulb" or elemnt.productType == "CustomizedProducts" %}{{viewData.Products}} Products{% endif %}
+                        {% if elemnt.productType =="video type"%}{{viewData.Videos}} Videos{% endif %}
+                        {% if elemnt.productType=="Article type" %}{{viewData.Article}} Articles{% endif %}
+                        {% if elemnt.productType=="Product News" or  elemnt.productType=="PressRelease"%}{{viewData.News}} News{% endif %}
+                        {% if elemnt.productType =="Project"%}{{viewData.Projects}} Projects{% endif %}
+                         </span><span class="mz-vt-txt"> found</span>
+                      </h1>
+                   </div>
+                </div>
+             </div>      
+          </div>
+          <div class="medium-7 columns nopadding_mobile mz-desktop">
+             <div class="breadcrumb-rht">
+                <div class="breadcrumb_sec">
+                   <div data-mz-pagingcontrols class="mz-pagingcontrols small-12">
+                      {% include "modules/common/paging-controls" %}
+                   </div>
+                </div>
+                <div class="breadcrumb_sec">
+                   <div data-mz-pagesort class="mz-sortby small-12 left"> 
+                      {% include "modules/common/page-sort" %}
+                   </div>
+                </div>
+                {% if model.facets %} 
+                <div  class="breadcrumb_sec filtersection" style="display:none;" >
+                   <div class="mz-filter-btn"> 
+                      <span class="filter-option pull-left">Filter</span>&nbsp;
+                      <span class="caret"></span>
+                   </div>
+                </div>
+                {% endif %}
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="mz-mobile plpbreadcrumbsss-wrap">
+       <div class="mz-mobile plpbreadcrumbsss">
+          <ul class="tz-mobrefine-slot">
+             <li jb-mobSort data-jb-current-sort="{{model.currentSort}}">
+                <a href="javascript:void(0);" class="tz-mobsort" title="{{ labels.sortBy }}">
+                {{ labels.sortBy }}
+                </a> 
+             </li>
+             <li><a href="javascript:void(0);" class="tz-mobrefine" title="{{ labels.refine }}">{{ labels.refine }}</a></li>
+          </ul>
+          <div class="mz-mobile mz-mobile_showitem">
+             <label class="mz-pagingcontrols-pagesize-label mz-customdrop">
+             <select data-mz-value="pageSize" class="mz-pagingcontrols-pagesize-dropdown amp-selector medium-12" autocomplete="off"> 
+             {% block page-sizes %} 
+             {% for pageSize in themeSettings.pageSizeOptionsMob %}
+             <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+             {% endfor %}
+             {% endblock page-sizes %}
+             </select>
+             </label>
+          </div>
+          {% if model.facets %}
+          <div class="mob-selected-fiter-values" data-mz-mob-selected-fiter-values > 
+             {% include "modules/common/mob-selected-fiter-values" %}
+          </div>
+          {% endif %}
+       </div>
+    </div>
+    {% if model.facets %}
+    <div class="slidebar-container-wrap">
+       <div data-mz-facets class="large-12 medium-12 columns mz-desktop slidebar-container"> 
+          {% dropzone "sidebar-above-facets" scope="template" %}
+          {% include "modules/product/faceting-form" %}  
+          {% dropzone "sidebar-below-facets" scope="template" %} 
+       </div>
+    </div>
+    {% endif %}
+    <div mz-mobile-facets class="mz-mobile-facets tz-Facets mz-mobile" > 
+       {% if model.facets %}
+       {% include "modules/product/faceting-formNew" %}
+       {% endif %}
+    </div>
+    <div class="mz-l-paginatedlist {% if model.facets %} {% endif %}">
+       <div data-mz-productlist class="mz-l-paginatedlist-list">
+          {% include "modules/product/product-list-tiled" %} 
+       </div>
+       <div class="mz-l-paginatedlist-footer">
+          <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+             {% include "modules/common/page-numbers" %} 
+          </div>
+       </div>
+    </div>
+    <div data-mz-mobile-page-sort class="mz-pagesort-mobile mz-mobile" style="display:none;">
+       {% include "modules/common/page-sort-mobile" %}
+    </div>
+{% else %}
+       
+    {% if elemnt.productType == "Project" %}
+        <div class="gallery-container resource-container">
+           <h2>Photo Gallery</h2>
+           <div class="learn-container">
+              <div class="right-content">
+                 <div class="plpbreadcrumb-wrap">
+                    <div class="row plpbreadcrumb mz-desktop">
+                       <div class="large-6 medium-4 columns nopadding_mobile">
+                          <div  class="mz-breadcrumbplp">
+                             <div class="breadcrumbs-center">
+                             </div>
+                          </div>
+                       </div>
+                       <div class="medium-8 large-6 columns nopadding_mobile mz-desktop">
+                          <div class="breadcrumb-rht">
+                             <div class="breadcrumb_sec">
+                                <div data-mz-pagingcontrols class="mz-pagingcontrols small-12">
+                                   {% include "modules/common/paging-controls" %}
+                                </div>
+                             </div>
+                             <div class="breadcrumb_sec">
+                                <div data-mz-pagesort class="mz-sortby small-12 left"> 
+                                   {% include "modules/common/page-sort" %}
+                                </div>
+                             </div>
+                             <div  class="breadcrumb_sec" >
+                                <div class="mz-filter-btn">  
+                                   <span class="filter-option pull-left">Filter</span>&nbsp;
+                                   <span class="caret"></span>
+                                </div>
+                             </div>
+                          </div>
+                          <!-- <div class="mz-l-paginatedlist-footer">
+                             <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                                 {% include "modules/common/page-numbers" %}
+                             </div> 
+                             </div>  -->
+                       </div>
+                    </div>
+                 </div>
+                 <div class="mz-mobile plpbreadcrumbsss-wrap">
+                    <div class="mz-mobile plpbreadcrumbsss">
+                       <ul class="tz-mobrefine-slot">
+                          <li jb-mobSort data-jb-current-sort="{{model.currentSort}}">
+                             <a href="javascript:void(0);" class="tz-mobsort" title="{{ labels.sortBy }}">
+                             {{ labels.sortBy }}
+                             </a> 
+                          </li>
+                          <li><a href="javascript:void(0);" class="tz-mobrefine" title="{{ labels.refine }}">{{ labels.refine }}</a></li>
+                       </ul>
+                       <div class="mz-mobile mz-mobile_showitem">
+                          <label class="mz-pagingcontrols-pagesize-label mz-customdrop">
+                          <select data-mz-value="pageSize" class="mz-pagingcontrols-pagesize-dropdown amp-selector medium-12" autocomplete="off"> 
+                          {% block page-sizes %} 
+                          {% for pageSize in themeSettings.pageSizeOptionsMob %}
+                          <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+                          {% endfor %}
+                          {% endblock page-sizes %}
+                          </select>
+                          </label>
+                       </div>
+                       <!-- <div class="mz-l-paginatedlist-footer">
+                          <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                              {% include "modules/common/page-numbers" %}
+                          </div> 
+                          </div> -->
+                       {% if model.facets %}
+                       <div class="mob-selected-fiter-values" data-mz-mob-selected-fiter-values > 
+                          {% include "modules/common/mob-selected-fiter-values" %}
+                       </div>
+                       {% endif %}
+                    </div>
+                 </div>
+                 {% if model.facets %} 
+                 <div class="slidebar-container-wrap">
+                    <div data-mz-facets class="large-12 medium-12 columns mz-desktop slidebar-container"> 
+                       {% dropzone "sidebar-above-facets" scope="template" %}
+                       {% include "modules/product/faceting-form" %}  
+                       {% dropzone "sidebar-below-facets" scope="template" %} 
+                    </div>
+                 </div>
+                 {% endif %}
+                 <div mz-mobile-facets class="mz-mobile-facets tz-Facets mz-mobile" > 
+                    {% if model.facets %}
+                    {% include "modules/product/faceting-formNew" %}
+                    {% endif %}
+                 </div>
+                 <div class="mz-l-paginatedlist {% if model.facets %} {% endif %}">
+                    <div data-mz-productlist class="mz-l-paginatedlist-list">
+                       {% include "modules/product/product-list-tiled" %} 
+                    </div>
+                    <div class="mz-l-paginatedlist-footer">
+                       <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                          {% include "modules/common/page-numbers" %} 
+                       </div>
+                    </div>
+                 </div>
+                 <div data-mz-mobile-page-sort class="mz-pagesort-mobile mz-mobile" style="display:none;">
+                    {% include "modules/common/page-sort-mobile" %}
+                 </div>
+              </div>
+           </div>
+        </div>
+    {% else %}
+        {% if  elemnt.productType =="video type" or  elemnt.productType=="Article type" or  elemnt.productType=="Product News" or  elemnt.productType=="PressRelease"%}
+            
+            <div class="resource-container">
+               <h2>Resource Center</h2>
+               <div class="learn-container">
+                  <a href="#openModal" class="learning-menu mz-mobile">Learning Materials<span class="caret"></span></a>
+                  <div id="openModal" class="mz-mobile modalDialog">
+                     <div>
+                        <a href="#close" title="Close" class="close">X</a>
+                        <div class="learning-popup">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="left-navigation">
+                     <h2>Learning Materials</h2>
+                     <h3 {% with model.items|first as elemt %}{% if elemt.productType=="Article type" %}class="active-tab"{% endif %} >
+                     {% if pagecontext.isEditMode%}<span style="font-size: 12px;">Heading for article </span>{% endif %}
+                     {% dropzone "article-heading" scope="page" %}
+                    {% if elemt.productType=="Article type" %}
+                     {% dropzone "article-content" scope="page" %}  
+                     {% endif %}
+                     {% endwith %}</h3>
+                     <h3{% with model.items|first as elemt %} {% if elemt.productType =="video type" %}class="active-tab"{% endif %}> 
+                    {% if pagecontext.isEditMode%}<span style="font-size: 12px;">Heading for Videos </span>{% endif %}
+                    {% dropzone "video-heading" scope="page" %}
+                    {% if elemt.productType =="video type" %}
+                    {% dropzone "video-content" scope="page" %} 
+                    {% endif %}
+                     {% endwith %}</h3>
+                     <h3 {% with model.items|first as elemt %}{% if  elemt.productType=="Product News" or  elemt.productType=="PressRelease" %}class="active-tab active-head"{% endif %}>
+                     {% if pagecontext.isEditMode%}<span style="font-size: 12px;">Heading for News </span>{% endif %}
+                     {% dropzone "news-heading" scope="page" %}
+                     {% if  elemt.productType=="Product News" or  elemt.productType=="PressRelease" %}
+                     {% dropzone "news-content" scope="page" %}  
+                     {% endif %}
+                     {% endwith %}</h3>
+                     <h3>
+                     {% if pagecontext.isEditMode%}<span style="font-size: 12px;">Heading for Other resources </span>{% endif %}
+                     {% dropzone "resource-heading" scope="page" %}
+                     <div style="">
+                    {% dropzone "resource-content" scope="page"  %}
+                    </div>
+                     </h3> 
+                  </div> 
+                  <div class="right-content">
+                     <div class="plpbreadcrumb-wrap">
+                        <div class="row plpbreadcrumb mz-desktop">
+                           <div class="medium-4 columns nopadding_mobile">
+                              <div  class="mz-breadcrumbplp">
+                                 <div class="breadcrumbs-center">
+                                    {% if pagecontext.pageType == "search" or model.pagetype == "search" or pagecontext.pageType == "searchresult" %} 
+                                    <div class="search-results">
+                                       {% dropzone "category_header" scope="template" %}   
+                                       <h2 class="mz-pagetitle">
+                                          <span class="mz-searchresults-query"> " {{ pageContext.search.query }} " </span> 
+                                          <span class="vt-searchdetails">{{viewData.countinfo}}</span><span class="mz-vt-txt"> found</span>
+                                       </h2>
+                                    </div>
+                                    {% else %}
+                                    <h2>{{ pagecontext.title }}</h2>
+                                    {% endif %}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="medium-8 columns nopadding_mobile mz-desktop">
+                              <div class="breadcrumb-rht">
+                                 <div  class="breadcrumb_sec" >
+                                    <div class="mz-filter-btn"> 
+                                       <span class="filter-option pull-left">Filter</span>&nbsp;
+                                       <span class="caret"></span>
+                                    </div>
+                                 </div>
+                                 <div class="breadcrumb_sec">
+                                    <div data-mz-pagesort class="mz-sortby small-12 left"> 
+                                       {% include "modules/common/page-sort" %}
+                                    </div>
+                                 </div>
+                                 <div class="breadcrumb_sec">
+                                    <div data-mz-pagingcontrols class="mz-pagingcontrols small-12">
+                                       {% include "modules/common/paging-controls" %}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="mz-l-paginatedlist-footer">
+                                 <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                                    {% include "modules/common/page-numbers" %}
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="mz-mobile plpbreadcrumbsss-wrap">
+                        <div class="mz-mobile plpbreadcrumbsss">
+                           <ul class="tz-mobrefine-slot">
+                              <li jb-mobSort data-jb-current-sort="{{model.currentSort}}">
+                                 <a href="javascript:void(0);" class="tz-mobsort" title="{{ labels.sortBy }}">
+                                 {{ labels.sortBy }}
+                                 </a> 
+                              </li>
+                              <li><a href="javascript:void(0);" class="tz-mobrefine" title="{{ labels.refine }}">{{ labels.refine }}</a></li>
+                           </ul>
+                           <div class="mz-mobile mz-mobile_showitem">
+                              <label class="mz-pagingcontrols-pagesize-label mz-customdrop">
+                              <select data-mz-value="pageSize" class="mz-pagingcontrols-pagesize-dropdown amp-selector medium-12" autocomplete="off"> 
+                              {% block page-sizes %} 
+                              {% for pageSize in themeSettings.pageSizeOptionsMob %}
+                              <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+                              {% endfor %}
+                              {% endblock page-sizes %}
+                              </select>
+                              </label>
+                           </div>
+                           <div class="mz-l-paginatedlist-footer">
+                              <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                                 {% include "modules/common/page-numbers" %}
+                              </div>
+                           </div>
+                           {% if model.facets %}
+                           <div class="mob-selected-fiter-values" data-mz-mob-selected-fiter-values > 
+                              {% include "modules/common/mob-selected-fiter-values" %}
+                           </div>
+                           {% endif %}
+                        </div>
+                     </div>
+                     {% if model.facets %}  
+                     <div class="slidebar-container-wrap">
+                        <div data-mz-facets class="large-12 medium-12 columns mz-desktop slidebar-container"> 
+                           {% dropzone "sidebar-above-facets" scope="template" %}
+                           {% include "modules/product/faceting-form" %}  
+                           {% dropzone "sidebar-below-facets" scope="template" %} 
+                        </div>
+                     </div>
+                     {% endif %}
+                     <div mz-mobile-facets class="mz-mobile-facets tz-Facets mz-mobile" > 
+                        {% if model.facets %}
+                        {% include "modules/product/faceting-formNew" %}
+                        {% endif %}
+                     </div>
+                     <div class="mz-l-paginatedlist {% if model.facets %} {% endif %}">
+                        <div data-mz-productlist class="mz-l-paginatedlist-list">
+                           {% include "modules/product/resource-list-tiled" %} 
+                        </div>
+                        <div class="mz-l-paginatedlist-footer">
+                           <div data-mz-pagenumbers class="mz-mobile mz-pagenumbers medium-12 columns">
+                              {% include "modules/common/page-numbers" %} 
+                           </div>
+                        </div>
+                     </div>
+                     <div data-mz-mobile-page-sort class="mz-pagesort-mobile mz-mobile" style="display:none;">
+                        {% include "modules/common/page-sort-mobile" %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+        
+        {% else %}
+            <div class="plpbreadcrumb-wrap">
+               <div class="row plpbreadcrumb">
+                  <div class="medium-5 columns nopadding_mobile">
+                     <div  class="mz-breadcrumbplp">
+                        <div class="breadcrumbs-center">
+                           {% if pagecontext.pageType == "search" or model.pagetype == "search" or pagecontext.pageType == "searchresult" %} 
+                           <div class="search-results">
+                              {% dropzone "category_header" scope="template" %}   
+                              <h2 class="mz-pagetitle">
+                                 <span class="mz-searchresults-query"> " {{ pageContext.search.query }} " </span> 
+                                 <span class="vt-searchdetails"></span><span class="mz-vt-txt"> found</span>
+                              </h2>
+                           </div>
+                           {% else %}
+                           <h2>{{ pagecontext.title }}</h2>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="medium-7 columns nopadding_mobile mz-desktop">
+                     <div class="breadcrumb-rht">
+                        <div class="breadcrumb_sec">
+                           <div data-mz-pagingcontrols class="mz-pagingcontrols small-12">
+                              {% include "modules/common/paging-controls" %}
+                           </div>
+                        </div>
+                        <div class="breadcrumb_sec">
+                           <div data-mz-pagesort class="mz-sortby small-12 left"> 
+                              {% include "modules/common/page-sort" %}
+                           </div>
+                        </div>
+                        {% if model.facets %} 
+                        <div  class="breadcrumb_sec filtersection" style="display:none;">
+                           <div class="mz-filter-btn"> 
+                              <span class="filter-option pull-left">Filter</span>&nbsp;
+                              <span class="caret"></span>
+                           </div>
+                        </div>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="mz-mobile plpbreadcrumbsss-wrap">
+               <div class="mz-mobile plpbreadcrumbsss">
+                  <ul class="tz-mobrefine-slot">
+                     <li jb-mobSort data-jb-current-sort="{{model.currentSort}}">
+                        <a href="javascript:void(0);" class="tz-mobsort" title="{{ labels.sortBy }}">
+                        {{ labels.sortBy }}
+                        </a> 
+                     </li>
+                     <li><a href="javascript:void(0);" class="tz-mobrefine" title="{{ labels.refine }}">{{ labels.refine }}</a></li>
+                  </ul>
+                  <div class="mz-mobile mz-mobile_showitem">
+                     <label class="mz-pagingcontrols-pagesize-label mz-customdrop">
+                     <select data-mz-value="pageSize" class="mz-pagingcontrols-pagesize-dropdown amp-selector medium-12" autocomplete="off"> 
+                     {% block page-sizes %} 
+                     {% for pageSize in themeSettings.pageSizeOptionsMob %}
+                     <option data-mz-url="{% make_url "paging" model with pageSize=pageSize.value page=1 %}" {% if model.pageSize == pageSize.value %}selected="selected"{% endif %} value="{{ pageSize.value }}">{{ pageSize.text }}</option>
+                     {% endfor %}
+                     {% endblock page-sizes %}
+                     </select>
+                     </label>
+                  </div>
+                  {% if model.facets %}
+                  <div class="mob-selected-fiter-values" data-mz-mob-selected-fiter-values > 
+                     {% include "modules/common/mob-selected-fiter-values" %}
+                  </div>
+                  {% endif %}
+               </div>
+            </div>
+            {% if model.facets %}
+            <div class="slidebar-container-wrap">
+               <div data-mz-facets class="large-12 medium-12 columns mz-desktop slidebar-container"> 
+                  {% dropzone "sidebar-above-facets" scope="template" %}
+                  {% include "modules/product/faceting-form" %}  
+                  {% dropzone "sidebar-below-facets" scope="template" %} 
+               </div>
+            </div>
+            {% endif %}
+            <div mz-mobile-facets class="mz-mobile-facets tz-Facets mz-mobile" > 
+               {% if model.facets %}
+               {% include "modules/product/faceting-formNew" %}
+               {% endif %}
+            </div>
+            <div class="mz-l-paginatedlist {% if model.facets %} {% endif %}">
+               <div data-mz-productlist class="mz-l-paginatedlist-list">
+                  {% include "modules/product/product-list-tiled" %} 
+               </div>
+               <div class="mz-l-paginatedlist-footer">
+                  <div data-mz-pagenumbers class="mz-pagenumbers medium-12 columns">
+                     {% include "modules/common/page-numbers" %} 
+                  </div>
+               </div>
+            </div>
+            <div data-mz-mobile-page-sort class="mz-pagesort-mobile mz-mobile" style="display:none;">
+               {% include "modules/common/page-sort-mobile" %}
+            </div>
+        {% endif %} 
+    {% endif %}
+     
+{% endif %}
+ {% endwith %}
+
+
+

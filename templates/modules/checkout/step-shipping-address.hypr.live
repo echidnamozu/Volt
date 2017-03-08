@@ -1,0 +1,132 @@
+﻿<h3 class="mz-formstep-header mz-checkoutform-header checkoutbgmh3">
+   1.{{ labels.shippingInformation }}      
+   {% if user.isAnonymous or not model.contacts %}   
+   <a href="javascript:;" class="mz-formstep-edit mz-shippingedit nonloginuser" data-mz-action="edit">Edit</a> 
+   {% endif %}  
+
+</h3>
+
+<div class="mz-formstep-body">
+    {% if model.requiresFulfillmentInfo or model.requiresDigitalFulfillmentContact %}
+    {% endif %}  
+
+    {% if not model.address.candidateValidatedAddresses %}
+      <div class="mz-formstep-summary mz-addresssummary mz-checkoutform">
+
+        {% if model.isAwsCheckout and model.stepStatus == "incomplete" %}
+        <a href="javascript:;" class="mz-formstep-cancel" data-mz-action="cancel">{{ labels.cancel }}</a>
+        {% endif %}
+
+        {% if model.requiresFulfillmentInfo %} 
+
+          {% if not user.isAnonymous and model.contacts %}  
+           
+            <p class="mysavedshipping">My Saved Shipping Address</p>      
+           
+            <select id="mz--contactselector-savedcontact" class="mz-contactselector customaddress shippingcontact" data-mz-value="" name="" >
+              <option disabled {% if not model.id %} selected  {% endif %} >{{labels.selectSavedAddress}}</option>
+              
+              
+              
+              {% for contact in model.contacts %}    
+              <option value="{{ contact.id }}"  {% if model.id == contact.id %} selected {% endif %}> {{ contact.firstName }} {{ contact.address.address1 }}   
+              </option>  
+              {% endfor %}
+            </select>   
+            
+            <a href="javascript:;" class="mz-formstep-edit mz-shippingedit" data-mz-action="edit">Edit</a> 
+          {% endif %} 
+            
+          {% include "modules/common/address-summary" %}
+
+          {% if model.isAwsCheckout %}  
+            <div style="margin-top:5px;margin-bottom:20px;"  id="changeAwsAddress">
+              <a data-mz-action="amazonShippingAndBilling" href="javascript:;">{{labels.awsChangeAddress}}</a>
+            </div>
+          {%endif%}    
+        {% else %}
+          {{ labels.noFulfillmentInfoRequired }}
+        {% endif %}
+      </div>   
+
+        {% if model.requiresFulfillmentInfo  %}
+          {% if model.isAwsCheckout and model.stepStatus == "incomplete" %}
+              <div class="mz-l-security-box">
+              {{ labels.awsAddressWarning }}
+              </div>
+          {%endif%} 
+
+          <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-active">
+            {% if model.contacts %}
+              {% include "modules/checkout/checkout-shipping-contact-selector" with editingContact=model %}
+                {% if not user.isAnonymous and pageContext.pageType == "checkout"  %}
+                <div>
+                    <input type="radio" id="updateaddress" name="updateaddress"{% if model.updateaddress %} checked="checked" {% endif %}data-mz-value="updateaddress" >
+                    <label for="updateaddress">Update this address in My account.</label>
+                </div>
+                {% endif %}
+            {% else %}
+              {% include "modules/common/address-form" with countries=pageContext.shippingCountries states=pageContext.shippingStates %}
+                {% if not user.isAnonymous and pageContext.pageType == "checkout"  %}
+                <div>
+                    <input type="radio" id="updateaddress" name="updateaddress" {% if model.updateaddress %} checked="checked" {% endif %} data-mz-value="updateaddress" >
+                    <label for="updateaddress">Update this address in My account.</label>
+                </div>
+                {% endif %}
+            {% endif %}        
+          </div>
+        {% endif %}
+      
+     
+        {% if model.requiresDigitalFulfillmentContact %}
+          <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform mz-checkoutform-active">
+            {% include "modules/checkout/checkout-digital-fulfillment" with editingContact=model %}
+          </div>
+          <div class="mz-formstep-summary mz-addresssummary mz-checkoutform-active">
+            <span>Gift Card Email: {{ model.email }}</span>
+          </div>
+        {% endif %}
+    {% else %}
+
+      <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-active">
+        {{ labels.selectValidAddress }}
+        {% for addr in model.address.candidateValidatedAddresses %}
+          <label class="mz-l-formfieldgroup-row">
+             <div class="mz-l-formfieldgroup-cell">
+                <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
+             </div>
+             <div class="mz-l-formfieldgroup-cell">
+                <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" />
+             </div>
+             <div class="mz-l-formfieldgroup-cell">
+                {{addr.address1}}<br />
+                {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
+                {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+             </div>
+          </label>
+        {% endfor %}  
+
+        {% if siteContext.generalSettings.allowInvalidAddresses %}
+        <label class="mz-l-formfieldgroup-row">
+           <div class="mz-l-formfieldgroup-cell">
+              <span>Original</span>
+           </div>
+           <div class="mz-l-formfieldgroup-cell">
+              <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="-1" />
+           </div>
+           <div class="mz-l-formfieldgroup-cell">
+              {{model.address.address1}}<br />
+              {% if model.address.address2 %}{{model.address.address2}}<br />{% endif %}
+              {{model.address.cityOrTown}}, {{model.address.stateOrProvince}} {{model.address.postalOrZipCode}} {{model.address.countryCode}}
+           </div>
+        </label>
+        {% endif %}
+
+      </div>
+    {% endif %}
+    
+     <div class="mz-formstep-next">
+         <p class="mz-requiredmsg">*Required Fields</p>
+        <button class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+     </div>
+</div>

@@ -1,0 +1,386 @@
+
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-quick-order {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+    
+    <div class="mz-l-container">   
+        <div class="row">
+            
+            <div id="mz-qo-category-collection" mz-qo-category-collection class="mz-qo-category-collection">
+                <div itemprop="breadcrumb" class="mz-breadcrumb"> 
+                    <div class="breadcrumbs-center {% if pageContext.title == "Quick Order"%} row{% endif %}">
+                        
+                        <div class=" small-12 columns">
+                            <a href="/" class="mz-breadcrumb-link is-first" title="Home">Home</a> 
+                            <span class="mz-breadcrumb-separator">/</span>
+                            <span class="mz-breadcrumb-current">{{ labels.quicorder }}</span>
+                        </div>
+                    </div>  
+                </div> 
+                <div class="quick_order_container">  
+                    <div class="mz-qo-logging-loader" style="display:none;">
+                        <svg width="50" height="50" class="svg-container">
+                            <circle class="svg-circle" cx="25" cy="25" r="20" stroke="#FFF" stroke-width="2" fill="transparent"/>
+                        </svg>
+                    </div>
+                    <div class="small-12 quick-order-head">
+                        <div class="filterhead">
+                            <h1>Quick Order</h1>
+                            <div  class="filtersection" mz-qo-category-filtering> 
+                               <span class="caret"></span> 
+                               <p  class="mz-qo-cart-filter">Filter</p>  
+                            </div>
+                            <div class="clearfix"></div>   
+                        </div>  
+                    </div>
+                    {% dropzone "quickorder-info" scope="page" %}  
+                    <div class="mz-qo-add-all-to-cart add-to-cart">
+                        <p mz-qo-add-all-to-cart class="add-to-cart">ADD TO CART</p>
+                    </div>
+                {% for link in navigation.tree %} 
+                    {% if link.nodeType == "category" and link.name|lower == "products" %} 
+                        <meta datamz-role="caterogtlinks" data-mz-json-attribute={% json_attribute link %}>
+                        <div mz-qo-category-filtering-container class="row mz-qo-category-filtering-container" style="display:none;">
+                            {% if pageContext.isMobile  %} 
+                            <a class="right" href="/quick-order">Close</a>   
+                            <span class="refine-search">Refine Your Search</span>
+                            <label class="label-product">PRODUCTS</label>      
+                            {% endif %} 
+                            <div class="small-10 small-centered columns apply-filter">
+                            {% for subchild in link.items %}
+                                {% if not subchild.isHidden %}  
+                                        <label ><input mz-qo-id-toggle-cntrl="{{subchild.categoryCode}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">{{subchild.name | lower | safe }}</label>
+                                {% endif %} 
+                                {% for child in subchild.items %}
+                                {% if not child.isEmpty %}  
+                                    {% for child1 in child.items %}
+                                        {% if not child1.isHidden %}
+                                                <label ><input mz-qo-id-toggle-cntrl="{{child1.categoryCode}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">{{child1.name | lower | safe }}</label>        
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% if not child.isHidden %}
+                                            <label ><input mz-qo-id-toggle-cntrl="{{child.categoryCode}}" class="mz-qo-catfilt-checkbox" type="checkbox" name="checkbox" checked value="value">{{child.name | lower | safe }}</label>        
+                                    {% endif %}
+                                {% endif %}    
+                                {% endfor %}
+                            {% endfor %}
+                            </div>
+                            {% if pageContext.isMobile  %}
+                            <div class="small-12 small-centered columns apply-clear-button">
+                                <div class="row">
+                                <button class="small-5 columns">clear</button>  
+                                <button class="small-5 columns">apply</button>
+                                </div>
+                            </div>
+                            {% endif%} 
+                        </div>
+                        
+                        {% for subchild in link.items %}
+                            {% set_var ss=false %}
+                            {% for child in subchild.items %}
+                                {% if subchild.items %}      
+                                    {% set_var ss=true %}
+                                {% endif %}    
+                            {% endfor %}  
+
+                            {% if ss %}
+                            {% if not subchild.isHidden %}
+                                <meta datamz-role="caterogtlinks1" data-mz-json-attribute={% json_attribute subchild %}>
+                                <div class="parent_category">
+                                    <h2 class="mz-qo-cat-name">{{subchild.name}}</h2>
+                                </div>
+                            {% endif %}   
+                            {% endif %}     
+
+                            <div class="child_catitems">
+                            {% for child in subchild.items %}
+                                    <meta datamz-role="caterogtlinks2" data-mz-json-attribute={% json_attribute child %}>
+                                {% if not child.isEmpty %}      
+                                    {% if not child.isHidden %}
+                                        <div class="mz-qo-category parent_category2" mz-qo-id-toggle="{{child.categoryCode}}">
+                                            <div  class="mz-qo-cat-title">
+                                                <h2 class="mz-qo-cat-name">{{child.name}}</h2>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% for child1 in child.items %}
+                                        <meta datamz-role="caterogtlinks3" data-mz-json-attribute={% json_attribute child1 %}>
+                                        {% if not child1.isEmpty %}      
+                                            {% if not child1.isHidden %}
+                                                <div class="mz-qo-category parent_category3" mz-qo-id-toggle="{{child1.categoryCode}}">
+                                                    <div  class="mz-qo-cat-title">
+                                                        <h2 class="mz-qo-cat-name">{{child1.name}}</h2>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% for child2 in child1.items %}  
+                                                <meta datamz-role="caterogtlinks4" data-mz-json-attribute={% json_attribute child2 %}>
+                                                {% if not child2.isEmpty %}      
+                                                    {% if not child2.isHidden %}
+                                                        <div class="mz-qo-category parent_category4" mz-qo-id-toggle="{{child2.categoryCode}}">
+                                                            <div  class="mz-qo-cat-title">
+                                                                <h2 class="mz-qo-cat-name">{{child2.name}}</h2>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% for child3 in child2.items %}
+                                                        <meta datamz-role="caterogtlinks5" data-mz-json-attribute={% json_attribute child3 %}>
+                                                        {% if not child3.isEmpty %}      
+                                                            {% if not child3.isHidden %}
+                                                                <div class="mz-qo-category parent_category5" mz-qo-id-toggle="{{child3.categoryCode}}">
+                                                                    <div  class="mz-qo-cat-title">
+                                                                        <h2 class="mz-qo-cat-name">{{child3.name}}</h2>
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                            {% for child4 in child3.items %}
+                                                                <meta datamz-role="caterogtlinks6" data-mz-json-attribute={% json_attribute child4 %}>
+                                                                {% if not child4.isEmpty %}      
+                                                                    {% if not child4.isHidden %}
+                                                                        <div class="mz-qo-category parent_category6" mz-qo-id-toggle="{{child4.categoryCode}}">
+                                                                            <div  class="mz-qo-cat-title">
+                                                                                <h2 class="mz-qo-cat-name">{{child4.name}}</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% for child5 in child4.items %}  
+                                                                        <meta datamz-role="caterogtlinks7" data-mz-json-attribute={% json_attribute child5 %}>
+                                                                        {% if not child5.isEmpty %}      
+                                                                            {% if not child5.isHidden %}
+                                                                                <div class="mz-qo-category parent_category7" mz-qo-id-toggle="{{child5.categoryCode}}">
+                                                                                    <div  class="mz-qo-cat-title">
+                                                                                        <h2 class="mz-qo-cat-name">{{child5.name}}</h2>
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                            {% for child6 in child5.items %}
+                                                                            aaaa
+                                                                                <meta datamz-role="caterogtlinks7" data-mz-json-attribute={% json_attribute child6 %}>
+                                                                                {% if not child6.isEmpty %}      
+                                                                                    {% if not child6.isHidden %}
+                                                                                        <div class="mz-qo-category parent_category8" mz-qo-id-toggle="{{child6.categoryCode}}">
+                                                                                            <div  class="mz-qo-cat-title">
+                                                                                                <h2 class="mz-qo-cat-name">{{child6.name}}</h2>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endif %}
+                                                                                    {% for child7 in child6.items %}
+                                                                                        <div class="mz-qo-category child_cat7" mz-qo-id-toggle="{{child7.categoryCode}}">
+                                                                                            <div mz-qo-id="{{child7.categoryCode}}" class="mz-qo-cat-title">
+                                                                                                <a href="javascript:void(0);" class="btn plus">
+                                                                                                    <span>
+                                                                                                      <span class="s1"></span>
+                                                                                                      <span class="s2"></span>
+                                                                                                      <span class="s3"></span>
+                                                                                                    </span>
+                                                                                                </a>
+                                                                                                <h2 class="mz-qo-cat-name">{{child7.name}}</h2>
+                                                                                            </div>
+                                                                                            <div mz-qo-p-id="{{child7.categoryCode}}" class="mz-qo-products">   
+                                                                                                {% comment %}  
+                                                                                                {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                                                {% endcomment %}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endfor %}
+                                                                                {% else %}
+                                                                                    <div class="mz-qo-category child_cat6" mz-qo-id-toggle="{{child6.categoryCode}}">
+                                                                                        <div mz-qo-id="{{child6.categoryCode}}" class="mz-qo-cat-title">
+                                                                                            <a href="javascript:void(0);" class="btn plus">
+                                                                                                <span>
+                                                                                                  <span class="s1"></span>
+                                                                                                  <span class="s2"></span>
+                                                                                                  <span class="s3"></span>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <h2 class="mz-qo-cat-name">{{child6.name}}</h2>
+                                                                                        </div>
+                                                                                        <div mz-qo-p-id="{{child6.categoryCode}}" class="mz-qo-products">   
+                                                                                            {% comment %}  
+                                                                                            {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                                            {% endcomment %}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                {% endif %}    
+                                                                            {% endfor %}
+                                                                        {% else %}         
+                                                                            <div class="mz-qo-category child_cat5" mz-qo-id-toggle="{{child5.categoryCode}}">
+                                                                                <div mz-qo-id="{{child5.categoryCode}}" class="mz-qo-cat-title">
+                                                                                    <a href="javascript:void(0);" class="btn plus">
+                                                                                        <span>
+                                                                                          <span class="s1"></span>
+                                                                                          <span class="s2"></span>
+                                                                                          <span class="s3"></span>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <h2 class="mz-qo-cat-name">{{child5.name}}</h2>
+                                                                                </div>
+                                                                                <div mz-qo-p-id="{{child5.categoryCode}}" class="mz-qo-products">   
+                                                                                    {% comment %}  
+                                                                                    {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                                    {% endcomment %}
+                                                                                </div>
+                                                                            </div>   
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% else %}
+                                                                    <div class="mz-qo-category child_cat4" mz-qo-id-toggle="{{child4.categoryCode}}">
+                                                                        <div mz-qo-id="{{child4.categoryCode}}" class="mz-qo-cat-title">
+                                                                            <a href="javascript:void(0);" class="btn plus">
+                                                                                <span>
+                                                                                  <span class="s1"></span>
+                                                                                  <span class="s2"></span>
+                                                                                  <span class="s3"></span>
+                                                                                </span>
+                                                                            </a>
+                                                                            <h2 class="mz-qo-cat-name">{{child4.name}}</h2>
+                                                                        </div>
+                                                                        <div mz-qo-p-id="{{child4.categoryCode}}" class="mz-qo-products">   
+                                                                            {% comment %}  
+                                                                            {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                            {% endcomment %}
+                                                                        </div>
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% endfor %}   
+                                                        {% else %}    
+                                                            <div class="mz-qo-category child_cat3" mz-qo-id-toggle="{{child3.categoryCode}}">
+                                                                <div mz-qo-id="{{child3.categoryCode}}" class="mz-qo-cat-title">
+                                                                    <a href="javascript:void(0);" class="btn plus">
+                                                                        <span>
+                                                                          <span class="s1"></span>
+                                                                          <span class="s2"></span>
+                                                                          <span class="s3"></span>
+                                                                        </span>
+                                                                    </a>
+                                                                    <h2 class="mz-qo-cat-name">{{child3.name}}</h2>
+                                                                </div>
+                                                                <div mz-qo-p-id="{{child3.categoryCode}}" class="mz-qo-products">   
+                                                                    {% comment %}  
+                                                                    {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                    {% endcomment %}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}    
+                                                    {% endfor %} 
+                                                {% else %}
+                                                    {% if not child2.isHidden %}
+                                                        <div class="mz-qo-category child_cat2" mz-qo-id-toggle="{{child2.categoryCode}}">
+                                                            <div mz-qo-id="{{child2.categoryCode}}" class="mz-qo-cat-title">
+                                                                <a href="javascript:void(0);" class="btn plus">
+                                                                    <span>
+                                                                      <span class="s1"></span>
+                                                                      <span class="s2"></span>
+                                                                      <span class="s3"></span>
+                                                                    </span>
+                                                                </a>
+                                                                <h2 class="mz-qo-cat-name">{{child2.name}}</h2>
+                                                            </div>
+                                                            <div mz-qo-p-id="{{child2.categoryCode}}" class="mz-qo-products">   
+                                                                {% comment %}  
+                                                                {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                                {% endcomment %}
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    {% endif %}    
+                                                {% endif %}            
+                                            {% endfor %} 
+                                        {% else %}
+                                            {% if not child1.isHidden %}
+                                                <div class="mz-qo-category child_cat1" mz-qo-id-toggle="{{child1.categoryCode}}">
+                                                    <div mz-qo-id="{{child1.categoryCode}}" class="mz-qo-cat-title">
+                                                        <a href="javascript:void(0);" class="btn plus">
+                                                            <span>
+                                                              <span class="s1"></span>
+                                                              <span class="s2"></span>
+                                                              <span class="s3"></span>
+                                                            </span>
+                                                        </a>
+                                                        <h2 class="mz-qo-cat-name">{{child1.name}}</h2>
+                                                    </div>
+                                                    <div mz-qo-p-id="{{child1.categoryCode}}" class="mz-qo-products">   
+                                                        {% comment %}  
+                                                        {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child1.categoryCode  as_parameter %}
+                                                        {% endcomment %}
+                                                    </div>
+                                                
+                                                </div>
+                                            {% endif %}    
+                                        {% endif %}    
+                                    {% endfor %} 
+                                {% else %}
+                                    {% if not child.isHidden %}
+                                        
+                                        <div class="mz-qo-category category2" mz-qo-id-toggle="{{child.categoryCode}}">
+                                            <div mz-qo-id="{{child.categoryCode}}" class="mz-qo-cat-title">
+                                                <a href="javascript:void(0);" class="btn plus">
+                                                    <span>
+                                                      <span class="s1"></span>
+                                                      <span class="s2"></span>
+                                                      <span class="s3"></span>
+                                                    </span>
+                                                </a>
+                                                <h2 class="mz-qo-cat-name">{{child.name}}</h2>
+                                            </div>  
+                                            <div mz-qo-p-id="{{child.categoryCode}}" class="mz-qo-products">   
+                                                {% comment %}  
+                                                {% include_products "modules/quick-order-product" with pageSize=200 categoryCode=child.categoryCode  as_parameter %}
+                                                {% endcomment %}
+                                            </div>
+                                        
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}        
+                {% endfor %}        
+                    
+                </div>
+            </div>   
+           
+        </div> 
+    </div>   
+   
+ {% require_script "pages/quick-order" %} 
+{% endblock body-content %}
+
+{% block body-below-content %}
+{% endblock body-below-content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

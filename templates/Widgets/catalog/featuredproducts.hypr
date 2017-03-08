@@ -1,0 +1,3 @@
+﻿<div class = "mz-featured-widget">
+{% include_products "modules/product/featuredProductNew" with  productCodes=Model.config.productCodes as_parameter %}
+</div>

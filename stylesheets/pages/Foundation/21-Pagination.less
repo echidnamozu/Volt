@@ -1,0 +1,58 @@
+// Section - 21 - Pagination
+
+ul.pagination {
+	display: block;
+	min-height: 1.5rem;
+	margin-left: -0.3125rem;
+	li {
+		height: 1.5rem;
+		color: #222222;
+		font-size: 0.875rem;
+		margin-left: 0.3125rem;
+		a, button {
+			display: block;
+			padding: 0.0625rem 0.625rem 0.0625rem;
+			color: #999999;
+			background: none;
+			border-radius: 3px;
+			font-weight: normal;
+			font-size: 1em;
+			line-height: inherit;
+			transition: background-color 300ms ease-out;
+		}
+		&:hover a, a:focus, &:hover button, button:focus {
+			background: #e6e6e6;
+		}
+		&.unavailable a, &.unavailable button {
+			cursor: default;
+			color: #999999;
+		}
+		&.unavailable:hover a, &.unavailable a:focus, &.unavailable:hover button, &.unavailable button:focus {
+			background: transparent;
+		}
+		&.current a, &.current button {
+			background: #008CBA;
+			color: #FFFFFF;
+			font-weight: bold;
+			cursor: default;
+			&:hover, &:focus {
+				background: #008CBA;
+			}
+		}
+	}
+	li {
+		float: left;
+		display: block;
+	}
+}
+
+/* Pagination centred wrapper */
+
+.pagination-centered {
+	text-align: center;
+	ul.pagination li {
+		float: none;
+		display: inline-block;
+	}
+}
+

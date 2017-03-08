@@ -1,0 +1,42 @@
+<div productandextrasproductsslider-main-wraper class="productandextrasproductsslider bg-totalpro-slide">
+    {% for item in model.items %}    
+
+    <div class="multislideparent">
+   
+        <div productandextrasproductsslider-item class="productandextrasproductsslider-item">
+           <div class="columns leftslide">
+            <a href="{% if item.content.seoFriendlyUrl %}/{{item.content.seoFriendlyUrl}}{% endif %}/p/{{item.productCode}}">
+                <div class="projectImage owl-lazy" 
+                     data-src="{% make_url "image" item.mainImage with max=themeSettings.productImagesContainerWidth quality=themeSettings.cdnQuality as_parameter %}" 
+                     style="background-image: url({% make_url "image" item.mainImage with max=themeSettings.listProductThumbSize quality=themeSettings.cdnQuality as_parameter %})"></div>
+                 <div class="productandextrasproductsslider-main-details large-6">
+                    <h3 class="productandextrasproductsslider-main-name">{{item.content.productName|safe}}</h3>
+                </div>
+            </a> 
+            </div> 
+
+            <div class="rightslide columns ">
+                <span class = "common-caption">VOLT<sup>&reg;</sup> Products Used For This Project</span>
+               
+                {% for opt in item.properties %} 
+                        {% if opt.attributeFQN == "tenant~products-in-project" %}  
+                           {% for val in opt.values %}
+                           
+                                    <div productandextrasproductsslider-extras class="productandextrasproductsslider-extras" pcode="{{item.productCode}}" preload-property="{{val.value}}"> 
+                                        {% for prod in val.value|split(",") %}
+                                             {% include_products "modules/product/product_extra_silder" with productCodes=prod as_parameter %}
+
+                                        {% endfor %} 
+                                    </div>
+                           {% endfor %} 
+                        {% endif %}
+                {% endfor %}
+            
+            </div> 
+            
+            <div class="clearfix"></div>
+        </div>
+
+    </div> 
+    {% endfor %}
+    </div>

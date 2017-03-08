@@ -1,0 +1,291 @@
+﻿
+.login-page
+{
+    display: table;
+    width: 85%;
+    margin: 0 auto;
+    padding: 50px 0;
+    
+    .login
+    {
+        border-right:none;
+        padding: 0 0 0 50px;
+    }
+    .order
+    {
+        border-right: 1px solid #d4d4d4;
+        padding: 0 50px 0 0;
+        .mz-popover-message{
+            margin-top: 5px;   
+        }
+    }
+    .order,.login
+    {
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+
+        div[data-mz-messagebar-container]
+        {
+            
+            width: 100%;
+        }
+
+        h1
+        {
+            padding:0 0 20px 0;
+            margin:0;
+            color: #000;
+            font-size: 1.125em;
+            .roboto_medium();
+            text-transform: uppercase;
+            line-height: 1;
+        }
+        p
+        {
+            padding:0 0 35px 0;
+            margin:0;
+            color: #000;
+            font-size: 1em;
+            .roboto_regular();
+            //width: 405px;
+            line-height: 18px;
+        }
+        p.redtext
+        {
+            color: red;
+            padding: 0 0 10px 0;
+            font-size: 0.813em;
+            a
+            {
+                color:red;
+                text-decoration: underline;
+            }
+        } 
+        p.note
+        {
+            .roboto_light();
+            width: 380px;
+            padding: 0 0 20px 0;
+        }
+        h2
+        {
+            padding:0 0 15px 0;
+            margin:0;
+            color: #000;
+            font-size: 1em;
+            .roboto_regular();
+            line-height: 1;
+        }
+        input{
+            background: #f7f7f7;
+            border: 1px solid #d4d4d4;
+            font-size: 0.875em;
+            .roboto_regular();
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 0 20px 0;
+            width: 100%;
+            color:#2e2e2e;
+            &:focus
+            {
+                background: #fff;
+                color:#2e2e2e;
+            }
+        }
+        select{
+            width: 100%;
+            background-color: #f7f7f7;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            font-size: 0.875em;
+            .roboto_regular();
+            padding: 8px 15px;
+            margin: 0 0 20px 0;
+            color:#2e2e2e;
+        }
+        ::-webkit-input-placeholder {
+           color: #949494;
+        }
+
+        :-moz-placeholder { /* Firefox 18- */
+           color: #949494;  
+        }
+
+        ::-moz-placeholder {  /* Firefox 19+ */
+           color: #949494;  
+        }
+
+        :-ms-input-placeholder {  
+           color: #949494;  
+        }
+        .mz-login-button
+        {
+            color:#000;
+            background:#e5c705;
+            padding: 10px 60px;
+            font-size: 0.750em;
+            .roboto_bold();
+            text-transform: uppercase;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            &:hover{
+                border: 1px solid #e5c705;
+                background: rgba(255, 255, 255, 0.1);
+                transition: all ease-in .2s;
+            }
+            &:focus{
+                border: 1px solid #e5c705;
+                background: rgba(255, 255, 255, 0.1);
+                transition: all ease-in .2s;
+            }
+        }
+        .mz-links,.mz-signup-links
+        {
+            font-size: 0.875em;
+            .roboto_light();
+            color: #666;
+            text-decoration: underline;    
+            text-align: right;
+            line-height: 36px;
+            float: right;
+            &:hover{
+                text-decoration: underline;
+            }
+            &:focus{
+                text-decoration: underline;
+            }
+        }
+        .mz-signup-links
+        {
+            font-size: 1em;
+            color: #000;
+            margin-top: 25px;    
+            float: none;
+            .roboto_regular();
+            display: inline-block;
+            text-decoration: underline;
+        }
+    }
+    .mz-messagebar {
+            
+        .mz-errors {
+            margin: 0 0 20px;
+            .border-radius(5px);
+                       
+            li {
+                color: red;
+                font-size: 12px;
+                font-weight: 400;
+                font-style: normal;
+                list-style-type: none;
+                .open_sans_regular(); 
+            }   
+        }
+        .mz-success {
+            margin: 0 0 10px;
+            .border-radius(5px);
+                       
+            li {
+                color: #4a8f10;
+                font-size: 12px;
+                font-weight: 400;
+                font-style: normal;
+                list-style-type: none;
+                .open_sans_regular(); 
+            }   
+        }
+        
+    }
+    .input-required {
+        border:1px solid #ED1F24 !important;
+          background: #ffeee5!important
+    }
+}
+@media (min-width: 1px) and (max-width: 767px){
+    .login-page
+    {
+        width: 95%;
+        padding: 0;
+        
+        .login
+        {
+            border-right:none;
+        }
+        .order
+        {
+            border-bottom: 1px solid #d4d4d4;
+            border-right: none;
+        }
+        .order,.login
+        {
+            float: none;
+            width: 100%;
+            padding: 25px 10px;
+            margin: 0 auto;
+            .signuplink {
+                text-align: center;  
+                clear: both;
+            }
+            h1
+            {
+                padding:0 0 15px 0;
+                margin:0;
+                font-size: 1em;
+                text-align:center;
+            }
+            p
+            {
+                padding:0 0 25px 0;
+                margin:0;
+                font-size: 0.875em;
+                width: 280px;
+            }
+            h2
+            {
+                padding:0 0 15px 0;
+                margin:0;
+                font-size: 0.875em;
+            }
+            input{
+                font-size: 0.875em;
+                padding: 10px 15px;
+                margin: 0 0 20px 0;
+            }
+            select{
+                font-size: 0.875em;
+                padding: 8px 15px;
+                margin: 0 0 20px 0;
+            }
+            .mz-login-button
+            {
+                padding: 10px 0;
+                font-size: 0.750em;
+                width:100%;
+            }
+            .mz-links,.mz-signup-links
+            {
+                font-size: 0.750em;
+                float: none;    
+                text-align: center;
+                display: block;
+                line-height: 1;
+                margin: 25px;
+            }
+            .mz-signup-links
+            {
+                font-size: 0.938em;
+                margin-top: 25px;    
+                float: none;
+            }
+        }
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 980px){
+    .login-page
+    {
+        width: 95%;
+    }
+}
+

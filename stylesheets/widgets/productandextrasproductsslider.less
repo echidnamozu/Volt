@@ -1,0 +1,278 @@
+ .mz-homepage .mz-amphome {
+    .mz-cms-col-12-12 {
+        padding: 0;
+    }    
+}
+.mz-blankpage {
+    .productandextrasproductsslider .productandextrasproductsslider-item a {
+     // width: 100%;   
+    }
+    .mz-cms-col-12-12 { 
+        padding: 0;
+    }
+}
+.projectGallery {
+    background-color: #2e2e2e; 
+    padding: 75px 0;
+    .projectGallery-title {
+        text-align: center;
+        color: @white;
+        font: 24px "roboto_bold";
+    }
+    .projectGallery-visitProject-wrap{
+        text-align: center;
+        .projectGallery-visitProject {
+            padding: 12px 30px;
+            border: 1px solid #fddb00;
+	color: #fff;
+            display: inline-block;
+            margin-bottom: 25px;
+            border-radius: 10px;
+        }
+        .projectGallery-visitProject:hover {
+            background-color: #fddb00;
+            color: #222;
+        }
+    }
+    
+}
+.owl-prev, owl-next {
+    margin-top: 0;
+}
+.productandextrasproductsslider{
+  //  width: 100%;
+  .multislideparent {
+      background-color: transparent;
+      border-radius: 8px;
+      overflow: hidden;
+        display: none;
+      &:first-child {
+        display: block;
+      }
+  }
+    .productandextrasproductsslider-item{
+        .leftslide{
+            width: 100%;
+            height: 350px;
+            float: none;
+            clear: both;
+            background-color: #222;
+            .productandextrasproductsslider-main-details {
+                position: absolute;
+                bottom: 0;
+                display: block;
+                width: 100%;
+                background: rgba(0,0,0,0.5);
+                margin: 0;
+                h3 {
+                    color: white;
+                    padding: 10px 30px;
+                    font-family: "roboto_bold";
+                }
+            }
+        }
+        .rightslide{
+            width: 100%;
+            background-color: #fff;
+            padding-top: 15px;
+            .common-caption {
+                color: #8a8a8a;
+                text-transform: uppercase;
+                display: block;
+                font: 14px "roboto_regular";
+                margin-bottom: 25px;
+            }
+            .owl-item.active {
+                border-right: 1px solid #cccccc;
+            }
+            .owl-stage-outer{
+                margin-left: 1px;
+            }
+        }
+        a{
+            .projectImage{
+                height: 100%;
+                overflow: hidden;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+         //   width: 50%;
+         //   display: inline-block;
+            img{
+                height: auto;  
+                width: 100%;
+              //  margin-bottom: 10px;
+            }
+        }
+        .productandextrasproductsslider-extras{
+           // width: 48%;
+            display: inline-block;
+            .productandextrasproductsslider-extras-item{
+                margin-left: 2px;
+                .productandextrasproductsslider-extras-item-image {
+                    display: inline-block;
+                    width: 200px;
+                    height: 200px;
+                    float: left;
+                    overflow: hidden;
+                }
+                a{
+                    width: 100%; 
+                    text-align: left;
+                    img{
+                        margin: 0 auto;
+                        width: auto;
+                        height: 100%;
+                        max-width: none;
+                    }
+                }
+                .productandextrasproductsslider-extras-item-details{
+                    display: inline-block;
+                    width: 50%;
+                    margin: 10px 0 0 20px;
+                    text-align: left;
+                    a {
+                        display: block;
+                        height: 45px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        margin-bottom: 15px;
+                    }
+                    .productandextrasproductsslider-extras-item-details-name{
+                        font: normal 18px "roboto_bold";
+                        color: #1c1c1c;
+                        margin: 0;
+                        margin-bottom: 20px;
+                        width: 100%;
+                        text-align: left;
+                    }
+                    .productandextrasproductsslider-extras-item-details-desc{
+                        font: normal 12px "roboto_regular";
+                        overflow: hidden;
+                        width: 100%;
+                        text-align: left;
+                        display: block;
+                        margin-bottom: 10px;
+                        height: 42px;
+                        text-overflow: ellipsis;
+                        
+                    }
+                    .productandextrasproductsslider-extras-item-details-price{
+                        font: bold 20px "roboto_regular";
+                        color: #1c1c1c;
+                        margin: 0;
+                    }
+                    .productandextrasproductsslider-extras-item-details-addcart{
+                        text-align: center;
+                        background: transparent;
+                        color: #2e2e2e;
+                        padding: 8px;
+                        border-radius: 4px;
+                        border: 1px solid #2e2e2e;
+                        font: normal 14px 'roboto_black';
+                        -webkit-transition: all 0.3s;
+                        -moz-transition: all 0.3s;
+                        transition: all 0.3s;
+                        width: 158px;
+                        display: inline-block;
+                        height: auto;
+                    }
+                    .productandextrasproductsslider-extras-item-details-addcart:hover{
+                        background-color: #222;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+.projectGallery .owl-nav .owl-prev, .projectGallery .owl-nav .owl-next {
+    height: 110px;
+    background-color: #fddb00;
+    margin: 0;
+    -webkit-transition: width 2s; /* Safari */
+    transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+    font-size: 0;
+    width: 32px;
+    background-repeat: no-repeat;
+    background-position: 9px;
+}
+.projectGallery .owl-nav .owl-prev {
+    background-image: url("../resources/images/icons/slide-left.png");
+}
+.projectGallery .owl-nav .owl-next {
+    background-image: url("../resources/images/icons/slide-right.png");
+}
+.projectGallery .owl-nav .owl-prev:hover{
+    background-color: #0b0b0b;
+    left: 115px;
+}
+.projectGallery .owl-nav .owl-next:hover{
+    background-color: #0b0b0b;
+    right: 115px;
+}
+@media (max-width:640px) {
+    .projectGallery {
+        padding: 30px 0 20px 0;
+        .owl-nav {
+            display: none
+        }
+    }
+     .productandextrasproductsslider-extras-item{
+         border: none !important;
+    }
+}
+
+@media (max-width:1100px) {
+    .productandextrasproductsslider {
+        .productandextrasproductsslider-item {
+            .rightslide{
+                .common-caption {
+                    margin: 0 0 15px 25px;
+                }
+            }
+            .productandextrasproductsslider-extras{
+                .productandextrasproductsslider-extras-item{
+                    .productandextrasproductsslider-extras-item-image {
+                        float: none;
+                        display: block;
+                        margin: 0px auto 0 auto;
+                    }
+                    a {
+                        text-align: center;
+                    }
+                    .productandextrasproductsslider-extras-item-details{
+                        .productandextrasproductsslider-extras-item-details-name {
+                            padding: 0;
+                            margin: 20px 0 10px 0;
+                            text-align: center;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: block;
+                            white-space: nowrap;
+                        }
+                        .productandextrasproductsslider-extras-item-details-desc{
+                            text-align: center;
+                            padding: 0;
+                        }
+                        width: 90%;
+                        display: block;
+                        margin: 0 auto;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+

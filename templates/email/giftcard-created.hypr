@@ -1,0 +1,39 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+{%comment%}
+
+	{{ labels.giftCardEmailBanner|string_format(domainName)|safe}}
+{%endcomment%}
+
+	<p style="font-weight:600;color:#56534c!important;font-size:16px;line-height:20px;">
+	<font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">
+		{% if model.Order.billingInfo.billingContact.firstName %}
+			{{ labels.giftCardEmailGreeting|string_format(model.Order.billingInfo.billingContact.firstName, model.Order.billingInfo.billingContact.lastNameOrSurname)|safe }}
+		{% else %}
+			{{ labels.emailOpeningAlternative|safe }}
+		{% endif %}
+	</font>
+	</p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmailIntro|safe }}</font></p>
+	
+	<p style="background-color:#2e2e2e;padding:5px 5px 5px 5px;color:#fddb00;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.giftDetails|safe}}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmailAmount|safe }} {{model.credit.currentBalance|currency}}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmailClaimCode|string_format(model.credit.code)|safe }}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmaildate|string_format(model.order.submittedDate)|safe }}</font></p>
+
+
+	<p style="line-height:20px;color:#575853;padding-top: 20px;border-top: 1px solid #f2f2f2;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmailInstructions|safe }}</font></p>
+		
+	<font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.giftCardEmailsteps|string_format(domainName)|safe}}</font>
+
+		
+	
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}</font></p>
+
+
+{% endblock body-content %}

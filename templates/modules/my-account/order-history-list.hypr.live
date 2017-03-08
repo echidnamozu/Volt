@@ -1,0 +1,10 @@
+﻿      <ul class="mz-orderlist">        
+        {% for order in model.items %}
+        <li>{% include "modules/my-account/order-history-order-listing" with model=order %}</li>
+        {% endfor %}
+      </ul>
+      {% if pageContext.pageType == "my_account" %}
+       {% if model.allLoaded != 2 %}
+            <button class="mz-more-order" data-mz-action-load-more-items data-mz-action="loadMoreItems">VIEW MORE ORDERS</button>
+        {% endif %}
+       {% endif %} 

@@ -1,0 +1,126 @@
+ .mz-parentcategory {
+    .featured-products{
+        .mz-featured-widget{
+            .mz-productlist-list {
+                width: 89%;
+                margin: 0 auto;
+                .mz-productlist-item:hover {
+                    background-color: #efefef;
+                }
+                .mz-productlist-item {
+                    width: 23%;
+                    min-height: 0;
+                    background-color: white;
+                    border-radius: 10px;
+                    border: 1px solid #dadada;
+                    padding-bottom: 20px;
+                    margin: 1%;
+                    transition: all 0.2s ease-out;
+                    float: left;
+                    .mz-productlisting-image {
+                        height: 200px;
+                        margin: 0;
+                        border-bottom: 1px solid #f3f3f3;
+                        overflow: hidden;
+                        a {
+                            line-height: normal;
+                            img {
+                                height: 100%;
+                                width: auto;
+                                max-width: none;
+                                display: block;
+                                margin: 0 auto;
+                            }
+                        }
+                    }
+                    .mz-productlisting-info {
+                        margin: 10px 20px 0 20px;
+                        .mz-productlisting-title {
+                            font-size: 16px;
+                            min-height: 70px;
+                            display: block;
+                            color: @black;
+                            font-family: 'roboto_medium';
+                            line-height: normal;
+                        }
+                        .mz-productlisting-price {
+                            min-height: 50px;
+                            .salePrice {
+                                font-family: "roboto_medium";
+                                line-height:1;
+                                b {
+                                    font-family: "roboto_medium";
+                                    color: #0059fd;
+                                }
+                            }
+                            .retailPrice
+                            {
+                                font-family: "roboto_light";
+                                font-size: 14px;
+                            }
+                        }
+                        .mz-productlisting-rating {
+                            margin: 5px 0;
+                            background: url('') no-repeat;
+                            background-size: contain;
+                            width: 80px;
+                            height: 22px;
+                        }
+                    }
+                }
+                .mz-productlist-item:nth-child(3n+1) {
+                    clear: none;
+                }
+            }
+        }
+    }
+}
+
+@media @tablet {
+    .mz-parentcategory {
+        .featured-products{
+            .mz-featured-widget{
+                .mz-productlist-list {
+                    .mz-productlist-item {
+                        width: 48%;
+                        margin: 1%;
+                        .mz-productlisting-info {
+                            margin: 10px 15px 0 15px;
+                            .mz-productlisting-title {
+                                font-size: 16px;
+                            }
+                            .mz-productlisting-price {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+         }
+    }
+}
+
+@media @mobile {
+    .mz-parentcategory {
+        .featured-products{
+            .mz-featured-widget{
+                .mz-productlist-list {
+                    width: 100%;
+                    .mz-productlist-item {
+                        width: 48%;
+                        margin: 1%;
+                        .mz-productlisting-info {
+                            margin: 10px 5px 0 5px;
+                            .mz-productlisting-title {
+                                font-size: 12px;
+                            }
+                            .mz-productlisting-price {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+         }
+    }
+}

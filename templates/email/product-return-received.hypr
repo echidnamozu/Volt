@@ -1,0 +1,68 @@
+﻿  {% extends "email/email" %}
+
+  {% block body-content %}
+
+	<p style="font-weight:600;color:#56534c!important;font-size:16px;line-height:20px;">
+		<font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">
+	        {% if user.firstName %}
+	            {{ labels.emailOpening|string_format(user.firstName, user.lastName)|safe }}
+	        {% else %}
+	            {{ labels.emailOpeningAlternative|safe }}
+	        {% endif %}
+	    </font>
+    </p>
+
+	<p style="line-height:20px;color:#575853;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.returnReceivedBlob1|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}</font></p>
+
+	<p style="background-color:#2e2e2e;padding:5px 5px 5px 5px;color:#fddb00;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{labels.returnDetails1|safe}}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.rma|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.returnNumber }}</font></p>
+
+	<p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.orderDate|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.order.submittedDate }}</font></p>
+    
+    <p style="line-height:20px;color:#575853;"><span style="color:#56534c!important;font-weight:600;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.returnRequestDate|safe }} :</font></span> <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ model.rmaDeadline|safe }}</font></p>
+	
+	<br/>
+
+    <table width="100%" cellpadding="5" cellspacing="0">
+        <tbody>
+            <tr>
+                <td width="50%" style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.qty }}</font></td>
+                <td style="font-weight:600;text-align: left;background-color:#eeeeee;color:#656565;text-transform:uppercase;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ labels.product }}</font></td>
+            </tr>
+            {% for item in model.items %}
+            {% with item.product|get_product_attribute("tenant~hide-product") as hidden %}
+				{% for reason in item.reasons %}
+	                <tr>
+	                    <td width="50%" valign="middle" style="border-bottom:1px solid #f2f2f2;">
+	                        <p style="font-weight:600;color:#666!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{ reason.quantity }}</font></p>
+	                    </td>
+	                    <td valign="top" style="border-bottom:1px solid #f2f2f2;padding-top:10px;padding-bottom:10px;">
+	                        <p style="font-weight:600;color:#000!important;line-height:20px;"><font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif"><a style="color:#000!important;text-decoration:none!important;" 
+	                        {% if hidden %}
+				            {% for val in hidden.values %}
+				            {% if forloop.first %}
+				            {% if val.value %} href="javascript:void(0)" {% else %}
+	                        href="http://{{domainName}}/p/{{item.product.productCode}}" 
+	                        {% endif %}
+	                        {% endif %}
+				            {% endfor %}
+				            {% else %}
+				            	href="http://{{domainName}}/p/{{item.product.productCode}}" 
+				            {% endif %}
+	                        target="_blank">{{ item.product.name }}</a></font></p>
+	                      
+                             {% for options in item.product.options %}
+                                <p style="line-height:20px;color:#000;padding: 0 0 0 0;margin: 0 0 0 0;font-weight: normal;">
+                                    <font face="'Roboto', Tahoma, Verdana, Geneva, Arial, sans-serif">{{options.stringValue}}</font>
+                                </p>
+                            {% endfor %}
+	                    </td>
+	                </tr>
+	            {% endfor %}
+	        {% endwith %}    
+			{% endfor %}
+        </tbody>
+    </table>
+
+{% endblock body-content %}

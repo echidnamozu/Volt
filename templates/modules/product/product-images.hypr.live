@@ -1,0 +1,278 @@
+    {% with model.options|findwhere('attributeFQN',"tenant~color") as option %}
+    {% with option.values|findwhere('isSelected',"true") as selectedColor %}
+    {% with model.properties|findwhere('attributeFQN',"tenant~default-color") as defaultColorData %}
+    {% with defaultColorData.values|first as defaultColor %}
+    {% with model.properties|findwhere('attributeFQN',"tenant~product-color-images") as colorImagesFull %}
+    {% with colorImagesFull.values|first as colorImagesString %}
+    {% if colorImagesString.stringValue %}    
+        {% for colorImagesSet in colorImagesString.stringValue|split("$") %} 
+            {% with colorImagesSet|split(":") as colorImagesValues %} 
+                {% with colorImagesValues|first as colorImagesTitle %} 
+                {% with colorImagesValues|last as colorImagesUrlSet %}
+                    {% with colorImagesUrlSet|split(",") as colorImagesUrls %} 
+                        {% if selectedColor %}    
+                            {% if  selectedColor.value|lower == colorImagesTitle|lower %}
+                                {% with colorImagesUrls|first as colorImagesUrl %}
+                                
+                                    
+                                    <img class="loader-product mz-desktop" src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/three-dots.svg" width="70" alt="" />
+                                    <figure class="mz-productimages-main mz-desktop">
+                                    <img itemprop="image" class="mz-productimages-mainimage mz-desktop" data-mz-productimage-main 
+     data-zoom-image="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrl}}?max={{themeSettings.productMainImagesizeZoom}}&quality={{themeSettings.cdnQuality}}"
+     src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrl}}?max={{themeSettings.productMainImagesizeDesktop}}&quality={{themeSettings.cdnQuality}}" 
+      alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}"/>
+                                    </figure>
+                                <figure class="mz-productimages-thumbs">
+                                    {% for colorImagesUrlThumb in colorImagesUrls %}
+                                    <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ colorImagesUrlThumb.sequence }}" href="javascript:void(0)">
+                                        {% if pageContext.isMobile %}
+                                        <img class="mz-productimages-thumbimage"  
+                                            src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrlThumb}}?max={{themeSettings.productMainImagesizeMobile}}&quality={{themeSettings.cdnQuality}}" width="320" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />
+                                        {% else %}
+                                        <img class="mz-productimages-thumbimage"  
+                                            src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrlThumb}}?max={{themeSettings.productMainImagesizeDesktop}}&quality={{themeSettings.cdnQuality}}" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />
+                                        {% endif %}
+                                    </a>
+                                    {% endfor %}
+                                    
+                                    {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                                    {% if aliasName%}
+                                        {% for videoLink in aliasName|split(",") %} 
+                                            {% with videoLink|split(":") as videoLinkData %} 
+                                                {% with videoLinkData|first as videoName %} 
+                                                    {% with videoLinkData|last as youtubeId %} 
+                                                    <div class="videopop mz-productimages-thumb">
+                                                        <span class="videoicon mz-cms-video-play video-thumb"></span>
+                                                        <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ youtubeId }}/0.jpg);" data-video="www.youtube.com/embed/{{ youtubeId }}"></div>
+                                                    </div>
+                                                    {% endwith %} 
+                                                {% endwith %} 
+                                            {% endwith %} 
+                                        {% endfor %} 
+                                    {% endif %} 
+                                    {% endwith %} 
+                                    
+                                </figure>
+                                {% endwith %}
+                            {% endif %}
+                        {% else %}
+                            {% if defaultColor.value|lower == colorImagesTitle|lower %}
+                                {% with colorImagesUrls|first as colorImagesUrl %}
+                                    {% if pageContext.isDesktop or pageContext.isTablet %}
+                                    <img class="loader-product" src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/three-dots.svg" width="70" alt="" />
+                                    <figure class="mz-productimages-main">
+                                    <img itemprop="image" class="mz-productimages-mainimage" data-mz-productimage-main 
+     data-zoom-image="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrl}}?max={{themeSettings.productMainImagesizeZoom}}"
+     src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrl}}?max={{themeSettings.productMainImagesizeDesktop}}&quality={{themeSettings.cdnQuality}}" 
+    alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />    
+                                    </figure>
+                                    {% endif %}
+                                {% endwith %}
+                                <figure class="mz-productimages-thumbs">
+                                    {% for colorImagesUrlThumb in colorImagesUrls %}
+                                    <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ colorImagesUrlThumb.sequence }}" href="javascript:void(0)">
+                                        {% if pageContext.isMobile %}
+                                        <img class="mz-productimages-thumbimage"  
+                                            src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/{{colorImagesUrlThumb}}?max={{themeSettings.productMainImagesizeMobile}}&quality={{themeSettings.cdnQuality}}" width="320" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />
+                                        {% else %}
+                                        <img class="mz-productimages-thumbimage"  
+                                            src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files//{{colorImagesUrlThumb}}?max={{themeSettings.productMainImagesizeDesktop}}&quality={{themeSettings.cdnQuality}}" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}"/>
+                                        {% endif %}
+                                    </a>
+                                    {% endfor %}
+                                    
+                                    {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                                    {% if aliasName%}
+                                        {% for videoLink in aliasName|split(",") %} 
+                                            {% with videoLink|split(":") as videoLinkData %} 
+                                                {% with videoLinkData|first as videoName %} 
+                                                    {% with videoLinkData|last as youtubeId %} 
+
+                                                    <div class="videopop mz-productimages-thumb">
+                                                        <span class="videoicon mz-cms-video-play video-thumb"></span>
+                                                        <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ youtubeId }}/0.jpg);" data-video="www.youtube.com/embed/{{ youtubeId }}"></div>
+                                                    </div>
+
+                                                    {% endwith %} 
+                                                {% endwith %} 
+                                            {% endwith %} 
+                                        {% endfor %} 
+                                    {% endif %} 
+                                    {% endwith %} 
+                                    
+                                </figure>
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                {% endwith %}
+                {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% else %}
+        
+        <img class="loader-product mz-desktop" src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/three-dots.svg" width="70" alt="loading" />
+        
+        {% if model.mainImage %}
+        <figure class="mz-productimages-main mz-desktop">
+          <img itemprop="image" class="mz-productimages-mainimage mz-desktop" data-mz-productimage-main src="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality as_parameter %}"  data-zoom-image="{% make_url "image" model.mainImage with max=themeSettings.productMainImagesizeZoom quality=themeSettings.cdnQuality as_parameter as_parameter %}" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" /> 
+        </figure>
+        {% else %}
+            <figure class="mz-productimages-main mz-desktop">
+              <img itemprop="image" class="mz-productimages-mainimage mz-desktop" data-mz-productimage-main src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg"  data-zoom-image="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg"  alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" /> 
+            </figure>
+
+        {% endif %} 
+        {% if model.content.productImages.length > 0 %}
+            <figure class="mz-productimages-thumbs"> 
+            
+            {% for image in model.content.productImages %}
+            <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="">
+
+                {% if pageContext.isMobile %}
+                <img  src="{% make_url 'image' image with max=themeSettings.productMainImagesizeMobile quality=themeSettings.cdnQuality %}"  class="mz-productimages-thumbimage"
+                   alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />
+                {% else %}
+                <img src="{% make_url 'image' image with max=themeSettings.productMainImagesizeDesktop quality=themeSettings.cdnQuality %}" 
+                     class="mz-productimages-thumbimage" alt="{% if image.altText and image.altText!=""%}{{ image.altText }}{% else %}{{model.content.productName}}{% endif %}" />  
+                {% endif %}
+            </a>
+            {% endfor %}
+           
+                    {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                    {% if aliasName%}
+                        {% for videoLink in aliasName|split(",") %} 
+                            {% with videoLink|split(":") as videoLinkData %} 
+                                {% with videoLinkData|first as videoName %} 
+                                    {% with videoLinkData|last as youtubeId %} 
+                                        
+                                        <div class="videopop mz-productimages-thumb">
+                                            <span class="videoicon mz-cms-video-play video-thumb"></span>
+                                            <div class="video-image" style="background-image:url(//img.youtube.com/vi/{{ youtubeId }}/0.jpg);" data-video="www.youtube.com/embed/{{ youtubeId }}"></div>
+                                        </div>
+                                        
+                                    {% endwith %} 
+                                {% endwith %} 
+                            {% endwith %} 
+                        {% endfor %} 
+                    {% endif %} 
+                    {% endwith %} 
+
+            </figure>
+        {% else %}
+            <figure class="mz-productimages-thumbs"> 
+            <a class="mz-productimages-thumb" data-mz-productimage-thumb="1" href="">
+                <img  src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg"  alt="No-Image"/>                                   
+            </a>    
+            </figure>    
+        {% endif %}
+    {% endif %}
+    
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %} 
+    <div class="mz-product-review-panel mz-desktop">  
+                            {% with model.properties|findwhere('attributeFQN',"tenant~technologies") as featureImages %} 
+                            {% if featureImages %}
+                            <div class="mz-product-featured large-6 medium-12 small-12" >
+                            <span class="small-3 column">Features</span>
+                            <div class="feature-images small-9 column">
+                                {% for featureImage in featureImages.values %} 
+                                    {{ featureImage.stringValue|safe }}
+                                {% endfor %}
+                            </div> 
+                            </div>
+                            {% endif %}
+                            {% endwith %} 
+    {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" or pagecontext.isEditMode  %}
+        {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+            {% if hideinfo  or pagecontext.isEditMode %}
+                {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                     {% if hiddenproduct %}
+                      </div>
+                    {% else %}
+                         
+                            <div class="mz-rating-social large-6 medium-12 small-12">
+                                <div class="mz-product-rating">
+                                    <span class="large-3 medium-3 column">Ratings</span>   
+                                    <div class="rating  pr-inline-rating small-9 large-9 medium-9 column" data-mz-product-code="{{ model.productCode }}" data-mz-product-url="{{ model.url }}">
+                                        {% if model|get_product_attribute('tenant~rating') %}
+                                            {% with model|get_product_attribute('tenant~rating') as rating %}
+                                                {% if rating.values|first|prop("value") != "" %} 
+                                                    {% with rating.values|first|prop("value")|floatformat as totalRating %}  
+                                                    <a href="#tab-5" class="pdpmobileratelink">
+                                                        {% if totalRating > 4.7 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-5-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating < 4.8 and totalRating > 4.2 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-4_5-sm">&nbsp;</div>
+                                                        {% endif %}                            
+                                                        {% if totalRating > 3.7 and totalRating < 4.3 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-4-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating < 3.8 and totalRating > 3.2 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-3_5-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating > 2.7 and totalRating < 3.3 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-3-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating < 2.8 and totalRating > 2.2 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-2_5-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating > 1.7 and totalRating < 2.3 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-2-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating < 1.8 and totalRating > 1.2 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-1_5-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating > 0.7 and totalRating < 1.3 %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-1-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating < 0.8 and totalRating > 0  %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-0_5-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        {% if totalRating == 0  %}
+                                                        <div class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div>
+                                                        {% endif %}
+                                                        <span id="pdpmobilerating">()</span>
+                                                    </a>
+                                                    <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                                    {% endwith %}
+                                                {% else %}            
+                                                    <a href="#tab-5" class="pdpmobileratelink">  
+                                                        <div class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div>  
+                                                        <span id="pdpmobilerating">(0)</span>
+                                                    </a>
+                                                    <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                                {% endif %}
+                                            {% endwith %}      
+                                        {% else %}      
+                                            <a href="#tab-5" class="pdpmobileratelink"> 
+                                                <div class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div> 
+                                                <span id="pdpmobilerating">(0)</span> 
+                                            </a>
+                                            <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                        {% endif %}
+                                    </div>  
+                        
+                                </div>
+                                <div class="mz-product-social">
+                                    <span class="large-3 medium-3 column">Share</span>  
+                                    <div class="socialbtn large-9 medium-9 column">
+                                        {% dropzone "socialShare" scope="template" %}
+                                    </div> 
+                                </div> 
+                            </div>
+                        </div> 
+                    {% endif %}
+                {% endwith %}
+            {% endif %} 
+        {% endwith %} 
+    {% endif %}
+   
+
+
+
+

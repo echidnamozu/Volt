@@ -1,0 +1,336 @@
+﻿<div class="close-icon"></div>
+<div class="mz-productoptions">  
+    
+    {% if pageContext.pageType !== "product"  %}
+       <div class="mz-backorder"{% if  model.backorderprd %} style="display:block;" {% endif %}  > 
+            {% if  model.backorderprd %}  
+                {% with model|get_product_attribute_value("tenant~backorder-date") as backorderdate %} 
+                    {% if backorderdate %}
+                        {% with backorderdate|split("Discontinued") as Discontinued %} 
+                            {% if Discontinued.length > 1 %}
+                                {{ backorderdate }}
+                            {% else %}
+                               {{ labels.backOrder }} Expected By:{{ backorderdate }}
+                            {% endif %}    
+                        {% endwith %}
+                    {% else %}
+                             {{ labels.backOrder }} 
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        </div>      
+    {% endif %}  
+    <h2 class="option-header">{{model.content.productName}}</h2>        
+     
+    {% with model|get_product_attribute("tenant~color") as coloropt %} 
+    {% with model|get_product_attribute("tenant~lead-wire") as leadopt %}
+    {% with model|get_product_attribute("tenant~size") as sizeopt %}
+    {% with model|get_product_attribute("tenant~color-temperature-option") as tempopt %}
+    
+   {% if (pageContext.pageType !== "product" and leadopt) or (pageContext.pageType !== "product" and sizeopt) or (pageContext.pageType !== "product" and tempopt) %} 
+    <h3 class="option-subheader">Choose Your Options</h3>     
+    <div class=" custom_popup_options mz-productoptions-optioncontainer"> 
+        <div class="sel_opt"> 
+            <div class="mz-productoptions-valuecontainer">     
+                <div class="selected_options">  
+                    {% if coloropt %} 
+                    <div class="mz-color-block">      
+                        <span class="label_name">{{coloropt.attributeDetail.name}}</span>
+                        <div class="color_block">
+                            <div class="mz-color-attribute">
+                                <a href="javascript:void(0)" class="color-swatches-icon">
+                                    
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}  
+                    <div class="mz-size-block">     
+                        <span class="label_name"></span>
+                        <label class="mz-pagingcontrols-pagesort-label mz-customdrop">
+                            <span class="custom_value"></span>
+                        </label>
+                    </div>   
+                    <a href="javascript:void(0);" class="custom_edit">EDIT</a>       
+                </div>
+            </div>        
+        </div>   
+        
+        <div class="Optioncontainer">
+            <div class="mz-productoptions-valuecontainer">  
+                <div class="mz-option-space" data-mz-product="{{ model.productCode }}">  
+                    {% if coloropt %}    
+                        <div class="mz-color-block">   
+                            <span class="label_name">{{coloropt.attributeDetail.name}}</span>
+                            {% with model|get_product_attribute_value("tenant~default-option-product-code") as defaultcolor %}
+                                    {% with model.variations|findwhere('productCode',defaultcolor) as defaultcolordata %}  
+                                        {% with defaultcolordata.options|findwhere('attributeFQN',"tenant~color") as defaultcolorvalue %} 
+                                            <div class="color_block">
+                                            {% for v in coloropt.values %} 
+                                                {% if v.value %}  
+                                                    {% if forloop.first %}
+                                                        <div class="mz-color-attribute">     
+                                                    {% endif %}
+                                                    <a href="javascript:void(0)" class="color-swatches-icon" colorswatchcode="{{ model.productCode }}_{{v.value|lower}}" color_value="{{v.value}}" option-name="{{coloropt.attributeFQN}}">
+                                                        <span class="color-outer">
+                                                            {% if pageContext.isMobile %}        
+                                                                <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}" class="{% spaceless %}{{v.value|lower}}{% endspaceless %} color-span {% if coloropt.value|lower == v.value|lower %} mobile-active-color {% endif %}" color_value="{{ v.stringValue  }}" color_data="{{v.value}}" >
+                                                                </span>
+                                                            {% else %}
+                                                                <span id="{% spaceless %}{{v.value|lower}}{% endspaceless %}" class="{% spaceless %}{{v.value|lower}}{% endspaceless %} color-span  {% if coloropt.value|lower == v.value|lower %} active-color  {% endif %}" color_value="{{ v.stringValue  }}" color_data="{{v.value}}" >
+                                                                </span>
+                                                            {% endif %}   
+                                                        </span>
+                                                    </a>
+                                                    {% if forloop.last%}
+                                                    </div>
+                                                    
+                                                    {% endif %}
+                                                {%  endif %}  
+                                            {% endfor %}
+                                            </div>
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endwith %}
+                        </div>  
+                    {% endif %}
+                    
+                    
+                    
+                    <div class="mz-size-block">              
+                        
+                        {% if leadopt %} 
+                            {% with model|get_product_attribute_value("tenant~default-option-product-code") as defaultcolor %}
+                                    {% with model.variations|findwhere('productCode',defaultcolor) as defaultcolordata %}  
+                                        {% with defaultcolordata.options|findwhere('attributeFQN',"tenant~lead-wire") as defaultcolorvalue %} 
+                                            <span class="label_name">{{leadopt.attributeDetail.name}}</span>
+                                            <label class="mz-pagingcontrols-pagesort-label mz-customdrop">
+                                                <select option-type="{{ leadopt.attributeDetail.usageType }}" option-name="{{leadopt.attributeFQN}}" class="mz-size-content mz-pagingcontrols-pagesize-dropdown {{leadopt.attributeDetail.usageType}}">
+                                                {% for sizeValue in leadopt.values %}
+                                                    <option {% if not sizeValue.isEnabled %} class="is-disabled" {% endif %} {% if defaultcolorvalue.value %} {% if defaultcolorvalue.value|lower == sizeValue.value|lower %} selected="true" {% endif %}  {% else %} {% if sizeValue.isSelected %}selected="true"{% endif %} {% endif %} value="{{sizeValue.value}}" val_name="{{sizeValue.stringValue}}">
+                                                        {{sizeValue.stringValue}}   
+                                                    </option>
+                                                {% endfor %}
+                                                </select>
+                                            </label>    
+                                        {% endwith %}  
+                                {% endwith %}
+                            {% endwith %}
+                        {% endif %}
+                        
+                        {% if sizeopt %}
+                            {% with model|get_product_attribute_value("tenant~default-option-product-code") as defaultcolor %}
+                                    {% with model.variations|findwhere('productCode',defaultcolor) as defaultcolordata %}  
+                                        {% with defaultcolordata.options|findwhere('attributeFQN',"tenant~size") as defaultcolorvalue %}    
+                                            <span class="label_name">{{sizeopt.attributeDetail.name}}</span>
+                                            <label class="mz-pagingcontrols-pagesort-label mz-customdrop">    
+                                                <select option-type="{{ sizeopt.attributeDetail.usageType }}"  option-name="{{sizeopt.attributeFQN}}" class="mz-size-content mz-pagingcontrols-pagesize-dropdown {{sizeopt.attributeDetail.usageType}}">
+                                                {% for sizeValue in sizeopt.values %}
+                                                    <option {% if not sizeValue.isEnabled %} class="is-disabled" {% endif %}  {% if defaultcolorvalue.value %} {% if defaultcolorvalue.value|lower == sizeValue.value|lower %} selected="true" {% endif %}  {% else %} {% if sizeValue.isSelected %}selected="true"{% endif %} {% endif %} value="{{sizeValue.value}}" val_name="{{sizeValue.stringValue}}">
+                                                        {{sizeValue.stringValue}}  
+                                                    </option>
+                                                {% endfor %}
+                                                </select>
+                                            </label>    
+                                        {% endwith %}
+                                {% endwith %}
+                            {% endwith %}  
+                        {% endif %}
+                         
+                        {% if tempopt %} 
+                            {% with model|get_product_attribute_value("tenant~default-option-product-code") as defaultcolor %}
+                                    {% with model.variations|findwhere('productCode',defaultcolor) as defaultcolordata %}  
+                                        {% with defaultcolordata.options|findwhere('attributeFQN',"tenant~color-temperature-option") as defaultcolorvalue %} 
+                                            <span class="label_name">{{tempopt.attributeDetail.name}}</span>
+                                            <label class="mz-pagingcontrols-pagesort-label mz-customdrop">
+                                                <select option-type="{{ tempopt.attributeDetail.usageType }}"  option-name="{{tempopt.attributeFQN}}" class="mz-size-content mz-pagingcontrols-pagesize-dropdown {{tempopt.attributeDetail.usageType}}">
+                                                {% for sizeValue in tempopt.values %}
+                                                    <option {% if not sizeValue.isEnabled %} class="is-disabled" {% endif %} {% if defaultcolorvalue.value %} {% if defaultcolorvalue.value|lower == sizeValue.value|lower %} selected="true" {% endif %}  {% else %} {% if sizeValue.isSelected %}selected="true"{% endif %} {% endif %} value="{{sizeValue.value}}" val_name="{{sizeValue.stringValue}}">
+                                                        {{sizeValue.stringValue}}  
+                                                    </option>
+                                                {% endfor %}    
+                                                </select>
+                                            </label>  
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endwith %}
+                        {% endif %}
+                        
+                    </div>       
+                </div>
+            </div>
+         
+            <div class="mz-overlay-btn"> 
+                <button id="custom_options_next" class="mz-product-next mz-button mz-button-large" data-mz-product="{{ model.productCode }}">
+                     Next
+                </button> 
+            </div>
+        </div>
+        
+        
+        
+    </div>      
+    <h3 class="option-subheader option-subextras">Extra</h3> 
+    {% else %}
+        <h3 class="option-subheader">Choose Your Options</h3>   
+    {% endif %}        
+        {% for option in model.options %}     
+            {% if option.attributeDetail.usageType == "Extra" %}   
+           
+                {% if option.attributeFQN !== themeSettings.singleCustomisedBulbMostPopularExtra and option.attributeFQN !== themeSettings.doubleCustomisedBulbMostPopularExtra %} 
+                    {% if pageContext.pageType == "product" %}  
+                        <div class="mz-productoptions-optioncontainer {% if option.attributeFQN == model.closestate %} {% else %}closestate{% endif %}"    
+                            {% if option.isRequired and option.values.length == 1 %}
+                            {% with option.values|first as info %}
+                                {% if info.deltaPrice < 1 %}
+                                    style="display:none !important;" autoselectinfo
+                                {% endif %}
+                            {% endwith %} 
+                            {% endif %} >
+                            <div class="option-container-heading">  
+                                <div class="label-heading">
+                                    <label class="mz-productoptions-optionlabel" val="{{option.attributeFQN}}">{{ option.attributeDetail.name }}</label>
+                                </div>
+                                <div class="option_field">   
+                                     <label class="mz-productoptions-optionlabel " id="selectmain"></label>
+                                    {% if option.attributeFQN ==themeSettings.singleCustomisedBulbExtra or option.attributeFQN ==themeSettings.TopCustomisedBulbExtra or option.attributeFQN == themeSettings.BottomCustomisedBulbExtra %}  
+                                        <label class="mz-productoptions-optionlabel " id="bulbtypelabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="colortemplabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="BeamSpreadlabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="wattagelabel"></label>
+                                    {% endif %}     
+                                   
+                                </div>   
+                                {% if option.attributeFQN == model.closestate %}
+                                  <a class="expand-collapse-btn" href="javascript:void(0);"></a>
+                                  {% else %}
+                                  <a class="" href="javascript:void(0);"></a>
+                                 {% endif %}
+                                <div class="clearfix"></div>
+                            </div> 
+                    
+                             {% if option.attributeFQN == model.closestate %}
+                                <div class='Optioncontainer '>
+                              {% else %}
+                               <div class='Optioncontainer closeContainer'>
+                             {% endif %} 
+                    {% else %}    
+                           <div class="mz-productoptions-optioncontainer {% if model.closestate %}{% if option.attributeFQN == model.closestate %}{% else %}closestate{% endif %}{% else %}closestate{% endif %}"
+                           {% if option.isRequired and option.values.length == 1 %}
+                            {% with option.values|first as info %}   
+                                {% if info.deltaPrice < 1 %}
+                                    style="display:none !important;" autoselectinfo
+                                {% endif %}
+                            {% endwith %} 
+                        {% endif %}> 
+                             
+                            <div class="option-container-heading">  
+                                <div class="label-heading">
+                                    <label class="mz-productoptions-optionlabel" val="{{option.attributeFQN}}">{{ option.attributeDetail.name }}</label>
+                                </div>
+                                <div class="option_field">   
+                                     <label class="mz-productoptions-optionlabel " id="selectmain"></label>
+                                    {% if option.attributeFQN ==themeSettings.singleCustomisedBulbExtra or option.attributeFQN ==themeSettings.TopCustomisedBulbExtra or option.attributeFQN == themeSettings.BottomCustomisedBulbExtra %}  
+                                        <label class="mz-productoptions-optionlabel " id="bulbtypelabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="colortemplabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="BeamSpreadlabel"></label>
+                                        <label class="mz-productoptions-optionlabel " id="wattagelabel"></label>
+                                    {% endif %}
+                                   
+                                </div>    
+                                <a class="{% if model.closestate %} {% if option.attributeFQN == model.closestate %}expand-collapse-btn{% endif %}{% endif %}" href="javascript:void(0);"></a>     
+                                <div class="clearfix"></div>
+                            </div> 
+                    
+                            <div class='Optioncontainer {% if model.closestate %} {% if option.attributeFQN == model.closestate %}{% else %} closeContainer{% endif %}{% else %} closeContainer{% endif %}'>
+                            
+                    {% endif %}
+                             
+                            {% if option.attributeFQN == themeSettings.singleCustomisedBulbExtra or option.attributeFQN == themeSettings.TopCustomisedBulbExtra %}      
+                                <div class="customised_view "> 
+                                    <div  class="preloader" style="display: none;" >
+                                            <p>Please wait while we apply this filter...</p>
+                                        </div>
+                                    {% include "modules/customizebulbtemplate" with model=model %}    
+                                </div>
+                            {% else %}
+                                {% if  option.attributeFQN == themeSettings.BottomCustomisedBulbExtra %}          
+                                    <div class="customised_view "> 
+                                        <div  class="preloader" style="display: none;" >
+                                            <p>Please wait while we apply this filter...</p>
+                                        </div>
+                                        {% include "modules/customizebulbtemplate1" with model=model %}    
+                                    </div>   
+                                {% else %}
+                                    <div class="mz-productoptions-valuecontainer">
+                                        <div class="mz-option-space">    
+                                            <div class="img-slot">
+                                                <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png" alt="No-option"/>
+                                            </div> 
+                                            <div class="option-container">
+                                            {% if option.attributeDetail.inputType == "List" %}
+                                               
+                                                    {% for value in option.values %}
+                                                    
+                                                        <div class="options ">  
+                                                        
+                                                        {% if option.attributeDetail.usageType=="Option" %}
+                                                            <input class="mz-productoptions-option" prcode="{{model.productCode}}" pordprice="{% if model.priceRange %} {{model.priceRange.lower.price}} {% else %}{{model.price.price}}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"  optionprice=1 ><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }} </span>){% endif %}</label> 
+                                                        {% else %}
+                                                           <input class="mz-productoptions-option " prnames="{{value.stringValue|default(value.value)}}" prcode="{{model.productCode}}" optionprice="{{value.deltaPrice}}" pordprice="{% if model.price.salePrice%} {{model.price.salePrice}}{% else %}{% if model.price.price %}{{model.price.price}}{% else %}{{model.priceRange.lower.price}}{% endif %}{% endif %}" option-type="{{ option.attributeDetail.usageType }}" name ="{{ option.attributeDetail.name }}" type="radio" id="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}" data-mz-product-option="{{ option.attributeFQN }}" value="{{value.value}}"><label class="mz-productoptions-label" for="{{model.productCode}}_{{option.attributeFQN}}_{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (<span class="price-labels">{{ value.deltaPrice|currency }} {{ labels.more }}</span>){% endif %} </label>
+                                                         {% endif %}  
+                                                         <div class="clearfix"></div> 
+                                                        </div>
+                                                    {% endfor %}  
+                                            </div>
+                                
+                                            <div class="clearfix"></div>   
+                                            {% else %}
+                                                {% if option.attributeDetail.inputType == "YesNo" %}
+                                                    <input class="mz-productoptions-option" type="checkbox" {% if option.shopperEnteredValue %}checked="checked"{% endif %} data-mz-product-option="{{ option.attributeFQN }}" />
+                                                {% endif %}
+                                                {% if option.attributeDetail.inputType == "TextBox" %}  
+                                                    {% if option.attributeDetail.dataType == "Number" %}
+                                                    <input class="mz-productoptions-option" type="number" min="{{ option.attributeDetail.validation.minNumericValue }}" max="{{ option.attributeDetail.validation.maxNumericValue }}" value="{{ option.shopperEnteredValue }}" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">
+                                                        {% else %}
+                                                    <input class="mz-productoptions-option" type="text" value="{{ option.shopperEnteredValue }}" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">
+                                                        {% endif %}
+                                                {% endif %}
+                                                {% if option.attributeDetail.inputType == "TextArea" %}
+                                                    <textarea class="mz-productoptions-option" data-mz-product-option="{{ option.attributeFQN }}" data-mz-focus-bookmark="{{ option.attributeFQN }}">{{ option.shopperEnteredValue }}</textarea>
+                                                {% endif %}
+                                                {% if option.attributeDetail.inputType == "Date" %}
+                                                    <input type="text" data-mz-is-datepicker data-mz-focus-bookmark="{{ option.attributeFQN }}" data-mz-product-option="{{ option.attributeFQN }}" class="mz-productoptions-option" style="color:transparent" value="{{ option.shopperEnteredValue }}" data-format="mm/dd/yy" data-max="{{option.maxValue}}" data-min="{{ option.minValue }}">
+                                                {% endif %}
+                                                {% if option.values %}
+                                                  {% for value in option.values %}
+                                                    {% if forloop.counter0 == 0 and value.deltaPrice > 0 %}
+                                                      ({{ value.deltaPrice|currency }} {{ labels.more }})
+                                                    {% endif %}
+                                                  {% endfor %}
+                                                {% endif %}
+                                            {% endif %}  
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}             
+                                <div class="mz-overlay-btn"> 
+                                    <button id="" class="mz-product-next mz-button mz-button-large  data-mz-action="addToCart" disabled="disabled" >
+                                        {% if option.attributeFQN== themeSettings.singleCustomisedBulbExtra and forloop.last  or option.attributeFQN == themeSettings.BottomCustomisedBulbExtra and forloop.last or forloop.last %} Finish {% else%} Next{% endif %}
+                                    </button>
+                                </div>
+                        </div>
+                    </div>      
+                
+                {% endif %} 
+               
+            {% endif %}   
+        {% endfor %}
+    
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+
+</div>
+

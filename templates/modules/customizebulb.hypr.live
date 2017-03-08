@@ -1,0 +1,115 @@
+
+<input type="hidden" name="check" id="bulbtype" value="">  
+<input type="hidden" name="check" id="beamspread" value="">
+<input type="hidden" name="check" id="colortemp" value="">
+<input type="hidden" name="check" id="wattage" value="">
+<input type="hidden" name="check" id="hiddendata" value="">   
+<input type="hidden" name="check" id="hiddendata" value="">  
+
+{% if model.BulbType %}   
+<div id ="BulbType" class="parent_type"> 
+    <h2 class="option-hdr mz-mobile">BULB TYPE</h2>
+    <div class="img-slot">
+        <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png" alt="Bulb Type">  
+    </div>
+    
+    <div class="option-container">  
+        <h2 class="option-hdr mz-desktop ">BULB TYPE</h2>
+        {% for mdl in model.BulbType %} 
+            <div class="options {{mdl.properties.Code}}" >  
+                <input class="mz-productoptions-option_bulb" dispalytxt="{{mdl.properties.DisplayText}}" name ="BULBTYPE"  descrip="{{mdl.properties.Description}}" imgsrc="{{mdl.properties.ImageUrl}}" type="radio" data-proptype="BULBTYPE" id="{{mdl.properties.Code}}{{model.opt}}" value="{{mdl.properties.Code}}"><label class="mz-productoptions-label" for="{{mdl.properties.Code}}{{model.opt}}">{{mdl.properties.DisplayText}}</label>
+                <div class="description-mobile"></div>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="description">
+    </div>
+    <div class="clearfix"></div>
+</div> 
+{% endif %} 
+ 
+{% if model.colortemp %}   
+<div  id="ColorTemp" class="parent_type" style="display:none;">  
+    <h2 class="option-hdr mz-mobile">Color Temperature</h2>
+    <div class="img-slot">
+        <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png" alt="Bulb Type">  
+    </div>
+    
+    <div class="option-container">
+        <h2 class="option-hdr mz-desktop">Color Temperature</h2>
+        {% for mdl in model.colortemp %}   
+            <div class="options {{mdl.properties.Code}}" style="display:none;">  
+                <input class="mz-productoptions-option_bulb" dispalytxt="{{mdl.properties.DisplayText}}" name ="colortemp"  descrip="{{mdl.properties.Description}}" imgsrc="{{mdl.properties.ImageUrl}}" type="radio" data-proptype="colortemp" id="{{mdl.properties.Code}}{{model.opt}}" value="{{mdl.properties.Code}}"><label class="mz-productoptions-label" for="{{mdl.properties.Code}}{{model.opt}}">{{mdl.properties.DisplayText}}</label>
+                <div class="description-mobile"></div>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="description"> </div>
+    <div class="clearfix"></div>
+</div> 
+{% endif %}  
+ 
+ 
+{% if model.BeamSpread %}
+<div id="BeamSpread" class="parent_type" style="display:none;">
+     <h2 class="option-hdr mz-mobile">BeamSpread</h2>
+    <div class="img-slot">
+        <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png"  alt="Bulb Type"> 
+    </div>
+    
+    <div class="option-container">
+        <h2 class="option-hdr mz-desktop">BeamSpread</h2>
+        {% for mdl in model.BeamSpread %} 
+            <div class="options {{mdl.properties.Code}}" style="display:none;">  
+                <input class="mz-productoptions-option_bulb" dispalytxt="{{mdl.properties.DisplayText}}" name ="BeamSpread"  descrip="{{mdl.properties.Description}}" imgsrc="{{mdl.properties.ImageUrl}}" type="radio" data-proptype="BeamSpread" id="{{mdl.properties.Code}}{{model.opt}}" value="{{mdl.properties.Code}}"><label class="mz-productoptions-label" for="{{mdl.properties.Code}}{{model.opt}}">{{mdl.properties.DisplayText}}</label>
+                <div class="description-mobile"></div>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="description"> </div>
+    <div class="clearfix"></div>
+        
+</div>        
+{% endif %}  
+
+{% if model.wattage %}
+<div id="Wattage" class="parent_type" style="display:none;">  
+   <h2 class="option-hdr mz-mobile">Wattage</h2>
+    <div class="img-slot">
+        <img src="{{ siteContext.cdnPrefix }}/cms/{{siteContext.siteId}}/files/nooption.png"  alt="Bulb Type"> 
+    </div>
+    
+    <div class="option-container"> 
+         <h2 class="option-hdr mz-desktop">Wattage</h2>
+        {% for mdl in model.wattage %} 
+            <div class="options {{mdl.properties.Code}}" style="display:none;">  
+                <input class="mz-productoptions-option_bulb" dispalytxt="{{mdl.properties.DisplayText}}" name ="wattage"  descrip="{{mdl.properties.Description}}" imgsrc="{{mdl.properties.ImageUrl}}" type="radio" data-proptype="wattage" id="{{mdl.properties.Code}}{{model.opt}}" value="{{mdl.properties.Code}}"><label class="mz-productoptions-label" for="{{mdl.properties.Code}}{{model.opt}}">{{mdl.properties.DisplayText}}</label>
+                <div class="description-mobile"></div>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="description"> </div>
+    <div class="clearfix"></div>
+</div>        
+{% endif %} 
+
+
+
+
+
+
+
+
+
+
+
+
+

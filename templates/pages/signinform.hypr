@@ -1,0 +1,228 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-signinform {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+
+  {% comment %}
+<script language="Javascript" type="text/javascript"> 
+    $(function () {
+        $(".fields, #mz-company").keyup(function(e){
+            var length=$(this).val().length;
+            switch(length){
+                case (1):
+                    var stringdata=$(this).val();
+                    if(stringdata==" "){
+                        $(this).val(""); 
+                    }
+                    break; 
+            } 
+        });
+    });
+</script>       
+{% endcomment %}       
+
+
+<div data-mz-role="login-pop-up-wrapper" class="mz-popover-login">
+  <div class=" mz-modal__wrapper" data-mz-role="modal-window">
+    <div class="mz-modal__inner" data-mz-role="modal-contents">  
+      <div id="mz-login">
+       
+        <div class="left-side-login">
+          <!--Login Starts Here -->
+
+          <div id="mz-divlogin" data-mz-login>
+          <form  method="post" autocomplete="off" data-mz-login-form>
+
+            <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+            <div class="defaultlogin">
+              <h2 class="heading">{{ labels.loginaccount }}</h2>
+              <p>{{ labels.logintext }}</p>
+
+              <h2>{{ labels.labelemail }}</h2>
+              <input autocomplete="off" type="email" maxlength="255" data-mz-email="" name="email" id="mz-login-email" placeholder="{{ labels.inputemail }}" tabindex="1"/>
+
+              <h2>{{ labels.labelpassword }}</h2>
+              <input name="password" id="mz-password" type="password" maxlength="320" placeholder="{{ labels.inputpassword }}" tabindex="2"/>
+
+                <p class="redtext">{{ labels.loginnewtext | safe }}</p>
+              <div><a href="javascript:void(0);" class="mz-forgot-pwd" tabindex="4">{{ labels.forgotPasswordLink }}</a></div>
+              <button value="{{ labels.loginbutton}}" type="submit"  class="mz-btn-login loginformbtn" tabindex="3" >{{ labels.loginbutton}}</button>
+            </div>
+            </form>
+            {% if pageContext.pageType == "checkout"  or pageContext.pageType == "cart"  %} 
+              <!--  <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div> -->
+              
+              <div class="mzloginsignup" style="display:none">     
+                <div  data-mz-signup-form>
+         
+                
+                  <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+
+
+                  <div class="left-side-signup">
+                     <h2 class="heading">{{ labels.signupwithus }}</h2>
+                     <p>{{ labels.signupnewtext | safe }}</p>
+
+                     <h2>{{ labels.firstName }}</h2>
+                     <input autocomplete="off" type="text" maxlength="320" data-mz-fnamel="" name="fname" id="mz-signup-fname" placeholder="{{ labels.inputfirstName }}" tabindex="1"/>
+   
+                     <h2>{{ labels.lastName }}</h2>
+                     <input name="lname" id="mz-signup-lname" type="text" maxlength="320" placeholder="{{ labels.inputlastName }}" tabindex="2"/>
+
+                     <h2>{{ labels.labelemail }}</h2>
+                     <input autocomplete="off" type="email" maxlength="255" data-mz-signup-email="" name="signupemail" id="mz-signup-email" placeholder="{{ labels.inputemail }}" tabindex="3"/>
+
+                     <h2>{{ labels.labelpassword }}</h2>
+                     <input name="signuppassword" id="mz-signup-password" type="password" maxlength="320" placeholder="{{ labels.inputpassword }}" tabindex="4"/>
+
+                     <h2>{{ labels.labelrepassword }}</h2>
+                     <input autocomplete="off" type="password" maxlength="320" data-mz-re-password="" name="repassword" id="mz-signup-repassword" placeholder="{{ labels.inputrepassword }}" tabindex="5"/>
+
+                     <label class="chkoffers"><input type="checkbox" name="checktext" id="checksign" tabindex="6" checked="checked"/>
+                     <span class="checkboxtext">{{ labels.textcheck | safe }}</span></label>
+
+                     <button value="{{labels.signupbutton}}" tabindex="7" class="mz-btn-signup">{{ labels.signupbutton }}</button>
+                  </div>
+
+                </div>  
+              </div>
+            {% endif %}
+          </div>
+          <!--Login Ends Here -->
+
+          <!--Forgot passowrd Starts Here -->
+
+          <div id="mz-div-fpwd" style="display:none;">
+            <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+            <h2 class="heading">{{ labels.resetpwd  }}</h2>
+             <p>{{ labels.forgotPasswordnewtext }}</p>
+
+             <h2>{{ labels.labelemail }}</h2>
+             <input autocomplete="off" type="email" maxlength="255" data-mz-email="" name="fpwdemail" id="mz-fpwd-email" placeholder="{{ labels.inputemail }}" tabindex="1"/>
+
+             <div><a href="javascript:void(0);" class="mz-forgot-pwd" tabindex="3">{{ labels.backtologin }}</a></div>
+            <button value="{{ labels.submit }}" class="mz-btn-submit" tabindex="2" data-mz-forgotpwd-form>{{ labels.submit }}</button>
+          </div>
+
+          <!--Forgot passowrd ends Here -->
+
+        </div>
+        
+        <div class="mz-mobile or-separator">
+          <span>
+            Or <!--Padding is optional-->
+          </span>
+        </div>
+              
+        <div class="right-side-login">
+          <div class="guestuser" id="guestuser">  
+            <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+
+            {% if pageContext.pageType == "checkout"  or pageContext.pageType == "cart" %} 
+              <div class="proceed_guest">
+                <h2 class="procees-email">Continue as a guest</h2>
+                <div class="mz-l-formfieldgroup-cell guest_text">
+                    <label class="email_account_text" >{{ labels.emailaccountcreation }}</label> 
+                </div>
+      
+                <div class="mz-l-formfieldgroup" style="margin-top: 2px;">
+                  <div class="mz-l-formfieldgroup-row">
+                    <p class="mz-guestaccounttext">This allows us to keep you updated about your order.</p>
+                    <p class="mz-popemail"> Email</p>  
+                      <div class="mz-l-formfieldgroup-cell">
+                           <input name="email" id="guest_email" data-mz-email placeholder="Enter Email"   type="email" class="guest-email"/>
+                      </div>
+                  </div>  
+                  <div class="mz-l-formfieldgroup-row">
+                      <div class="mz-l-formfieldgroup-cell"></div>  
+                      <div class="mz-l-formfieldgroup-cell">
+                        <span class="error-guest"></span>
+                        <button value="{{ labels.submit }}"  class="mz-btn-submit mz-btn-login" tabindex="2" data-mz-guestemail>checkout</button> 
+                      </div>  
+                  </div>
+                </div>
+            
+                <div class="clearfix"></div>
+                  
+              </div>
+            {% endif %}
+          </div>  
+          
+            {% if pageContext.pageType == "cart" %} 
+                <div class="right-side-signup" style="display:none"  extrasignup="yes">
+                    <p>{{ labels.logincontinuetext }}</p>
+                    <button value="{{labels.logincontinuebutton}}" class="mz-btn-continue-login">{{ labels.logincontinuebutton }}</button>
+                </div> 
+           {% endif %}  
+             
+          <div class="onlyforlogin">
+            <p>{{ labels.signupcontinuetext }}</p> 
+            
+            <button value="{{ labels.signupcontinuebutton }}"  class="mz-btn-continue-sign-up">{{ labels.signupcontinuebutton }}</button> 
+          </div> 
+        </div>    
+      </div>
+            
+      <div id="mz-signup"  style="display:none" data-mz-signup-form>
+      
+       
+        <div data-mz-messagebar-container>{% include "modules/common/message-bar" with model=model.messages %}</div>
+
+
+        <div class="left-side-signup">
+          <h2 class="heading">{{ labels.signupwithus }}</h2>
+          <p>{{ labels.signupnewtext | safe }}</p>
+
+          <h2>{{ labels.firstName }}</h2>
+          <input autocomplete="off" type="text" maxlength="320" data-mz-fnamel="" name="fname" id="mz-signup-fname" placeholder="{{ labels.inputfirstName }}" tabindex="1"/>
+
+          <h2>{{ labels.lastName }}</h2>
+          <input name="lname" id="mz-signup-lname" type="text" maxlength="320" placeholder="{{ labels.inputlastName }}" tabindex="2"/>
+
+          <h2>{{ labels.labelemail }}</h2>
+          <input autocomplete="off" type="email" maxlength="255" data-mz-signup-email="" name="signupemail" id="mz-signup-email" placeholder="{{ labels.inputemail }}" tabindex="3"/>
+
+          <h2>{{ labels.labelpassword }}</h2>
+          <input name="signuppassword" id="mz-signup-password" type="password" maxlength="320" placeholder="{{ labels.inputpassword }}" tabindex="4"/>
+
+          <h2>{{ labels.labelrepassword }}</h2>
+          <input autocomplete="off" type="password" maxlength="320" data-mz-re-password="" name="repassword" id="mz-signup-repassword" placeholder="{{ labels.inputrepassword }}" tabindex="5"/>
+
+          <label class="chkoffers"><input type="checkbox" name="checktext" id="checksign" tabindex="6" checked="checked"/>
+          <span class="checkboxtext">{{ labels.textcheck | safe }}</span></label>
+
+          <button value="{{labels.signupbutton}}" tabindex="7" class="mz-btn-signup">{{ labels.signupbutton }}</button>
+        </div>
+
+        <div class="right-side-signup">
+          <p>{{ labels.logincontinuetext }}</p>
+          <button value="{{labels.logincontinuebutton}}" class="mz-btn-continue-login">{{ labels.logincontinuebutton }}</button>
+        </div>  
+      </div>  
+      
+    </div>
+        
+    {% if pageContext.pageType == "checkout"  or  pageContext.pageType == "cart" %}
+      <div class="mz-mobile or-separator cartspecor" {% if pageContext.pageType == "cart"%}  style="display:none" {% endif %}>
+        <span>
+          Or <!--Padding is optional-->
+        </span>
+      </div>
+      
+      <div class="checkoutbtns" {% if pageContext.pageType == "cart"%}  style="display:none" {% endif %}>  
+        <button value="{{ labels.signupcontinuebutton }}" class="mz-btn-continue-sign-up">Sign-up and create an account</button>
+        <button value="{{labels.logincontinuebutton}}"  class="mz-btn-continue-login" style="display:none">Already have an account - Login Here</button>
+      </div>
+    {% endif %}
+               
+  </div>    
+          
+</div>    
+  
+
+{% endblock body-content %}
+

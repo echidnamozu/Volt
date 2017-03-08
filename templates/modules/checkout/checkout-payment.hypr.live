@@ -1,0 +1,51 @@
+<div class="mz-checkout-payment">
+    <dl class="mz-propertylist">
+        {% if model.billingInfo.billingContact.email %}
+        <dt>{{ labels.billingEmail }}</dt>
+        <dd>{{ model.billingInfo.billingContact.email }}</dd>
+      {% endif %}
+      {% if model.billingInfo.paymentType == "StoreCredit" or model.billingInfo.paymentType == "GiftCard" or  model.billingInfo.paymentType|lower == "paypalexpress2" or model.billingInfo.paymentType|lower == "paywithamazon"%}
+          
+            {% if model.billingInfo.paymentType == "PayWithAmazon" %}
+            <dt>Payment Method</dt> 
+                <dd><img src="../../resources/images/amazonpay60x38.png" alt="Amazon"/></dd>
+            {%else%}
+                {% if model.billingInfo.paymentType|lower == "paypalexpress2" %}
+                <dt>Payment Method</dt>  
+                    <dd>
+                        <img alt="PayPal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" align="left" width="100px" height="26px" style="margin-right:7px;">
+                    </dd>
+                {% else %}
+                    {% if model.billingInfo.paymentType == "StoreCredit" or model.billingInfo.paymentType == "GiftCard" %} 
+                            <dt>{{ labels.digitalCreditCode }}</dt>
+                            <dd>{{ model.billingInfo.storeCreditCode }}</dd>
+                    {%endif%}
+                {% endif %}
+            {% endif %}   
+        {% else %} 
+        <dt>{{ labels.billingName }}</dt>
+        <dd>{{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }}</dd>
+        <dt>{{ labels.billingAddress }}</dt>
+        <dd class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.billingInfo.billingContact %}</dd>
+        <dt>{{ labels.paymentMethod }}</dt>
+        <dd>{{ model.billingInfo.paymentType }}
+        {% endif %}
+            
+        {% if model.billingInfo.paymentType == "Check" %}
+        
+        <dt><strong>{{ labels.mailCheckTo }}</strong></dt>
+        <dd class="mz-addresssummary">
+            <span>{{ ViewData.mailCheckTo.shippingOriginContact.firstName}} {{ ViewData.mailCheckTo.shippingOriginContact.lastNameOrSurname }}</span>
+            <span>{{ ViewData.mailCheckTo.shippingOriginContact.companyOrOrganization }}</span>
+            {% include "modules/common/address-summary" with model=ViewData.mailCheckTo %}
+        </dd>
+        {% endif %}
+    </dl>
+</div> 
+
+
+
+
+
+
+

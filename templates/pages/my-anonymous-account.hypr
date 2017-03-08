@@ -1,0 +1,43 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.orderStatus %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-anonymous-account {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+
+{% preload_json model "customer" %}  
+
+
+<div class="mz-accountparent">
+    <h1 class="mz-pagetitle">
+    {{ labels.orderStatus|safe|upper }}
+    </h1>
+    <div class=" mz-mobile">
+        <select class="small-12" data-mz-orderstatus>
+            <option value="orderhistory">Order</option>
+            <option value="returnhistory">Returns</option>
+        </select>
+    </div>
+    
+<div class="mz-l-sidebar mz-myaccount-nav mz-desktop">
+    {% include "modules/my-account/my-account-nav" with navtarget="body" %}
+</div>
+<div id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large">
+    
+    <a id="orderhistory"></a>
+    <div class="mz-l-stack-section mz-accountorderhistory mz-container mz-myaccount-panels active-tab" id="account-orderhistory" style="display: block;">
+    
+    {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=false %}
+    </div> 
+
+    <a id="returnhistory"></a>
+    <div class="mz-l-stack-section mz-accountreturnhistory mz-container mz-myaccount-panels" id="account-returnhistory">
+    {% include "modules/my-account/my-account-returnhistory" with model=model.returnHistory %}
+    </div>
+
+</div>
+
+{% require_script "pages/myaccount" %}
+{% endblock body-content %}

@@ -1,0 +1,17 @@
+<h5 class="section-title">{{ themeSettings.preferencestext }}</h5>
+<div class="my-preferenceaccount panel-border">
+	<div class="mz-personalinformation">
+	        <span>Preferences</span>
+	</div>
+	<div class="store-balance">
+		<h4>Email Preferences</h4> 
+		<label class="mz-contacttype-isprimary css-label cb3">
+		<input type="checkbox" data-mz-action="acceptsMarketing" class="css-checkbox" data-mz-value="acceptsMarketing"  {% if model.acceptsMarketing %}checked="checked"{% endif %}><span class="css-label cb3">{{ labels.textcheck|safe }}</span>
+		</label>
+	</div> 
+</div>
+
+
+
+
+ 

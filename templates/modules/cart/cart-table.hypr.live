@@ -1,0 +1,522 @@
+
+<h6 class="mz-pagetitle large-12 columns titlepadding"><span class="amp-count"> {{ model.totalCount }} </span> <span class="amp-counttext">Item(s) in your cart:</span>  <span class="amp-total-count">
+   {{ model.total|currency }}
+   </span>
+   {% if pageContext.isMobile  %}
+   <div class="mz-mobile">  
+    {% if user.isAnonymous %}
+        <div id="cart-checkout" class="amp-btn  {% if model.proccedDisable or  model.isEmpty %} disabled {% else %} mz-loginpop {% endif %}" >{{ labels.proceedToCheckout }}</div> 
+    {% else %}
+        <button id="cart-checkout" class="mz-button mz-button-large amp-btn" {% if model.proccedDisable or  model.isEmpty %} disabled {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button> 
+    {% endif %}    
+   
+   </div>          
+   {% endif %}       
+   <span class="printcartDetails mz-desktop"><a class="{% if model.isEmpty %}hide{% endif %}" href="javascript:window.print()">Print Shopping Cart</a></span> 
+   
+    {% if user.isAnonymous %}
+        <span class="amp-wishlist mz-desktop"><a href="javascript:void(0);" id="cart-popupopen" title="Go to WishList">Go to Wishlist</a>  </span> 
+        <a href="javascript:void(0);" class="mz-utilitynav-link mz-item1 loginlink" data-mz-loginpopup=""></a>
+    {% else %}
+        <span class="amp-wishlist mz-desktop"><a href="/myaccount#wishlist" title="Go to WishList">Go to Wishlist</a>  </span>     
+    {% endif %}  
+</h6>   
+<div class="cart-brd"> 
+<div class="row text-center cart-section">
+   <div class="cart-section-attr">
+      <div class="mz-carttable-header-item bold  large-1 medium-1  large-push-0 small-2 columns">{{ labels.cartitems}}</div>
+      <div class="mz-carttable-header-desc bold large-3 medium-2 large-push-0 small-2 columns">{{ labels.cartdesc}}</div>
+      <div class="mz-carttable-header-price bold large-1 medium-1  large-push-0 small-2 columns">{{ labels.cartprice}}</div>
+      <div class="mz-carttable-header-qty bold large-2 medium-2  large-push-0 small-2 columns">{{ labels.cartqty}}</div>
+      <div class="mz-carttable-header-options bold large-3 medium-3  large-push-0 small-2 columns">{{ labels.cartextras}}</div>
+      <div class="mz-carttable-header-total bold large-1 large-text-left medium-2 large-push-0  small-2 columns">{{ labels.carttotal}}</div>
+   </div>  
+</div>
+<div class="mz-table-cart-{% if model.isEmpty %}isempty{% else %}items{% endif %}">
+   {% if not model.isEmpty %}
+   {% for item in model.items %}
+   
+   <div class="row text-center cart-hover">
+      <div data-mz-prodcode="{{ item.product.productCode }}" optcode ="{{ item.product.productCode }}{% if  item.product.options.length >  0  %}{% for option in item.product.options %}{{option.value}}{% endfor %}{% endif %}" class="cart-row {% if item.product.nonstock %} redborder {% endif %} clearfix">
+         <div class="small-12 mzcart-mobile text-left mz-padding">
+            <div class="mz-carttable-item-info-wrap{% if not item.product.imageUrl %} mz-no-image{% endif %}">
+               <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
+               <span class="mz-carttable-item-code">
+               {{ labels.productCode }}: <em>{{ item.product.productCode }}</em>
+               </span>
+               {% if item.fulfillmentMethod == 'Pickup' %}
+               <span class="mz-carttable-item-pickuplocation">
+               {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
+               </span>
+               {% endif %}
+            </div>  
+         </div>
+         <div class="mz-carttable-item-remove">
+            <a href="javascript:;" data-mz-action="showDeleteModelDialog" data-mz-cart-item="{{ item.id }}" class="mz-icon mz-icon-close">{{ labels.remove }}</a>
+         </div>
+         <div id="left">
+           <div class="mz-carttable-item-items large-1 medium-1 large-push-0  small-6 columns">
+              {% if item.product.imageUrl %}
+              {% if item.product.imageUrl and themeSettings.showCartItemImage %}
+              <a class="mz-carttable-item-title" href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{ item.product.imageUrl }}?max=80&quality={{themeSettings.cdnQuality}}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% else %}alt="{{ item.product.productName }}"{% endif %} /></a>
+              {% endif %}  
+              {% else %}
+                {% if themeSettings.showCartItemImage %}
+                <a class="mz-carttable-item-title" href="{{item.product.url}}"><img class="mz-carttable-item-image" src="{{siteContext.cdnPrefix}}/cms/{{siteContext.siteId}}/files/volt-noimageavailable.jpg?max=80&quality={{themeSettings.cdnQuality}}" alt="No Image" /></a>
+                {% endif %}
+              {% endif %}
+           </div>
+        </div>   
+         <div id="right">
+            <div class="mz-carttable-item-product large-3 medium-2  large-push-0  small-6 columns">
+              <div class="mz-carttable-item-info-wrap{% if not item.product.imageUrl %} mz-no-image{% endif %}">
+                 <a class="mz-carttable-item-title mzcart-desktop" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
+                 
+                 {% for option in item.product.options %}
+                 <div class="option-values">
+                  {% if option.attributeFQN == "tenant~color" %}
+                    <label class="mz-finish">Color/Finish :</label>
+                    <span class="mzcolor-text">{{option.stringValue}}</span>   
+                 {% endif %}
+                 {% if option.attributeFQN == "tenant~lead-wire" %}
+                    <label class="mz-finish">{{option.name}} :</label>
+                    <span class="mzcolor-text">{{option.stringValue}}</span>   
+                 {% endif %}
+                 {% if option.attributeFQN == "tenant~color-temperature-option" %}
+                    <label class="mz-finish">{{option.name}} :</label>
+                    <span class="mzcolor-text">{{option.stringValue}}</span>   
+                 {% endif %}
+                 {% if option.attributeFQN == "tenant~size" %}
+                    <label class="mz-finish">{{option.name}} :</label>
+                    <span class="mzcolor-text">{{option.stringValue}}</span>   
+                 {% endif %}
+                 </div>
+                 {% endfor %}
+                 <span class="mz-carttable-item-code">
+                 {{ labels.productCode }}: <em>{{ item.product.productCode }}</em>
+                 </span>
+                
+                 {% for property in item.product.properties %}
+                  {% if property.attributeFQN == "tenant~warranty" %}
+                      {% for propertyVal in property.values %}
+                 <span class="mz-cartwarranty"><a target="_blank" href="/warranty">{{ propertyVal.stringValue|safe }}</a> </span>     
+                          
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                 
+                 
+                 {% if item.fulfillmentMethod == 'Pickup' %}
+                 <span class="mz-carttable-item-pickuplocation">
+                 {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
+                 </span>
+                 {% endif %}
+              </div>
+           </div>
+           <div class="mz-carttable-item-price large-1 medium-1  large-push-0 small-6 columns ">
+          <div class="mz-carttable-item-total large-12 medium-2  large-push-0  small-12 columns mz-pricecust"> 
+              <span class="mz-item-rowtotal amp-price ">{% with item.basePrice |currency as baseprice  %} {{ baseprice|default(item.product.price.price|currency)}} {% endwith %} 
+              </span>
+              {% if item.product.savedamount %}
+              <span class="savepercent">save {{ item.product.savedamount}}%</span>
+          {% endif %}
+           </div> 
+              <!--{% include "modules/common/item-price" %} --> 
+           </div>
+           <div class="mz-carttable-item-qty large-2 medium-2 large-push-0  small-6 columns">
+              <span class="amp-mblcontent mzcart-mobile">QTY</span>
+              <input class="mz-carttable-qty-field small-cart large-4 medium-4" type="text" pattern="^[0-9]+$" min="1" max="999" maxlength="3"  {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" value="{{ item.quantity }}" />
+              <button class="cart-update-btn" disabled>Update</button>
+             {% if item.product.backstock %}
+                          <span class="qty-shot-desc">{{ item.product.inventory.onlineStockAvailable }} in stock,</span>
+                          <span class="qty-shot-desc">{{ item.product.backstock }} backordered</span>
+                      {% endif %} 
+                      {% if item.product.nonstock %}
+                           <span class="qty-shot-desc instck">{{ item.product.inventory.onlineStockAvailable }} in stock,</span>
+                          <span class="qty-shot-desc notavilable">Please Remove the item from the cart since stock is Unavailable</span>
+                      {% endif %}
+           </div>
+         </div>
+         <div class="mz-carttable-header-options bold large-3 medium-3  large-push-0  small-12 columns">
+            {% if  item.product.options.length >  0  %}
+                {% for option in item.product.options %}
+                  <label>
+                      <span>
+                          {% if option.attributeFQN !='tenant~color' and option.attributeFQN !='tenant~lead-wire' and option.attributeFQN!="tenant~color-temperature-option" and option.attributeFQN!="tenant~size" %}+({{ item.quantity }} X {% if option.deltaPrice%}{{option.deltaPrice|currency}}{%else%}$0.00{% endif %})
+                          {% else %}
+                            {% if forloop.last %}
+                            <label> No Options </label>
+                            {% endif %}
+                          {% endif %}
+                      </span> 
+                        {% if option.attributeFQN !='tenant~color' and option.attributeFQN !='tenant~lead-wire' and option.attributeFQN!="tenant~color-temperature-option" and option.attributeFQN!="tenant~size" %}
+                            {{ option.stringValue }}
+                        {% endif %}
+                 </label>
+                {% endfor %} 
+            {% else %}
+                <label> No Options </label>
+            {% endif %}
+         </div>
+         <div class="mz-carttable-item-total large-1 medium-2  large-push-0  small-12 columns mz-pricecust">
+            {% include "modules/common/item-total" %}
+         </div>
+         <div class="mz-carttable-item-all large-3 medium-3 columns mzcart-closebtn-mobileonly">
+            <a href="javascript:void(0);" data-mz-action="showDeleteModelDialog" data-mz-cart-item="{{ item.id }}" class="mz-icon mz-icon-close">{{ labels.remove }}</a>
+         </div>
+         {% for productDiscount in item.productDiscounts %}
+         <div class="mz-itemcartdiscount">
+            <div class="mz-item-discount">
+               <span class="mz-item-discountname">{{ productDiscount.discount.name }}</span>
+               {% if productDiscount.discount.freeShipping %}
+               <span class="mz-item-discountamt">{{ labels.freeShipping }}</span>
+               {% else %}
+               <span class="mz-item-discountamt"> -{{ productDiscount.impact|currency }}</span>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+   {% endfor %}
+   {% else %} 
+   <div class="mz-carttable-noitems">
+      <div>
+         {{ labels.cartEmpty }}
+      </div>
+   </div>
+   {% endif %}
+</div>
+<div>
+   <!--  <div class="mz-carttable-shipping-row row">-->
+   <!--    <div class="large-4 medium-4 columns" >-->
+   <!--    </div>-->
+   <!--    <div class="large-2 medium-4 columns">-->
+   <!--</div>-->
+   <!--<div class="large-2 medium-2 columns">-->
+   <!--</div>-->
+   <!--<div class="large-4 medium-4 columns">-->
+   <!--</div>-->
+   <!--  </div>-->
+   {% for discount in model.orderDiscounts %}
+   {% if not discount.excluded %}
+   {% comment %}
+   <div class="row mz-carttable-total-row" >
+      <div class="large-4 medium-4 columns">
+          {{ discount.discount.name }}:
+      </div>
+      <div class="mz-carttable-total-wrap large-2 medium-2 columns">
+         <span class="mz-carttable-rowtotal text-center">- {{ discount.impact|currency }}</span>   
+      </div>
+      <div class="large-4 medium-4 columns mz-carttable-total-label">
+         {{ discount.discount.name }}:
+         {% endcomment %}
+      </div>
+   </div>
+   {% endif %} 
+   {% endfor %}
+   <div class="mz-carttable-total-row" >
+      <div class="mz-carttable-total-wrap">
+         <div class="mz-carttable-total-label large-12 medium-12 small-12 columns bold font16">
+            {% if not model.isEmpty %}<a class="mz-carttable-emptylink mz-carttable-item-allremove" href="javascript:void(0);" data-mz-action="showDeleteModelDialog">Remove All</a> <a  {% if model.isEmpty %}class="hide"{% endif %}href="javascript:window.print()" class="mz-print">Print Shopping Cart</a>{% endif %}
+             
+            <span class="amp-subtotal">Sub Total:</span>
+            <span id="mz-carttable-total" class="mz-carttable-total font-16">
+            {{ model.discountedTotal|currency }}
+            </span>
+         </div>
+         <div>   
+         </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="amp-cart-page">   
+         <div class="right-cart">
+         
+            
+            <div class="amp-cart-coupon cart-total-section"> 
+               <!--<ul class="amp-leftdiscount">
+                  <li>{{ labels.subtotal }}:</li>
+                  {% if model.orderDiscounts.length > 0 %}
+                    {% for disc in model.orderDiscounts %}
+                        {% if disc.impact %}
+                            <li> Discounts: </li>
+                        {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  <li>{{ labels.tax }}:</li>
+                  <li>{{ labels.shippingHandling }}:</li>
+               </ul>--> 
+               <ul class="amp-rightdiscount">
+                  <li><label>{{ labels.subtotal }}:</label>
+                    <strong class="mzsubtotal">{{ model.discountedSubtotal|currency }}</strong></li>
+                  {% if model.orderDiscounts.length > 0 %} 
+                    {% for disc in model.orderDiscounts %}    
+                        {% if disc.impact %}  
+                            <li class="amp-rightcolor"><label>Order Discounts: </label><strong><span>- {{ disc.impact|currency }}</strong></span></li>
+                        {% else %}   
+                            
+                        {% endif %} 
+                    {% endfor %}  
+                  {% else %}
+                    
+                  {% endif %} 
+                  
+                  <li class="amp-rightcolor">
+                    <label class="labelest">{{ labels.shippingHandling }}:</label>
+                    <div class="estimate"> 
+                      <span id="text-chkout"><strong>{{labels.taxinCheckout}}</strong></span> 
+                      <span id="text-est"><a href="javascript:void(0);">Estimate</a></span>
+                    </div>
+                  </li>
+                  <li class="amp-rightcolor"><label>{{ labels.tax }}:</label>
+                  <strong>{{labels.taxinCheckout}}</strong></li> 
+               </ul>
+            </div>
+            <div class="amp-cart-coupon amp-estimate"> 
+               <ul class="amp-leftdiscount">
+                  <li>{{ labels.cartesttotal }}:</li> 
+               </ul>
+               <ul class="amp-rightdiscount">
+                
+                     <strong class="amp-total">{{ model.total|currency }}</strong>
+                 
+               </ul>  
+            </div>
+            <div class="clear"></div>  
+            <div class="safecheckout">
+            {% dropzone "mz-imagecheckout" scope="template" %}
+             </div>
+            {% if model.couponCodes.length > 0 %} 
+            <div class="coupon-code-bg"> 
+               {% for discountcode in model.couponCodes %}
+                  <span id="mob-coupon"> Coupon code  <label>{{ discountcode }}</label> successfully applied
+                  <a href="javascript:void(0)"  data-mz-coupon-code="{{ discountcode }}"  data-mz-action="removecouponcode" class="mz-icon-close removeCoupon">X</a>
+                  </span>       
+                 
+               {% endfor %}   
+            </div> 
+            {% else %}
+            <div class="mz-checkoutform-couponcode mz-l-formfieldgroup-row amp-cart-coupon amp-estimate" id="coupon-code-field" >
+                <div class="mz-l-formfieldgroup-cell coupon-label large-12 columns">
+                    <label for="coupon-code">{{ labels.couponCode }}</label>
+                    <span class="promotion-tip"><a href="javascript:void(0)" class="abt-coupon">{{ labels.couponPromotions }}</a>
+                    {% if themeSettings.couponcodeinfo %}
+                    <div class="cart-tooltip">{{ themeSettings.couponcodeinfo|safe }}</div>
+                    {% endif %}
+                    </span>
+                </div> 
+                <div class="mz-l-formfieldgroup-cell coupon-data large-12 columns">
+                    <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" placeholder="{{ labels.enterCode }}"  data-mz-value="couponCode">
+                    <button type="button" class="mz-button" data-mz-action="addCoupon" id="cart-coupon-code" 
+                        {% if not model.couponCode %} 
+                            disabled="disabled" 
+                        {% endif %}
+                        {% if model.isEmpty%}
+                            disabled="disabled" 
+                        {% endif %}
+                        >
+                        {{ labels.applyCoupon }}
+                    </button>
+                </div>  
+            </div> 
+            
+            {% endif %}
+          
+               <div class="clearfix"></div>
+                
+            
+            <div class="amp-freeshipping clear">
+               <div class="bordercorner_position">
+                 
+               </div>   
+            </div>
+         </div>  
+         
+         <div class="left-cart amprecommends"> 
+
+          <div class="leftcartcolor">
+          {% if model.prdpurchaseable  and themeSettings.recommendationproduct %}
+           {% if model.productExist %}
+           {% else %}
+
+           {% if model.amproproduct.content.productImages%}
+          
+         <div class="amp-cart-title">VOLT<sup>&reg;</sup> Recommends</div>
+           <div class="amp-content">
+            <div class="left-img">
+            
+            {% for mdl in model.amproproduct.content.productImages %}
+              {%if forloop.first %}
+              <a href="{% if model.amproproduct.content.seoFriendlyUrl %}/{{model.amproproduct.content.seoFriendlyUrl}}{% endif %}/p/{{model.amproproduct.productCode}}" ><img src="{{mdl.imageUrl}}" alt="{{model.amproproduct.productCode}}"/></a>
+              {% endif %}
+            {% endfor %}
+              <a class="mzcart-mobile" href="{% if model.amproproduct.content.seoFriendlyUrl %}/{{model.amproproduct.content.seoFriendlyUrl}}{% endif %}/p/{{model.amproproduct.productCode}}" ><div class="amp-imgtitle">{{model.amproproduct.content.productName |safe }}</div></a> 
+              <p class="amp-rate mzcart-mobile ">{{ model.amproproduct.price.price|currency }}</p>
+             </div>  
+                  
+             <div class="right-text">
+              <a class="mzcart-desktop" href="{% if model.amproproduct.content.seoFriendlyUrl %}/{{model.amproproduct.content.seoFriendlyUrl}}{% endif %}/p/{{model.amproproduct.productCode}}" ><div class="amp-imgtitle">{{model.amproproduct.content.productName |safe }}</div></a> 
+               <p class="amp-details">{{ model.amproproduct.content.productShortDescription |safe }}</p>
+              {% if model.amproproduct.price.msrp %}<p class="amp-msrate mzcart-desktop"><span>Compare at :</span> <span>{{ model.amproproduct.price.msrp|currency}} </span> </p>{% endif %}
+              {% if model.amproproduct.price.price %}<p class="amp-rate mzcart-desktop"><span>Special Inductory Price :</span> <span>{{ model.amproproduct.price.price|currency }} </span> </p> {% endif %}
+              
+              <a
+              {% if model.amproproduct.options.length ==1 %}
+                {% for modprod in model.amproproduct.options %}
+                    {% with modprod.values|first as info %}
+                      {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                        data-mz-extracode="{{info.value}}"  
+                      {% endif %}
+                    {% endwith %}
+                {% endfor %} 
+              {% else %}  
+                  {% for modprod in model.amproproduct.options %}
+                    {% with modprod.values|first as info %}
+                      {% if modprod.isRequired and modprod.values.length == 1 and info.deltaPrice < 1 %}
+                        {% if forloop.first %}
+                        data-mz-extracode="{{info.value}}"  
+                        {% endif %}
+                      {% else %}
+                            {% if forloop.last %}
+                              href="{% if model.amproproduct.content.seoFriendlyUrl %}/{{model.amproproduct.content.seoFriendlyUrl}}{% endif %}/p/{{model.amproproduct.productCode}}"
+                            {% endif %}
+                      {% endif %}
+                    {% endwith %}
+                {% endfor %}    
+              {% endif %}
+
+               class="remoteamp-btn {% if not model.prdpurchaseable %}is-disabled{% endif %}" {% if not model.prdpurchaseable %} disabled="disabled" {% endif %} data-mz-action="addtoCart" mz-code="{{model.amproproduct.productCode}}">ADD TO CART</a> 
+              
+             </div> 
+           </div>
+         {% endif %}
+         {% endif %}
+          {% endif %} 
+
+            <div class="clear"></div>
+            <div class="mz-cartupsell" style="{% if pageContext.isDesktop and model.productExist!=true %}top:0px{% else %}{% if pageContext.isTablet and model.productExist!=true %}    top: 325px;{% else %}{% if pageContext.isMobile and not model.productExist %}top:0px {% else %}top:0px{% endif %}{% endif %}{% endif %}"> 
+                {% dropzone "mz-cartupsell" scope="template" %}
+            </div>
+            </div> 
+         </div>
+
+        </div>
+
+      <div class="clear"></div> 
+      <p class="amp-bor"> </p> 
+      <div class="checkout_idme" >
+        {% dropzone "mz-cartidme" scope="template" %}
+      </div> 
+      <div class="mz-carttable-checkout-row row">
+         <div class="large-12 medium-12 columns text-right small-12">
+            <span class="amp-contiue"><a href="/">Continue Shopping</a></span>
+             
+            <div>
+
+                <p>{{labels.orWith}}</p>
+                  <div class="mz-carttable-thirdpartypayment" > 
+                    {% if not model.proccedDisable and not model.isEmpty %}                    
+                        {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %} 
+                            {% if externalPaymentWorkflowsEnabled %}
+                                {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
+                                    {% if externalPayment.isEnabled %}
+                                        {% if externalPayment.name == "PayWithAmazon" %}
+                                            <div id="AmazonPayButton"></div>
+                                        {% endif %}
+                                        {% comment %} 
+                                            {% if externalPayment.name == "VisaCheckout" %}
+                                                <img alt="Visa Checkout" class="v-button" role="button" src="{{pageContext.visaCheckoutButtonUrl}}"/>
+                                            {%endif%}
+                                        {% endcomment %}
+                                        {% if externalPayment.name == "PayPalExpress2" %}   
+                                            <img id="btn_xpressPaypal" class="p-button" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" />
+                                            {% comment %}
+                                                <button id="btn_xpressPaypal" class="p-button mz-button mz-button-large amp-btn" {% if model.proccedDisable or model.isEmpty %} disabled {% endif %} data-mz-action="proceedToCheckout">{{ labels.paypalCheckout }}</button>
+                                            {% endcomment %}
+                                            {% require_script "modules/xpressPaypal" %}
+                                        {%endif%}
+                                    {%endif%}
+                                {%endfor%}
+                            {% endif %}
+                        {%endwith%}      
+                    {% endif %}
+                    {% if user.isAnonymous %}       
+                        <div id="cart-checkout" class="amp-btn  {% if model.proccedDisable or  model.isEmpty %} disabled {% else %} mz-loginpop {% endif %}" >{{ labels.proceedToCheckout }}</div>           
+                    {% else %}
+                        <button id="cart-checkout" class="mz-button mz-button-large amp-btn" {% if model.proccedDisable or  model.isEmpty %} disabled {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button> 
+                    {% endif %}
+                  
+               </div>
+           </div>
+         </div>
+      </div> 
+   </div>
+</div>
+
+</div>
+<div id="estimate-popup">
+  <div class="mz-chooseestimate">
+    <a href="javascript:void(0);" class="close-estimate"></a>
+    <div class="hdr">Estimate Shipping Charges</div>
+    <label>Enter Zipcode to check Shipping charges</label>
+   
+    <input type="text" class="zip-code" placeholder="Zip Code" maxlength="10"/>
+    <button type="button" class="mz-estimate" value="Estimate">Estimate</button>
+    
+    <div id="loader"><svg width="58" height="58" viewBox="0 0 58 58" xmlns="www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(2 1)" stroke="#fddb00" stroke-width="1.5">
+            <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="1;0;0;0;0;0;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;1;0;0;0;0;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;1;0;0;0;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;0;1;0;0;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;0;0;1;0;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;0;0;0;1;0;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;0;0;0;0;1;0" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+            <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#fddb00">
+                <animate attributeName="fill-opacity"
+                     begin="0s" dur="1.3s"
+                     values="0;0;0;0;0;0;0;1" calcMode="linear"
+                     repeatCount="indefinite" />
+            </circle>
+        </g>
+    </g>
+</svg></div>
+  </div>
+</div>
+

@@ -1,0 +1,55 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-challenge {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+
+
+    <div class="mz-l-container">  
+        <h1>Challenges</h1>
+        <div class="mz-voltchallenge-slot">
+            <div class="mz-voltchallenge-slot_title"> 
+                {% dropzone "parent-category-amch_title" scope="page" %}    
+            </div>
+            <div class="mz-voltchallenge-slot_content"> 
+                <div class="mz-voltchallenge_contentinner mz-drop">
+                   <div class="left-img-content">
+                    {% dropzone "parent-category-volt_content_img" scope="page" %}  
+                    {% dropzone "parent-category-volt_content_button" scope="page" %}  
+                    </div>
+                    <div class="left-content">
+                    {% dropzone "parent-category-volt_content_middle" scope="page" %}
+                    </div>
+                </div> 
+                <div class="mz-voltchallenge_contentinner">
+                    <div class="right-content">
+                        {% dropzone "parent-category-volt_content_right" scope="page" %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="competitor-products">
+            {% dropzone "comparison-title" scope="page" %}
+            
+            <div class="competitor-row">
+            
+                
+                {% dropzone "competitor-title8" scope="page" %}
+                {% dropzone "volt-competitor8" scope="page" %}
+            </div>
+        </div>
+        
+     
+    </div>
+{% endblock body-content %}  
+
+
+
+
+
+
+
+

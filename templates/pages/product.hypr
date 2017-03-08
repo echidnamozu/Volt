@@ -1,0 +1,431 @@
+{% extends "page" %}
+{% block meta-tags %}
+ {% parent %}
+{% comment %}
+        <meta property="fb:app_id" content="YOUR-APP-ID" />
+        <meta property="fb:admins" content="USER_ID,USER_ID"/>
+{% endcomment %}
+        <meta property="og:title" content="{{PageContext.metaTitle}}"/>
+        <meta property="og:url" content="{{PageContext.url}}"/>
+        <meta property="og:description" content="{{ PageContext.MetaDescription }}" />
+        <meta property="og:site_name" content="voltlighting.com" /> 
+        {% if model.productType == 'video type' %}
+            <meta property="og:type" content="video.other"/> 
+            {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                {% if aliasName %}  
+                    {% with aliasName|split("/") as videoLinks %}
+                        {% with videoLinks|last as youtubeId %}
+                       {%comment%} <meta itemprop="image" content="{% if pagecontext.isSecure %}https://img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg{% else %}http://img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg{% endif %}"/> {%endcomment%} 
+                        <meta property="og:image" content="{% if pagecontext.isSecure %}https://img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg{% else %}http://img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg{% endif %}"/> 
+                        <meta property="og:video" content="{% if pagecontext.isSecure %}https://www.youtube.com/v/{{youtubeId}}&fs=1{% else %}http://www.youtube.com/v/{{youtubeId}}&fs=1{% endif %}"/>
+                        {% endwith %}
+                    {% endwith %} 
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+        {% if model.productType == 'Product News' or model.productType == "PressRelease"%}
+            {% if model.mainImage.imageUrl %} 
+                    <meta property="og:image" content="{% if pagecontext.isSecure %}https:{{model.mainImage.imageUrl}}{% else %}http:{{model.mainImage.imageUrl}}{% endif %}"/>
+            {% else %}
+                    <meta property="og:image" content="{{themeSettings.newsnoimage}}"/>
+            {% endif %}
+             
+            <meta property="og:type" content="article"/> 
+        {% endif %}
+        {% if model.productType == 'Article type' %}
+        {% if model.mainImage.imageUrl %}
+            <meta property="og:image" content="{% if pagecontext.isSecure %}https:{{model.mainImage.imageUrl}}{% else %}http:{{model.mainImage.imageUrl}}{% endif %}"/> 
+         {% else %}
+                    <meta property="og:image" content="{{themeSettings.articlenoimage}}"/>
+        {% endif %}    
+            <meta property="og:type" content="article"/>
+        {% endif %}
+        {% if model.productType == 'project' %}
+        {% if model.mainImage.imageUrl %} 
+            <meta property="og:image" content="{% if pagecontext.isSecure %}https:{{model.mainImage.imageUrl}}{% else %}http:{{model.mainImage.imageUrl}}{% endif %}"/> 
+        {% endif %}
+            <meta property="og:type" content="article"/>
+        {% endif %}
+        {% if model.productType == 'Standard' or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+            <meta property="og:type" content="{{PageContext.pageType}}"/>
+            <meta property="og:image" content="{% if pagecontext.isSecure %}https:{{model.mainImage.imageUrl}}{% else %}http:{{model.mainImage.imageUrl}}{% endif %}"/> 
+        {% endif %}
+        
+{% endblock meta-tags%}
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.content.productName %}  | {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %} mz-product {% if model.productType =="project" %} mz-project-description{% endif %} {% endblock body-tag-classes %} 
+{% block body-content %}
+ <h2 style="display: none;" class="mz-pagetitle" id="pageheader_title" ><label itemprop="name">{{ model.content.productName|safe}}</label> </h2>
+  {% preload_json model "product" %} 
+{% if model.productType == 'video type' or pagecontext.isEditMode %}
+        {% if pagecontext.isEditMode %}
+            <h2>Video Product</h2>
+        {% endif %}
+        {% include "modules/product/video-detail" %}
+{% endif %}
+{% if model.productType == 'Product News' or model.productType == 'PressRelease' or pagecontext.isEditMode %}
+        {% if pagecontext.isEditMode %}
+            <h2>News Product</h2>
+        {% endif %}
+        {% include "modules/product/news-detail" %}
+{% endif %}
+{% if model.productType == 'Article type' or pagecontext.isEditMode %}
+        {% if pagecontext.isEditMode %}
+            <h2>Article Product</h2>
+        {% endif %}
+        {% include "modules/product/article-details" %}
+{% endif %}
+{% if model.productType == 'project' or pagecontext.isEditMode %} 
+    {% if pagecontext.isEditMode %}
+        <h2>project Product</h2>
+    {% endif %}
+    {% include "modules/product/project-description" %}
+{% endif %}
+{% if model.productType == 'Standard' or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" or pagecontext.isEditMode %}
+
+    {% if pagecontext.isEditMode %}
+        <h2>Normal Product</h2>
+    {% endif %}
+
+    {% require_script "pages/product-listing" %}
+    {% require_script "pages/product" %}
+    <div class="mz-product-description">
+    <input type="hidden" id="prProductCode" value="{{ model.productCode }}"  /> 
+   
+    <div {% if model.productType == 'Standard' or model.productType == 'CustomizedProducts' or model.productType =="single_customised_bulbs" or model.productType == "MR16 Bulb" or  model.productType == "multiple_customised_bulbs" %}itemscope itemtype="http://schema.org/Product"{% endif %} class="mz-l-container row">
+        <h1 class="mz-pagetitle" id="pageheader_title" itemprop="name">{{ model.content.productName|safe}}</h1>
+        <div class="mz-product-utility">
+
+            <dd class="hide mz-productcodes-productcode" itemprop="productId">{{ model.variationProductCode|default(model.productCode) }}</dd>
+          <div class="hide" itemprop="brand" itemscope itemtype="http://schema.org/Organization">
+                <span itemprop="name">Volt  </span>
+            </div> 
+            <div data-mz-productimages class="mz-productimages mz-l-sidebar small-12 large-7 medium-7 columns {% if not user.isAnonymous %}loggedin{% endif %}"> 
+                {% include "modules/product/product-images" %}
+            </div>
+             <div  class="mz-productdetail small-12 large-5 medium-5 columns">
+               <div id="product-detail" class="mz-productdetail-inner"> 
+                            {% include "modules/product/product-detail" %}
+                 </div>
+                 <div class="email-notification">
+                     {% dropzone "emailForOutofStock" scope="template" %}
+                </div>
+            </div>
+            <div class="mz-product-review-panel {% if pagecontext.isEditMode %}{% else %}mz-mobile {% endif %}">
+            {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" or pagecontext.isEditMode  %}
+        {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+            {% if hideinfo or pagecontext.isEditMode %}
+                {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                     {% if hiddenproduct %}
+                      
+                    {% else %}
+             
+                        
+                            <div class="mz-rating-social large-6 medium-12 small-12">
+                                <div class="mz-product-rating">
+                                    <span class="small-3">Ratings</span>
+                                    <div class="rating small-9 column">
+                                        {% if model|get_product_attribute('tenant~rating') %}
+                                            {% with model|get_product_attribute('tenant~rating') as rating %}
+                                                {% if rating.values|first|prop("value") != "" %}   
+                                                    <a href="#tab-5" class="pdpmobileratelink">
+                                                        <div class="pr-stars pr-stars-small pr-stars-{{ rating.values|first|prop("value")}}-sm">&nbsp;</div>
+                                                        <span id="pdpmobilerating"></span>
+                                                    </a>
+                                                    <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                                {% else %}  
+                                                    <a href="#tab-5" class="pdpmobileratelink">  
+                                                        <div class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div>  
+                                                        <span id="pdpmobilerating">(0)</span>
+                                                    </a>
+                                                    <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% else %}    
+                                            <a href="#tab-5" class="pdpmobileratelink"> 
+                                                <div class="pr-stars pr-stars-small pr-stars-0-sm">&nbsp;</div> 
+                                                <span id="pdpmobilerating">(0)</span> 
+                                            </a>
+                                            <a id="writereview_snippet" href="javascript:void(0)">Write a Review</a>
+                                        {% endif %}
+                                    </div>
+            
+                                </div>
+                                <div class="mz-product-social">
+                                    <span class="small-3">Share</span> 
+                                    <div class="socialbtn small-9 column">
+                                        {% dropzone "socialShare-mob" scope="template" %}
+                                    </div> 
+                                </div>
+                            </div>
+                            {% endif %}
+                {% endwith %}
+            {% endif %} 
+        {% endwith %} 
+    {% endif %}
+                {% with model.properties|findwhere('attributeFQN',"tenant~technologies") as featureImages %} 
+                {% if featureImages %}
+                <div class="mz-product-featured large-6 medium-12 small-12" >
+                    <span class="small-4">Features</span>
+                    <div class="feature-images small-12 ">
+                        {% for featureImage in featureImages.values %}
+                            {{ featureImage.stringValue|safe }}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+           
+        </div>
+    </div>
+    <div id="horizontalTab" class="large-12 column">
+        <div class="product-detail-tabs-wrap"> 
+            <ul class="product-detail-tabs">
+                <li class="rtab-1 large-2"><a href="#tab-1" title="{{ labels.tabDetails }}">{{ labels.tabDetails }}</a></li>
+                <li class="rtab-2 large-2"><a href="#tab-2" title="{{ labels.tabDownload }}">{{ labels.tabDownload }}</a></li>
+                <li class="rtab-3 large-2"><a href="#tab-3" title="{{ labels.tabSpecifications }}">{{ labels.tabSpecifications }}</a></li>
+                {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                        {% if hideinfo %}
+                            {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                                {% if hiddenproduct %}
+                                {% else %}
+                                    <li class="rtab-4 large-2"><a href="#tab-4" title="{{ labels.tabQa }}">{{ labels.tabQa }}</a></li>
+                                    <li class="rtab-5 large-2"><a href="#tab-5" title="{{ labels.tabReviews }}">{{ labels.tabReviews }}</a></li>
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %} 
+                    {% endwith %} 
+                {% endif %}
+                
+                <li class="rtab-6 large-2"><a href="#tab-6" title="{{ labels.tabVideos }}">{{ labels.tabVideos }}</a></li>
+            </ul>
+        </div>
+        <noscript>
+        {% with model.properties|findwhere('attributeFQN',"tenant~tabdetails") as tags %}
+            {% for val in tags.values %}
+                {% if forloop.first %}
+                    <span itemscope="description">{{ val.stringValue|safe }}</span>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+      </noscript>
+        <div id="tab-1" class="row tab-section detail-section">
+        {% with model.properties|findwhere('attributeFQN',"tenant~tabdetails") as tags %}
+            {% for val in tags.values %}
+                {% if forloop.first %}
+                    <span itemscope="description">{{ val.stringValue|safe }}</span>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+      </div>
+        <noscript>
+        {% with model|get_product_attribute_value("tenant~documents") as docuemnts %} 
+        {% for document in docuemnts|split(",") %} 
+        {% with document|split(":") as documentData %} 
+        {% with documentData|first as documentDataName %} 
+        {% with documentData|last as documentDataLink %}
+        <h3>{{documentDataName}}</h3>
+        <h4>
+            <a href="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/{{documentDataLink}}" target="_blank" title="{{documentDataName}}">{{documentDataLink}}</a>
+          </h4> 
+        {% endwith %} 
+        {% endwith %} 
+        {% endwith %} 
+        {% endfor %} 
+        {% endwith %}
+    </noscript>
+        <div id="tab-2" class="row tab-section download-section">
+        {% with model|get_product_attribute_value("tenant~documents") as docuemnts %} 
+            {% if docuemnts %}
+                {% for document in docuemnts|split(",") %} 
+                    {% with document|split(":") as documentData %} 
+                        {% with documentData|first as documentDataName %} 
+                            {% with documentData|last as documentDataLink %}
+                            <div class="download-tab-section large-4 small-12">
+                                <div class="download-text large-8 medium-9 small-10 column">
+                                    <h3>{{documentDataName}}</h3>
+                                    <a class="download_link" href="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/{{documentDataLink}}" target="_blank" title="{{documentDataName}}">{{documentDataLink}}</a>
+                                </div>
+                                <div class="download-icon large-4 medium-3 small-2 column">
+                                    <a class="download_button" href="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/{{documentDataLink}}" target="_blank" title="{{documentDataName}}" download>
+                                        <img class="download_button-image" src="{{sitecontext.cdnPrefix}}/cms/{{sitecontext.siteId}}/files/download_doc.png?max=31&quality={{themeSettings.cdnQuality}}" alt="{{documentDataName}} download"></img>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                            {% endwith %} 
+                        {% endwith %} 
+                    {% endwith %} 
+                {% endfor %} 
+            {% else %}
+                <span class="resource-na">No Downloads are available for this product</span>
+            {% endif %}
+        {% endwith %}
+    </div>
+        <noscript>
+             {% with model.properties|findwhere('attributeFQN',"tenant~tabspecifications") as tags %} 
+                {% for val in tags.values %}
+                    {% if forloop.first %}
+                       {{ val.stringValue|safe }}
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+          </noscript>
+        <div id="tab-3" class="row tab-section spec">
+            {% with model.properties|findwhere('attributeFQN',"tenant~tabspecifications") as tags %} 
+                {% for val in tags.values %}
+                    {% if forloop.first %}
+                       {{ val.stringValue|safe }}
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+
+            {% with model|get_product_attribute_value("tenant~documents") as docuemnts %} 
+                {% if docuemnts %}
+                  <div class="spec-link" id="sss">
+                        <a  class="specToDownload" href="javascript:void(0)">Download Spec Sheets</a>
+                  </div>
+                {% endif %}
+            {% endwith %}
+          </div>
+        {% if model.productType == "Standard"  or model.productType == "CustomizedProducts" or model.productType=="single_customised_bulbs" or model.productType=="customised_bulb_products" or model.productType=="multiple_customised_bulbs" %}
+                    {% with model.properties|findwhere('attributeFQN','tenant~hide-product') as hideinfo %}  
+                        {% if hideinfo %}
+                            {% with hideinfo.values|findwhere('value',true) as hiddenproduct %}
+                                {% if hiddenproduct %}
+                                {% else %}
+                                        <div id="tab-4" class="row tab-section product-qa large-10 medium-11 small-12">
+                                            {% dropzone "product_QA" scope="template" %} 
+                                        </div>
+                                        <div id="tab-5" class="row tab-section reviewTab large-10 medium-12 small-12">
+                                            {% dropzone "reviewTab" scope="template" %} 
+                                         </div>
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %} 
+                    {% endwith %} 
+                {% endif %}  
+          
+  
+        
+        <div id="tab-6" class="row tab-section video-section">
+        
+            <div class="video-carousel large-8 columns mz-desktop">
+                {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                {% if aliasName %} 
+                    {% for videoLink in aliasName|split(",") %} 
+                        {% with videoLink|split(":") as videoLinkData %} 
+                            {% with videoLinkData|first as videoName %} 
+                                {% with videoLinkData|last as youtubeId %} 
+                                    {% if forloop.first %}
+                                        <div class='video-list'>
+                                            <div class='item' data-hash='zero'>
+                                                <h4>
+                                                  <iframe
+                                                    class='mz-embedvideo'
+                                                    width='640'
+                                                    height='360'
+                                                    src="//www.youtube.com/embed/{{ youtubeId }}?autoplay=0&showinfo=0&controls=2&rel=0" frameborder="0" allowfullscreen>
+                                                  </iframe>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                     <script type="application/ld+json"> 
+{ "@context": "http://schema.org", "@type": "VideoObject", "description": "{{model.content.productName |safe|replace('"','\"') }}", "contentUrl": "http://www.youtube.com/embed/{{youtubeId}}", "name": "{{model.content.productName |safe|replace('"','\"')   }}", "thumbnailUrl": "http://img.youtube.com/vi/{{ youtubeId }}/0.jpg", "uploadDate": "{{model.createDate}}" }                </script>
+                                {% endwith %} 
+                            {% endwith %}  
+                        {% endwith %} 
+                    {% endfor %} 
+                {% else %}
+                    <span>No videos are available for this product</span>
+                {% endif %}
+                {% endwith %}
+
+                <div class='video-preview large-4 medium-4 small-4'>
+                    {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                    {% if aliasName%}
+                        {% for videoLink in aliasName|split(",") %} 
+                            {% with videoLink|split(":") as videoLinkData %} 
+                                {% with videoLinkData|first as videoName %} 
+                                    {% with videoLinkData|last as youtubeId %} 
+                                        <div class='item'>
+                                            <a class='button' href='#zero'>
+                                                <div datavideo='{{ youtubeId }}' class='video-icon prodvideo'></div>
+                                                <img datavideo='{{ youtubeId }}' class="prodvideo" src="//img.youtube.com/vi/{{ youtubeId }}/0.jpg"  alt="Youtube"/>
+                                                <span>{% if videoLinkData.length ==2 %}{{ videoName }}{% else %}{{model.content.productName|safe}}{% endif %}</span>
+                                            </a>
+                                        </div>
+                                    {% endwith %} 
+                                {% endwith %} 
+                            {% endwith %} 
+                        {% endfor %} 
+                    {% endif %} 
+                    {% endwith %} 
+                    {{ videoName }}
+                </div>
+            </div>
+        
+            <div class="video-linkcontainer-mobile mz-mobile small-12">
+               {% with model|get_product_attribute_value("Tenant~video-links") as aliasName %} 
+                    {% if aliasName %}
+                        {% for videoLink in aliasName|split(",") %}
+                                {% with videoLink|split(":") as videoLinkData %}
+                                    {% with videoLinkData|first as videoName %}
+                                        {% with videoLinkData|last as youtubeId %}
+                                        <div class='video-linkcontainer-mobile-item'>
+                                            <div class="mz-cms-video-placeholder"
+                                                 data-url="{{Model.config.videoArticleUrl}}"
+                                                 {% if PageContext.IsEditMode %}data-edit="true"{% endif %}
+                                                 >
+                                                <div class="videopop">
+                                                        <span class="videoicon mz-cms-video-play"></span>
+                                                        <div class="video-image" style="background-image:url(http://img.youtube.com/vi/{{ youtubeId }}/sddefault.jpg);" data-video="//www.youtube.com/embed/{{youtubeId}}"></div>
+                                                </div>
+                                            </div>
+                                             <div class="videoname small-12">{% if videoLinkData.length ==2 %}{{ videoName }}{% else %}{{model.content.productName|safe}}{% endif %}</div>
+                                        </div>
+                                        {% endwith %}
+                                    {% endwith %}
+                                {% endwith %}
+                         {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+            </div>
+        
+        </div>
+    </div>
+    <div class="projects-featuring row" style="display:block;">
+           
+   </div>
+       
+    </div>
+    <div class="mz-product-banner">
+        <div class="mz-product-banner-desktop mz-desktop">
+            {% dropzone "productBanner-desktop" scope="template" %}
+        </div>
+        <div class="mz-product-banner-mobile mz-mobile">
+            {% dropzone "productBanner-mobile" scope="template" %}
+        </div>
+    </div>
+    <div class="mz-product-map">
+        <div class="mz-product-banner-desktop mz-desktop">
+            {% dropzone "productMap-desktop" scope="template" %}
+        </div>
+        <div class="mz-product-banner-mobile mz-mobile">
+            {% dropzone "productMap-mobile" scope="template" %}
+        </div>
+    </div>
+    <div class="recently-viewed">
+        {% dropzone "product-recently-viewed-title-1" scope="template" %}
+        {% dropzone "product-recently-viewed-1" scope="template" %}
+    </div>
+</div>
+{% endif %}
+{% endblock body-content %} 
+
+
+

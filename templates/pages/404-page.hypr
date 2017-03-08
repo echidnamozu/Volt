@@ -1,0 +1,15 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.pageNotFound %} | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-error-page {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="error-page"> 
+      {% dropzone "error-page" scope="template" %} 
+    </div>
+
+{% endblock body-content %} 

@@ -1,0 +1,70 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle labels.cart %} | {% parent %}{% endblock title-tag-content %}
+
+{% block head-tag-scripts %}
+{% parent %}
+{% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode %}
+{% include "modules/common/anti-clickjacking-script" %}
+{% endif %}
+{% endblock head-tag-scripts %}
+
+{% block body-tag-classes %} mz-cart {% endblock body-tag-classes %}
+
+{% block site-nav %}{% endblock site-nav %}
+
+{% block body-content %} 
+
+
+{% preload_json model "cart" %} 
+ 
+<div class="mz-cartpage">
+<div class="row"> 
+<div class="mz-l-container">
+<img class="print-logo" src="/resources/images/print-logo.png" width= "250" height="50"  alt="print-logo"/>
+<div class="print-address" style="float: right;">
+    <p>VOLT<sup>&reg;</sup> Lighting</p>
+    <p>15486 N.Nebraska Ave. </p>
+    <p>Lutz, FL 33549</p>
+    <p>Phone: {{ labels.phoneNumber }}</p>
+</div>
+<div class="clearfix"></div>
+    <div class="mz-cartdescrpition">   
+     {% dropzone "mz-shoppingdesc" scope="template" %}  
+    </div>
+     <div class="amp-top">
+    <h1 class="amp-h1 ">SHOPPING CART <span class="printcartDetails mz-mobile"><a href="javascript:window.print()">Print Shopping Cart</a></span>   </h1>
+    <span style="display:none;" id="time-custom-now" date-attr={% now "F, j, Y h:i:s A" %}>{% now "F, j, Y h:i:s A" %}</span>        
+        {% if user.isAnonymous %}   
+            <!--<span class="amp-wishlist mz-desktop"><a href="javascript:void(0);" id="cart-popupopen" title="Go to WishList">Go to Wishlist</a>  </span>--> 
+            <span class="amp-wishlist mz-mobile"><a id = "cart-popupopenmobile" href="javascript:void(0);" title="Go to Wish List">Go to Wish List</a>  </span>    
+        {% else %}
+            <span class="amp-wishlist mz-mobile"><a href="/myaccount#wishlist" title="Go to Wish List">Go to Wish List</a>  </span>    
+        {% endif %}
+    
+    </div>  
+        
+    
+        <div class="mz-mobile clearfix"></div>
+    <form class="large-12 columns" method="post" action="{{ siteContext.secureHost }}/cart/checkout" id="cartform">
+     
+        <input type="hidden" name="id" value="{{model.id}}" />
+        {% include "modules/common/message-bar" with model=model.messages %}
+       <table class="mz-table mz-table-cart" >
+        <div id="cart" class="mz-table mz-table-cart" >
+            
+            {% include "modules/cart/cart-table" %}
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{themeSettings.googleMapApiKey}}"></script>
+            </div>   
+                
+        </table>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+
+{% require_script "pages/cart" %} 
+
+{% endblock body-content %}

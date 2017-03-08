@@ -1,0 +1,120 @@
+// Section 33 - OffCanvasWrap - InnerWrap - TabBar 
+
+// Off - canvas wrap
+.off-canvas-wrap {
+	-webkit-backface-visibility: hidden;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	&.move-right, &.move-left {
+		min-height: 100%;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+// Inner wrap 
+
+.inner-wrap {
+	position: relative;
+	width: 100%;
+	-webkit-transition: -webkit-transform 500ms ease;
+	-moz-transition: -moz-transform 500ms ease;
+	-ms-transition: -ms-transform 500ms ease;
+	-o-transition: -o-transform 500ms ease;
+	transition: transform 500ms ease;
+	&:before, &:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// Tab bar 
+
+.tab-bar {
+	-webkit-backface-visibility: hidden;
+	background: #333333;
+	color: #FFFFFF;
+	height: 2.8125rem;
+	line-height: 2.8125rem;
+	position: relative;
+	h1, h2, h3, h4, h5, h6 {
+		color: #FFFFFF;
+		font-weight: bold;
+		line-height: 2.8125rem;
+		margin: 0;
+	}
+	h1, h2, h3, h4 {
+		font-size: 1.125rem;
+	}
+	.menu-icon {
+		text-indent: 2.1875rem;
+		width: 2.8125rem;
+		height: 2.8125rem;
+		display: block;
+		padding: 0;
+		color: #FFFFFF;
+		position: relative;
+		transform: translate3d(0, 0, 0);
+		span::after {
+			content: "";
+			position: absolute;
+			display: block;
+			height: 0;
+			top: 50%;
+			margin-top: -0.5rem;
+			left: 0.90625rem;
+			box-shadow: 0 0 0 1px #FFFFFF, 0 7px 0 1px #FFFFFF, 0 14px 0 1px #FFFFFF;
+			width: 1rem;
+		}
+		span:hover:after {
+			box-shadow: 0 0 0 1px #b3b3b3, 0 7px 0 1px #b3b3b3, 0 14px 0 1px #b3b3b3;
+		}
+	}
+	&-section {
+		padding: 0 0.625rem;
+		position: absolute;
+		text-align: center;
+		height: 2.8125rem;
+		top: 0;
+		&.left {
+			left: 0;
+			right: 2.8125rem;
+		}
+		&.right {
+			left: 2.8125rem;
+			right: 0;
+		}
+		&.middle {
+			left: 2.8125rem;
+			right: 2.8125rem;
+		}
+	}
+}
+.left-small {
+	width: 2.8125rem;
+	height: 2.8125rem;
+	position: absolute;
+	top: 0;
+	border-right: solid 1px #1a1a1a;
+	left: 0;
+}
+.right-small {
+	width: 2.8125rem;
+	height: 2.8125rem;
+	position: absolute;
+	top: 0;
+	border-left: solid 1px #1a1a1a;
+	right: 0;
+}
+
+@media only screen and (min-width: 40.063em) { 
+	.tab-bar-section.left {
+		text-align: left;
+	}
+	.tab-bar-section.right {
+		text-align: right;
+	}
+}

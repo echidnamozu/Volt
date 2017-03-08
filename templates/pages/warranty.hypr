@@ -1,0 +1,80 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  | {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-warranty {% endblock body-tag-classes %}
+
+
+ {% block body-content %}
+ <script>
+$(document).ready(function(){
+	
+    _warrantysteps =$('.warranty-instructions .warranty-steps');
+    _warantystep1 = $('.warranty-instructions .warranty-steps').first().find('div:not(".steps")');
+    _stepl1html = _warantystep1.html();
+
+    if( ($( window ).width()) < 767 ){
+        displaystr();
+    }
+
+    function displaystr()
+    {
+        _strmax = 199;
+        _step1str = "";
+        _warrantysteps.hide();
+        _warrantysteps.first().show();
+        if(_stepl1html.length > _strmax)
+        {
+            _substr = _stepl1html.substring(0,_strmax).trim();
+            _splitstr = _substr.split(' ');
+            _laststr=_splitstr[_splitstr.length-1];
+
+            if(_laststr.indexOf('<')!= -1)
+            {
+                _index = _laststr.indexOf('<');
+                _str = _laststr.substring(0,_index);
+                _substr = _substr.replace(_laststr,_str);
+            }
+             _step1str = _substr + "...";
+            _warantystep1.html(_step1str);
+
+        }
+        else
+        {
+            _warantystep1.html(_stepl1html);
+
+            if(_warrantysteps.length == 1)
+                $('.warranty-instructions #for-mobile').hide();
+        }
+    }
+
+    $(document).on('click',".warranty-instructions #for-mobile", function(e){
+       
+        if($(this).text() == "More") 
+        {
+            _warantystep1.html(_stepl1html);
+            $(this).text("Less");
+            _warrantysteps.show();
+        }
+        else
+        {
+            if(_step1str !== "")
+            {
+                _warantystep1.html(_step1str);
+            }
+            _warrantysteps.hide();
+            _warrantysteps.first().show();
+            $(this).text("More");
+        }
+    });
+});
+</script>
+
+	 <div>{{model.properties.blurb|safe}}<div>
+	 
+    <div class="warranty mz-static-page"> 
+      {% dropzone "warranty" scope="template" %} 
+    </div>
+
+{% endblock body-content %}
+
